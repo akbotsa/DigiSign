@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     this.services.login(loginObj).subscribe((resp)=> {
       if(resp.StatusCode == 200) {
         localStorage.setItem("userDetails",JSON.stringify(resp.Data.loginDetails));
+        this.services.loginHideShow.emit(true);
         alert(`${resp.Message}`);
         this.router.navigateByUrl('home')
       } else {
