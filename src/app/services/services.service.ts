@@ -11,7 +11,11 @@ export class ServicesService {
   constructor(private http: HttpClient) {}
 
   login(data): Observable<any> {
-    return this.http.post(environment.baseUrl + 'authentication/login', data);
+    console.log(environment.baseUrl);
+    return this.http.post(
+      'http://15.207.202.132:7000/api/v1/' + 'authentication/login',
+      data
+    );
   }
 
   register(data): Observable<any> {

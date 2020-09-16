@@ -78,6 +78,7 @@ export class AdddocumentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     this.loadRecpForm();
     this.showDelete = false;
     for (let i = this.t.length; i < this.formLength; i++) {
