@@ -21,6 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DraftsComponent } from './drafts/drafts.component';
 import { AddFieldsComponent } from './add-fields/add-fields.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const ROUTES: Routes = [
@@ -74,6 +76,8 @@ const ROUTES: Routes = [
     AddFieldsComponent,
   ],
   imports: [
+    HttpClientModule,
+    CommonModule,
     BrowserModule,
     PdfViewerModule,
     ReactiveFormsModule,

@@ -3,7 +3,7 @@
 <div class="register">
     <div class="container">
         <div class="text-center">
-            <h1>Try DocuSign free for 30 Days</h1>
+            <h1>Try DigiSign free for 30 Days</h1>
             <h6 class="mt-3">No credit card required</h6>
         </div>
         <div class="login-card">
@@ -14,35 +14,42 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">First Name*</label>
-                                    <input type="text" formControlName="first_name" class="form-control"
+                                    <input type="text" formControlName="first_name" class="form-control" placeholder=" Enter first name"
                                     [ngClass]="{ 'is-invalid': r.first_name.touched && r.first_name.errors && this.registerForm.invalid }">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Last Name*</label>
-                                    <input type="text" formControlName="last_name" class="form-control"
+                                    <input type="text" formControlName="last_name" class="form-control" placeholder="Enter last name"
                                     [ngClass]="{ 'is-invalid': r.last_name.touched && r.last_name.errors && this.registerForm.invalid }">
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Email*</label>
-                                    <input type="text" formControlName="email" class="form-control"
+                                    <input type="text" formControlName="email" class="form-control" placeholder="Enter email"
                                     [ngClass]="{ 'is-invalid': r.email.touched && r.email.errors && this.registerForm.invalid}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Phone*</label>
-                                    <input type="text" formControlName="phone" class="form-control"
+                                    <label for="">Password*</label>
+                                    <input type="password" formControlName="password" class="form-control" placeholder="Enter password"
+                                    [ngClass]="{ 'is-invalid': r.password.touched && r.password.errors && this.registerForm.invalid}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Phone*</label> 
+                                    <input type="text" formControlName="phone" class="form-control" placeholder="Enter phone"
                                     [ngClass]="{ 'is-invalid': r.phone.touched && r.phone.errors && this.registerForm.invalid}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Job Title*</label>
-                                    <input type="text" formControlName="job_title" class="form-control"
+                                    <input type="text" formControlName="job_title" class="form-control" placeholder="Enter job title"
                                     [ngClass]="{ 'is-invalid': r.job_title.touched && r.job_title.errors && this.registerForm.invalid }">
                                 </div>
                             </div>
@@ -61,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button class="btn btn-block btn-warning" (click)="register()">GET STARTED</button>
+                                <button class="btn btn-block btn-primary" (click)="register()">GET STARTED</button>
                             </div>
                         </div>
                     </div>
