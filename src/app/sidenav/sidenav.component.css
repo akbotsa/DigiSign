@@ -1,0 +1,19 @@
+.fa-exclamation-circle{
+    color: rgb(16, 16, 172);
+}
+
+label{
+    line-height: 30px;
+    
+}
+
+.side-links .nav-item .active {
+    background-color: orange !important;
+}
+.side-links li {
+    list-style-type: none !important;
+}
+
+/* #fgroup{
+    font-size: 12px;
+} */

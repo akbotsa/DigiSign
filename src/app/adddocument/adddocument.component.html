@@ -1,0 +1,320 @@
+<div *ngIf="!showAllRecept">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active ">
+                    <a class="nav-link">
+                        <i class="fa fa-chevron-left"></i> Upload Document and add Envelop</a>
+                </li>
+            </ul>
+            <ul class="form-inline my-2 my-lg-0">
+                <li class="nav-item">
+                    <div class="dropdown ml-5 pl-5 pr-3 ">
+                        <i class="fa fa-question-circle"></i>
+                        <button type="button" class="btn btn-md btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Actions
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Edit Message</a>
+                            <a class="dropdown-item" href="#">Edit Recipients</a>
+                            <a class="dropdown-item" href="#">Edit Documents</a>
+                            <a class="dropdown-item" href="#">Advanced Options</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="RECIPIENT PREVIEW">
+                        <button class="btn btn-warning my-2 my-sm-0" type="button">Next</button>
+                    </form>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h4>Add Documents to the Envelop</h4>
+        <div class="row">
+            <div class="col-md-3" id="border">
+                <!-- <img [src]="url" alt=""> -->
+                <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display: block;"
+                
+                [show-all]="false"
+               
+                ></pdf-viewer>  
+                <!-- [zoom]="0.5" -->
+                <!-- [show-borders]="true"
+                [autoresize]="true"
+                [original-size]="true" -->
+            </div>
+            <div class="col-md-3" id="border">
+                <div class="text-center">
+                    <p><i class="fa fa-file"></i></p>
+                    <!-- <input (change)="onFileSelected()" type="file" id="file" /> -->
+
+                    <button class="btn btn-primary btn-block" type="button" (click)="fileInput.click()">
+                        <span>UPLOAD</span>
+                        <input #fileInput type="file" (change)="onFileSelected()" id="file" style="display:none;" />
+                    </button>
+                    <!-- <a class="btn btn-block btn-primary text-light">UPLOAD</a> -->
+                    <a class="btn btn-block btn-info text-light">USE A TEMPLATE</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-4">
+        <h4>Add Recipients to the Envelop</h4>
+        <div class="row">
+
+            <div class="col-md-7">
+                <p>As sender you automatically receive a copy of the complited Envelop</p>
+            </div>
+            <div class="col-md-3">
+
+                <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> <b> ADD FROM CONTACTS</b></p>
+
+            </div>
+            <div class="col-md-2">
+                <p><i class="fa fa-sitemap" aria-hidden="true"></i><b> SIGNING ORDER</b></p>
+
+
+            </div>
+
+
+        </div>
+
+        <h6><input type="checkbox"> Set Singing order</h6>
+        <div class="row" id="border">
+            <!--Grid column-->
+
+            <div class="col-md-4">
+                <div class="md-form">
+                    <label for="name" class="">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Anil Kumar">
+
+                </div>
+                <div class="md-form mt-2 mb-2">
+                    <label for="email" class="">Email</label>
+                    <input type="text" id="email" name="email" class="form-control" placeholder="anilkumar@gmail.com">
+
+                </div>
+            </div>
+            <!--Grid column-->
+            <div class="col-md-3">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-pencil-square-o"></i> Need to sign
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Link 1</a>
+                        <a class="dropdown-item" href="#">Link 2</a>
+                        <a class="dropdown-item" href="#">Link 3</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+                        More
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Link 1</a>
+                        <a class="dropdown-item" href="#">Link 2</a>
+                        <a class="dropdown-item" href="#">Link 3</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a class="btn btn-primary text-white mt-3"><i class="fa fa-user-plus"></i> Add Recepient</a>
+    </div>
+
+    <!---footer-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="form-inline my-2 my-lg-0">
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0">
+                        <button class="btn btn-dafault my-2 my-sm-0" type="button">Send Now</button>
+                        <button class="btn btn-warning my-2 my-sm-0" type="button"
+                            (click)="showNextAllRecp()">Next</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--man ----TPI-->
+<div *ngIf="showAllRecept">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active ">
+                    <a class="nav-link">
+                        <i class="fa fa-chevron-left"></i> Man to TPI</a>
+                </li>
+            </ul>
+            <ul class="form-inline my-2 my-lg-0">
+                <li class="nav-item">
+                    <div class="dropdown ml-5 pl-5 pr-3 ">
+                        <i class="fa fa-question-circle"></i>
+                        <button type="button" class="btn btn-md btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Actions
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Edit Message</a>
+                            <a class="dropdown-item" href="#">Edit Recipients</a>
+                            <a class="dropdown-item" href="#">Edit Documents</a>
+                            <a class="dropdown-item" href="#">Advanced Options</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="RECIPIENT PREVIEW">
+                        <button class="btn btn-warning my-2 my-sm-0" type="button" (click)="gotoAddField()">Next</button>
+                    </form>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <h4>Envelope custom fields</h4>
+                <div class="md-form">
+                    <label for="exampleFormControlSelect1">Department</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Select</option>
+                        <option>General</option>
+                        <option>CMM/Procurement</option>
+                        <option>HR</option>
+                        <option>IT</option>
+                        <option>Travel</option>
+                        <option>Hydro Projects</option>
+                        <option>Hydro O&M</option>
+                        <option>Wind Projects</option>
+                        <option>Wind O&M</option>
+                        <option>Biomass</option>
+                        <option>Solar Project</option>
+                        <option>Solar O&M</option>
+                        <option>GSS</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-4 pt-3 pb-3 bg-light">
+            <div class="col-md-6">
+                <h5>Message to All Recipients</h5>
+                <p class="mt-1"><input type="checkbox"> Custom email and language for each recepient</p>
+                <div class="md-form ">
+                    <label for="email" class=""><b>Email Subject</b></label>
+                    <input type="text" id="email" name="email" class="form-control" placeholder="anilkumar@gmail.com">
+                    <sub>Character remaining 58</sub>
+                </div>
+                <div class="md-form mt-3">
+                    <label for="email" class=""><b>Email Message</b></label>
+                    <input type="text" rows="4" cols="50" class="form-control" height="200">
+                    <sub>Character remaining 100</sub>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h5>Advanced Options | <a href="">Edit</a></h5>
+                <ul>
+                    <li>Recepients can change signin responsibility</li>
+                    <li>Incomplete envelopes expire 180 days after send date</li>
+                    <li>Recepients are warned 30 day(s) before request expires</li>
+                    <li>Senders can use either quick send or advanced edit</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <h4>Man for Third Party inspection Service 2020-21</h4>
+        <p>last changes on 6/30/2020 | 08:20 pm</p>
+
+        <p><i class="fa fa-check"></i>Complited</p>
+        <div class="row">
+            <div class="col-md-2 text-light">
+                <a class="btn btn-primary">Move</a>
+                <a class="btn btn-primary ml-2">More <i class="fa fa-angle-down"></i></a>
+
+            </div>
+
+
+            <div class="col-md-2 offset-md-8">
+
+                <i class="fa fa-download"></i>
+                <i class="fa fa-print ml-3"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mt-4">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h5>Recipient</h5>
+            </div>
+
+            <div class="col-md-6"></div>
+
+            <div class="col-md-3 ">
+                <h5><i class="fa fa-sitemap"></i> SIGNING ORDER</h5>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row mt-4 pt-3 pb-3 ">
+            <div class="col-md-4">
+                <p><i class="fa fa-check"></i> Suresh</p>
+                <p class="ml-3">suresh@gmail.com</p>
+            </div>
+            <div class="col-md-5"></div>
+
+            <div class="col-md-3">
+                <p><i class="fa fa-pencil" aria-hidden="true"></i><b> Signed</b></p>
+                <p>on 1/1/2020 | 11.00 am</p>
+                <a href="">Signed in location</a>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row mt-4 pt-3 pb-3 ">
+            <div class="col-md-4">
+                <p><i class="fa fa-check"></i> Vamsi Krishna</p>
+                <p class="ml-3">Vamsi@gmail.com</p>
+            </div>
+            <div class="col-md-5"></div>
+
+            <div class="col-md-3">
+                <p><i class="fa fa-pencil" aria-hidden="true"></i><b> Need to Sign</b></p>
+
+            </div>
+        </div>
+
+        <hr>
+
+    </div>
+</div>

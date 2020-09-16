@@ -1,0 +1,28 @@
+
+
+
+.inbox .top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-right-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.to-status {
+    color: #666666;
+    font-size: 14px;
+}
+.time {
+    color: #ccc;
+    font-size: 14px;
+}
+.border-bottom {
+    border-bottom: solid 1px #ccc;
+}
+.table th {
+    font-size: 13px;
+}

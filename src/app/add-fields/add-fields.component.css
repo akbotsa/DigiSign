@@ -1,0 +1,26 @@
+
+.dragAndDrop {
+    padding: 10px;
+}
+.side-options {
+    padding: 5px;
+    border-right: solid 1px #ccc;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+.top-part {
+    background-color: #eee;
+    padding: 5px;
+}
+
+.pdfViewerSection {
+    padding: 10px;
+}
+.side-icon {
+    background: yellow;
+    padding: 3px;
+}

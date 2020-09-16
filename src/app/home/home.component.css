@@ -1,0 +1,54 @@
+.fa-exclamation-circle{
+    color: rgb(16, 16, 172);
+}
+
+.fa-chevron-right{
+    font-size: 12px;
+    color: gray;
+    
+}
+
+.fa-warning{
+    color: red;
+}
+
+.fa-check{
+    color: green;
+}
+
+
+.text-justify{
+text-align: justify;
+}
+
+.top-heading {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 450px;
+    margin: auto;
+}
+.top-heading .dropdown-menu {
+    /* display: block; */
+}
+.top-heading button {
+    padding: 5px 25px;
+}
+.top-heading button::after {
+    display: none;
+}
+
+ .left-part {
+    padding: 0px 20px;
+}
+.sidebar-heading {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 5px;
+    border-bottom: solid 1px #ccc;
+}
+.middle-part {
+    border-right: solid 1px #ccc;
+}
+.middle-part p {
+    font-size: 14px;
+}

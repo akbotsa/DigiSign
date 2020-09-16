@@ -1,0 +1,67 @@
+<div class="bg-light border-right" id="sidebar-wrapper">
+    <!--university-->
+    <div class="sidebar-heading ">
+        <button class="btn btn-warning btn-block"><b>New</b></button>
+        <button class="btn btn-defauit btn-block mt-4">Shared Envelopes</button>
+    </div>
+
+    <div class="list-group">
+        <h5 class="mt-3">Envelopes</h5>
+        <!-- <ul class="side-links navbar-nav">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['/document/inbox']">
+                    <span><i class="fa fa-inbox mr-2"></i>inbox</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['/document/sent']">
+                    <span><i class="fa fa-send-o mr-2"></i>Sent</span>
+                </a>
+            </li>
+        </ul> -->
+        <div>
+            <label [routerLink]="['/document/inbox']"><i class="fa fa-inbox mr-2"></i>inbox</label>
+        </div>
+        <div>
+            <label [routerLink]="['/document/sent']"><i class="fa fa-send-o mr-2"></i>Sent</label>
+        </div>
+        <div>
+            <label [routerLink]="['/document/draft']"><i class="fa fa-pencil-square-o mr-2"></i>Drafts</label>
+        </div>
+        <div>
+            <label><i class="fa fa-trash mr-2"></i>Deleted</label>
+        </div>
+
+    </div>
+
+    <div class="list-group" id="fgroup">
+        <h5 class="mt-3">Quick Links</h5>
+        <div>
+            <label>
+                <i class="fa fa-exclamation-circle mr-2"></i>
+                <a routerLink="/action">Action Required</a> </label>
+
+        </div>
+
+
+        <div>
+            <label><i class="fa fa-clock-o mr-2"></i>
+                <a routerLink="/waiting"> Waiting for Outhers </a>
+            </label>
+        </div>
+
+        <div>
+            <label><i class="fa fa-warning mr-2"></i>
+                Exparing Soon
+            </label>
+        </div>
+
+        <div>
+            <label><i class="fa fa-check mr-2"></i>
+                Complited
+            </label>
+        </div>
+
+    </div>
+
+</div>

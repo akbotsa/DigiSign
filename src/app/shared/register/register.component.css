@@ -1,0 +1,15 @@
+
+
+.login-card {
+    max-width: 420px;
+    margin: auto;
+    /* text-align: center; */
+}
+
+.register {
+    padding: 20px 0px;
+}
+
+.is-invalid {
+    border: solid 1px red;
+}

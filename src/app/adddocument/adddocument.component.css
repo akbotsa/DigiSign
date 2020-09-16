@@ -1,0 +1,65 @@
+.nav-item{
+    list-style: none;
+}
+
+.fa-question-circle{
+    color: black;
+    font-size: 30px;
+    padding-right: 20px;
+   padding-top: 5px;
+}
+
+#border{
+    border: 1px solid rgb(187, 187, 187); padding: 20px 10px; margin-top: 20px;}
+
+
+     
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.sub{
+    padding : 0px !important;
+    margin: 0px !important;
+}
+
+/* <-- hr----> */
+
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+.separator::before {
+    margin-right: .25em;
+}
+.separator::after {
+    margin-left: .25em;
+}
+.fa-file{
+    font-size: 30px;
+    padding: 20px;
+    margin: 30px;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 50%;
+}
+
+pdf-viewer {
+    display: block;
+    height: 200px;
+}
