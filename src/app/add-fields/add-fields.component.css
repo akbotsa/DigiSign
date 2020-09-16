@@ -41,3 +41,7 @@
 .imagePreview{
     padding: 20px 0;
 }
+
+.draggable{
+    z-index: 1;
+}
