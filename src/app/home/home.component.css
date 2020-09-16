@@ -52,3 +52,17 @@ text-align: justify;
 .middle-part p {
     font-size: 14px;
 }
+
+.digi-main-content {
+    max-width: 1000px;
+    margin: auto;
+}
+.digi-profile  {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.right-part {
+
+}

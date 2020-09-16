@@ -4,19 +4,23 @@
     <div class="container">
         <div class=" login-card">
             <div class="">
-                <h1>DocuSign</h1>
+                <h1 class="text-center">DigiSign</h1>
                 <div>
                     <form [formGroup]="loginForm">
                         <!-- <div class="col-md-12"> -->
                         <!-- <div class="row"> -->
                         <div class="form-group">
-                            <label for="">Please Log into your account</label>
-                            <input type="text" formControlName="email" class="form-control">
+                            <label for="">Email/Mobile</label>
+                            <input type="text" formControlName="email" class="form-control" placeholder="Enter email or mobile number">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-block btn-warning" (click) = "login()">CONTINUE</button>
+                            <label for="">Password</label>
+                            <input type="password" formControlName="password" class="form-control" placeholder="enter password">
                         </div>
-                        <div>
+                        <div class="form-group">
+                            <button class="btn btn-block btn-primary" (click) = "login()">LOGIN</button>
+                        </div>
+                        <div class="text-center">
                             <a routerLink="/register"> No account? Sign up for free</a>
                         </div>
                         <!-- </div> -->

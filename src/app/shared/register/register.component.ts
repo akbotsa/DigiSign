@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-register',
@@ -10,20 +12,21 @@ export class RegisterComponent implements OnInit {
 
   registerForm : FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private services: ServicesService, private route: Router ) { }
 
   ngOnInit(): void {
     this.loadRegisterForm();
   }
 
   loadRegisterForm() {
-    this.registerForm = this.fb.group({
+    this.registerForm = this.fb.group({ 
       first_name: ['',Validators.required],
       last_name: ['',Validators.required],
       email: ['',Validators.required],
+      password: ['',Validators.required],
       phone: ['',Validators.required],
       job_title: ['',Validators.required],
-      industry: ['',Validators.required]
+      industry: ['',]
     })
     // console.log("registerForm",this.registerForm);
   }
@@ -32,8 +35,32 @@ export class RegisterComponent implements OnInit {
 
   register() {
     console.log("regForm-----",this.registerForm.valid);
-    if( this.registerForm ) {
+    if( this.registerForm.valid ) {
       console.log("registerForm",this.registerForm);
+
+      let regObj = {
+        FirstName: this.registerForm.value.first_name,
+        LastName:  this.registerForm.value.first_name,
+        Email:  this.registerForm.value.first_name,
+        DialingCode: "",
+        Mobile: this.registerForm.value.phone,
+        Password: this.registerForm.value.password,
+        JobTitle: this.registerForm.value.job_title,
+        Industry: "",
+        DeviceToken: "",
+        DeviceType: "",
+        FirBaseToken: ""
+      }
+
+      this.services.register(regObj).subscribe((response)=> {
+        console.log("reg response----", response);
+        if(response.StatusCode == 201) {
+          alert(`${response.Message}`)
+          this.route.navigateByUrl("/home");
+        } else {
+          alert(`${response.Message}`)
+        }
+      })
     } else {
       alert("Please fill the required fields");
     }

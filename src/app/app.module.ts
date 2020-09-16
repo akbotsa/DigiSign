@@ -23,6 +23,9 @@ import { AddFieldsComponent } from './add-fields/add-fields.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignaturePadModule } from '@ng-plus/signature-pad';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
 
 const ROUTES: Routes = [
 
@@ -75,6 +78,8 @@ const ROUTES: Routes = [
     AddFieldsComponent,
   ],
   imports: [
+    HttpClientModule,
+    CommonModule,
     BrowserModule,
     PdfViewerModule,
     ReactiveFormsModule,
