@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -30,6 +30,8 @@ export class ServicesService {
       return err;
     }
   }
+
+  loginHideShow = new EventEmitter<any>();
 
   public addReceiptsData(data): Observable<any> {
     try {

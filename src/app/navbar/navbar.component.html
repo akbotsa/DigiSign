@@ -20,15 +20,18 @@
         </li> -->
       </ul>
       <ul class="form-inline my-2 my-lg-0">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!showLogin">
           <a class="nav-link " routerLink="/login" routerLinkActive="active">Login</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!showLogin">
           <a class="nav-link " routerLink="/register" routerLinkActive="active">Register</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link " href="#">My Profile</a>
+        <li class="nav-item dropdown" *ngIf="showLogin">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">My Profile</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
         </li>
 
       </ul>
