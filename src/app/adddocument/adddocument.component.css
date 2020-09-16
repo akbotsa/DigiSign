@@ -59,7 +59,76 @@
     border-radius: 50%;
 }
 
-pdf-viewer {
+/* pdf-viewer {
     display: block;
     height: 200px;
+} */
+
+.next-btn {
+    text-align: right;
+    max-width: 1000px;
+}
+.next-btn button {
+    padding: 5px 25px;
+}
+.drag-file-wrapper {
+    padding-top: 75px;
+    padding-bottom: 30px;
+}
+.delete-group-fields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.delete-group-fields i {
+    cursor: pointer;
+}
+/* ======= Drag and Drop ========== */
+
+
+.uploadfilecontainer {
+    background-image: url("../../assets/images/upload.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px dashed #1C8ADB;
+    border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+}
+
+.files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 5px;
+    color: #1c8adb;
+}
+
+.files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.files-list .delete-file img {
+    width: 30px;
+}
+.file-list-name p {
+    padding: 5px;
+    margin-bottom: 0px;
+}
+.uploaded-list {
+    
 }

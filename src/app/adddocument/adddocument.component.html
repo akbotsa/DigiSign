@@ -1,5 +1,5 @@
 <div *ngIf="!showAllRecept">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
 
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -34,129 +34,124 @@
 
             </ul>
         </div>
-    </nav>
+    </nav> -->
 
-    <div class="container mt-4">
-        <h4>Add Documents to the Envelop</h4>
-        <div class="row">
-            <div class="col-md-3" id="border">
-                <!-- <img [src]="url" alt=""> -->
-                <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display: block;"
-                
-                [show-all]="false"
-               
-                ></pdf-viewer>  
-                <!-- [zoom]="0.5" -->
-                <!-- [show-borders]="true"
-                [autoresize]="true"
-                [original-size]="true" -->
-            </div>
-            <div class="col-md-3" id="border">
-                <div class="text-center">
-                    <p><i class="fa fa-file"></i></p>
-                    <!-- <input (change)="onFileSelected()" type="file" id="file" /> -->
-
-                    <button class="btn btn-primary btn-block" type="button" (click)="fileInput.click()">
-                        <span>UPLOAD</span>
-                        <input #fileInput type="file" (change)="onFileSelected()" id="file" style="display:none;" />
-                    </button>
-                    <!-- <a class="btn btn-block btn-primary text-light">UPLOAD</a> -->
-                    <a class="btn btn-block btn-info text-light">USE A TEMPLATE</a>
-
-                </div>
+    <div class="container drag-file-wrapper mt-4 text-center">
+        <h1>Upload documents</h1>
+        <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+            <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+        </div>
+        <!-- <p>Upload </p> -->
+        <div class="uploaded-list">
+            <!-- <p>Uploaded list</p> -->
+            <div class="files-list file-list-name" *ngFor="let file of files;let i= index">
+                <p> {{ file }} </p>
+                <button class="delete-file" (click)="deleteAttachment(i)">
+                    <img src="../../assets/images/delete.png">
+                </button>
             </div>
         </div>
+        <div class="next-btn mt-3" *ngIf="showNextBtn">
+            <button class="btn btn-md btn-primary" (click)="showNextAllRecp()">Next</button>
+        </div>
     </div>
+</div>
 
-
+<div *ngIf="showAllRecept">
     <div class="container mt-4">
         <h4>Add Recipients to the Envelop</h4>
-        <div class="row">
-
+        <!-- <div class="row">
             <div class="col-md-7">
-                <p>As sender you automatically receive a copy of the complited Envelop</p>
+                <p>As sender you automatically receive a copy of the completed Envelop</p>
             </div>
             <div class="col-md-3">
-
                 <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> <b> ADD FROM CONTACTS</b></p>
-
             </div>
             <div class="col-md-2">
                 <p><i class="fa fa-sitemap" aria-hidden="true"></i><b> SIGNING ORDER</b></p>
-
-
             </div>
+        </div> -->
 
+        <!-- <h6><input type="checkbox"> Set Signing order</h6> -->
+        <form [formGroup]="recpForm">
+            <div class="row" *ngFor="let ticket of t.controls; let i = index">
+                <div class="col-md-10">
+                    <div class="row" id="border">
+                        <!--Grid column-->
+                        <div class="col-md-8">
+                            <div class="md-form">
+                                <label for="name" class="">Name</label>
+                                <input type="text" formGrouplName="this.name" id="name" name="name" class="form-control"
+                                    placeholder="Enter name">
 
-        </div>
+                            </div>
+                            <div class="md-form mt-2 mb-2">
+                                <label for="email" class="">Email</label>
+                                <input type="text" formGrouplName="this.email" id="email" name="email"
+                                    class="form-control" placeholder="Enter email">
 
-        <h6><input type="checkbox"> Set Singing order</h6>
-        <div class="row" id="border">
-            <!--Grid column-->
+                            </div>
+                        </div>
+                        <!--Grid column-->
+                        <!-- <div class="col-md-3">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-default dropdown-toggle"
+                                    data-toggle="dropdown">
+                                    <i class="fa fa-pencil-square-o"></i> Need to sign
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Link 1</a>
+                                    <a class="dropdown-item" href="#">Link 2</a>
+                                    <a class="dropdown-item" href="#">Link 3</a>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="col-md-4">
-                <div class="md-form">
-                    <label for="name" class="">Name</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Anil Kumar">
-
+                        <div class="col-md-2">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-default dropdown-toggle"
+                                    data-toggle="dropdown">
+                                    More
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Link 1</a>
+                                    <a class="dropdown-item" href="#">Link 2</a>
+                                    <a class="dropdown-item" href="#">Link 3</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
-                <div class="md-form mt-2 mb-2">
-                    <label for="email" class="">Email</label>
-                    <input type="text" id="email" name="email" class="form-control" placeholder="anilkumar@gmail.com">
-
-                </div>
-            </div>
-            <!--Grid column-->
-            <div class="col-md-3">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-pencil-square-o"></i> Need to sign
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Link 1</a>
-                        <a class="dropdown-item" href="#">Link 2</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
+                <div class="col-md-2 delete-group-fields" *ngIf="showDelete">
+                    <div class="">
+                        <i class="fa fa-times" (click)="deleteRecep(i)"></i>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-2">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
-                        More
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Link 1</a>
-                        <a class="dropdown-item" href="#">Link 2</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <a class="btn btn-primary text-white mt-3"><i class="fa fa-user-plus"></i> Add Recepient</a>
+        </form>
+        <!-- <a class="btn btn-primary text-white mt-3 mr-4" (click)="submitAddRecps()">Submit</a> -->
+        <a class="btn btn-primary text-white mt-3" (click)="addRecepient()"><i class="fa fa-user-plus"></i> Add
+            Recepient</a>
     </div>
-
-    <!---footer-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto"></ul>
-            <ul class="form-inline my-2 my-lg-0">
-                <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0">
-                        <button class="btn btn-dafault my-2 my-sm-0" type="button">Send Now</button>
-                        <button class="btn btn-warning my-2 my-sm-0" type="button"
-                            (click)="showNextAllRecp()">Next</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </nav>
 </div>
+<!---footer-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-none">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+        <ul class="form-inline my-2 my-lg-0">
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-dafault my-2 my-sm-0" type="button">Send Now</button>
+                    <button class="btn btn-warning my-2 my-sm-0" type="button" (click)="showNextAllRecp()">Next</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 
 <!--man ----TPI-->
-<div *ngIf="showAllRecept">
+<div class="d-none">
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
 
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
@@ -185,7 +180,8 @@
                 <li class="nav-item">
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="text" placeholder="RECIPIENT PREVIEW">
-                        <button class="btn btn-warning my-2 my-sm-0" type="button" (click)="gotoAddField()">Next</button>
+                        <button class="btn btn-warning my-2 my-sm-0" type="button"
+                            (click)="gotoAddField()">Next</button>
                     </form>
                 </li>
 
