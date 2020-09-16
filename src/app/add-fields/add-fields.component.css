@@ -24,3 +24,20 @@
     background: yellow;
     padding: 3px;
 }
+.tab-sign{
+    width: auto;
+    display: block;
+}
+.signature-pad canvas{
+    width: 770 !important;
+}
+
+.sing-type input{
+    font-size: 100px !important;
+    width: 765px;
+    border: none;
+}
+
+.imagePreview{
+    padding: 20px 0;
+}

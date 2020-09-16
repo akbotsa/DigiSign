@@ -21,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DraftsComponent } from './drafts/drafts.component';
 import { AddFieldsComponent } from './add-fields/add-fields.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SignaturePadModule } from '@ng-plus/signature-pad';
 
 const ROUTES: Routes = [
 
@@ -79,7 +80,9 @@ const ROUTES: Routes = [
     ReactiveFormsModule,
     FormsModule,
     DragDropModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    NgbModule,
+    SignaturePadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

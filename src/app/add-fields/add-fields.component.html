@@ -86,6 +86,7 @@
                 </div>
             </div>
             <div class="col-md-8">
+                <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Singature</button>
                 <div class="pdfViewerSection">
                     <pdf-viewer [src]="viewSrc" [render-text]="true" style="display: block;" 
                     [show-all]="false"></pdf-viewer>  
@@ -94,3 +95,53 @@
         </div>
     </div>
 </div>
+
+
+   
+<ng-template #mymodal let-modal>
+  <!-- <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div> -->
+  <div class="modal-body">
+    <ngb-tabset [destroyOnHide]="false">
+        <ngb-tab title="Draw">
+          <ng-template ngbTabContent>
+            <div class="col-md-12">
+                <div class="tab-sign">
+                    <ng-signature-pad (done)="saveImage($event)"></ng-signature-pad>
+                </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Type">
+          <ng-template ngbTabContent>
+              <div class="sing-type">
+                <input type="text" name="signaturetype" id="signaturetype" >
+              </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Upload">
+          <ng-template ngbTabContent>
+            <div class="upload-sig">
+                <div class="text-center">
+                    <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+                        <img [src]="imageURL" alt="upimages" width="200px">
+                    </div>
+                    <button class="btn btn-primary btn-block" type="button" (click)="fileInput.click()">
+                        <span>UPLOAD</span>
+                        <input #fileInput type="file" (change)="onFileSelected($event)" id="file" style="display:none;" accept="image/*"/>
+                    </button>
+                </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancle</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Create Signature')">Create Signature</button>
+  </div>
+</ng-template>
