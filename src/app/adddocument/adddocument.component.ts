@@ -1,53 +1,64 @@
-import { Component, Directive, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  Directive,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ServicesService } from '../services/services.service';
+
 @Component({
   selector: 'app-adddocument',
   templateUrl: './adddocument.component.html',
-  styleUrls: ['./adddocument.component.css']
+  styleUrls: ['./adddocument.component.css'],
 })
-
-
 export class AdddocumentComponent implements OnInit {
-
   @Directive({
-    selector: '[appDragDrop]'
+    selector: '[appDragDrop]',
   })
   /* ========= for drag and drop ========== */
+  @Output()
+  onFileDropped = new EventEmitter<any>();
 
-  @Output() onFileDropped = new EventEmitter<any>();
-
-  @HostBinding('style.background-color') private background = '#f5fcff'
-  @HostBinding('style.opacity') private opacity = '1'
+  @HostBinding('style.background-color') private background = '#f5fcff';
+  @HostBinding('style.opacity') private opacity = '1';
   showNextBtn: boolean;
   formLength: number = 1;
   showDelete: boolean;
+  uploadedFiles = [];
+  recepArr: FormArray;
+  userId: string = '5f61cacae1e8890af056308a';
+  docId: string;
 
-   //Dragover listener
-   @HostListener('dragover', ['$event']) onDragOver(evt) {
+  //Dragover listener
+  @HostListener('dragover', ['$event']) onDragOver(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     this.background = '#9ecbec';
-    this.opacity = '0.8'
+    this.opacity = '0.8';
   }
 
   //Dragleave listener
   @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#f5fcff'
-    this.opacity = '1'
+    this.background = '#f5fcff';
+    this.opacity = '1';
   }
 
   //Drop listener
   @HostListener('drop', ['$event']) public ondrop(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#f5fcff'
-    this.opacity = '1'
+    this.background = '#f5fcff';
+    this.opacity = '1';
     let files = evt.dataTransfer.files;
     if (files.length > 0) {
-      this.onFileDropped.emit(files)
+      this.onFileDropped.emit(files);
     }
   }
 
@@ -55,119 +66,147 @@ export class AdddocumentComponent implements OnInit {
 
   files: any = [];
 
-  
   showAllRecept: boolean;
   url: string | ArrayBuffer;
   recpForm: FormGroup;
-  
-  pdfSrc : any
-  constructor(private router: Router, private fb : FormBuilder) { }
+
+  pdfSrc: any;
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private digiService: ServicesService
+  ) {}
 
   ngOnInit(): void {
     this.loadRecpForm();
     this.showDelete = false;
-    for( let i = this.t.length; i < this.formLength; i++ ) {
-      this.t.push(this.fb.group({
-        name: ['',Validators.required],
-        email: ['',Validators.required]
-      }));
-  }
+    for (let i = this.t.length; i < this.formLength; i++) {
+      this.t.push(
+        this.fb.group({
+          ReceiptId: [i + 1],
+          Name: ['', Validators.required],
+          Email: ['', Validators.required],
+        })
+      );
+    }
   }
 
   loadRecpForm() {
     this.recpForm = this.fb.group({
-      receipents: new FormArray([])
-    })
+      receipents: new FormArray([]),
+    });
   }
 
-  get f() { return this.recpForm.controls; }
-  get t() { return this.f.receipents as FormArray; }
+  get f() {
+    return this.recpForm.controls;
+  }
+  get t() {
+    return this.f.receipents as FormArray;
+  }
 
   /* =========== add receipent ========== */
 
   addRecepient() {
-    console.log("addddd")
+    console.log('addddd');
     this.formLength = this.formLength + 1;
 
-    if(this.formLength > 1) {
+    if (this.formLength > 1) {
       this.showDelete = true;
     }
 
-    for( let i = this.t.length; i < this.formLength; i++ ) {
-        this.t.push(this.fb.group({
-          name: ['',Validators.required],
-          email: ['',Validators.required]
-        }));
+    for (let i = this.t.length; i < this.formLength; i++) {
+      this.t.push(
+        this.fb.group({
+          ReceiptId: [i + 1],
+          Name: ['', Validators.required],
+          Email: ['', Validators.required],
+        })
+      );
     }
   }
 
+  onSubmitAddReceipts() {
+    let receiptsAddReqObj = {
+      UserId: this.userId,
+      DocId: this.docId,
+      Message: 'message testing',
+      Subject: 'testing subject',
+      Receipts: this.recpForm.value.receipents,
+    };
+    this.digiService.addReceiptsData(receiptsAddReqObj).subscribe((resp) => {
+      console.log('add receipts resp', JSON.stringify(resp));
+    });
+  }
+
   deleteRecep(index) {
-    
     this.t.removeAt(index);
     this.formLength = this.formLength - 1;
-    if(this.formLength == 1) {
+    if (this.formLength == 1) {
       this.showDelete = false;
     }
   }
 
-  submitAddRecps() {
-    console.log("form total details---",this.recpForm.value);
-  }
-
   showNextAllRecp() {
-    this.showAllRecept = true;
+    const formData = new FormData();
+    formData.append('UserId', this.userId);
+    formData.append('doc', this.uploadedFiles[0]);
+    this.digiService.getUploadDocument(formData).subscribe((resp) => {
+      if (resp.statusCode === 200) {
+        localStorage.setItem('docId', resp.data.doc.DocId);
+        this.docId = resp.data.doc.DocId;
+        this.showAllRecept = !this.showAllRecept;
+      }
+      console.log('file upload resp', JSON.stringify(resp));
+    });
   }
 
   onFileInput(event) {
-    console.log("event",event)
-    console.log("eventttt file",event.target.files[0].name)
-    if(event.target.files && event.target.files[0].name) {
+    console.log('event', event);
+    console.log('eventttt file', event.target.files[0].name);
+    if (event.target.files && event.target.files[0].name) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event) => {
         this.url = event.target.result;
-      console.log("URL",this.url);
-      }
+        console.log('URL', this.url);
+      };
     }
   }
 
   onFileSelected() {
     let $img: any = document.querySelector('#file');
-   
-    if (typeof (FileReader) !== 'undefined') {
+
+    if (typeof FileReader !== 'undefined') {
       let reader = new FileReader();
-   
+
       reader.onload = (e: any) => {
         this.pdfSrc = e.target.result;
-        console.log("viewwww",this.pdfSrc)
-        localStorage.setItem("PdfViewerSrc",JSON.stringify(this.pdfSrc));
+        console.log('viewwww', this.pdfSrc);
+        localStorage.setItem('PdfViewerSrc', JSON.stringify(this.pdfSrc));
       };
-   
+
       reader.readAsArrayBuffer($img.files[0]);
     }
   }
 
   gotoAddField() {
-    this.router.navigateByUrl("/addfields");
+    this.router.navigateByUrl('/addfields');
   }
-
 
   /*  =============== Drag and Drop ============ */
 
   uploadFile(event) {
-    console.log("length",event.length);
-    if(event.length > 0) { 
+    if (event.length > 0) {
       this.showNextBtn = true;
     }
     for (let index = 0; index < event.length; index++) {
+      this.uploadedFiles.push(event[0]);
+
       const element = event[index];
       this.files.push(element.name);
-    }  
+    }
   }
   deleteAttachment(index) {
-    this.files.splice(index, 1)
+    this.files.splice(index, 1);
   }
-
-  
-
 }
