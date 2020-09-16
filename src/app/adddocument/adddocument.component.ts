@@ -126,7 +126,7 @@ export class AdddocumentComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event) => {
         this.url = event.target.result;
-      console.log("URL",this.url);
+        console.log("URL",this.url);
       }
     }
   }

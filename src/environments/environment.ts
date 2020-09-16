@@ -6,7 +6,7 @@ declare var baseUrl: any;
 
 export const environment = {
   production: false,
-  baseUrl : "http://52.91.146.228:7000/api/v1/"
+  baseUrl : "http://15.207.202.132:7000/api/v1/"
 };
 
 /*

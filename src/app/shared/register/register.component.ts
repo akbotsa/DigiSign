@@ -40,8 +40,8 @@ export class RegisterComponent implements OnInit {
 
       let regObj = {
         FirstName: this.registerForm.value.first_name,
-        LastName:  this.registerForm.value.first_name,
-        Email:  this.registerForm.value.first_name,
+        LastName:  this.registerForm.value.last_name,
+        Email:  this.registerForm.value.email,
         DialingCode: "",
         Mobile: this.registerForm.value.phone,
         Password: this.registerForm.value.password,
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
         console.log("reg response----", response);
         if(response.StatusCode == 201) {
           alert(`${response.Message}`)
-          this.route.navigateByUrl("/home");
+          this.route.navigateByUrl("/login");
         } else {
           alert(`${response.Message}`)
         }
