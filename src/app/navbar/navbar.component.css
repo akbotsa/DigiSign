@@ -4,3 +4,6 @@
 }
 
 
+.profile .dropdown-menu {
+    left: -50px !important;
+}
