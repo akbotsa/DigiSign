@@ -20,25 +20,37 @@
                         <p>Drag me around</p>
                     </div> -->
 
-                    <!-- <div class="draggable">
+                    <div class="draggable">
                         <div class="one">
                             <p  class="ui-state-highlight">Drag me down</p>
                         </div>
-                    </div> -->
-                
+                    </div>
 
+                    <div id="parent">
+                        <div class="draggable chaild" >
+                            <p  class="ui-state-highlight">Main Drag</p>
+                        </div>
+                    </div>
+                
+                    <button class="btn btn-outline-primary" (click)="clontheitem()">Hello</button>
                     <div class="">
+                        <div class="draggable1">
+                            <div class="draggable drag-cls" style="display: inline;">
+                                <p  class="ui-state-highlight">New Item</p>
+                            </div>
+                        </div>
+
                         <ul class="navbar-nav" >
-                            <li class="nav-item draggable">
+                            <li class="nav-item draggable1">
                                 <a class="nav-link"><i class="fa fa-pencil side-icon"></i>&nbsp; Signature</a>
                             </li> 
-                            <li class="nav-item draggable">
+                            <li class="nav-item draggable1">
                                 <a class="nav-link"><i class="fa fa-pencil side-icon" ></i>&nbsp; Initial</a>
                             </li>
-                            <li class="nav-item draggable">
+                            <li class="nav-item draggable1">
                                 <a class="nav-link"><i class="fa fa-pencil side-icon"></i>&nbsp; Stamp</a>
                             </li>
-                            <li class="nav-item draggable">
+                            <li class="nav-item draggable1">
                                 <a class="nav-link"><i class="fa fa-pencil side-icon"></i>&nbsp; Date Signed</a>
                             </li>
                         </ul>
@@ -97,9 +109,7 @@
                 </div>
                 
             </div>
-            <div class="col-md-8">
-
-                <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Singature</button>
+            <div class="col-md-8 image-view">
 
                 <button class="btn btn-primary" type="button" (click)="fileInput2.click()">
                     <span>UPLOAD</span>
@@ -109,9 +119,17 @@
                 <img [src]="signatureImage" *ngIf="signatureImage" />
 
                 <div class="pdfViewerSection" id="sortable">
+                    <div class="hhhh"></div>
+                    <div class="draggable drag-cls" style="display: inline;">
+                        <p  class="ui-state-highlight">Testing</p>
+                    </div>
                     <pdf-viewer [src]="viewSrc" [render-text]="true" style="display: block;" 
-                    [show-all]="false"></pdf-viewer>  
+                        [show-all]="false"> </pdf-viewer>  
+                    
                 </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Singature</button>
             </div>
         </div>
     </div>

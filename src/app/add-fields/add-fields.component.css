@@ -45,3 +45,7 @@
 .draggable{
     z-index: 1;
 }
+
+.image-view img, .drag-cls, .drag-cls p{
+    display: inline;
+}

@@ -33,14 +33,36 @@ export class AddFieldsComponent implements OnInit {
 
   getdrag(){
     $(function () {
-      // $( "#sortable" ).sortable({
-      //   revert: true
-      // });
-      $( ".draggable" ).draggable();
+      $( "#sortable" ).sortable({
+        revert: true
+      });
+      $( ".draggable" ).draggable({
+        containment: "parent"
+      });
+
+
+      $( ".draggable1" ).draggable({
+        connectToSortable: "#sortable",
+        helper: "clone",
+        revert: "invalid"
+      });
+
+      
       //$( ".one" ).draggable();
 
       //$( "ul, li" ).disableSelection();
     });
+  }
+
+  clontheitem(){
+    var el = $('.child').clone(); 
+    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1" >
+    <p  class="ui-state-highlight" style="display: inline;">Main Drag</p>
+</div>`);
+    $('.draggable2').draggable({
+      containment: "parent"
+    });
+    console.log(el);
   }
 
   onPdfUpload(event){
