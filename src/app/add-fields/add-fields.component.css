@@ -1,9 +1,11 @@
 
 .dragAndDrop {
     padding: 10px;
+    background-color: #eee;
 }
 .side-options {
-    padding: 5px;
+    padding: 5px 10px;
+    padding-right: 20px;
     border-right: solid 1px #ccc;
 }
 
@@ -48,4 +50,18 @@
 
 .image-view img, .drag-cls, .drag-cls p{
     display: inline;
+}
+.border-left-primary {
+    border-left: solid 3px  #1c8adb;
+}
+
+.signImage {
+    width: 100%;
+    height: 100%;
+    max-width: 152px;
+}
+
+.add-sign-view {
+    display: flex;
+    justify-content: space-between;
 }

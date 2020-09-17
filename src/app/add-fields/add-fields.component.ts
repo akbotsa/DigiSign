@@ -23,6 +23,8 @@ export class AddFieldsComponent implements OnInit {
   userId: any;
   docID: string;
   doc: any;
+  recpList: any;
+  currentIndex: any;
 
 
   constructor(private modalService: NgbModal, private services: ServicesService) { }
@@ -30,7 +32,7 @@ export class AddFieldsComponent implements OnInit {
   ngOnInit(): void {
     // this.viewSrc = localStorage.getItem("PdfViewerSrc");
     
-    this.viewSrc = "http://15.207.202.132:7000/api/v1/documents/document/Roles-b81e.pdf";
+    // this.viewSrc = "http://15.207.202.132:7000/api/v1/documents/document/Roles-b81e.pdf";
     //console.log("srccccccc",this.viewSrc)
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     this.docID = localStorage.getItem("docId");
@@ -82,19 +84,14 @@ export class AddFieldsComponent implements OnInit {
 
     this.services.recipientsList(reqObj).subscribe((resp)=> {
       console.log("recpList resp-----",resp);
-      // this.doc = resp.
+      this.recpList = resp.data.ReceiptsDetails[0].Receipts;
+      console.log("recpList- ",this.recpList)
       let docum = resp.data.DocDetails[0].Doc;
       console.log("doccccccccc",docum);
-      this.getDoc(docum);
+      this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${docum}`;
     })
   }
 
-  getDoc(docName) {
-    this.services.getDocument(docName).subscribe((resp)=> {
-      console.log("get doc response---------",resp);
-      // this.viewSrc = resp as string;
-    })
-  }
 
   onPdfUpload(event){
     const file = (event.target as HTMLInputElement).files[0];
@@ -106,7 +103,9 @@ export class AddFieldsComponent implements OnInit {
     reader.readAsDataURL(file)
   }
 
-  open(content) {
+  open(content,index) {
+    console.log("indexxxx",index);
+    this.currentIndex = index;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size : 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
