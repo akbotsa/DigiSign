@@ -13,7 +13,7 @@ export class ServicesService {
   login(data): Observable<any> {
     console.log(environment.baseUrl);
     return this.http.post(
-      'http://15.207.202.132:7000/api/v1/' + 'authentication/login',
+      environment.baseUrl + 'authentication/login',
       data
     );
   }
@@ -25,10 +25,18 @@ export class ServicesService {
     );
   }
 
+  recipientsList(data): Observable<any> {
+    return this.http.post(environment.baseUrl + 'receipts/list' , data);
+  }
+
+  getDocument(data):Observable<any> {
+    return this.http.get(environment.baseUrl +`documents/document/${data}`);
+  }
+
   public getUploadDocument(data): Observable<any> {
     try {
       return this.http
-        .post('http://15.207.202.132:7000/api/v1/' + 'documents/upload', data)
+        .post(environment.baseUrl + 'documents/upload', data)
         .pipe(map((res) => res));
     } catch (err) {
       return err;
@@ -46,4 +54,6 @@ export class ServicesService {
       return err;
     }
   }
+
+
 }

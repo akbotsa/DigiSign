@@ -94,6 +94,8 @@ export class AdddocumentComponent implements OnInit {
 
   loadRecpForm() {
     this.recpForm = this.fb.group({
+      email_subject: [''],
+      email_message: [''],
       receipents: new FormArray([]),
     });
   }
@@ -130,12 +132,16 @@ export class AdddocumentComponent implements OnInit {
     let receiptsAddReqObj = {
       UserId: this.userId,
       DocId: this.docId,
-      Message: 'message testing',
-      Subject: 'testing subject',
+      Message: this.recpForm.value.email_message,
+      Subject: this.recpForm.value.email_subject,
       Receipts: this.recpForm.value.receipents,
     };
+    console.log("reqq objjj", receiptsAddReqObj);
     this.digiService.addReceiptsData(receiptsAddReqObj).subscribe((resp) => {
       console.log('add receipts resp', JSON.stringify(resp));
+      if(resp.statusCode == 200) {
+        this.router.navigateByUrl("/addfields");
+      }
     });
   }
 

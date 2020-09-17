@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {NgbModal,  ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ServicesService } from '../services/services.service';
 declare var jquery: any;
 declare var $: any;
 
@@ -19,16 +20,23 @@ export class AddFieldsComponent implements OnInit {
   mainImage: string;
 
   fileContent: any;
+  userId: any;
+  docID: string;
+  doc: any;
 
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private services: ServicesService) { }
   private modelref: NgbModalRef
   ngOnInit(): void {
     // this.viewSrc = localStorage.getItem("PdfViewerSrc");
-    //this.viewSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+    
+    this.viewSrc = "http://15.207.202.132:7000/api/v1/documents/document/Roles-b81e.pdf";
     //console.log("srccccccc",this.viewSrc)
-
+    this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
+    this.docID = localStorage.getItem("docId");
+    // console.log("dociiddddd",this.docID);
     this.getdrag();
+    this.loadRecipientsList();
   }
 
   getdrag(){
@@ -65,11 +73,35 @@ export class AddFieldsComponent implements OnInit {
     console.log(el);
   }
 
+  loadRecipientsList() {
+
+    let reqObj = {
+      UserId: this.userId,
+      DocId: this.docID
+    }
+
+    this.services.recipientsList(reqObj).subscribe((resp)=> {
+      console.log("recpList resp-----",resp);
+      // this.doc = resp.
+      let docum = resp.data.DocDetails[0].Doc;
+      console.log("doccccccccc",docum);
+      this.getDoc(docum);
+    })
+  }
+
+  getDoc(docName) {
+    this.services.getDocument(docName).subscribe((resp)=> {
+      console.log("get doc response---------",resp);
+      // this.viewSrc = resp as string;
+    })
+  }
+
   onPdfUpload(event){
     const file = (event.target as HTMLInputElement).files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      this.viewSrc = reader.result as string;
+      // this.viewSrc = "http://15.207.202.132:7000/api/v1/documents/document/57e98bd0-6fec-4379-b844-e2bc448ccefd-8ccd.pdf";
+      // this.viewSrc = reader.result as string;
     }
     reader.readAsDataURL(file)
   }
