@@ -15,24 +15,24 @@
             <div class="col-md-3">
                 <div class="side-options mt-3">
                     <!-- <input type="text" class="form-control" placeholder="Search"> -->
-                    <h6 class="mt-3">Standard Fields</h6>
+                    <!-- <h6 class="mt-3">Standard Fields</h6> -->
                     <!-- <div class="ui-widget-content draggable">
                         <p>Drag me around</p>
                     </div> -->
 
                     <div class="draggable">
                         <div class="one">
-                            <p class="ui-state-highlight">Drag me down</p>
+                            <!-- <p class="ui-state-highlight">Drag me down</p> -->
                         </div>
                     </div>
 
                     <div id="parent">
                         <div class="draggable chaild">
-                            <p class="ui-state-highlight">Main Drag</p>
+                            <!-- <p class="ui-state-highlight">Main Drag</p> -->
                         </div>
                     </div>
 
-                    <button class="btn btn-outline-primary" (click)="clontheitem()">Hello</button>
+                    <!-- <button class="btn btn-outline-primary" (click)="clontheitem()">Hello</button> -->
                     <div class="">
                         <!-- <div class="draggable1">
                             <div class="draggable drag-cls" style="display: inline;">
@@ -74,23 +74,34 @@
                         <hr>
                         <div>
                             <h6>Recipients</h6>
-                            <div *ngFor="let list of recpList; let i = index">
-                                <div class="card mb-3 mt-3 border-left-primary">
-                                    <div class="card-body">
+                            <div *ngFor="let list of recpList; let i = index" class="mail-section border-left-primary">
+                                <div class=" mb-3 ">
+                                    <div class="sidebar-image">
                                         {{list?.Email}}
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="card mb-3 border-left-primary" *ngIf="signatureImage">
-                                        <div class="card-body">
+                                    <div class=" mb-3" *ngIf="signatureImage">
+                                        <div class="">
                                             <img [src]="signatureImage" class="signImage" />
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="sign-format">
+                                    <div class="signature">
+                                        <button (click)="clontheitem()" class="btn btn-primary"><img src="assets/images/pen.png">&nbsp;Signature</button>
+                                    </div>
+    
+                                    <div class="signature1">
+                                        <button (click)="clonetheitem()" class="btn btn-primary"><img src="assets/images/initial.png">&nbsp;Initial</button>
+                                    </div>
+                                </div>
+
                                 <!-- add-sign-view -->
-                                <div class="text-right mt-3 ">
+                                <div class="text-right">
                                     <!-- <img [src]="signatureImage" class="signImage" *ngIf="signatureImage" /> -->
-                                    <button (click)="open(mymodal,i)" class="btn btn-primary">Add Signature</button>
+                                    <!-- <button (click)="open(mymodal,i)" class="btn btn-primary">Add Signature</button> -->
                                 </div>
                                 <!-- <div class="card mb-3 mt-2 border-left-primary">
                                     <div class="card-body">

@@ -66,8 +66,21 @@ export class AddFieldsComponent implements OnInit {
 
   clontheitem(){
     var el = $('.child').clone(); 
-    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1" >
-    <p  class="ui-state-highlight" style="display: inline;">Main Drag</p>
+    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px;
+    border-radius: 5px; color: #fff; cursor: pointer" >
+    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png"> Signature</p>
+</div>`);
+    $('.draggable2').draggable({
+      containment: "parent"
+    });
+    console.log(el);
+  }
+
+  clonetheitem(){
+    var el = $('.child').clone(); 
+    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px;
+    border-radius: 5px; color: #fff; cursor: pointer" >
+    <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">Initial</p>
 </div>`);
     $('.draggable2').draggable({
       containment: "parent"
