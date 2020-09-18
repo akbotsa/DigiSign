@@ -1,0 +1,25 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+@Component({
+  selector: 'app-document-sign-view',
+  templateUrl: './document-sign-view.component.html',
+  styleUrls: ['./document-sign-view.component.css']
+})
+export class DocumentSignViewComponent implements OnInit {
+  public viewSrc: string;
+  public baseUrl=environment.imageBaseUrl;
+  constructor(private readonly route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+  /*   this.route.paramMap.subscribe(params => {
+      this.viewSrc = this.baseUrl+params.get("id");
+      console.log("pdf url in document sign view",this.viewSrc);
+    }); */
+    console.log("doc id",localStorage.getItem("docId"));
+    this.viewSrc = this.baseUrl+localStorage.getItem("docId");
+    console.log("pdf url in document sign view",this.viewSrc);
+  }
+
+}
