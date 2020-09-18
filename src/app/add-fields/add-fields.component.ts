@@ -53,7 +53,7 @@ export class AddFieldsComponent implements OnInit {
         drag: function () {
           var offset = $(this).offset();
 
-          console.log("positions:", offset);
+          //console.log("positions:", offset);
           var xPos = offset.left;
           var yPos = offset.top;
           $('#posX').text('x: ' + xPos);
@@ -77,17 +77,17 @@ export class AddFieldsComponent implements OnInit {
   }
 
   cloneSignature(user, index) {
-    if (!this.recpList[index].hasOwnProperty('positions')) {
+    if (!this.recpList[index].hasOwnProperty('signature')) {
       let temp = [
         {
           top: 0,
           left: 0
         }
       ];
-      this.recpList[index]['positions'] = temp;
+      this.recpList[index]['signature'] = temp;
     } else {
       // console.log("recp list  have signature key");
-      this.recpList[index]['positions'].push({
+      this.recpList[index]['signature'].push({
         top: 0,
         left: 0
       });
@@ -95,66 +95,58 @@ export class AddFieldsComponent implements OnInit {
     //console.log("rec list length", this.recpList[index]['positions'].length);
 
     $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;"
-    id="drag_${index}_${this.recpList[index]['positions'].length}"
+    id="drag_${index}_${this.recpList[index]['signature'].length}"
     >
-    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">${user.Email}.${this.recpList[index]['positions'].length}</p></div>`);
+    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">${user.Email}.${this.recpList[index]['signature'].length}</p></div>`);
     let self = this;
     $('.draggable2').draggable({
       containment: "parent",
       stop: function (event, ui) {
-        // console.log("stop--->", ui);
-        // console.log("event--->", event);
         // console.log("draggable element id ", $(this).attr('id'));
-        let [name, parentIndex, positionIndex] = $(this).attr('id').split("_")
-          ;
-        // let parentIndex = $(this).attr('id').split("_")[1];
-        //console.log("paraentIndex and signature index are ", parentIndex, "", positionIndex);
-        /* console.log("stop--->",this.positionIndx);
-        this.tstfun(ui.position);*/
-        //localStorage.position = JSON.stringify(ui.position)
-        //this.car = JSON.stringify(ui.position);
-        //console.log(self.recpList);
-        //console.log("rec signature length", self.recpList[parentIndex]);
-        self.recpList[parentIndex]['positions'][positionIndex-1]['top'] = ui.position.top;
-        self.recpList[parentIndex]['positions'][positionIndex-1]['left'] = ui.position.left;
-        console.log("recpList", self.recpList);
+        let [name, parentIndex, positionIndex] = $(this).attr('id').split("_");
+        self.recpList[parentIndex]['signature'][positionIndex-1]['top'] = ui.position.top;
+        self.recpList[parentIndex]['signature'][positionIndex-1]['left'] = ui.position.left;
+        //console.log("recpList", self.recpList);
         localStorage.setItem('userData', JSON.stringify(self.recpList));
       }
     });
-    console.log("First");
-    console.log("recpList", self.recpList);
+    //console.log("First");
+    //console.log("recpList", self.recpList);
     localStorage.setItem('userData', JSON.stringify(self.recpList));
   }
 
-  cloneIntial(user) {
-    //console.log(user);
-    var el = $('.child').clone();
-    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px;
-    border-radius: 5px; color: #fff; cursor: move" >
-    <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">${user.Name}</p>
-</div>`);
+  cloneIntial(user, index) {
+
+    if (!this.recpList[index].hasOwnProperty('initial')) {
+      let temp = [
+        {
+          top: 0,
+          left: 0
+        }
+      ];
+      this.recpList[index]['initial'] = temp;
+    } else {
+      // console.log("recp list  have signature key");
+      this.recpList[index]['initial'].push({
+        top: 0,
+        left: 0
+      });
+    }
+
+    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">${user.Name}</p></div>`);
+
+    let self = this;
     $('.draggable2').draggable({
       containment: "parent",
-      cursor: "crosshair",
-      drag: function () {
-        var offset = $(this).offset();
-
-        console.log("positions:", offset);
-        var xPos = offset.left;
-        var yPos = offset.top;
-        $('#posX').text('x: ' + xPos);
-        $('#posY').text('y: ' + yPos);
-      },
-      start: function (event, ui) {
-        console.log("start", ui);
-        $(ui.helper).css('width', "50%");
-      },
       stop: function (event, ui) {
-        console.log("stop", ui);
-        $(ui.helper).css('width', "100%");
+        let [name, parentIndex, positionIndex] = $(this).attr('id').split("_");
+        self.recpList[parentIndex]['initial'][positionIndex-1]['top'] = ui.position.top;
+        self.recpList[parentIndex]['initial'][positionIndex-1]['left'] = ui.position.left;
+        //console.log("recpList", self.recpList);
+        localStorage.setItem('userData', JSON.stringify(self.recpList));
       }
     });
-    console.log(el);
+    localStorage.setItem('userData', JSON.stringify(self.recpList));
   }
 
   loadRecipientsList() {
@@ -165,11 +157,11 @@ export class AddFieldsComponent implements OnInit {
     }
 
     this.services.recipientsList(reqObj).subscribe((resp) => {
-      console.log("recpList resp-----", resp);
+      //console.log("recpList resp-----", resp);
       this.recpList = resp.data.ReceiptsDetails[0].Receipts;
-      console.log("recpList- ", this.recpList)
+      //console.log("recpList- ", this.recpList)
       let docum = resp.data.DocDetails[0].Doc;
-      console.log("doccccccccc", docum);
+      //console.log("doccccccccc", docum);
       this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${docum}`;
     })
   }
@@ -186,7 +178,7 @@ export class AddFieldsComponent implements OnInit {
   }
 
   open(content, index) {
-    console.log("indexxxx", index);
+    //console.log("indexxxx", index);
     this.currentIndex = index;
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -197,7 +189,7 @@ export class AddFieldsComponent implements OnInit {
 
   saveImage(data) {
     this.signatureImage = data;
-    console.log("Draw Signature image data--->", this.signatureImage);
+    //console.log("Draw Signature image data--->", this.signatureImage);
     this.modelref.close();
   }
 
@@ -212,7 +204,7 @@ export class AddFieldsComponent implements OnInit {
   }
 
   uploadSignature() {
-    console.log('fileContent-->', this.fileContent);
+    //console.log('fileContent-->', this.fileContent);
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -220,7 +212,7 @@ export class AddFieldsComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileContent);
 
-    console.log(this.mainImage);
+    //console.log(this.mainImage);
 
   }
 

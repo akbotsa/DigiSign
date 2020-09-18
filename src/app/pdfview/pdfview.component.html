@@ -4,10 +4,16 @@
         <div class="col-md-8 image-view">
             <div class="pdfViewerSection" id="sortable">
                 <div  *ngFor="let list of userData; let i = index" >
-                        <div  *ngFor="let pos of list.positions; let idx = index" >
+                    <div  *ngFor="let pos of list.signature; let idx = index" >
                         <div class="drag-cls ui-draggable ui-draggable-handle" style="display: inline; z-index: 1; background: rgba(204, 204, 204, 0.73); padding: 10px 30px; border-radius: 5px; color: rgb(255, 255, 255); cursor: move; position: relative; left: {{pos.left}}px; top: {{pos.top}}px;" id="drag_{{i}}_{{idx}}">
                             <p class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold">
-                                <img style="height: 20px;" src="assets/images/sign.png">{{list.Email}}{{idx}}</p>
+                                <img style="height: 20px;" src="assets/images/sign.png">{{list.Email}}</p>
+                        </div>
+                    </div>
+                    <div  *ngFor="let ini of list.initial; let j = index" >
+                        <div class="drag-cls ui-draggable ui-draggable-handle" style="display: inline; z-index: 1; background: rgba(204, 204, 204, 0.73); padding: 10px 30px; border-radius: 5px; color: rgb(255, 255, 255); cursor: move; position: relative; left: {{ini.left}}px; top: {{ini.top}}px;" id="drag_{{i}}_{{j}}">
+                            <p class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold">
+                                <img style="height: 20px;" src="assets/images/sign.png">{{list.Email}}</p>
                         </div>
                     </div>
                 </div>
