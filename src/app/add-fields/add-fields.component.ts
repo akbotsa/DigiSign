@@ -25,11 +25,12 @@ export class AddFieldsComponent implements OnInit {
   doc: any;
   recpList: any;
   currentIndex: any;
+  sendBtnHide: boolean = false;
 
   constructor(private modalService: NgbModal, private services: ServicesService) { }
   private modelref: NgbModalRef
   ngOnInit(): void {
-    //localStorage.removeItem('userData');
+    localStorage.removeItem('userData');
     // this.viewSrc = localStorage.getItem("PdfViewerSrc");
 
     // this.viewSrc = "http://15.207.202.132:7000/api/v1/documents/document/Roles-b81e.pdf";
@@ -77,6 +78,7 @@ export class AddFieldsComponent implements OnInit {
   }
 
   cloneSignature(user, index) {
+    this.sendBtnHide = true;
     if (!this.recpList[index].hasOwnProperty('signature')) {
       let temp = [
         {
@@ -116,7 +118,7 @@ export class AddFieldsComponent implements OnInit {
   }
 
   cloneIntial(user, index) {
-
+    this.sendBtnHide = true;
     if (!this.recpList[index].hasOwnProperty('initial')) {
       let temp = [
         {
@@ -214,6 +216,24 @@ export class AddFieldsComponent implements OnInit {
 
     //console.log(this.mainImage);
 
+  }
+
+  updateCoordinates(){
+    var  recepctData = JSON.stringify(localStorage.getItem('userData'));
+    let object = {
+      "UserId": this.userId,
+      "DocId": this.docID,
+      "Recipients": this.recpList
+    }
+    //console.log(object);
+    this.services.insertDragObject(object).subscribe((resp) => {
+      console.log("Final Coordiantes", resp);
+      if(resp.statusCode == 200){
+        alert('Coordinate send successfully.');
+      }else{
+        alert('Oops! Somthing went wrong.');
+      }
+    })
   }
 
 }

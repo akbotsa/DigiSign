@@ -65,4 +65,8 @@ export class ServicesService {
     }
   }
 
+  insertDragObject(data): Observable<any> {
+    return this.http.post(environment.baseUrl + 'documents/send' , data);
+  }
+
 }
