@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignaturePadModule } from '@ng-plus/signature-pad';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { DocumentSignViewComponent } from './document-sign-view/document-sign-view.component';
 
 
 const ROUTES: Routes = [
@@ -58,6 +59,7 @@ const ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'addfields', component: AddFieldsComponent },
+  { path: 'documentSign', component: DocumentSignViewComponent },
 ]
 
 @NgModule({
@@ -76,6 +78,7 @@ const ROUTES: Routes = [
     RegisterComponent,
     DraftsComponent,
     AddFieldsComponent,
+    DocumentSignViewComponent,
   ],
   imports: [
     HttpClientModule,
