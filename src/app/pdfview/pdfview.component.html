@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2"></div>
+        <div class="col-md-8 image-view">
+            <div class="pdfViewerSection" id="sortable">
+                <div  *ngFor="let list of userData; let i = index" >
+                        <div  *ngFor="let pos of list.positions; let idx = index" >
+                        <div class="drag-cls ui-draggable ui-draggable-handle" style="display: inline; z-index: 1; background: rgba(204, 204, 204, 0.73); padding: 10px 30px; border-radius: 5px; color: rgb(255, 255, 255); cursor: move; position: relative; left: {{pos.left}}px; top: {{pos.top}}px;" id="drag_{{i}}_{{idx}}">
+                            <p class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold">
+                                <img style="height: 20px;" src="assets/images/sign.png">{{list.Email}}{{idx}}</p>
+                        </div>
+                    </div>
+                </div>
+                <pdf-viewer [src]="viewSrc" [render-text]="true" style="display: block;"> </pdf-viewer>
+            </div>
+        </div>
+    </div>1
+</div>

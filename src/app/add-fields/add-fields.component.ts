@@ -26,22 +26,10 @@ export class AddFieldsComponent implements OnInit {
   recpList: any;
   currentIndex: any;
 
-  positionIndx = [];
-
-  pos: number = 0;
-
-  Car = {
-    top: String,
-    left: String
-  }
-  Signature = {
-    signId: String,
-    positionData: this.Car
-  }
-
   constructor(private modalService: NgbModal, private services: ServicesService) { }
   private modelref: NgbModalRef
   ngOnInit(): void {
+    //localStorage.removeItem('userData');
     // this.viewSrc = localStorage.getItem("PdfViewerSrc");
 
     // this.viewSrc = "http://15.207.202.132:7000/api/v1/documents/document/Roles-b81e.pdf";
@@ -89,37 +77,27 @@ export class AddFieldsComponent implements OnInit {
   }
 
   cloneSignature(user, index) {
-    var items = this.pos + user.ReceiptId;
-    //console.log(this.pos);
-    //user.signatures
-    var sig = this.Signature;
-    // console.log(user);
-    //var cid = email.name+this.pos;
-    //var el = $('.child').clone(); 
-
-    //var items = [{'left':0, 'right':0}];
-
     if (!this.recpList[index].hasOwnProperty('positions')) {
       let temp = [
         {
-          top: "0",
-          left: "0"
+          top: 0,
+          left: 0
         }
       ];
       this.recpList[index]['positions'] = temp;
     } else {
       // console.log("recp list  have signature key");
       this.recpList[index]['positions'].push({
-        top: "0",
-        left: "0"
+        top: 0,
+        left: 0
       });
     }
-    console.log("rec list length", this.recpList[index]['positions'].length);
+    //console.log("rec list length", this.recpList[index]['positions'].length);
 
-    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move"
+    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;"
     id="drag_${index}_${this.recpList[index]['positions'].length}"
     >
-    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">${user.Email}</p></div>`);
+    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">${user.Email}.${this.recpList[index]['positions'].length}</p></div>`);
     let self = this;
     $('.draggable2').draggable({
       containment: "parent",
@@ -130,36 +108,22 @@ export class AddFieldsComponent implements OnInit {
         let [name, parentIndex, positionIndex] = $(this).attr('id').split("_")
           ;
         // let parentIndex = $(this).attr('id').split("_")[1];
-        console.log("paraentIndex and signature index are ", parentIndex, "", positionIndex);
+        //console.log("paraentIndex and signature index are ", parentIndex, "", positionIndex);
         /* console.log("stop--->",this.positionIndx);
         this.tstfun(ui.position);*/
         //localStorage.position = JSON.stringify(ui.position)
-        this.car = JSON.stringify(ui.position);
-        console.log(self.recpList);
-        console.log("rec signature length", self.recpList[parentIndex]);
+        //this.car = JSON.stringify(ui.position);
+        //console.log(self.recpList);
+        //console.log("rec signature length", self.recpList[parentIndex]);
         self.recpList[parentIndex]['positions'][positionIndex-1]['top'] = ui.position.top;
         self.recpList[parentIndex]['positions'][positionIndex-1]['left'] = ui.position.left;
-        console.log("recpList", self.recpList[parentIndex]);
-        // this.user
-        //this.positionIndx.push(ui.position);
-        //console.log("second", this.car) ;
-
-
+        console.log("recpList", self.recpList);
+        localStorage.setItem('userData', JSON.stringify(self.recpList));
       }
     });
     console.log("First");
-    /*v ar ttt = localStorage.getItem('items');
-    if(ttt === 'null'){
-      this.positionIndx[items] = {"top":0,"left":0};
-    }else{
-      this.positionIndx[items] = ttt;
-    } */
-
-
-    //this.positionIndx[items] = 
-
-    this.pos++;
-    console.log("positionIndx--->", this.positionIndx);
+    console.log("recpList", self.recpList);
+    localStorage.setItem('userData', JSON.stringify(self.recpList));
   }
 
   cloneIntial(user) {

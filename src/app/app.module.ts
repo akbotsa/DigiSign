@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignaturePadModule } from '@ng-plus/signature-pad';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { PdfviewComponent } from './pdfview/pdfview.component';
 
 
 const ROUTES: Routes = [
@@ -58,6 +59,7 @@ const ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'addfields', component: AddFieldsComponent },
+  { path: 'pdfview', component: PdfviewComponent },
 ]
 
 @NgModule({
@@ -76,6 +78,7 @@ const ROUTES: Routes = [
     RegisterComponent,
     DraftsComponent,
     AddFieldsComponent,
+    PdfviewComponent,
   ],
   imports: [
     HttpClientModule,
