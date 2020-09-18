@@ -25,6 +25,8 @@ export class AddFieldsComponent implements OnInit {
   doc: any;
   recpList: any;
   currentIndex: any;
+  
+  positionIndx: any = [];
 
 
   constructor(private modalService: NgbModal, private services: ServicesService) { }
@@ -42,12 +44,24 @@ export class AddFieldsComponent implements OnInit {
   }
 
   getdrag(){
+    var sigcount = 1;
+    var inicount = 1;
     $(function () {
       $( "#sortable" ).sortable({
         revert: true
       });
       $( ".draggable" ).draggable({
-        containment: "parent"
+        containment: "parent",
+        drag: function() {
+          var offset = $(this).offset();
+
+          console.log("positions:",offset);
+          var xPos = offset.left;
+          var yPos = offset.top;
+          $('#posX').text('x: ' + xPos);
+          $('#posY').text('y: ' + yPos);
+      }
+      
       });
 
 
@@ -64,26 +78,65 @@ export class AddFieldsComponent implements OnInit {
     });
   }
 
-  clontheitem(){
+  cloneSignature(email){
+    console.log(email);
     var el = $('.child').clone(); 
-    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px;
-    border-radius: 5px; color: #fff; cursor: pointer" >
-    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png"> Signature</p>
+    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move">
+    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">${email}</p>
 </div>`);
     $('.draggable2').draggable({
-      containment: "parent"
+      containment: "parent",
+      scroll: false,
+      drag: function() {
+        var offset = $(this).offset();
+
+        console.log("positions:",offset);
+        var xPos = offset.left;
+        var yPos = offset.top;
+        $('#posX').text('x: ' + xPos);
+        $('#posY').text('y: ' + yPos);
+    },
+   /*  start: function(event, ui) {
+      console.log("start",ui);
+      $(ui.helper).css('width', "50%");
+    }, */
+    stop: function(event, ui) {
+      console.log("stop--->",ui);
+      this.positionIndx
+      localStorage.positions = JSON.stringify(ui.position)
+    }
     });
+    
     console.log(el);
   }
 
-  clonetheitem(){
+  cloneIntial(user){
+    console.log(user);
     var el = $('.child').clone(); 
     $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px;
-    border-radius: 5px; color: #fff; cursor: pointer" >
-    <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">Initial</p>
+    border-radius: 5px; color: #fff; cursor: move" >
+    <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">${user.Name}</p>
 </div>`);
     $('.draggable2').draggable({
-      containment: "parent"
+      containment: "parent",
+      cursor: "crosshair",
+      drag: function() {
+        var offset = $(this).offset();
+
+        console.log("positions:",offset);
+        var xPos = offset.left;
+        var yPos = offset.top;
+        $('#posX').text('x: ' + xPos);
+        $('#posY').text('y: ' + yPos);
+    },
+    start: function(event, ui) {
+      console.log("start",ui);
+      $(ui.helper).css('width', "50%");
+    },
+    stop: function(event, ui) {
+      console.log("stop",ui);
+      $(ui.helper).css('width', "100%");
+    }
     });
     console.log(el);
   }
