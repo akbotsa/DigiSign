@@ -48,12 +48,21 @@ export class ServicesService {
   public addReceiptsData(data): Observable<any> {
     try {
       return this.http
-        .post('http://15.207.202.132:7000/api/v1/' + 'receipts/add', data)
+        .post(environment.baseUrl + 'receipts/add', data)
         .pipe(map((res) => res));
     } catch (err) {
       return err;
     }
   }
 
+  public getDocumentsManage(data):Observable<any>{
+    try {
+      return this.http
+        .post(environment.baseUrl + 'documents/manage', data)
+        .pipe(map((res) => res));
+    } catch (err) {
+      return err;
+    }
+  }
 
 }
