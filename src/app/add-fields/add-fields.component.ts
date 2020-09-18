@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {NgbModal,  ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ServicesService } from '../services/services.service';
@@ -28,6 +28,7 @@ export class AddFieldsComponent implements OnInit {
   
   positionIndx: any = [];
 
+  @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
   constructor(private modalService: NgbModal, private services: ServicesService) { }
   private modelref: NgbModalRef
@@ -78,12 +79,17 @@ export class AddFieldsComponent implements OnInit {
     });
   }
 
+   
   cloneSignature(email){
+   
     console.log(email);
     var el = $('.child').clone(); 
-    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move">
+    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" id="signature_clone" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move">
     <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">${email}</p>
 </div>`);
+$("#signature_clone").click(()=>{
+  this.modalService.open(this.mymodal);
+})
     $('.draggable2').draggable({
       containment: "parent",
       scroll: false,

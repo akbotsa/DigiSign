@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+.signature-pad canvas {
+    width: 100% !important;
+    margin: 10px 0px;
+}
+
+.pdfViewer.removePageBorders .page {
+    width: 100% !important;
+}
+
+.pdfViewer .canvasWrapper {
+    width: 100% !important;
+}
+
+.page .textLayer {
+    width: 100% !important;
+}
+
+
+@media print and (color){
+    #sortable, [role="document"] {
+        width: 100%;
+        max-width: 100%;
+    }
+}
