@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DocumentSignViewComponent implements OnInit {
   public viewSrc: string;
-  public baseUrl=environment.imageBaseUrl;
+  //public baseUrl = environment.imageBaseUrl;
   constructor(private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -18,7 +18,9 @@ export class DocumentSignViewComponent implements OnInit {
       console.log("pdf url in document sign view",this.viewSrc);
     }); */
     console.log("doc id",localStorage.getItem("docId"));
-    this.viewSrc = this.baseUrl+localStorage.getItem("docId");
+    console.log("baseUrl",environment.imageBaseUrl);
+    this.viewSrc = 'http://15.207.202.132:7000/api/v1/documents/document/'+localStorage.getItem("docId");
+
     console.log("pdf url in document sign view",this.viewSrc);
   }
 

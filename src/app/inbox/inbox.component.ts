@@ -11,11 +11,14 @@ export class InboxComponent implements OnInit {
   public currentUser: any;
   public isLoading: boolean = true;
   public documentsList = [];
+  userId: any;
+
   constructor(private digiServices: ServicesService,
     private readonly router:Router
     ) { }
 
   ngOnInit(): void {
+    this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     this.currentUser = JSON.parse(localStorage.getItem("userDetails"));
     this.getDocumentsManage();
   }
@@ -24,7 +27,7 @@ export class InboxComponent implements OnInit {
   public getDocumentsManage(): void {
     let data = {
       "type": "1",
-      "UserId": "5f645bc4d4865523ab7065db",//this.currentUser._id//"5f645bc4d4865523ab7065db"
+      "UserId": this.userId,//this.currentUser._id//"5f645bc4d4865523ab7065db"
     }
     this.digiServices.getDocumentsManage(data).subscribe(manageDocumentsResp => {
       this.isLoading = false;
