@@ -24,3 +24,8 @@
         max-width: 100%;
     }
 }
+
+#sortable .ui-draggable-handle {
+    position: absolute !important;
+    margin: 0px 15px;
+}

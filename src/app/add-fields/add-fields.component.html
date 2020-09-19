@@ -111,11 +111,15 @@
                             </div>
                         </div>
 
+                        <div style="text-align: center;" class="signature1">
+                            <button type="submit" class="btn btn-succss" *ngIf="sendBtnHide" style="margin: 20px 0px 10px 0px;" (click)="updateCoordinates()">Send</button>  
+                        </div>
+
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-9 image-view">
+            <div class="col-md-8 image-view">
 
                 <!-- <button class="btn btn-primary" type="button" (click)="fileInput2.click()">
                     <span>UPLOAD</span>
@@ -124,10 +128,7 @@
 
                 <!-- <img [src]="signatureImage" *ngIf="signatureImage" /> -->
 
-                <div style="text-align: end;" class="signature1">
-                    <button type="submit" class="btn btn-succss" *ngIf="sendBtnHide" style="margin: 15px 80px 10px 0px;" (click)="updateCoordinates()">Send</button>
-                    
-                </div>
+               
 
                 <div class="pdfViewerSection" id="sortable">
                     <!-- <div class="hhhh"></div>

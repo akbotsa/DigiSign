@@ -125,5 +125,14 @@
     background-color: #ccc;
 } */
 
+#sortable .ui-draggable-handle {
+    display: block;
+    position: absolute !important;
+}
+
+#sortable {
+    margin: 0px 70px;
+}
+
 
 
