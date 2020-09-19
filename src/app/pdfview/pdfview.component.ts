@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ServicesService } from '../services/services.service';
+import {NgbModal,  ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pdfview',
@@ -14,8 +15,13 @@ export class PdfviewComponent implements OnInit {
   recpList: any;
   currentIndex: any;
   userData: any;
+  imageURL: String;
+  signatureImage;
+  fileContent: any;
+  mainImage: any;
+  @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
-  constructor(private services: ServicesService) { }
+  constructor(private modalService: NgbModal, private services: ServicesService) { }
 
   ngOnInit(): void {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
@@ -50,6 +56,39 @@ export class PdfviewComponent implements OnInit {
 
     //this.userData = JSON.parse(localStorage.getItem('userData'));
     console.log(this.userData);
+  }
+
+  draggable_Signature() {
+    this.modalService.open(this.mymodal);
+    console.log("method working");
+  }
+
+  saveImage(data) {
+    this.signatureImage = data;
+    //console.log("Draw Signature image data--->", this.signatureImage);
+    //this.modelref.close();
+
+  }
+
+  onFileSelected(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.fileContent = file;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    }
+    reader.readAsDataURL(file)
+  }
+
+  uploadSignature() {
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.mainImage = reader.result as string;
+    }
+    reader.readAsDataURL(this.fileContent);
+
+
   }
 
 }

@@ -9,7 +9,7 @@
             <div class="pdfViewerSection" id="sortable">
                 <div  *ngFor="let list of userData; let i = index" >
                     <div  *ngFor="let pos of list.signature; let idx = index" >
-                        <div class="drag-cls ui-draggable ui-draggable-handle" style="display: inline; z-index: 1; background: rgba(204, 204, 204, 0.73); padding: 10px 30px; border-radius: 5px; color: rgb(255, 255, 255); cursor: move; position: relative; left: {{pos.left}}px; top: {{pos.top}}px;" id="drag_{{i}}_{{idx}}">
+                        <div (click)="draggable_Signature()" class="drag-cls ui-draggable ui-draggable-handle" style="display: inline; z-index: 1; background: rgba(204, 204, 204, 0.73); padding: 10px 30px; border-radius: 5px; color: rgb(255, 255, 255); cursor: move; position: relative; left: {{pos.left}}px; top: {{pos.top}}px;" id="drag_{{i}}_{{idx}}">
                             <p class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold">
                                 <img style="height: 20px;" src="assets/images/sign.png">{{list.Email}}</p>
                         </div>
@@ -29,3 +29,64 @@
         </div>
     </div>
 </div>
+
+
+
+
+<ng-template #mymodal let-modal>
+    <!-- <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div> -->
+    <div class="modal-body">
+        <ngb-tabset [destroyOnHide]="false">
+            <ngb-tab title="Draw">
+                <ng-template ngbTabContent>
+                    <div class="col-md-12">
+                        <div class="tab-sign">
+                            <ng-signature-pad doneButtonText="Create a Signature" format="base64"
+                                (done)="saveImage($event)"></ng-signature-pad>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- <ngb-tab title="Type">
+                <ng-template ngbTabContent>
+                    <div class="sing-type">
+                        <input type="text" name="signaturetype" id="signaturetype">
+                    </div>
+                    <button type="button" class="btn btn-outline-dark"
+                        (click)="modal.close('Save click')">Cancle</button>
+                    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Create Signature')">Create
+                        Signature</button>
+                </ng-template>
+            </ngb-tab> -->
+            <ngb-tab title="Upload">
+                <ng-template ngbTabContent>
+                    <div class="upload-sig">
+                        <div class="text-center">
+                            <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+                                <img [src]="imageURL" alt="upimages" width="200px">
+                            </div>
+                            <button class="btn btn-primary btn-block" type="button" (click)="fileInput.click()">
+                                <span>UPLOAD</span>
+                                <input #fileInput type="file" (change)="onFileSelected($event)" id="file"
+                                    style="display:none;" accept="image/*" />
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-dark"
+                        (click)="modal.close('Save click')">Cancle</button>
+                    <button type="button" class="btn btn-outline-dark" (click)="uploadSignature();"
+                        *ngIf="imageURL && imageURL !== ''">Create Signature</button>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+    <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancle</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Create Signature')">Create Signature</button>
+  </div> -->
+</ng-template>
