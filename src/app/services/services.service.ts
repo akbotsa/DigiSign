@@ -68,5 +68,9 @@ export class ServicesService {
   insertDragObject(data): Observable<any> {
     return this.http.post(environment.baseUrl + 'documents/send' , data);
   }
+  
+  getpdfcoordinates(data): Observable<any> {
+    return this.http.post(environment.baseUrl + 'documents/doc_Coordinates' , data);
+  }
 
 }
