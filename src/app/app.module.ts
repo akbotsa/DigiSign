@@ -63,7 +63,7 @@ const ROUTES: Routes = [
   { path: 'addfields', component: AddFieldsComponent },
   { path: 'pdfview', component: PdfviewComponent },
   { path: 'documentSign', component: DocumentSignViewComponent },
-  { path: 'final-doc', component: FinalDocComponent },
+  { path: 'finalDoc', component: FinalDocComponent },
 ]
 
 @NgModule({

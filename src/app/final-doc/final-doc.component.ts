@@ -24,14 +24,14 @@ export class FinalDocComponent implements OnInit {
     "left": 24.875
     },
     {
-    "top": 245,
-    "left": -334.921875
+    "top": 0,
+    "left": 40
     }
     ],
     "initial": [
     {
-    "top": 0,
-    "left": 0
+    "top": 200,
+    "left": 300
     },
     {
     "top": 0,
@@ -43,7 +43,7 @@ export class FinalDocComponent implements OnInit {
     "ReceiptId": 2,
     "Name": "kirankumar",
     "Email": "chinthadakirankumar@gmail.com",
-    "VerifyFlag": true,
+    "VerifyFlag": false,
     "signatureImage": "test.png",
     "initialImage": "",
     "signature": [
@@ -71,10 +71,14 @@ export class FinalDocComponent implements OnInit {
     receipientData:any;
     docId:any;
     userId;
+    docfile: any;
+    viewSrc: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.docfile = localStorage.getItem("docfile");
+    this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${this.docfile}`;
     console.log(this.userdata);
     this.receipientData=this.userdata.Recipients;
     this.docId=this.userdata.docId;
