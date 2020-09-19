@@ -27,6 +27,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { PdfviewComponent } from './pdfview/pdfview.component';
 import { DocumentSignViewComponent } from './document-sign-view/document-sign-view.component';
+import { FinalDocComponent } from './final-doc/final-doc.component';
 
 
 const ROUTES: Routes = [
@@ -53,7 +54,7 @@ const ROUTES: Routes = [
       {
         path: 'draft',
         component: DraftsComponent
-      }
+      },
     ]
   },
   { path: 'adddocument', component: AdddocumentComponent },
@@ -62,6 +63,7 @@ const ROUTES: Routes = [
   { path: 'addfields', component: AddFieldsComponent },
   { path: 'pdfview', component: PdfviewComponent },
   { path: 'documentSign', component: DocumentSignViewComponent },
+  { path: 'final-doc', component: FinalDocComponent },
 ]
 
 @NgModule({
@@ -82,6 +84,7 @@ const ROUTES: Routes = [
     AddFieldsComponent,
     PdfviewComponent,
     DocumentSignViewComponent,
+    FinalDocComponent,
   ],
   imports: [
     HttpClientModule,
