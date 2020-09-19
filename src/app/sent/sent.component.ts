@@ -19,10 +19,6 @@ export class SentComponent implements OnInit {
     this.getDocumentsManage();
   }
 
-  onClicksign(data){
-
-  }
-
   public getDocumentsManage(): void {
     let data = {
       "type": "2",
@@ -34,6 +30,10 @@ export class SentComponent implements OnInit {
         this.documentsList = manageDocumentsResp.data.sent;
       }
     })
+  }
+
+  onClicksign(doc){
+    console.log('doc', doc);
   }
 
 }

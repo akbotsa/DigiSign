@@ -78,6 +78,8 @@ export class AddFieldsComponent implements OnInit {
   }
 
   cloneSignature(user, index) {
+    console.log('hello');
+
     this.sendBtnHide = true;
     if (!this.recpList[index].hasOwnProperty('signature')) {
       let temp = [
@@ -104,7 +106,7 @@ export class AddFieldsComponent implements OnInit {
     $('.draggable2').draggable({
       containment: "parent",
       stop: function (event, ui) {
-        // console.log("draggable element id ", $(this).attr('id'));
+        console.log("draggable element id ", $(this).attr('id'));
         let [name, parentIndex, positionIndex] = $(this).attr('id').split("_");
         self.recpList[parentIndex]['signature'][positionIndex-1]['top'] = ui.position.top;
         self.recpList[parentIndex]['signature'][positionIndex-1]['left'] = ui.position.left;
@@ -135,10 +137,10 @@ export class AddFieldsComponent implements OnInit {
       });
     }
 
-    $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">${user.Name}</p></div>`);
+    $('.pdfViewerSection').prepend(`<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">${user.Name}</p></div>`);
 
     let self = this;
-    $('.draggable2').draggable({
+    $('.draggable3').draggable({
       containment: "parent",
       stop: function (event, ui) {
         let [name, parentIndex, positionIndex] = $(this).attr('id').split("_");

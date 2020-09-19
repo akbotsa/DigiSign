@@ -27,5 +27,5 @@
 
 #sortable .ui-draggable-handle {
     position: absolute !important;
-    margin: 0px 15px;
+    /* margin: 0px 15px; */
 }

@@ -19,9 +19,9 @@
     padding: 5px;
 }
 
-.pdfViewerSection {
-    padding: 10px;
-}
+/* .pdfViewerSection {
+    padding: 10px; 
+} */
 .side-icon {
     background: yellow;
     padding: 3px;
@@ -130,9 +130,9 @@
     position: absolute !important;
 }
 
-#sortable {
-    margin: 0px 70px;
-}
+/* #sortable {
+     margin: 0px 70px;
+} */
 
 
 
