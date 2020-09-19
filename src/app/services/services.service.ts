@@ -77,4 +77,8 @@ export class ServicesService {
     return this.http.post(environment.baseUrl + 'documents/verify' , data);
   }
 
+  getDocumentDetails(data): Observable<any> {
+    return this.http.post(environment.baseUrl + 'documents/final_doc' , data);
+  }
+
 }

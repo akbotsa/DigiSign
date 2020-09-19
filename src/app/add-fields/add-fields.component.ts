@@ -221,6 +221,15 @@ export class AddFieldsComponent implements OnInit {
   }
 
   updateCoordinates(){
+    if(this.recpList.length > 0){
+        for (let i = 0; i < this.recpList.length; i++) {
+            this.recpList[i]['VerifyFlag'] =  false;
+            this.recpList[i]['signatureImage'] = "";
+            this.recpList[i]['initialImage'] = "";
+        }
+    }
+
+
     var  recepctData = JSON.stringify(localStorage.getItem('userData'));
     let object = {
       "UserId": this.userId,

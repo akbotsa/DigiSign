@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesService } from '../services/services.service';
 
 @Component({
   selector: 'app-final-doc',
@@ -24,7 +25,7 @@ export class FinalDocComponent implements OnInit {
     "left": 24.875
     },
     {
-    "top": 0,
+    "top": 360,
     "left": 40
     }
     ],
@@ -74,15 +75,31 @@ export class FinalDocComponent implements OnInit {
     docfile: any;
     viewSrc: any;
 
-  constructor() { }
+  constructor(private services: ServicesService) { }
 
   ngOnInit(): void {
     this.docfile = localStorage.getItem("docfile");
+    this.docId = localStorage.getItem("docId");
     this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${this.docfile}`;
     console.log(this.userdata);
-    this.receipientData=this.userdata.Recipients;
-    this.docId=this.userdata.docId;
-    this.userId=this.userdata.userId;
+    //this.receipientData= this.userdata.Recipients;
+    //this.docId=this.userdata.docId;
+    //this.userId=this.userdata.userId;
+    this.getDocDetails();
+  }
+
+  getDocDetails(){
+    let finObject = {
+      "DocId" : this.docId
+    }
+    this.services.getDocumentDetails(finObject).subscribe((resp) => {
+      console.log('documentDetails-->', resp);
+      this.receipientData = resp.data.Recipients;
+      
+      //this.useRecId = resp.data[0].Recipients[0].ReceiptId;
+      this.userId = resp.data.UserId;
+      console.log(this.receipientData);
+    })
   }
 
 }

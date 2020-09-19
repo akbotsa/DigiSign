@@ -38,7 +38,7 @@ export class SentComponent implements OnInit {
     let docfile = document.documents[0].Doc
     localStorage.setItem("docId",docId);
     localStorage.setItem("docfile",docfile);
-    this.router.navigateByUrl("/pdfview");
+    this.router.navigateByUrl("/finalDoc");
   }
 
 }
