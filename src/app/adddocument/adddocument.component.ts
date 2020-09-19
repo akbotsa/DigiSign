@@ -209,6 +209,7 @@ export class AdddocumentComponent implements OnInit {
     for (let index = 0; index < event.length; index++) {
       this.uploadedFiles.push(event[0]);
 
+      console.log('upload file-->', event[0]);
       const element = event[index];
       this.files.push(element.name);
     }

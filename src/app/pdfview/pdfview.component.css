@@ -10,3 +10,7 @@
     padding: 20px 0px;
     /* margin: 0px 70px; */
 }
+
+.tab-sign {
+    overflow: hidden;
+}

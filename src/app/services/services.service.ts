@@ -73,4 +73,8 @@ export class ServicesService {
     return this.http.post(environment.baseUrl + 'documents/doc_Coordinates' , data);
   }
 
+  sendRecipientFiles(data): Observable<any> {
+    return this.http.post(environment.baseUrl + 'documents/verify' , data);
+  }
+
 }

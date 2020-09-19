@@ -27,6 +27,11 @@ export class PdfviewComponent implements OnInit {
   fileContent: any;
   mainImage: any;
   itemId: any;
+  uploadedFiles = [];
+  useRecId: any;
+  userDocId: any;
+  signatureFile: any;
+  initialFile: any;
   @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
   constructor(private modalService: NgbModal, private services: ServicesService) { }
@@ -60,6 +65,9 @@ export class PdfviewComponent implements OnInit {
     this.services.getpdfcoordinates(reqObj).subscribe((resp) => {
       console.log('coordinats-->', resp);
       this.userData = resp.data[0].Recipients;
+
+      this.useRecId = resp.data[0].Recipients[0].ReceiptId;
+      this.userDocId = resp.data[0].DocId;
       console.log(this.userData);
     })
 
@@ -67,40 +75,40 @@ export class PdfviewComponent implements OnInit {
     console.log(this.userData);
   }
 
-  draggable_Signature(obj, index, index2, id) {
-    console.log(index)
-    console.log(index2)
+  draggable_Signature(id) {
     console.log(id)
     this.modalService.open(this.mymodal);
     //this.modelref.close();
     console.log("method working");
-    localStorage.setItem('index',index);
-    localStorage.setItem('index2',index2);
     localStorage.setItem('itemId',id);
   }
 
   saveImage(data) {
-    this.signatureImage = data;
-    var index1 = localStorage.getItem('index');
-    var index2 = localStorage.getItem('index2');
-    this.itemId = localStorage.getItem('itemId');
-    if(this.itemId == 1){
-      var xx = '#drag_'+index1+'_'+index2;
-      var yy = '#remove_'+index1+'_'+index2;
-    }else{
-      var xx = '#idrag_'+index1+'_'+index2;
-      var yy = '#iremove_'+index1+'_'+index2;
+    let self= this;
+    var reader = new FileReader();
+    reader.readAsDataURL(data); 
+    reader.onloadend = function() {
+        var base64data = reader.result;                
+        self.itemId = localStorage.getItem('itemId');
+        if(self.itemId == 1){
+          var xx = '.drag';
+          var yy = '.remove';
+          var aa = 'remove';
+          self.signatureImage = data;
+        }else{
+          var xx = '.idrag';
+          var yy = '.iremove';
+          var aa = 'iremove';
+          self.initialFile = data;
+        }
+        $(yy).remove();
+        $(xx).css({"background-color": "transparent", "padding": 0});
+        $(xx).append(`<img class="${aa}" style="height: 40px;width: 80px;" src="${base64data}">`);
     }
-    $(yy).remove();
-    $(xx).css({"background-color": "transparent", "padding": 0});
-    $(xx).append(`<img style="height: 40px;width: 80px;" src="${this.signatureImage}">`);
-    console.log("Draw Signature image data--->", this.signatureImage);
-    //this.modalService.
-
   }
 
   onFileSelected(event) {
-    console.log("onFileSelected--->");
+    console.log("onFileSelected--->", event);
     const file = (event.target as HTMLInputElement).files[0];
     this.fileContent = file;
     const reader = new FileReader();
@@ -111,38 +119,102 @@ export class PdfviewComponent implements OnInit {
   }
 
   uploadSignature() {
-    console.log("uploadSignature--->");
+    this.itemId = localStorage.getItem('itemId');
+
+    /* if(this.uploadedFiles.length > 0){
+      if(this.itemId == 1){
+        this.uploadedFiles[0] = this.fileContent;
+      }else{
+        this.uploadedFiles[1] = this.fileContent;
+      }
+    }else{
+      if(this.itemId == 1){
+        this.uploadedFiles.push({
+          'signature' : this.fileContent
+        })
+        this.uploadedFiles.push({
+          'initial' : ''
+        })
+      }else{
+        this.uploadedFiles.push({
+          'signature' : ''
+        })
+        this.uploadedFiles.push({
+          'initial' : this.fileContent
+        })
+      }
+    } */
+
+    /* if(!this.uploadedFiles.hasOwnProperty('signature')){
+      this.uploadedFiles.push({
+        'signature' : ''
+      })
+    }
+
+    if(!this.uploadedFiles.hasOwnProperty('initial')){
+      this.uploadedFiles.push({
+        'initial' : ''
+      })
+    } */
+
+
+    console.log("uploadSignature--->", this.fileContent);
     const reader = new FileReader();
     reader.onload = () => {
+      console.log("res--->",reader.result );
       this.mainImage = reader.result as string;
 
       /* append image here */
-      var index1 = localStorage.getItem('index');
-      var index2 = localStorage.getItem('index2');
-      this.itemId = localStorage.getItem('itemId');
+      
       if(this.itemId == 1){
-        var xx = '#idrag_'+index1+'_'+index2;
-        var yy = '#remove_'+index1+'_'+index2;
+        var xx = '.drag';
+        var yy = '.remove';
+        var aa = 'remove';
+        this.signatureImage = this.fileContent;
       }else{
-        var xx = '#idrag_'+index1+'_'+index2;
-        var yy = '#iremove_'+index1+'_'+index2;
+        var xx = '.idrag';
+        var yy = '.iremove';
+        var aa = 'iremove';
+        this.initialFile =  this.fileContent;
       }
-
+      console.log("yy--->",yy);
+      console.log("xx--->",xx);
       $(yy).remove();
       $(xx).css({"background-color": "transparent", "padding": 0});
-      $(xx).append(`<img style="height: 40px;width: 80px;" src="${this.mainImage}">`);
+      $(xx).append(`<img class="${aa}" style="height: 40px;width: 80px;" src="${this.mainImage}">`);
+
+      console.log(this.uploadedFiles)
     }
     reader.readAsDataURL(this.fileContent);
 
   }
 
-  generatePdf() {
+  /* generatePdf() {
     const filename  = 'Invoice.pdf';
 		html2canvas(document.querySelector('#content'), {scale: 4}).then(canvas => {
 			let pdf = new jsPDF('p', 'mm', 'a4');
 			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
 			pdf.save(filename);
 		});
+  } */
+
+  updateSignature(){
+    const formData = new FormData();
+    formData.append('DocId', this.userDocId);
+    formData.append('RecipientID', this.useRecId);
+    formData.append('initialImage', this.initialFile);
+    formData.append('signatureImage', this.signatureImage);
+
+    console.log('formData--->', formData);
+
+    this.services.sendRecipientFiles(formData).subscribe((resp) => {
+      console.log('coordinats-->', resp);
+      /* this.userData = resp.data[0].Recipients;
+      console.log(this.userData); */
+    })
+
+    //console.log(finObj)
+    //console.log(this.signatureImage)
   }
 
 }
