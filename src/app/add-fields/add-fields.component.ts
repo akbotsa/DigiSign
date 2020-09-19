@@ -225,7 +225,10 @@ export class AddFieldsComponent implements OnInit {
     let object = {
       "UserId": this.userId,
       "DocId": this.docID,
-      "Recipients": this.recpList
+      "Recipients": this.recpList,
+      "VerifyFlag" : false,
+      "signatureImage" : "",
+      "initialImage" : "",
     }
     //console.log(object);
     this.services.insertDragObject(object).subscribe((resp) => {
