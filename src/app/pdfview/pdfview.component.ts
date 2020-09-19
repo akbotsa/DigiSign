@@ -4,6 +4,11 @@ import {NgbModal,  ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-boo
 declare var jquery: any;
 declare var $: any;
 
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf';
+
+
+
 @Component({
   selector: 'app-pdfview',
   templateUrl: './pdfview.component.html',
@@ -111,6 +116,7 @@ export class PdfviewComponent implements OnInit {
     reader.onload = () => {
       this.mainImage = reader.result as string;
 
+      /* append image here */
       var index1 = localStorage.getItem('index');
       var index2 = localStorage.getItem('index2');
       this.itemId = localStorage.getItem('itemId');
@@ -122,16 +128,21 @@ export class PdfviewComponent implements OnInit {
         var yy = '#iremove_'+index1+'_'+index2;
       }
 
-      
       $(yy).remove();
       $(xx).css({"background-color": "transparent", "padding": 0});
       $(xx).append(`<img style="height: 40px;width: 80px;" src="${this.mainImage}">`);
     }
     reader.readAsDataURL(this.fileContent);
 
-    /* append image here */
-    
+  }
 
+  generatePdf() {
+    const filename  = 'Invoice.pdf';
+		html2canvas(document.querySelector('#content'), {scale: 4}).then(canvas => {
+			let pdf = new jsPDF('p', 'mm', 'a4');
+			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
+			pdf.save(filename);
+		});
   }
 
 }
