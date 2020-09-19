@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ServicesService } from '../services/services.service';
 import {NgbModal,  ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-pdfview',
@@ -19,11 +21,13 @@ export class PdfviewComponent implements OnInit {
   signatureImage;
   fileContent: any;
   mainImage: any;
+  itemId: any;
   @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
   constructor(private modalService: NgbModal, private services: ServicesService) { }
 
   ngOnInit(): void {
+    
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     this.docID = localStorage.getItem("docId");
     this.docfile = localStorage.getItem("docfile");
@@ -58,19 +62,40 @@ export class PdfviewComponent implements OnInit {
     console.log(this.userData);
   }
 
-  draggable_Signature() {
+  draggable_Signature(obj, index, index2, id) {
+    console.log(index)
+    console.log(index2)
+    console.log(id)
     this.modalService.open(this.mymodal);
+    //this.modelref.close();
     console.log("method working");
+    localStorage.setItem('index',index);
+    localStorage.setItem('index2',index2);
+    localStorage.setItem('itemId',id);
   }
 
   saveImage(data) {
     this.signatureImage = data;
-    //console.log("Draw Signature image data--->", this.signatureImage);
-    //this.modelref.close();
+    var index1 = localStorage.getItem('index');
+    var index2 = localStorage.getItem('index2');
+    this.itemId = localStorage.getItem('itemId');
+    if(this.itemId == 1){
+      var xx = '#drag_'+index1+'_'+index2;
+      var yy = '#remove_'+index1+'_'+index2;
+    }else{
+      var xx = '#idrag_'+index1+'_'+index2;
+      var yy = '#iremove_'+index1+'_'+index2;
+    }
+    $(yy).remove();
+    $(xx).css({"background-color": "transparent", "padding": 0});
+    $(xx).append(`<img style="height: 40px;width: 80px;" src="${this.signatureImage}">`);
+    console.log("Draw Signature image data--->", this.signatureImage);
+    //this.modalService.
 
   }
 
   onFileSelected(event) {
+    console.log("onFileSelected--->");
     const file = (event.target as HTMLInputElement).files[0];
     this.fileContent = file;
     const reader = new FileReader();
@@ -81,13 +106,31 @@ export class PdfviewComponent implements OnInit {
   }
 
   uploadSignature() {
-
+    console.log("uploadSignature--->");
     const reader = new FileReader();
     reader.onload = () => {
       this.mainImage = reader.result as string;
+
+      var index1 = localStorage.getItem('index');
+      var index2 = localStorage.getItem('index2');
+      this.itemId = localStorage.getItem('itemId');
+      if(this.itemId == 1){
+        var xx = '#idrag_'+index1+'_'+index2;
+        var yy = '#remove_'+index1+'_'+index2;
+      }else{
+        var xx = '#idrag_'+index1+'_'+index2;
+        var yy = '#iremove_'+index1+'_'+index2;
+      }
+
+      
+      $(yy).remove();
+      $(xx).css({"background-color": "transparent", "padding": 0});
+      $(xx).append(`<img style="height: 40px;width: 80px;" src="${this.mainImage}">`);
     }
     reader.readAsDataURL(this.fileContent);
 
+    /* append image here */
+    
 
   }
 
