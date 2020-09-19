@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServicesService } from '../services/services.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class SentComponent implements OnInit {
   public documentsList = [];
   userId: any;
 
-  constructor(private digiServices: ServicesService) { }
+  constructor(private digiServices: ServicesService, private router:Router) { }
 
   ngOnInit(): void {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
@@ -32,8 +33,12 @@ export class SentComponent implements OnInit {
     })
   }
 
-  onClicksign(doc){
-    console.log('doc', doc);
+  onClicksign(document){
+    let docId = document.documents[0].DocId
+    let docfile = document.documents[0].Doc
+    localStorage.setItem("docId",docId);
+    localStorage.setItem("docfile",docfile);
+    this.router.navigateByUrl("/pdfview");
   }
 
 }

@@ -40,7 +40,7 @@ const ROUTES: Routes = [
     children: [
       {
         path: "",
-        component: DocumentDetailsComponent 
+        component: InboxComponent 
       }, 
       {
         path: 'inbox',

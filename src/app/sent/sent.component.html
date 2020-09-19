@@ -30,7 +30,7 @@
                                 <th>Subject</th>
                                 <th>Message</th>
                                 <!-- <th>Last Change</th> -->
-                                <th></th>
+                                <th>Action</th>
                             </thead>
                             <tbody>
                                 <tr class="border-bottom" *ngFor="let document of documentsList">
@@ -40,7 +40,7 @@
                                     </td>
                                     <td>
                                         <p class="mb-0"><strong>Please Digisign: {{document?.documents[0]?.Doc}}</strong></p>
-                                        <span> From: {{document?.Sender[0].FirstName}} {{document?.Sender[0].LastName}}</span>
+                                        To:<span *ngFor="let rec of document.Receipts"> {{rec.Name}}, </span>
                                         <!-- <span class="to-status">  Sujatha M</span> -->
                                     </td>
                                     <td>
@@ -51,7 +51,7 @@
                                         <span class="time">09:45:23 am</span>
                                     </td> -->
                                     <td>
-                                        <div class="dropdown">
+                                        <!-- <div class="dropdown">
                                             <button class="btn form-inline dropdown-toggle"
                                                 data-toggle="dropdown">MOVE</button>
                                             <div class="dropdown-menu">
@@ -62,9 +62,8 @@
                                                 <a class="dropdown-item">Export as CSV</a>
                                                 <a class="dropdown-item">Delete</a>
                                             </div>
-
-                                            <button class="btn btn-primary" (click)="onClicksign(document)"> Sign </button>
-                                        </div>
+                                        </div> -->
+                                        <button class="btn btn-primary" (click)="onClicksign(document)"> View </button>
                                     </td>
                                 </tr>
                             </tbody>

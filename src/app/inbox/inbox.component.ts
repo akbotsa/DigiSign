@@ -40,14 +40,10 @@ export class InboxComponent implements OnInit {
 
   /* Click on sign button in table row */
   public onClicksign(document): void {
-    // this.router.navigate(["/profile",student.id]);.replace(/\s+/g, '')
-    console.log(document.documents[0].Doc);
     let docId = document.documents[0].DocId
     let docfile = document.documents[0].Doc
-    console.log(docId);
     localStorage.setItem("docId",docId);
     localStorage.setItem("docfile",docfile);
-    // this.router.navigate(["/documentSign",document.documents[0].Doc])
     this.router.navigateByUrl("/pdfview");
   }
 }
