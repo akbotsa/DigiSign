@@ -6,26 +6,30 @@
 } */
 
 .pdfViewer.removePageBorders .page {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 .pdfViewer .canvasWrapper {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 .page .textLayer {
-    width: 100% !important;
+  width: 100% !important;
 }
 
-
-@media print and (color){
-    #sortable, [role="document"] {
-        width: 100%;
-        max-width: 100%;
-    }
+@media print and (color) {
+  #sortable,
+  [role="document"] {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 #sortable .ui-draggable-handle {
-    position: absolute !important;
-    /* margin: 0px 15px; */
+  position: absolute !important;
+  /* margin: 0px 15px; */
+}
+
+.pagination-container ul.ngx-pagination {
+  margin-bottom: 0;
 }

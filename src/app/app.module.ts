@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -28,34 +27,34 @@ import { HttpClientModule } from '@angular/common/http';
 import { PdfviewComponent } from './pdfview/pdfview.component';
 import { DocumentSignViewComponent } from './document-sign-view/document-sign-view.component';
 import { FinalDocComponent } from './final-doc/final-doc.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DigitOnlyDirective } from './helpers/digitOnlyDirective';
 
 const ROUTES: Routes = [
-
-  { path: '', redirectTo : 'login'  , pathMatch : "full"},
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   {
-    path: 'document', 
+    path: 'document',
     component: ManageComponent,
     // redirectTo: "details",
     children: [
       {
-        path: "",
-        component: InboxComponent 
-      }, 
+        path: '',
+        component: InboxComponent,
+      },
       {
         path: 'inbox',
-        component: InboxComponent
+        component: InboxComponent,
       },
       {
         path: 'sent',
-        component: SentComponent
+        component: SentComponent,
       },
       {
         path: 'draft',
-        component: DraftsComponent
+        component: DraftsComponent,
       },
-    ]
+    ],
   },
   { path: 'adddocument', component: AdddocumentComponent },
   { path: 'login', component: LoginComponent },
@@ -64,7 +63,7 @@ const ROUTES: Routes = [
   { path: 'pdfview', component: PdfviewComponent },
   { path: 'documentSign', component: DocumentSignViewComponent },
   { path: 'finalDoc', component: FinalDocComponent },
-]
+];
 
 @NgModule({
   declarations: [
@@ -85,6 +84,7 @@ const ROUTES: Routes = [
     PdfviewComponent,
     DocumentSignViewComponent,
     FinalDocComponent,
+    DigitOnlyDirective,
   ],
   imports: [
     HttpClientModule,
@@ -96,9 +96,10 @@ const ROUTES: Routes = [
     DragDropModule,
     RouterModule.forRoot(ROUTES),
     NgbModule,
-    SignaturePadModule
+    NgxPaginationModule,
+    SignaturePadModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

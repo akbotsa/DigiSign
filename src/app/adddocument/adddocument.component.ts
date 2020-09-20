@@ -33,6 +33,8 @@ export class AdddocumentComponent implements OnInit {
   recepArr: FormArray;
   userId: string = '5f61cacae1e8890af056308a';
   docId: string;
+  isSignInOrder: boolean = false;
+  public documentFieldValidationFlag: boolean = false;
 
   //Dragover listener
   @HostListener('dragover', ['$event']) onDragOver(evt) {
@@ -87,6 +89,8 @@ export class AdddocumentComponent implements OnInit {
           ReceiptId: [i + 1],
           Name: ['', Validators.required],
           Email: ['', Validators.required],
+          OrderNum: [this.isSignInOrder ? '' : 0, Validators.required],
+          IsOwnDocVerify: [false],
         })
       );
     }
@@ -94,8 +98,8 @@ export class AdddocumentComponent implements OnInit {
 
   loadRecpForm() {
     this.recpForm = this.fb.group({
-      email_subject: [''],
-      email_message: [''],
+      email_subject: ['', Validators.required],
+      email_message: ['', Validators.required],
       receipents: new FormArray([]),
     });
   }
@@ -110,7 +114,6 @@ export class AdddocumentComponent implements OnInit {
   /* =========== add receipent ========== */
 
   addRecepient() {
-    console.log('addddd');
     this.formLength = this.formLength + 1;
 
     if (this.formLength > 1) {
@@ -123,26 +126,34 @@ export class AdddocumentComponent implements OnInit {
           ReceiptId: [i + 1],
           Name: ['', Validators.required],
           Email: ['', Validators.required],
+          OrderNum: [this.isSignInOrder ? '' : 0, Validators.required],
+          IsOwnDocVerify: [false],
         })
       );
     }
   }
 
   onSubmitAddReceipts() {
-    let receiptsAddReqObj = {
-      UserId: this.userId,
-      DocId: this.docId,
-      Message: this.recpForm.value.email_message,
-      Subject: this.recpForm.value.email_subject,
-      Receipts: this.recpForm.value.receipents,
-    };
-    console.log("reqq objjj", receiptsAddReqObj);
-    this.digiService.addReceiptsData(receiptsAddReqObj).subscribe((resp) => {
-      console.log('add receipts resp', JSON.stringify(resp));
-      if(resp.statusCode == 200) {
-        this.router.navigateByUrl("/addfields");
-      }
-    });
+    if (this.recpForm.valid) {
+      console.log('validation if case');
+      let receiptsAddReqObj = {
+        UserId: this.userId,
+        DocId: this.docId,
+        Message: this.recpForm.value.email_message,
+        Subject: this.recpForm.value.email_subject,
+        Receipts: this.recpForm.value.receipents,
+      };
+      console.log('reqq objjj', receiptsAddReqObj);
+      this.digiService.addReceiptsData(receiptsAddReqObj).subscribe((resp) => {
+        console.log('add receipts resp', JSON.stringify(resp));
+        if (resp.statusCode == 200) {
+          this.router.navigateByUrl('/addfields');
+        }
+      });
+    } else {
+      console.log('validation else case');
+      this.documentFieldValidationFlag = true;
+    }
   }
 
   deleteRecep(index) {
@@ -216,5 +227,10 @@ export class AdddocumentComponent implements OnInit {
   }
   deleteAttachment(index) {
     this.files.splice(index, 1);
+  }
+
+  /* Sign In order */
+  public onChangeSignOrder(eve): void {
+    this.isSignInOrder = eve.target.checked ? true : false;
   }
 }

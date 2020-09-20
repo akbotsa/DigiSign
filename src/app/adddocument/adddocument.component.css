@@ -1,62 +1,68 @@
-.nav-item{
-    list-style: none;
+.nav-item {
+  list-style: none;
 }
 
-.fa-question-circle{
-    color: black;
-    font-size: 30px;
-    padding-right: 20px;
-   padding-top: 5px;
+.fa-question-circle {
+  color: black;
+  font-size: 30px;
+  padding-right: 20px;
+  padding-top: 5px;
+}
+.recepient-container .sign-value {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.recepient-container .sign-value input {
+  width: 40px;
+}
+#border {
+  border: 1px solid rgb(187, 187, 187);
+  padding: 5px 10px;
 }
 
-#border{
-    border: 1px solid rgb(187, 187, 187); padding: 5px 10px; margin-top: 20px;}
-
-
-     
-.stylish-input-group .input-group-addon{
-    background: white !important; 
+.stylish-input-group .input-group-addon {
+  background: white !important;
 }
-.stylish-input-group .form-control{
-	border-right:0; 
-	box-shadow:0 0 0; 
-	border-color:#ccc;
+.stylish-input-group .form-control {
+  border-right: 0;
+  box-shadow: 0 0 0;
+  border-color: #ccc;
 }
-.stylish-input-group button{
-    border:0;
-    background:transparent;
+.stylish-input-group button {
+  border: 0;
+  background: transparent;
 }
 
-.sub{
-    padding : 0px !important;
-    margin: 0px !important;
+.sub {
+  padding: 0px !important;
+  margin: 0px !important;
 }
 
 /* <-- hr----> */
 
-
 .separator {
-    display: flex;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
-.separator::before, .separator::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #000;
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #000;
 }
 .separator::before {
-    margin-right: .25em;
+  margin-right: 0.25em;
 }
 .separator::after {
-    margin-left: .25em;
+  margin-left: 0.25em;
 }
-.fa-file{
-    font-size: 30px;
-    padding: 20px;
-    margin: 30px;
-    border: 1px solid rgb(216, 216, 216);
-    border-radius: 50%;
+.fa-file {
+  font-size: 30px;
+  padding: 20px;
+  margin: 30px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 50%;
 }
 
 /* pdf-viewer {
@@ -65,71 +71,74 @@
 } */
 
 .next-btn {
-    text-align: right;
-    max-width: 1000px;
+  text-align: right;
+  max-width: 1000px;
 }
 .next-btn button {
-    padding: 5px 25px;
+  padding: 5px 25px;
 }
 .drag-file-wrapper {
-    padding-top: 75px;
-    padding-bottom: 30px;
+  padding-top: 75px;
+  padding-bottom: 30px;
 }
 .delete-group-fields {
-    display: flex;
-    justify-content: flex-end;
-    align-items: end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
 }
 .delete-group-fields i {
-    cursor: pointer;
+  cursor: pointer;
 }
 /* ======= Drag and Drop ========== */
 
-
 .uploadfilecontainer {
-    background-image: url("../../assets/images/upload.png");
-    background-repeat: no-repeat;
-    background-size: 100px;
-    background-position: center;
-    height: 200px;
-    width: 80%;
-    margin: 20px auto;
-    border: 2px dashed #1C8ADB;
-    border-radius: 10px;
+  background-image: url("../../assets/images/upload.png");
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: center;
+  height: 200px;
+  width: 80%;
+  margin: 20px auto;
+  border: 2px dashed #1c8adb;
+  border-radius: 10px;
 }
 
 .uploadfilecontainer:hover {
-    cursor: pointer;
-    background-color: #9ecbec !important;
-    opacity: 0.8;
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
 }
 
 .files-list {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin: 10px auto;
-    background: #ffffff;
-    border: 1px dashed;
-    border-radius: 12px;
-    padding: 5px;
-    color: #1c8adb;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 10px auto;
+  background: #ffffff;
+  border: 1px dashed;
+  border-radius: 12px;
+  padding: 5px;
+  color: #1c8adb;
 }
 
 .files-list .delete-file {
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .files-list .delete-file img {
-    width: 30px;
+  width: 30px;
 }
 .file-list-name p {
-    padding: 5px;
-    margin-bottom: 0px;
+  padding: 5px;
+  margin-bottom: 0px;
 }
 
 .md-form {
-    padding: 15px 0px;
+  padding: 15px 0px 0 0;
+}
+
+.validation-text {
+  color: red;
 }

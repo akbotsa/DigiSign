@@ -1,80 +1,103 @@
 <!-- <p>inbox works!</p> -->
 
 <div class="inbox">
-    <div class="container-fluid">
-        <div class="">
-            <div class="top-section">
-                <div>
-                    <h2>Inbox</h2>
-                </div>
-                <div class="top-right-filters">
-                    <div>
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    &nbsp;&nbsp;
-                    <div>
-                        <i class="fa fa-filter"></i> FILTERS
-                    </div>
-                </div>
-            </div>
-            <div class="inbox-mails mt-5">
-                <div class="mails-table">
-                    <div *ngIf="isLoading">
-                        Loading....
-                    </div>
-                    <div *ngIf="!isLoading && documentsList.length ===0">
-                        No Mails Available
-                    </div>
-                    <div *ngIf="!isLoading && documentsList.length >0">
-                        <table class="table">
-                            <thead>
-                                <th></th>
-                                <th>Subject</th>
-                                <th>Message</th>
-                                <!-- <th>Last Change</th> -->
-                                <th>Action</th>
-                            </thead>
-                            <tbody>
-                                <tr class="border-bottom" *ngFor="let document of documentsList">
-                                    <td>
-                                        <input type="checkbox">&nbsp;&nbsp;
-                                        <i class="fa fa-check"></i>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0"><strong>Please Digisign: {{document?.documents[0]?.Doc}}</strong></p>
-                                        <span> From: {{document?.Sender[0].FirstName}} {{document?.Sender[0].LastName}}</span>
-                                        <!-- <span class="to-status">  Sujatha M</span> -->
-                                    </td>
-                                    <td>
-                                        <span class="to-status">{{document?.Message}}</span>
-                                    </td>
-                                   <!--  <td>
+  <div class="container-fluid">
+    <div class="">
+      <div class="top-section">
+        <div>
+          <h2>Inbox</h2>
+        </div>
+        <div class="top-right-filters">
+          <div class="pagination-container">
+            <pagination-controls
+              (pageChange)="page = $event"
+            ></pagination-controls>
+          </div>
+          <div>
+            <input type="text" class="form-control" placeholder="Search" />
+          </div>
+          &nbsp;&nbsp;
+          <div><i class="fa fa-filter"></i> FILTERS</div>
+        </div>
+      </div>
+      <div class="inbox-mails mt-5">
+        <div class="mails-table">
+          <div *ngIf="isLoading">Loading....</div>
+          <div *ngIf="!isLoading && documentsList.length === 0">
+            No Mails Available
+          </div>
+          <div *ngIf="!isLoading && documentsList.length > 0">
+            <table class="table">
+              <thead>
+                <th></th>
+                <th>Subject</th>
+                <th>Message</th>
+                <!-- <th>Last Change</th> -->
+                <th>Action</th>
+              </thead>
+              <tbody>
+                <tr
+                  class="border-bottom"
+                  *ngFor="
+                    let document of documentsList
+                      | paginate: { itemsPerPage: 10, currentPage: page }
+                  "
+                >
+                  <td>
+                    <input type="checkbox" />&nbsp;&nbsp;
+                    <i class="fa fa-check"></i>
+                  </td>
+                  <td>
+                    <p class="mb-0">
+                      <strong
+                        >Please Digisign:
+                        {{ document?.documents[0]?.Doc }}</strong
+                      >
+                    </p>
+                    <span>
+                      From: {{ document?.Sender[0].FirstName }}
+                      {{ document?.Sender[0].LastName }}</span
+                    >
+                    <!-- <span class="to-status">  Sujatha M</span> -->
+                  </td>
+                  <td>
+                    <span class="to-status">{{ document?.Message }}</span>
+                  </td>
+                  <!--  <td>
                                         <p class="mb-0 to-status">03/11/2020</p>
                                         <span class="time">09:45:23 am</span>
                                     </td> -->
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn form-inline dropdown-toggle"
-                                                data-toggle="dropdown">MOVE</button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item">Forward</a>
-                                                <a class="dropdown-item">Create a copy</a>
-                                                <a class="dropdown-item">Save as Template</a>
-                                                <a class="dropdown-item">History</a>
-                                                <a class="dropdown-item">Export as CSV</a>
-                                                <a class="dropdown-item">Delete</a>
-                                            </div>
+                  <td>
+                    <div class="dropdown">
+                      <button
+                        class="btn form-inline dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        MOVE
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item">Forward</a>
+                        <a class="dropdown-item">Create a copy</a>
+                        <a class="dropdown-item">Save as Template</a>
+                        <a class="dropdown-item">History</a>
+                        <a class="dropdown-item">Export as CSV</a>
+                        <a class="dropdown-item">Delete</a>
+                      </div>
 
-                                            <button class="btn btn-primary" (click)="onClicksign(document)"> Sign </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                      <button
+                        class="btn btn-primary"
+                        (click)="onClicksign(document)"
+                      >
+                        Sign
+                      </button>
                     </div>
-                   
-                </div>
-            </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
