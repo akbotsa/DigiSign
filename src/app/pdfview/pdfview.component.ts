@@ -5,6 +5,7 @@ declare var jquery: any;
 declare var $: any;
 
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -33,7 +34,7 @@ export class PdfviewComponent implements OnInit {
   initialFile: any;
   @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
-  constructor(private modalService: NgbModal, private services: ServicesService, private router:Router) { }
+  constructor(private modalService: NgbModal, private services: ServicesService, private router:Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     
@@ -62,12 +63,19 @@ export class PdfviewComponent implements OnInit {
 
 
     this.services.getpdfcoordinates(reqObj).subscribe((resp) => {
-      console.log('coordinats-->', resp);
-      this.userData = resp.data[0].Recipients;
-
-      this.useRecId = resp.data[0].Recipients[0].ReceiptId;
-      this.userDocId = resp.data[0].DocId;
-      console.log(this.userData);
+      if(resp.statusCode == 200){
+        console.log('coordinats-->', resp);
+        this.userData = resp.data[0].Recipients;
+  
+        this.useRecId = resp.data[0].Recipients[0].ReceiptId;
+        this.userDocId = resp.data[0].DocId;
+        console.log(this.userData);
+      }else if(resp.statusCode == 403){
+        this.toastr.error('Waiting for prior authorized signatures.','Failed:')
+      }else{
+        this.toastr.error('Oops! Somthing went worng.','Failed:')
+      }
+      
     })
 
     //this.userData = JSON.parse(localStorage.getItem('userData'));
@@ -188,10 +196,7 @@ export class PdfviewComponent implements OnInit {
       this.modalService.dismissAll();
     }
     reader.readAsDataURL(this.fileContent);
-
   }
-
-  /*  */
 
   updateSignature(){
     const formData = new FormData();
@@ -200,19 +205,17 @@ export class PdfviewComponent implements OnInit {
     formData.append('initialImage', this.initialFile);
     formData.append('signatureImage', this.signatureImage);
 
-    console.log('formData--->', formData);
+    //console.log('formData--->', formData);
 
     this.services.sendRecipientFiles(formData).subscribe((resp) => {
       if(resp.statusCode == 200){
-          this.router.navigateByUrl('/document')
+        this.toastr.success(`${resp.Message}`,'Success:')
+        this.router.navigateByUrl('/document')
+      }else{
+        this.toastr.error(`${resp.Message}`,'Failed:')
       }
       console.log('coordinats-->', resp);
-      /* this.userData = resp.data[0].Recipients;
-      console.log(this.userData); */
     })
-
-    //console.log(finObj)
-    //console.log(this.signatureImage)
   }
 
 }
