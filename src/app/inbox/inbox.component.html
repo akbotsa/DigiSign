@@ -32,7 +32,7 @@
                 <th></th>
                 <th>Subject</th>
                 <th>Message</th>
-                <!-- <th>Last Change</th> -->
+                <th>Date & Time</th>
                 <th>Action</th>
               </thead>
               <tbody>
@@ -50,7 +50,7 @@
                   <td>
                     <p class="mb-0">
                       <strong
-                        >Please Digisign:
+                        >Please Endorse:
                         {{ document?.documents[0]?.Doc }}</strong
                       >
                     </p>
@@ -64,9 +64,13 @@
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
                   <td>
-                    <p class="mb-0 to-status">{{document?.createdAt | date: "dd-MM-y"}}</p>
-                    <span class="time">{{document?.createdAt | date: "h:mm:ss a"}}</span>
-                </td>
+                    <p class="mb-0 to-status">
+                      {{ document?.createdAt | date: "dd-MM-y" }}
+                    </p>
+                    <span class="time">{{
+                      document?.createdAt | date: "h:mm:ss a"
+                    }}</span>
+                  </td>
                   <td>
                     <div class="dropdown">
                       <button
