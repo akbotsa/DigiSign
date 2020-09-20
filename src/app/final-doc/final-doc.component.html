@@ -12,10 +12,10 @@
             <div class="pdfViewerSection" id="sortable">
                 <div  *ngFor="let list of receipientData; let i = index" >
                     <div  *ngFor="let pos of list.signature; let idx = index" >
-                        <div class="drag-cls ui-draggable ui-draggable-handle drag" style="display: inline; z-index: 1; background: rgba(204, 204, 204, 0.73); padding: 10px 30px; border-radius: 5px; color: rgb(255, 255, 255); position: relative;" [style.left.px]="pos.left" [style.top.px]="pos.top" >
+                        <div class="drag-cls ui-draggable ui-draggable-handle drag" style="display: inline; z-index: 1; border-radius: 5px; color: rgb(255, 255, 255); position: relative;" [style.left.px]="pos.left" [style.top.px]="pos.top" >
                             <span *ngIf="list.VerifyFlag; then condition1 else condition2"></span>
                             <ng-template #condition1>
-                                <img  style="height: 40px;width: 80px;" src="http://15.207.202.132:7000/api/v1/documents/document/{{list.signatureImage}}">
+                                <img  style="height: 70px;width: 300px;" src="http://15.207.202.132:7000/api/v1/documents/document/{{list.signatureImage}}">
                             </ng-template>
                             <ng-template #condition2>
                                 <p class="ui-state-highlight remove" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">{{list.Email}}</p>
@@ -23,10 +23,10 @@
                         </div>
                     </div>
                     <div  *ngFor="let ini of list.initial; let j = index" >
-                        <div class="drag-cls ui-draggable ui-draggable-handle idrag" style="display: inline; z-index: 1; background: rgba(204, 204, 204, 0.73); padding: 10px 30px; border-radius: 5px; color: rgb(255, 255, 255); position: relative;" [style.left.px]="ini.left" [style.top.px]="ini.top">
+                        <div class="drag-cls ui-draggable ui-draggable-handle idrag" style="display: inline; z-index: 1;  border-radius: 5px; color: rgb(255, 255, 255); position: relative;" [style.left.px]="ini.left" [style.top.px]="ini.top">
                             <div *ngIf="list.VerifyFlag; then condition1 else condition2"></div>
                             <ng-template #condition1>
-                                <img  style="height: 40px;width: 80px;" src="http://15.207.202.132:7000/api/v1/documents/document/{{list.initialImage}}">
+                                <img  style="height: 70px;width: 300px;" src="http://15.207.202.132:7000/api/v1/documents/document/{{list.initialImage}}">
                             </ng-template>
                             <ng-template #condition2>
                                 <p class="ui-state-highlight iremove" style="display: inline; color: #135699; font-weight: bold">

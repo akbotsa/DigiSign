@@ -103,7 +103,7 @@ export class PdfviewComponent implements OnInit {
         }
         $(yy).remove();
         $(xx).css({"background-color": "transparent", "padding": 0});
-        $(xx).append(`<img class="${aa}" style="height: 40px;width: 80px;" src="${base64data}">`);
+        $(xx).append(`<img class="${aa}" style="height: 70px;width: 300px;" src="${base64data}">`);
     }
   }
 
@@ -181,7 +181,7 @@ export class PdfviewComponent implements OnInit {
       console.log("xx--->",xx);
       $(yy).remove();
       $(xx).css({"background-color": "transparent", "padding": 0});
-      $(xx).append(`<img class="${aa}" style="height: 40px;width: 80px;" src="${this.mainImage}">`);
+      $(xx).append(`<img class="${aa}" style="height: 70px;width: 300px;" src="${this.mainImage}">`);
 
       console.log(this.uploadedFiles)
     }
