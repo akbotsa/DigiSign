@@ -14,3 +14,62 @@
 .tab-sign {
     overflow: hidden;
 }
+
+.recipi {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 15px 0px;
+}
+
+.final-sidebar {
+    border: 3px solid #000;
+    border-radius: 5px;
+    margin: 25px 0px 0px 0px;
+    padding: 10px;
+    border-bottom: 5px solid #000;
+}
+
+.final-sidebar p {
+    /* font-weight: bold; */
+    margin-bottom: 5px;
+    font-size: 16px;
+    
+    /* text-align: center; */
+}
+
+.doc-side-card {
+    padding: 10px;
+    margin: 15px 0px;
+    box-shadow: 6px 8px 6px -5px #777;
+    /* border: 3px solid #ccc; */
+}
+
+.side-status {
+    display: flex;
+    align-items: center;
+}
+
+.side-status p {
+    padding: 15px 30px;
+    border-radius: 5px;
+    /* margin-bottom: 10px; */
+    /* background: #ccc; */
+}
+
+.doc-sidee {
+    display: flex;
+    justify-content: space-between;
+    /* border-bottom: 3px solid #000; */
+}
+
+.final-name {
+    font-size: 25px; 
+    text-transform: capitalize;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.final-mail {
+    font-size: 15px;
+}
