@@ -17,7 +17,7 @@ import { ServicesService } from '../services/services.service';
   templateUrl: './adddocument.component.html',
   styleUrls: ['./adddocument.component.css'],
 })
-export class AdddocumentComponent implements OnInit, AfterViewInit {
+export class AdddocumentComponent implements OnInit {
   @Directive({
     selector: '[appDragDrop]',
   })
