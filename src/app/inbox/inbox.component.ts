@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ServicesService } from '../services/services.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class InboxComponent implements OnInit {
 
   constructor(
     private digiServices: ServicesService,
-    private readonly router: Router
+    private readonly router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +39,8 @@ export class InboxComponent implements OnInit {
         this.isLoading = false;
         if (manageDocumentsResp.statusCode === 200) {
           this.documentsList = manageDocumentsResp.data.inbox;
+        } else {
+          this.toastr.error('Somthing went wrong.', 'Failed:');
         }
       });
   }

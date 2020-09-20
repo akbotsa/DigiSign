@@ -29,6 +29,9 @@ import { DocumentSignViewComponent } from './document-sign-view/document-sign-vi
 import { FinalDocComponent } from './final-doc/final-doc.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DigitOnlyDirective } from './helpers/digitOnlyDirective';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -98,6 +101,9 @@ const ROUTES: Routes = [
     NgbModule,
     NgxPaginationModule,
     SignaturePadModule,
+    SignaturePadModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

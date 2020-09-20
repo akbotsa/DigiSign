@@ -2,7 +2,26 @@
     
     <div class="row">
         <div class="col-md-3 col-md-offset-3">
-            <!-- <button class="btn btn-primary" (click)="generatePdf()">Genarate Pdf</button> -->
+            <div>
+                <h6>Recipients</h6>
+                <div *ngFor="let list of receipientData; let i = index" class="mail-section border-left-primary">
+                    <div class=" mb-3 ">
+                        <h4>{{list?.Name}}</h4>
+                        <div class="sidebar-image">{{list?.Email}} </div>
+                    </div>
+                    <div class=" mb-3 ">
+                        <h4>Date:</h4>
+                        <span *ngIf="list.VerifyFlag; then con1 else con2"></span>
+                        <ng-template #con1>
+                            <p>Completed</p>
+                        </ng-template>
+                        <ng-template #con2>
+                            <p>Signature Pending</p>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" (click)="generatePdf()" *ngIf="isDownloadflag">Download Pdf</button>
             <!-- <button class="btn btn-primary" (click)="updateSignature()">Update Signature</button> -->
         </div>
         <div class="col-md-9 image-view" #content id="content">
@@ -18,7 +37,7 @@
                                 <img  style="height: 70px;width: 300px;" src="http://15.207.202.132:7000/api/v1/documents/document/{{list.signatureImage}}">
                             </ng-template>
                             <ng-template #condition2>
-                                <p class="ui-state-highlight remove" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">{{list.Email}}</p>
+                                <p class="ui-state-highlight remove" style="display: inline; color: #135699; font-weight: bold"><img style="height: 20px;" src="assets/images/sign.png">{{list.Name}}</p>
                             </ng-template>
                         </div>
                     </div>
@@ -30,7 +49,7 @@
                             </ng-template>
                             <ng-template #condition2>
                                 <p class="ui-state-highlight iremove" style="display: inline; color: #135699; font-weight: bold">
-                                    <img style="height: 20px;" src="assets/images/sign.png">{{list.Nam}}</p>
+                                    <img style="height: 20px;" src="assets/images/digital.png">{{list.Name}}</p>
                             </ng-template>
                         </div>
                     </div>

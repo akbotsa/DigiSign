@@ -60,10 +60,10 @@
                   <td>
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
-                  <!--  <td>
-                                        <p class="mb-0 to-status">03/11/2020</p>
-                                        <span class="time">09:45:23 am</span>
-                                    </td> -->
+                  <td>
+                    <p class="mb-0 to-status">{{document?.createdAt | date: "dd-MM-y"}}</p>
+                    <span class="time">{{document?.createdAt | date: "h:mm:ss a"}}</span>
+                </td>
                   <td>
                     <!-- <div class="dropdown">
                                             <button class="btn form-inline dropdown-toggle"

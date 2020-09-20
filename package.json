@@ -33,6 +33,7 @@
     "jspdf": "^2.1.1",
     "ng2-pdf-viewer": "^6.3.2",
     "ngx-pagination": "^5.0.0",
+    "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

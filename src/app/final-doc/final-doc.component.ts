@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../services/services.service';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-final-doc',
@@ -74,6 +76,8 @@ export class FinalDocComponent implements OnInit {
     userId;
     docfile: any;
     viewSrc: any;
+    dummy:any = [];
+    isDownloadflag: boolean = true;
 
   constructor(private services: ServicesService) { }
 
@@ -99,7 +103,31 @@ export class FinalDocComponent implements OnInit {
       //this.useRecId = resp.data[0].Recipients[0].ReceiptId;
       this.userId = resp.data.UserId;
       console.log(this.receipientData);
+
+      if(this.receipientData.length > 0){
+        for (let i = 0; i < this.receipientData.length; i++) {
+          console.log('verify-->', this.receipientData[i].VerifyFlag);
+            if(this.receipientData[i].VerifyFlag === false){
+                this.dummy.push(this.receipientData[i].VerifyFlag);
+            }
+        }
+      }
+
+      if(this.dummy.length >0){
+        this.isDownloadflag = false;
+      }
+      
+
     })
+  }
+
+  generatePdf() {
+    const filename  = 'FinalDOc.pdf';
+		html2canvas(document.querySelector('#content'), {scale: 3}).then(canvas => {
+			let pdf = new jsPDF('p', 'mm', 'a4');
+			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
+			pdf.save(filename);
+		});
   }
 
 }

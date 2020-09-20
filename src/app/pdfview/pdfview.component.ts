@@ -4,8 +4,8 @@ import {NgbModal,  ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-boo
 declare var jquery: any;
 declare var $: any;
 
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -32,9 +32,11 @@ export class PdfviewComponent implements OnInit {
   userDocId: any;
   signatureFile: any;
   initialFile: any;
+  dummy = [];
+  isShowflag: boolean = false;
   @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
-  constructor(private modalService: NgbModal, private services: ServicesService) { }
+  constructor(private modalService: NgbModal, private services: ServicesService, private router:Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     
@@ -63,12 +65,32 @@ export class PdfviewComponent implements OnInit {
 
 
     this.services.getpdfcoordinates(reqObj).subscribe((resp) => {
-      console.log('coordinats-->', resp);
-      this.userData = resp.data[0].Recipients;
+      if(resp.statusCode == 200){
+        console.log('coordinats-->', resp);
+        this.userData = resp.data[0].Recipients;
+  
+        this.useRecId = resp.data[0].Recipients[0].ReceiptId;
+        this.userDocId = resp.data[0].DocId;
+        console.log(this.userData);
+      }else if(resp.statusCode == 403){
+        this.toastr.error('Waiting for prior authorized signatures.','Failed:')
+      }else{
+        this.toastr.error('Oops! Somthing went worng.','Failed:')
+      }
+      if(this.userData.length > 0){
+        for (let i = 0; i < this.userData.length; i++) {
+          console.log('verify-->', this.userData[i].VerifyFlag);
+            if(this.userData[i].VerifyFlag === true){
+                this.dummy.push(this.userData[i].VerifyFlag);
+            }
+        }
+      }
 
-      this.useRecId = resp.data[0].Recipients[0].ReceiptId;
-      this.userDocId = resp.data[0].DocId;
-      console.log(this.userData);
+      if(this.dummy.length >0){
+        this.isShowflag = true;
+      }
+
+      
     })
 
     //this.userData = JSON.parse(localStorage.getItem('userData'));
@@ -103,7 +125,8 @@ export class PdfviewComponent implements OnInit {
         }
         $(yy).remove();
         $(xx).css({"background-color": "transparent", "padding": 0});
-        $(xx).append(`<img class="${aa}" style="height: 70px;width: 300px;" src="${base64data}">`);
+        $(xx).append(`<img class="${aa}" style="height: 70px;width: 80px;" src="${base64data}">`);
+        self.modalService.dismissAll();
     }
   }
 
@@ -183,20 +206,12 @@ export class PdfviewComponent implements OnInit {
       $(xx).css({"background-color": "transparent", "padding": 0});
       $(xx).append(`<img class="${aa}" style="height: 70px;width: 300px;" src="${this.mainImage}">`);
 
-      console.log(this.uploadedFiles)
+      console.log(this.uploadedFiles);
+
+      this.modalService.dismissAll();
     }
     reader.readAsDataURL(this.fileContent);
-
   }
-
-  /* generatePdf() {
-    const filename  = 'Invoice.pdf';
-		html2canvas(document.querySelector('#content'), {scale: 4}).then(canvas => {
-			let pdf = new jsPDF('p', 'mm', 'a4');
-			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
-			pdf.save(filename);
-		});
-  } */
 
   updateSignature(){
     const formData = new FormData();
@@ -205,16 +220,17 @@ export class PdfviewComponent implements OnInit {
     formData.append('initialImage', this.initialFile);
     formData.append('signatureImage', this.signatureImage);
 
-    console.log('formData--->', formData);
+    //console.log('formData--->', formData);
 
     this.services.sendRecipientFiles(formData).subscribe((resp) => {
+      if(resp.statusCode == 200){
+        this.toastr.success(`${resp.Message}`,'Success:')
+        this.router.navigateByUrl('/document')
+      }else{
+        this.toastr.error(`${resp.Message}`,'Failed:')
+      }
       console.log('coordinats-->', resp);
-      /* this.userData = resp.data[0].Recipients;
-      console.log(this.userData); */
     })
-
-    //console.log(finObj)
-    //console.log(this.signatureImage)
   }
 
 }
