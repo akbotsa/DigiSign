@@ -10,7 +10,7 @@
 }
 
 #border{
-    border: 1px solid rgb(187, 187, 187); padding: 20px 10px; margin-top: 20px;}
+    border: 1px solid rgb(187, 187, 187); padding: 5px 10px; margin-top: 20px;}
 
 
      
@@ -77,8 +77,8 @@
 }
 .delete-group-fields {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: end;
 }
 .delete-group-fields i {
     cursor: pointer;
@@ -129,6 +129,7 @@
     padding: 5px;
     margin-bottom: 0px;
 }
-.uploaded-list {
-    
+
+.md-form {
+    padding: 15px 0px;
 }

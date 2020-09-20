@@ -17,3 +17,9 @@ label{
 /* #fgroup{
     font-size: 12px;
 } */
+
+.new:hover {
+    color: #ffc107;
+    border-color: #ffc107;
+    text-decoration: none;
+}

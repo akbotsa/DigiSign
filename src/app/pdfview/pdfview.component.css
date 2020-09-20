@@ -14,3 +14,18 @@
 .tab-sign {
     overflow: hidden;
 }
+
+/* .ui-draggable img {
+    height: 100px;
+    width: 150px !important;
+} */
+
+.iremove {
+    height: 100px !important;
+    width: 400px !important;
+}
+
+.update {
+    text-align: center;
+    margin: 40px 0px;
+}
