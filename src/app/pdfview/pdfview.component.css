@@ -1,18 +1,18 @@
 .pdf-none {
-    padding: 30px 0px;
+  padding: 30px 0px;
 }
 
 .pdf-none p {
-    margin: 0px 0px 10px 0px;
+  margin: 0px 0px 10px 0px;
 }
 
 #sortable {
-    padding: 20px 0px;
-    /* margin: 0px 70px; */
+  padding: 20px 0px;
+  /* margin: 0px 70px; */
 }
 
 .tab-sign {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 /* .ui-draggable img {
@@ -21,11 +21,19 @@
 } */
 
 .iremove {
-    height: 100px !important;
-    width: 400px !important;
+  height: 100px !important;
+  width: 400px !important;
 }
 
-.update {
-    text-align: center;
-    margin: 40px 0px;
+.reject-btn {
+  padding-right: 5px;
+}
+.signature-acceptance {
+  padding-top: 50px;
+}
+.signature-acceptance textarea {
+  width: 100%;
+}
+.rejected-text {
+  margin-top: 50px;
 }

@@ -12,10 +12,7 @@ export class ServicesService {
 
   login(data): Observable<any> {
     console.log(environment.baseUrl);
-    return this.http.post(
-      environment.baseUrl + 'authentication/login',
-      data
-    );
+    return this.http.post(environment.baseUrl + 'authentication/login', data);
   }
 
   register(data): Observable<any> {
@@ -26,11 +23,11 @@ export class ServicesService {
   }
 
   recipientsList(data): Observable<any> {
-    return this.http.post(environment.baseUrl + 'receipts/list' , data);
+    return this.http.post(environment.baseUrl + 'receipts/list', data);
   }
 
-  getDocument(data):Observable<any> {
-    return this.http.get(environment.baseUrl +`documents/document/${data}`);
+  getDocument(data): Observable<any> {
+    return this.http.get(environment.baseUrl + `documents/document/${data}`);
   }
 
   public getUploadDocument(data): Observable<any> {
@@ -55,7 +52,7 @@ export class ServicesService {
     }
   }
 
-  public getDocumentsManage(data):Observable<any>{
+  public getDocumentsManage(data): Observable<any> {
     try {
       return this.http
         .post(environment.baseUrl + 'documents/manage', data)
@@ -66,19 +63,31 @@ export class ServicesService {
   }
 
   insertDragObject(data): Observable<any> {
-    return this.http.post(environment.baseUrl + 'documents/send' , data);
+    return this.http.post(environment.baseUrl + 'documents/send', data);
   }
-  
+
   getpdfcoordinates(data): Observable<any> {
-    return this.http.post(environment.baseUrl + 'documents/doc_Coordinates' , data);
+    return this.http.post(
+      environment.baseUrl + 'documents/doc_Coordinates',
+      data
+    );
   }
 
   sendRecipientFiles(data): Observable<any> {
-    return this.http.post(environment.baseUrl + 'documents/verify' , data);
+    return this.http.post(environment.baseUrl + 'documents/verify', data);
   }
 
   getDocumentDetails(data): Observable<any> {
-    return this.http.post(environment.baseUrl + 'documents/final_doc' , data);
+    return this.http.post(environment.baseUrl + 'documents/final_doc', data);
   }
 
+  public getReject(data): Observable<any> {
+    try {
+      return this.http
+        .post(environment.baseUrl + 'documents/doc_reject', data)
+        .pipe(map((res) => res));
+    } catch (err) {
+      return err;
+    }
+  }
 }

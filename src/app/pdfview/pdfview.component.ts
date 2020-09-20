@@ -10,6 +10,7 @@ declare var $: any;
 
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pdfview',
@@ -35,14 +36,18 @@ export class PdfviewComponent implements OnInit {
   signatureFile: any;
   initialFile: any;
   dummy = [];
-  isShowflag: boolean = false;
+  isShowflag: boolean = true;
+  public rejectFormGroup: FormGroup;
   @ViewChild('mymodal', { static: false }) mymodal: TemplateRef<any>;
+  public docRejected: boolean;
+  public isVerified: boolean = false;
 
   constructor(
     private modalService: NgbModal,
     private services: ServicesService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +56,7 @@ export class PdfviewComponent implements OnInit {
     this.docfile = localStorage.getItem('docfile');
     this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${this.docfile}`;
     this.loadRecipientsList();
+    this.loadRejectForm();
   }
 
   loadRecipientsList() {
@@ -72,9 +78,10 @@ export class PdfviewComponent implements OnInit {
       if (resp.statusCode == 200) {
         console.log('coordinats-->', resp);
         this.userData = resp.data[0].Recipients;
-
+        this.docRejected = resp.data[0].Recipients[0].isReject;
         this.useRecId = resp.data[0].Recipients[0].ReceiptId;
         this.userDocId = resp.data[0].DocId;
+        this.isVerified = resp.data[0].Recipients[0].VerifyFlag;
         console.log(this.userData);
       } else if (resp.statusCode == 403) {
         this.isShowflag = true;
@@ -101,6 +108,12 @@ export class PdfviewComponent implements OnInit {
 
     //this.userData = JSON.parse(localStorage.getItem('userData'));
     console.log(this.userData);
+  }
+
+  public loadRejectForm(): void {
+    this.rejectFormGroup = this.fb.group({
+      comments: [null, Validators.required],
+    });
   }
 
   draggable_Signature(id) {
@@ -239,6 +252,31 @@ export class PdfviewComponent implements OnInit {
         this.toastr.error(`${resp.Message}`, 'Failed:');
       }
       console.log('coordinats-->', resp);
+    });
+  }
+
+  /* Signature Rejection  */
+  public onRejectInvitation() {
+    let rejectReqObj = {
+      DocId: this.userDocId,
+      RecipientID: this.useRecId,
+      comments: this.rejectFormGroup.value.comments,
+    };
+
+    this.services.getReject(rejectReqObj).subscribe((resp) => {
+      if (resp.statusCode === 200) {
+        this.router.navigateByUrl('/document/inbox');
+        this.isShowflag = false;
+        this.toastr.success(`${resp.Message}`, 'Success:');
+      } else if (resp.statusCode == 403) {
+        this.isShowflag = false;
+        this.toastr.error(
+          'Waiting for prior authorized signatures.',
+          'Failed:'
+        );
+      } else {
+        this.toastr.error(`${resp.Message}`, 'Failed:');
+      }
     });
   }
 }

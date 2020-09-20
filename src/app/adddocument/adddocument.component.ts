@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   Directive,
   EventEmitter,
@@ -16,7 +17,7 @@ import { ServicesService } from '../services/services.service';
   templateUrl: './adddocument.component.html',
   styleUrls: ['./adddocument.component.css'],
 })
-export class AdddocumentComponent implements OnInit {
+export class AdddocumentComponent implements OnInit, AfterViewInit {
   @Directive({
     selector: '[appDragDrop]',
   })
@@ -35,6 +36,7 @@ export class AdddocumentComponent implements OnInit {
   docId: string;
   isSignInOrder: boolean = false;
   public documentFieldValidationFlag: boolean = false;
+  public isOwnVerify: boolean = true;
 
   //Dragover listener
   @HostListener('dragover', ['$event']) onDragOver(evt) {
@@ -89,8 +91,10 @@ export class AdddocumentComponent implements OnInit {
           ReceiptId: [i + 1],
           Name: ['', Validators.required],
           Email: ['', Validators.required],
-          OrderNum: [this.isSignInOrder ? '' : 0, Validators.required],
-          IsOwnDocVerify: [false],
+          OrderNum: this.isSignInOrder ? [1, Validators.required] : null,
+          IsOwnDocVerify: [this.isOwnVerify],
+          comments: [''],
+          isReject: [false],
         })
       );
     }
@@ -126,8 +130,10 @@ export class AdddocumentComponent implements OnInit {
           ReceiptId: [i + 1],
           Name: ['', Validators.required],
           Email: ['', Validators.required],
-          OrderNum: [this.isSignInOrder ? '' : 0, Validators.required],
-          IsOwnDocVerify: [false],
+          OrderNum: this.isSignInOrder ? [1, Validators.required] : null,
+          IsOwnDocVerify: [this.isOwnVerify],
+          comments: [''],
+          isReject: [false],
         })
       );
     }
@@ -232,5 +238,6 @@ export class AdddocumentComponent implements OnInit {
   /* Sign In order */
   public onChangeSignOrder(eve): void {
     this.isSignInOrder = eve.target.checked ? true : false;
+    this.isOwnVerify = this.isOwnVerify === true ? true : false;
   }
 }
