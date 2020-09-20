@@ -3,25 +3,54 @@
     <div class="row">
         <div class="col-md-3 col-md-offset-3">
             <div>
-                <h6>Recipients</h6>
+                
                 <div *ngFor="let list of receipientData; let i = index" class="mail-section border-left-primary">
-                    <div class=" mb-3 ">
-                        <h4>{{list?.Name}}</h4>
-                        <div class="sidebar-image">{{list?.Email}} </div>
-                    </div>
-                    <div class=" mb-3 ">
-                        <h4>Date:</h4>
-                        <span *ngIf="list.VerifyFlag; then con1 else con2"></span>
-                        <ng-template #con1>
-                            <p>Completed</p>
-                        </ng-template>
-                        <ng-template #con2>
-                            <p>Signature Pending</p>
-                        </ng-template>
+                    <div class="">
+                        <!-- <h6 class="recipi">Recipients</h6> -->
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <div class=" mb-3 ">
+                                    <p>{{list?.Name}}</p>
+                                    <p>{{list?.Email}} </p>
+                                </div>                            
+                            </div>
+    
+                            <div class="col-md-6">
+                                <div class=" mb-3 ">
+                                    <p>Status</p>
+                                    <span *ngIf="list.VerifyFlag; then con1 else con2"></span>
+                                    <ng-template #con1>
+                                        <p>Completed</p>
+                                    </ng-template>
+                                    <ng-template #con2>
+                                        <p>Signature Pending</p>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="card doc-side-card">
+                            <div class="doc-sidee">
+                                <div class="doc-sidebar">
+                                    <p class="final-name">{{list?.Name}}</p>
+                                    <p class="final-mail">{{list?.Email}}</p>
+                                </div>
+                                <div class="side-status">
+                                    <span *ngIf="list.VerifyFlag; then con1 else con2"></span>
+                                    <ng-template #con1>
+                                    <p style="color: #000000e6;background: rgb(0 128 0 / 30%); padding: 15px 22px;">Completed</p>
+                                    </ng-template>
+                                    <ng-template #con2>
+                                        <p style="color: #000000e6;background: rgb(255 0 0 / 30%);">Pending</p>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" (click)="generatePdf()" *ngIf="isDownloadflag">Download Pdf</button>
+            <div class="text-center">
+                <button class="btn btn-primary" (click)="generatePdf()" *ngIf="isDownloadflag">Download Pdf</button>
+            </div>
             <!-- <button class="btn btn-primary" (click)="updateSignature()">Update Signature</button> -->
         </div>
         <div class="col-md-9 image-view" #content id="content">
