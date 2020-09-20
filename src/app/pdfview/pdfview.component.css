@@ -24,3 +24,8 @@
     height: 100px !important;
     width: 400px !important;
 }
+
+.update {
+    text-align: center;
+    margin: 40px 0px;
+}
