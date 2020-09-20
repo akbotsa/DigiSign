@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("userDetails",JSON.stringify(resp.Data.loginDetails));
         this.services.loginHideShow.emit(true);
         alert(`${resp.Message}`);
-        this.router.navigateByUrl('home')
+        this.router.navigateByUrl('document')
       } else {
         alert(`${resp.Message}`)
       }

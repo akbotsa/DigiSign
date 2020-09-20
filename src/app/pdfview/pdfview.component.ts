@@ -4,8 +4,7 @@ import {NgbModal,  ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-boo
 declare var jquery: any;
 declare var $: any;
 
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf';
+import { Router } from '@angular/router';
 
 
 
@@ -34,7 +33,7 @@ export class PdfviewComponent implements OnInit {
   initialFile: any;
   @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
-  constructor(private modalService: NgbModal, private services: ServicesService) { }
+  constructor(private modalService: NgbModal, private services: ServicesService, private router:Router) { }
 
   ngOnInit(): void {
     
@@ -104,6 +103,7 @@ export class PdfviewComponent implements OnInit {
         $(yy).remove();
         $(xx).css({"background-color": "transparent", "padding": 0});
         $(xx).append(`<img class="${aa}" style="height: 40px;width: 80px;" src="${base64data}">`);
+        self.modalService.dismissAll();
     }
   }
 
@@ -183,20 +183,15 @@ export class PdfviewComponent implements OnInit {
       $(xx).css({"background-color": "transparent", "padding": 0});
       $(xx).append(`<img class="${aa}" style="height: 40px;width: 80px;" src="${this.mainImage}">`);
 
-      console.log(this.uploadedFiles)
+      console.log(this.uploadedFiles);
+
+      this.modalService.dismissAll();
     }
     reader.readAsDataURL(this.fileContent);
 
   }
 
-  /* generatePdf() {
-    const filename  = 'Invoice.pdf';
-		html2canvas(document.querySelector('#content'), {scale: 4}).then(canvas => {
-			let pdf = new jsPDF('p', 'mm', 'a4');
-			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
-			pdf.save(filename);
-		});
-  } */
+  /*  */
 
   updateSignature(){
     const formData = new FormData();
@@ -208,6 +203,9 @@ export class PdfviewComponent implements OnInit {
     console.log('formData--->', formData);
 
     this.services.sendRecipientFiles(formData).subscribe((resp) => {
+      if(resp.statusCode == 200){
+          this.router.navigateByUrl('/document')
+      }
       console.log('coordinats-->', resp);
       /* this.userData = resp.data[0].Recipients;
       console.log(this.userData); */
