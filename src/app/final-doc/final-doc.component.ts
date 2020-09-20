@@ -76,6 +76,8 @@ export class FinalDocComponent implements OnInit {
     userId;
     docfile: any;
     viewSrc: any;
+    dummy:any = [];
+    isDownloadflag: boolean = true;
 
   constructor(private services: ServicesService) { }
 
@@ -101,6 +103,21 @@ export class FinalDocComponent implements OnInit {
       //this.useRecId = resp.data[0].Recipients[0].ReceiptId;
       this.userId = resp.data.UserId;
       console.log(this.receipientData);
+
+      if(this.receipientData.length > 0){
+        for (let i = 0; i < this.receipientData.length; i++) {
+          console.log('verify-->', this.receipientData[i].VerifyFlag);
+            if(this.receipientData[i].VerifyFlag === false){
+                this.dummy.push(this.receipientData[i].VerifyFlag);
+            }
+        }
+      }
+
+      if(this.dummy.length >0){
+        this.isDownloadflag = false;
+      }
+      
+
     })
   }
 

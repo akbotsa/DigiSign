@@ -101,7 +101,7 @@ export class AddFieldsComponent implements OnInit {
     
     $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;"
     id="drag_${index}_${this.recpList[index]['signature'].length}">
-    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">Sig</p></div>`);
+    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${user.Name}</p></div>`);
     let self = this;
     $('.draggable2').draggable({
       containment: "parent",
@@ -136,8 +136,8 @@ export class AddFieldsComponent implements OnInit {
         left: 0
       });
     }
-
-    $('.pdfViewerSection').prepend(`<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold">${user.Name}</p></div>`);
+    
+    $('.pdfViewerSection').prepend(`<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/digital.png">${user.Name}</p></div>`);
 
     let self = this;
     $('.draggable3').draggable({

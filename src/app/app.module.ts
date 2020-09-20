@@ -28,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PdfviewComponent } from './pdfview/pdfview.component';
 import { DocumentSignViewComponent } from './document-sign-view/document-sign-view.component';
 import { FinalDocComponent } from './final-doc/final-doc.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const ROUTES: Routes = [
@@ -96,7 +98,9 @@ const ROUTES: Routes = [
     DragDropModule,
     RouterModule.forRoot(ROUTES),
     NgbModule,
-    SignaturePadModule
+    SignaturePadModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

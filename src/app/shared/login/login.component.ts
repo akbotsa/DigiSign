@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder , private router : Router,private services: ServicesService) { }
+  constructor(private fb: FormBuilder , private router : Router,private services: ServicesService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadLoginForm();
@@ -39,10 +40,12 @@ export class LoginComponent implements OnInit {
       if(resp.StatusCode == 200) {
         localStorage.setItem("userDetails",JSON.stringify(resp.Data.loginDetails));
         this.services.loginHideShow.emit(true);
-        alert(`${resp.Message}`);
+        this.toastr.success(`${resp.Message}`,'Success:')
+        //alert(`${resp.Message}`);
         this.router.navigateByUrl('document')
       } else {
-        alert(`${resp.Message}`)
+        this.toastr.error(`${resp.Message}`,'Failed:')
+       // alert(`${resp.Message}`)
       }
       console.log("Login resp=---",resp.data);
     })
