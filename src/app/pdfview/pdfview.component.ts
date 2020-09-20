@@ -32,6 +32,8 @@ export class PdfviewComponent implements OnInit {
   userDocId: any;
   signatureFile: any;
   initialFile: any;
+  dummy = [];
+  isShowflag: boolean = false;
   @ViewChild("mymodal",{static: false})mymodal:TemplateRef<any>
 
   constructor(private modalService: NgbModal, private services: ServicesService, private router:Router, private toastr: ToastrService) { }
@@ -75,6 +77,19 @@ export class PdfviewComponent implements OnInit {
       }else{
         this.toastr.error('Oops! Somthing went worng.','Failed:')
       }
+      if(this.userData.length > 0){
+        for (let i = 0; i < this.userData.length; i++) {
+          console.log('verify-->', this.userData[i].VerifyFlag);
+            if(this.userData[i].VerifyFlag === true){
+                this.dummy.push(this.userData[i].VerifyFlag);
+            }
+        }
+      }
+
+      if(this.dummy.length >0){
+        this.isShowflag = true;
+      }
+
       
     })
 
