@@ -145,7 +145,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 70px;width: 80px;" src="${base64data}">`
+        `<img class="${aa}" style="height: 100px;width: auto;" src="${base64data}">`
       );
       self.modalService.dismissAll();
     };
@@ -225,7 +225,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 70px;width: 300px;" src="${this.mainImage}">`
+        `<img class="${aa}" style="height: 100px;width: auto;" src="${this.mainImage}">`
       );
 
       console.log(this.uploadedFiles);
