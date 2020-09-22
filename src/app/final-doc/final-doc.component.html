@@ -91,6 +91,19 @@
             </div> -->
       <div class="pdfViewerSection" id="sortable">
         <div *ngFor="let list of receipientData; let i = index">
+          <div *ngFor = "let como of list.comments">
+            <div class="drag-cls ui-draggable ui-draggable-handle drag"  style="
+              display: inline;
+              z-index: 1;
+              border-radius: 5px;
+              position: relative;
+            "
+            [style.left.px]="como.left"
+            [style.top.px]="como.top"
+          >{{como.comment}}
+            </div>
+          </div>
+
           <div *ngFor="let pos of list.signature; let idx = index">
             <div
               class="drag-cls ui-draggable ui-draggable-handle drag"

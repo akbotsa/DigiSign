@@ -241,7 +241,7 @@ export class AddFieldsComponent implements OnInit {
         this.recpList[i]['VerifyFlag'] = false;
         this.recpList[i]['signatureImage'] = '';
         this.recpList[i]['initialImage'] = '';
-        this.recpList[i]['comments'] = '';
+        this.recpList[i]['comments'] = [];
         this.recpList[i]['isReject'] = false;
       }
     }

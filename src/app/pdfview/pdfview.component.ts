@@ -42,6 +42,8 @@ export class PdfviewComponent implements OnInit {
   public docRejected: boolean;
   public isVerified: boolean = false;
 
+  comments:any =[];
+
   constructor(
     private modalService: NgbModal,
     private services: ServicesService,
@@ -235,12 +237,63 @@ export class PdfviewComponent implements OnInit {
     reader.readAsDataURL(this.fileContent);
   }
 
+  cloneComment(){
+    var comment = this.rejectFormGroup.value.comments;
+    console.log('comment--->', comment);
+    if(comment ===  null){
+        this.toastr.error('Please Enter Comment', 'Failed:');
+    }else{
+      let cObject = {
+        "comment" : comment,
+        "top" : 0,
+        "left" : 0
+      }
+      this.comments.push(cObject);
+
+      $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;" id="drag_${this.comments.length}"><p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${comment}</p></div>`);
+      let self = this;
+      $('.draggable2').draggable({
+        containment: 'parent',
+        stop: function (event, ui) {
+          console.log('draggable element id ', $(this).attr('id'));
+          let [name, positionIndex] = $(this).attr('id').split('_');
+          //console.log('name-->', name);
+          /* console.log('positionIndex-->', positionIndex);
+          console.log('positionIndex-->', self.comments); */
+          
+
+          self.comments[positionIndex - 1]['top'] =  ui.position.top;
+          self.comments[positionIndex - 1]['left'] =  ui.position.left;
+          console.log('comments-->', JSON.stringify(self.comments));
+        }
+      });
+
+      //console.log('comments-->', JSON.stringify(this.comments));
+    }
+  }
+
   updateSignature() {
+    var comt = JSON.stringify(this.comments);
+
+    console.log('comments-->',comt);
+    /* console.log('lnght-->',this.comments.length);
+    if(this.comments.length > 0){
+      for (let i = 0; i < this.comments.length; i++) {
+        console.log('test-->',this.comments[i]);
+      }
+    } */
+
     const formData = new FormData();
     formData.append('DocId', this.userDocId);
     formData.append('RecipientID', this.useRecId);
     formData.append('initialImage', this.initialFile);
     formData.append('signatureImage', this.signatureImage);
+    formData.append('comments', comt);
+   /*  if(this.comments.length > 0){
+      for (let i = 0; i < this.comments.length; i++) {
+        formData.append('comments[]', JSON.parse(this.comments[i]));
+      }
+    } */
 
     //console.log('formData--->', formData);
 
@@ -251,7 +304,7 @@ export class PdfviewComponent implements OnInit {
       } else {
         this.toastr.error(`${resp.Message}`, 'Failed:');
       }
-      console.log('coordinats-->', resp);
+      //console.log('coordinats-->', resp);
     });
   }
 
@@ -279,4 +332,6 @@ export class PdfviewComponent implements OnInit {
       }
     });
   }
+
+  
 }

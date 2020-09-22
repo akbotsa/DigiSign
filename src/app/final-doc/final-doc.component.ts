@@ -102,14 +102,20 @@ export class FinalDocComponent implements OnInit {
       
       //this.useRecId = resp.data[0].Recipients[0].ReceiptId;
       this.userId = resp.data.UserId;
-      console.log(this.receipientData);
+     // console.log(this.receipientData);
 
       if(this.receipientData.length > 0){
         for (let i = 0; i < this.receipientData.length; i++) {
-          console.log('verify-->', this.receipientData[i].VerifyFlag);
+          //console.log('verify-->', this.receipientData[i].VerifyFlag);
             if(this.receipientData[i].VerifyFlag === false){
                 this.dummy.push(this.receipientData[i].VerifyFlag);
             }
+            var items = JSON.parse(this.receipientData[i].comments);
+
+            this.receipientData[i]['comments'] = items;
+
+            //console.log('comments-->', );
+
         }
       }
 
