@@ -63,6 +63,6 @@ text-align: justify;
     align-items: center;
 }
 
-.right-part {
-
+.border-left-primary {
+    border-left: solid 4px #1c8adb;
 }

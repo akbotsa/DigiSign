@@ -9,9 +9,7 @@
         </div>
         <div class="top-right-filters">
           <div class="pagination-container">
-            <pagination-controls
-              (pageChange)="page = $event"
-            ></pagination-controls>
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
           </div>
           <div>
             <input type="text" class="form-control" placeholder="Search" />
@@ -36,27 +34,24 @@
                 <th>Action</th>
               </thead>
               <tbody>
-                <tr
-                  class="border-bottom"
-                  *ngFor="
+                <tr class="border-bottom" *ngFor="
                     let document of documentsList
                       | paginate: { itemsPerPage: 10, currentPage: page }
-                  "
-                >
+                  ">
                   <td>
                     <input type="checkbox" />&nbsp;&nbsp;
                     <i class="fa fa-check"></i>
                   </td>
                   <td>
-                    <p class="mb-0">
-                      Please Endorse:
-                      <strong>{{ document?.documents[0]?.Doc }}</strong
-                      >
-                    </p>
-                    <span>
-                      From: {{ document?.Sender[0].FirstName }}
-                      {{ document?.Sender[0].LastName }}</span
-                    >
+                    <div [ngClass]="{'boldClass': document?.Recipients?.viewFlag == false}">
+                      <p class="mb-0">
+                        Please Endorse:
+                        {{ document?.documents[0]?.Doc }}
+                      </p>
+                      <span>
+                        From: {{ document?.Sender[0].FirstName }}
+                        {{ document?.Sender[0].LastName }}</span>
+                    </div>
                     <!-- <span class="to-status">  Sujatha M</span> -->
                   </td>
                   <td>
@@ -72,10 +67,7 @@
                   </td>
                   <td>
                     <div class="dropdown">
-                      <button
-                        class="btn form-inline dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
+                      <button class="btn form-inline dropdown-toggle" data-toggle="dropdown">
                         MOVE
                       </button>
                       <div class="dropdown-menu">
@@ -87,10 +79,7 @@
                         <a class="dropdown-item">Delete</a>
                       </div>
 
-                      <button
-                        class="btn btn-primary"
-                        (click)="onClicksign(document)"
-                      >
+                      <button class="btn btn-primary" (click)="onClicksign(document)">
                         Sign
                       </button>
                     </div>

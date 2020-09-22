@@ -81,6 +81,10 @@ export class ServicesService {
     return this.http.post(environment.baseUrl + 'documents/final_doc', data);
   }
 
+  viewFlagUpdate(data):Observable<any> {
+    return this.http.post(environment.baseUrl + 'documents/updateView', data);
+  }
+
   public getReject(data): Observable<any> {
     try {
       return this.http

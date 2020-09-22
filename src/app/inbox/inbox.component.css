@@ -28,3 +28,7 @@
 .table th:last-child {
     text-align: center;
   }
+
+  .boldClass {
+      font-weight: bold !important;
+  }
