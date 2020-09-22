@@ -7,13 +7,17 @@
           class="signature-acceptance"
           *ngIf="isShowflag && docRejected === false && isVerified === false"
         >
-          <textarea
+          <div class="comment-box">
+            <textarea
             name="comments"
             cols="30"
-            rows="5"
+            rows="1"
             placeholder="Please comment here..."
             formControlName="comments"
           ></textarea>
+
+          <button class="btn btn-primary" (click)="cloneComment()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </div>
           <div class="d-flex">
             <div class="reject-btn">
               <button class="btn btn-danger" (click)="onRejectInvitation()">
@@ -34,7 +38,7 @@
           <h5 class="text-danger">Document has already Signed</h5>
         </div>
 
-        <button class="btn btn-primary" (click)="cloneComment()">Copy</button>
+        
       </form>
     </div>
     <div class="col-md-9 image-view" #content id="content">
