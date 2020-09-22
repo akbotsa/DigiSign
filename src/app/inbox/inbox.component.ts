@@ -14,14 +14,16 @@ export class InboxComponent implements OnInit {
   public documentsList = [];
   userId: any;
   public page: number = 1;
+  boldStyleFlag: boolean = true;
 
   constructor(
     private digiServices: ServicesService,
     private readonly router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService 
   ) {}
 
   ngOnInit(): void {
+    this.boldStyleFlag = true;
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     this.currentUser = JSON.parse(localStorage.getItem('userDetails'));
     this.getDocumentsManage();
@@ -47,6 +49,15 @@ export class InboxComponent implements OnInit {
 
   /* Click on sign button in table row */
   public onClicksign(document): void {
+    let obj = {
+      Type: "1",
+      UserId: this.userId,
+      DocId: document.documents[0].DocId
+    }
+    console.log("objjjjjjjjjjjjj",obj)
+    this.digiServices.viewFlagUpdate(obj).subscribe((resp)=> {
+      console.log("respppppp",resp);
+    })
     let docId = document.documents[0].DocId;
     let docfile = document.documents[0].Doc;
     localStorage.setItem('docId', docId);
