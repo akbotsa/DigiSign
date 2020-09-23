@@ -1,15 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light p-3 justify-content-center">
-    <a class="navbar-brand" routerLink="/home"><h3>DigiSign</h3></a>
+<nav class="navbar navbar-expand-lg navbar-light p-3 justify-content-center">
+    <a class="navbar-brand logo" routerLink="/home"><span><img src="assets/images/logo.png"></span>&nbsp;<h3>Endorse</h3></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse ml-5 pl-5" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active ml-4">
+        <li class="nav-item active ml-4"  *ngIf="showLogin">
           <a href="/home" routerLink="/home" routerLinkActive="active" class="nav-link" >Home</a>
         </li>
-        <li class="nav-item ml-4">
+        <li class="nav-item ml-4"  *ngIf="showLogin">
           <a href="/document" routerLink="/document" routerLinkActive="active"  class="nav-link" >Manage</a>
         </li>
         <!-- <li class="nav-item ml-4">

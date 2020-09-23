@@ -37,3 +37,16 @@
 .rejected-text {
   margin-top: 50px;
 }
+
+.comment-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-box {
+  margin-bottom: 20px;
+}
+
+.comment-box button {
+  margin-left: 10px;
+}
