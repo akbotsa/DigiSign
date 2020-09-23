@@ -182,19 +182,6 @@
   </div> -->
   <div class="modal-body">
     <ngb-tabset [destroyOnHide]="false">
-      <ngb-tab title="Draw">
-        <ng-template ngbTabContent>
-          <div class="col-md-12">
-            <div class="tab-sign">
-              <ng-signature-pad
-                doneButtonText="Create a Signature"
-                format="blob"
-                (done)="saveImage($event)"
-              ></ng-signature-pad>
-            </div>
-          </div>
-        </ng-template>
-      </ngb-tab>
 
       <ngb-tab title="Use">
         <ng-template ngbTabContent>
@@ -211,6 +198,22 @@
           </button>
         </ng-template>
       </ngb-tab>
+
+      <ngb-tab title="Draw">
+        <ng-template ngbTabContent>
+          <div class="col-md-12">
+            <div class="tab-sign">
+              <ng-signature-pad
+                doneButtonText="Create a Signature"
+                format="blob"
+                (done)="saveImage($event)"
+              ></ng-signature-pad>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+     
       <!-- <ngb-tab title="Type">
                 <ng-template ngbTabContent>
                     <div class="sing-type">
