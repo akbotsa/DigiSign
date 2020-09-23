@@ -66,3 +66,16 @@ text-align: justify;
 .border-left-primary {
     border-left: solid 4px #1c8adb;
 }
+
+.reject-btn {
+    padding-right: 5px;
+  }
+  .signature-acceptance {
+    padding-top: 50px;
+  }
+  .signature-acceptance textarea {
+    width: 100%;
+  }
+  .rejected-text {
+    margin-top: 50px;
+  }
