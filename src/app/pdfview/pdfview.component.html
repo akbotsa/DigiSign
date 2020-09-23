@@ -181,23 +181,7 @@
     </button>
   </div> -->
   <div class="modal-body">
-    <ngb-tabset [destroyOnHide]="false">
-
-      <ngb-tab title="Use">
-        <ng-template ngbTabContent>
-          <div class="upload-sig use-sig">
-            <div class="text-center">
-              <img src="assets/images/signn.png">              
-            </div>
-          </div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="uploadSignature()">
-            Create Signature
-          </button>
-        </ng-template>
-      </ngb-tab>
+    <ngb-tabset [destroyOnHide]="false">      
 
       <ngb-tab title="Draw">
         <ng-template ngbTabContent>
@@ -210,6 +194,22 @@
               ></ng-signature-pad>
             </div>
           </div>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab title="Use">
+        <ng-template ngbTabContent>
+          <div class="upload-sig use-sig">
+            <div class="text-center">
+              <img src="assets/images/signn.png">              
+            </div>
+          </div>
+          <!-- <button
+            type="button"
+            class="btn btn-primary"
+            (click)="uploadSignature()">
+            Create Signature
+          </button> -->
         </ng-template>
       </ngb-tab>
 
