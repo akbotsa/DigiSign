@@ -11,6 +11,7 @@ declare var $: any;
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pdfview',
@@ -42,6 +43,8 @@ export class PdfviewComponent implements OnInit {
   public docRejected: boolean;
   public isVerified: boolean = false;
 
+   public imageBaseUrl = environment.imageBaseUrl
+
   comments:any =[];
 
   constructor(
@@ -56,7 +59,7 @@ export class PdfviewComponent implements OnInit {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     this.docID = localStorage.getItem('docId');
     this.docfile = localStorage.getItem('docfile');
-    this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${this.docfile}`;
+    this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
     this.loadRecipientsList();
     this.loadRejectForm();
   }

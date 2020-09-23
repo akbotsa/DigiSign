@@ -120,7 +120,7 @@ export class FinalDocComponent implements OnInit {
             if(this.receipientData[i].signatureImage !=""){
               console.log('xdataUrl-->', i);
               let self = this;
-              var burl = `http://15.207.202.132:7000/api/v1/documents/document/${this.receipientData[i].signatureImage}`;
+              var burl = `${environment.imageBaseUrl}${this.receipientData[i].signatureImage}`;
               this.toDataURL(burl, function (dataUrl) {
                     let x = dataUrl.split(';')
                     self.receipientData[i].signatureImage = `data:image/png;${x[1]}`;
@@ -129,7 +129,7 @@ export class FinalDocComponent implements OnInit {
 
             if(this.receipientData[i].initialImage !=""){
               let self = this;
-              var burl = `http://15.207.202.132:7000/api/v1/documents/document/${this.receipientData[i].initialImage}`;
+              var burl = `${environment.imageBaseUrl}${this.receipientData[i].initialImage}`;
               this.toDataURL(burl, function (dataUrl) {
                     let x = dataUrl.split(';')
                     self.receipientData[i].initialImage = `data:image/png;${x[1]}`;
