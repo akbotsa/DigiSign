@@ -74,7 +74,7 @@ text-align: justify;
     padding-top: 50px;
   }
   .signature-acceptance textarea {
-    width: 100%;
+    width: 100% !important;
   }
   .rejected-text {
     margin-top: 50px;

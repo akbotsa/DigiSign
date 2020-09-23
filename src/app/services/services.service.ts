@@ -85,6 +85,10 @@ export class ServicesService {
     return this.http.post(environment.baseUrl + 'documents/updateView', data);
   }
 
+  signs(data):Observable<any> {
+    return this.http.post(environment.baseUrl + "documents/Signs", data);
+  }
+
   public getReject(data): Observable<any> {
     try {
       return this.http
