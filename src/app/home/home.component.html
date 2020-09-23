@@ -141,8 +141,18 @@
                     
                     <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                         <div class="signature-main">
-                            <button class="btn btn-md btn-primary" (click)="sign(1)">Signature</button>
-                            <button><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button class="btn btn-md btn-primary" (click)="sign(1)"><i class="fa fa-plus pr-1" aria-hidden="true"></i>Signature</button>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3"  *ngFor="let item of signslist">
+                                    <div class="card">
+                                        <div>
+                                            <img  class="image" [src]="imageBaseUrl + item.Sign" >
+                                        </div>
+                                        <button>default</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     

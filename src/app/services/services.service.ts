@@ -98,4 +98,10 @@ export class ServicesService {
       return err;
     }
   }
+
+
+  getsigns(data):Observable<any> {
+    return this.http.post(environment.baseUrl + "documents/get_signs", data);
+  }
+
 }
