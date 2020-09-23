@@ -195,6 +195,22 @@
           </div>
         </ng-template>
       </ngb-tab>
+
+      <ngb-tab title="Use">
+        <ng-template ngbTabContent>
+          <div class="upload-sig use-sig">
+            <div class="text-center">
+              <img src="assets/images/signn.png">              
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="uploadSignature()">
+            Create Signature
+          </button>
+        </ng-template>
+      </ngb-tab>
       <!-- <ngb-tab title="Type">
                 <ng-template ngbTabContent>
                     <div class="sing-type">

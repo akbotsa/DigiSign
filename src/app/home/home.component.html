@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="">
     <div class="jumbotron ">
         <div class="top-heading">
             <h3 class="text-center">Sign or Get Signature</h3>
@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="container mb-5">
+    <div class="">
         <div class="row digi-main-content">
             <div class="col-md-4 d-none">
 
@@ -61,80 +61,137 @@
                 </div>
             </div>
 
-            <div class="col-md-6 middle-part">
-                <h4>What's New</h4>
-                <div>
-                    <h6 class="mt-3">Comments</h6>
-                    <p class="text-justify"> Ask and answer questions about documents and receive real-time comment
-                        notifications.
-                        <a>More info</a>
-                    </p>
-                </div>
-                <div>
-                    <h6 class="mt-3">Bulk Send for multiple Recipients</h6>
-                    <p class="text-justify">Include multiple recipients in each envelope.
-                        Send to more recipient types and specify envelope custom field values
-                    </p>
-                </div>
-                <div>
-                    <h6 class="mt-3">Template Sorting</h6>
-                    <p class="text-justify">Sort your templates by name.</p>
-                </div>
-
-            </div>
-
-            <div class="col-md-6 right-part">
-                <h4>My Endorse</h4>
-                <div class="form-inline mt-3 digi-profile ">
-                    <img src="assets/images/profile.png" class="rounded-circle" width="50">
-                    <div>
-                        <p class="ml-3 mb-0">{{this.user?.FirstName}} {{this.user?.LastName}}</p>
-                        <p class="ml-3 mb-0">{{this.user?.Email}}</p>
-                    </div>
-                </div>
-                <button class="mt-3 btn btn-md btn-primary" (click)="sign(1)">Signature</button>
-                <button class="ml-3 mt-3 btn btn-md btn-primary" (click)="sign(2)">Initial</button>
-            </div>
+            
 
         </div>
 
-        <div class="mt-5 ">
-            <!-- <h4 class="mb-3">Completed</h4> -->
-            <!-- <div class="">
-                <div class="">
-                    <div class="col-md-12">
+       
+
+    </div>
+
+
+    <!-- Demo header-->
+<section class="py-5 header">
+    <div class="container py-4">
+        
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Tabs nav -->
+                <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        <i class="fa fa-user-circle-o mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">Profile</span></a>
+
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                        <i class="fa fa-pencil mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">Signatures</span></a>
+
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                        <i class="fa fa-star mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">Initials</span></a>
+
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                        <i class="fa fa-check mr-2"></i>
+                        <span class="font-weight-bold small text-uppercase">Statitics</span></a>
+                    </div>
+            </div>
+
+
+            <div class="col-md-9">
+                <!-- Tabs content -->
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class=" card border-left-primary shadow ordersListGap">
-                                    <div class="card-body">
-                                        <p><strong>Completed:</strong></p>
-                                        <p class="mb-0">3</p>
+                            <div class="col-md-6 middle-part">
+                                <h4>What's New</h4>
+                                <div>
+                                    <h6 class="mt-3">Comments</h6>
+                                    <p class="text-justify"> Ask and answer questions about documents and receive real-time comment
+                                        notifications.
+                                        <a>More info</a>
+                                    </p>
+                                </div>
+                                <div>
+                                    <h6 class="mt-3">Bulk Send for multiple Recipients</h6>
+                                    <p class="text-justify">Include multiple recipients in each envelope.
+                                        Send to more recipient types and specify envelope custom field values
+                                    </p>
+                                </div>
+                                <div>
+                                    <h6 class="mt-3">Template Sorting</h6>
+                                    <p class="text-justify">Sort your templates by name.</p>
+                                </div>
+                
+                            </div>
+                
+                            <div class="col-md-6 right-part">
+                                <h4>My Endorse</h4>
+                                <div class="form-inline mt-3 digi-profile ">
+                                    <img src="assets/images/profile.png" class="rounded-circle" width="50">
+                                    <div>
+                                        <p class="ml-3 mb-0">{{this.user?.FirstName}} {{this.user?.LastName}}</p>
+                                        <p class="ml-3 mb-0">{{this.user?.Email}}</p>
                                     </div>
                                 </div>
+                                <button class="mt-3 btn btn-md btn-primary" (click)="sign(1)">Signature</button>
+                                <button class="ml-3 mt-3 btn btn-md btn-primary" (click)="sign(2)">Initial</button>
                             </div>
-                            <div class="col-md-4">
-                                <div class=" card border-left-primary shadow ordersListGap">
-                                    <div class="card-body">
-                                        <p><strong>UnRead:</strong></p>
-                                        <p class="mb-0">3</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class=" card border-left-primary shadow ordersListGap">
-                                    <div class="card-body">
-                                        <p><strong>Rejected:</strong></p>
-                                        <p class="mb-0">3</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <h4 class="font-italic mb-4">Bookings</h4>
+                        <p class="font-italic text-muted mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    
+                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        <h4 class="font-italic mb-4">Reviews</h4>
+                        <p class="font-italic text-muted mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    
+                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                        <div class="">
+                            <h4 class="mb-3">Completed</h4>
+                            <div class="">
+                                <div class="">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class=" card border-left-primary shadow ordersListGap">
+                                                    <div class="card-body">
+                                                        <p><strong>Completed:</strong></p>
+                                                        <p class="mb-0">3</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class=" card border-left-primary shadow ordersListGap">
+                                                    <div class="card-body">
+                                                        <p><strong>UnRead:</strong></p>
+                                                        <p class="mb-0">3</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class=" card border-left-primary shadow ordersListGap">
+                                                    <div class="card-body">
+                                                        <p><strong>Rejected:</strong></p>
+                                                        <p class="mb-0">3</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
-
     </div>
+</section>
+
 
 
     <ng-template #mymodal let-modal>

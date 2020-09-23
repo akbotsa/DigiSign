@@ -50,3 +50,10 @@
 .comment-box button {
   margin-left: 10px;
 }
+
+.use-sig img {
+  height: 230px;
+  margin: 15px 0px;
+  width: 100%;
+  padding: 0px 20px;
+}

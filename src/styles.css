@@ -33,3 +33,9 @@
 .pagination-container ul.ngx-pagination {
   margin-bottom: 0;
 }
+
+
+.signature-pad canvas {
+  width: 100% !important;
+  height: 300px;
+}

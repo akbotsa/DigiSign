@@ -69,13 +69,14 @@ text-align: justify;
 
 .reject-btn {
     padding-right: 5px;
-  }
-  .signature-acceptance {
+}
+.signature-acceptance {
     padding-top: 50px;
-  }
-  .signature-acceptance textarea {
+}
+.signature-acceptance textarea {
     width: 100% !important;
-  }
-  .rejected-text {
+}
+.rejected-text {
     margin-top: 50px;
-  }
+}
+
