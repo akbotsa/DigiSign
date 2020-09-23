@@ -64,7 +64,7 @@ text-align: justify;
 }
 
 .border-left-primary {
-    border-left: solid 4px #1c8adb;
+    border-left: solid 4px #008000b3;
 }
 
 .reject-btn {
@@ -85,28 +85,28 @@ text-align: justify;
 }
 
 .signature-main button {
-    padding: 10px 13px;
-    margin-left: 15px;
-    background:#007bff;
+    padding: 10px 15px;
+    /* margin-left: 15px; */
+    background:#5abf82;
     border-radius: 5px;
-    border: 1px solid #007bff;
+    border: 1px solid #5abf82;
 }
 
 .signature-main button:focus {
-    border: 1px solid #007bff;
+    border: 1px solid #5abf82;
 }
 
 .signature-main button:hover {
-    border: 1px solid #007bff;
+    border: 1px solid #5abf82;
     background: none;
 }
 
 .signature-main button:hover i {
-    color: #007bff;
+    color: #5abf82;
 }
 
 .signature-main button:hover {
-    color: #007bff;
+    color: #5abf82;
 }
 
 .signature-main button i {
@@ -115,4 +115,53 @@ text-align: justify;
 .image{
     width: 100%;
     height: 100px;
+}
+
+.actions {
+    margin: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions .buttons-1 {
+    color: #fff;
+    margin: 0px 8px !important;
+    background: #008000b3 !important;
+    border: 1px solid #008000b3 !important;
+    padding: 5px 10px;
+}
+
+.actions .button-2 {
+    color: #fff;
+    margin: 0px 8px !important;
+    background: #ce2c2c;
+    border: 1px solid #ce2c2c;
+    padding: 10px 15px !important;
+}
+
+.actions .button-3 {
+    color: #fff;
+    margin: 0px 8px !important;
+    background: #008000b3;
+    border: 1px solid #008000b3;
+    padding: 10px 15px !important;
+}
+
+.nav-pills .nav-link.active {
+    background: #008000b3;
+    color: #fff ;
+}
+
+.card {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    margin: 15px 10px;
+}
+
+.nav-pills .nav-link {
+    color: #4ca64cad;
+}
+
+.new-button {
+    background: #008000b3;
+    color: #fff ;
 }
