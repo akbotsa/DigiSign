@@ -111,22 +111,54 @@ export class FinalDocComponent implements OnInit {
             if(this.receipientData[i].VerifyFlag === false){
                 this.dummy.push(this.receipientData[i].VerifyFlag);
             }
-            var items = JSON.parse(this.receipientData[i].comments);
 
-            this.receipientData[i]['comments'] = items;
+            if(this.receipientData[i].comments.length > 0){
+              var items = JSON.parse(this.receipientData[i].comments);
+              this.receipientData[i]['comments'] = items;
+            }
 
-            //console.log('comments-->', );
+            if(this.receipientData[i].signatureImage !=""){
+              console.log('xdataUrl-->', i);
+              let self = this;
+              var burl = `http://15.207.202.132:7000/api/v1/documents/document/${this.receipientData[i].signatureImage}`;
+              this.toDataURL(burl, function (dataUrl) {
+                    let x = dataUrl.split(';')
+                    self.receipientData[i].signatureImage = `data:image/png;${x[1]}`;
+              })
+            }
 
+            if(this.receipientData[i].initialImage !=""){
+              let self = this;
+              var burl = `http://15.207.202.132:7000/api/v1/documents/document/${this.receipientData[i].initialImage}`;
+              this.toDataURL(burl, function (dataUrl) {
+                    let x = dataUrl.split(';')
+                    self.receipientData[i].initialImage = `data:image/png;${x[1]}`;
+              })
+            }
         }
       }
 
       if(this.dummy.length >0){
         this.isDownloadflag = false;
       }
-      
-
     })
+    console.log('receipientData-->', this.receipientData);
   }
+
+  toDataURL(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+          //console.log('test--->', reader);
+            callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+}
 
   generatePdf() {
     const filename  = 'FinalDOc.pdf';
