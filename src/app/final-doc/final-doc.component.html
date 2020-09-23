@@ -74,7 +74,7 @@
           </div>
         </div>
       </div>
-      <div class="text-center">
+      <div class="text-center"><!--  -->
         <button
           class="btn btn-primary"
           (click)="generatePdf()"
@@ -123,9 +123,7 @@
               <ng-template #condition1>
                 <img
                   style="height: 70px; width: 300px"
-                  src="http://15.207.202.132:7000/api/v1/documents/document/{{
-                    list.signatureImage
-                  }}"
+                  [src]="list.signatureImage"
                 />
               </ng-template>
               <ng-template #condition2>
@@ -159,9 +157,7 @@
               <ng-template #condition1>
                 <img
                   style="height: 70px; width: 300px"
-                  src="http://15.207.202.132:7000/api/v1/documents/document/{{
-                    list.initialImage
-                  }}"
+                  [src]="list.initialImage"
                 />
               </ng-template>
               <ng-template #condition2>
