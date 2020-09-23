@@ -140,7 +140,7 @@ text-align: justify;
 }
 
 .actions .button-3 {
-    color: #fff;
+    color: #fff !important;
     margin: 0px 8px !important;
     background: #008000b3;
     border: 1px solid #008000b3;
@@ -164,4 +164,12 @@ text-align: justify;
 .new-button {
     background: #008000b3;
     color: #fff ;
+}
+.defaultColour{
+    background-color: gray !important;
+    color: white;
+}
+.signature-pad canvas {
+    width: 100% !important;
+    height: 300px;
 }
