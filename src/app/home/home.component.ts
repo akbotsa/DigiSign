@@ -1,5 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { ServicesService } from '../services/services.service';
 
 declare var jquery: any;
@@ -22,14 +24,29 @@ export class HomeComponent implements OnInit {
   mainImage: any;
   userId: any;
   type: any;
+  signslist: any;
+  public imageBaseUrl = environment.imageBaseUrl
 
-  constructor(private modalService: NgbModal, private services: ServicesService) { }
+  constructor(private modalService: NgbModal, private services: ServicesService,   
+    
+    ) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("userDetails"));
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     // this.firstName = this.user.FirstName;
     console.log("user----",this.user)
+    this.getsigns()
+  }
+
+  getsigns(){
+   const formData= {
+      "UserId" : "5f61cacae1e8890af056308a"
+    }
+    this.services.getsigns(formData).subscribe((res)=>{
+      console.log("res",res)
+      this.signslist = res.data
+    })
   }
 
   sign(value) {

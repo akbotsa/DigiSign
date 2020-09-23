@@ -27,9 +27,9 @@ text-align: justify;
     max-width: 450px;
     margin: auto;
 }
-.top-heading .dropdown-menu {
+/* .top-heading .dropdown-menu {
     /* display: block; */
-}
+/* } */ 
 .top-heading button {
     padding: 5px 25px;
 }
@@ -111,4 +111,8 @@ text-align: justify;
 
 .signature-main button i {
     color: #fff;
+}
+.image{
+    width: 100%;
+    height: 100px;
 }
