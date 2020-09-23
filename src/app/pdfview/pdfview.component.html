@@ -208,8 +208,7 @@
             Use Signature
           </button>
         </ng-template>
-      </ngb-tab>
-    <ngb-tabset [destroyOnHide]="false">      
+      </ngb-tab>    
 
       <ngb-tab title="Draw">
         <ng-template ngbTabContent>
@@ -225,21 +224,7 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab title="Use">
-        <ng-template ngbTabContent>
-          <div class="upload-sig use-sig">
-            <div class="text-center">
-              <img src="assets/images/signn.png">              
-            </div>
-          </div>
-          <!-- <button
-            type="button"
-            class="btn btn-primary"
-            (click)="uploadSignature()">
-            Create Signature
-          </button> -->
-        </ng-template>
-      </ngb-tab>
+      
 
      
       <!-- <ngb-tab title="Type">
@@ -296,8 +281,9 @@
       </ngb-tab>
     </ngb-tabset>
   </div>
+  </ng-template>
   <!-- <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancle</button>
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Create Signature')">Create Signature</button>
   </div> -->
-</ng-template>
+
