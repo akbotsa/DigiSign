@@ -19,7 +19,7 @@ export class DocumentSignViewComponent implements OnInit {
     }); */
     console.log("doc id",localStorage.getItem("docId"));
     console.log("baseUrl",environment.imageBaseUrl);
-    this.viewSrc = 'http://15.207.202.132:7000/api/v1/documents/document/'+localStorage.getItem("docId");
+    this.viewSrc = `${environment.imageBaseUrl}`+localStorage.getItem("docId");
 
     console.log("pdf url in document sign view",this.viewSrc);
   }

@@ -92,7 +92,7 @@ export class AdddocumentComponent implements OnInit {
           Name: ['', Validators.required],
           Email: ['', Validators.required],
           OrderNum: this.isSignInOrder ? [1, Validators.required] : null,
-          IsOwnDocVerify: [this.isOwnVerify],
+          IsOwnDocVerify: [false],
           comments: [''],
           isReject: [false],
         })
@@ -131,7 +131,7 @@ export class AdddocumentComponent implements OnInit {
           Name: ['', Validators.required],
           Email: ['', Validators.required],
           OrderNum: this.isSignInOrder ? [1, Validators.required] : null,
-          IsOwnDocVerify: [this.isOwnVerify],
+          IsOwnDocVerify: [false],
           comments: [''],
           isReject: [false],
         })

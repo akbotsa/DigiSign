@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 declare var jquery: any;
 declare var $: any;
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-fields',
@@ -178,7 +179,7 @@ export class AddFieldsComponent implements OnInit {
       //console.log("recpList- ", this.recpList)
       let docum = resp.data.DocDetails[0].Doc;
       //console.log("doccccccccc", docum);
-      this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${docum}`;
+      this.viewSrc = `${environment.imageBaseUrl}${docum}`;
     });
   }
 

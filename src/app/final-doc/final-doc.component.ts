@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../services/services.service';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-final-doc',
@@ -84,7 +85,7 @@ export class FinalDocComponent implements OnInit {
   ngOnInit(): void {
     this.docfile = localStorage.getItem("docfile");
     this.docId = localStorage.getItem("docId");
-    this.viewSrc = `http://15.207.202.132:7000/api/v1/documents/document/${this.docfile}`;
+    this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
     console.log(this.userdata);
     //this.receipientData= this.userdata.Recipients;
     //this.docId=this.userdata.docId;
