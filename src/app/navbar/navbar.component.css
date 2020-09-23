@@ -3,7 +3,20 @@
     list-style: none;
 }
 
+.navbar {
+    background-color: #f6f6f6!important;
+}
+
 
 .profile .dropdown-menu {
     left: -50px !important;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
 }
