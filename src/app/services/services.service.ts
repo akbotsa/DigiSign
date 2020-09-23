@@ -104,4 +104,9 @@ export class ServicesService {
     return this.http.post(environment.baseUrl + "documents/get_signs", data);
   }
 
+  // /documents/Get_Default_Signs
+  getDefaultSigns(id):Observable<any> {
+    return this.http.get(environment.baseUrl + `documents/Get_Default_Signs/${id}`);
+  }
+
 }

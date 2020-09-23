@@ -46,6 +46,10 @@ export class PdfviewComponent implements OnInit {
    public imageBaseUrl = environment.imageBaseUrl
 
   comments:any =[];
+  defaultSign: any;
+  getid: any;
+  dafaultSignObj: any;
+  showimage: boolean;
 
   constructor(
     private modalService: NgbModal,
@@ -62,6 +66,14 @@ export class PdfviewComponent implements OnInit {
     this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
     this.loadRecipientsList();
     this.loadRejectForm();
+    this.getdefaultSigns()
+  }
+
+  getdefaultSigns(){
+    this.services.getDefaultSigns(this.userId).subscribe((res)=>{
+      this.defaultSign = res.data
+      console.log("getDefaultSigns",this.defaultSign)
+    })
   }
 
   loadRecipientsList() {
@@ -123,6 +135,17 @@ export class PdfviewComponent implements OnInit {
 
   draggable_Signature(id) {
     console.log(id);
+    this.getid = id
+    const array = this.defaultSign.find(res=>{return res.Type == id.toString()}) 
+    console.log("array",array)
+    if(array !== undefined){
+      this.dafaultSignObj = array
+      this.showimage = true
+    }else{
+      this.dafaultSignObj = {}
+      this.showimage = false
+    }
+   
     this.modalService.open(this.mymodal);
     //this.modelref.close();
     console.log('method working');

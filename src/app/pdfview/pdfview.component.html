@@ -154,6 +154,7 @@
                   <img style="height: 20px" src="assets/images/digital.png" />{{
                     list.Name
                   }}
+                
                 </p>
               </div>
             </ng-template>
@@ -186,15 +187,25 @@
       <ngb-tab title="Use">
         <ng-template ngbTabContent>
           <div class="upload-sig use-sig">
-            <div class="text-center">
-              <img src="assets/images/signn.png">              
+            <div class="text-center" >
+              <div *ngIf="!showimage">
+                <p>No default Signature Found</p>
+
+              </div>
+              <div *ngIf="showimage">
+
+                <img   [src]="imageBaseUrl + dafaultSignObj?.Sign">
+              </div>
+                           
+              <!-- <img *ngIf="item.Type === '2' && getid === '2'"  src="{{imageBaseUrl + item.Sign}}">               -->
             </div>
           </div>
           <button
+          *ngIf="showimage"
             type="button"
             class="btn btn-primary"
             (click)="uploadSignature()">
-            Create Signature
+            Use Signature
           </button>
         </ng-template>
       </ngb-tab>
