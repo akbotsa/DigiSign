@@ -80,3 +80,35 @@ text-align: justify;
     margin-top: 50px;
 }
 
+.signature-main {
+    text-align: end;
+}
+
+.signature-main button {
+    padding: 10px 13px;
+    margin-left: 15px;
+    background:#007bff;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+}
+
+.signature-main button:focus {
+    border: 1px solid #007bff;
+}
+
+.signature-main button:hover {
+    border: 1px solid #007bff;
+    background: none;
+}
+
+.signature-main button:hover i {
+    color: #007bff;
+}
+
+.signature-main button:hover {
+    color: #007bff;
+}
+
+.signature-main button i {
+    color: #fff;
+}
