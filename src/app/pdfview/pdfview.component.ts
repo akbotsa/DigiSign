@@ -270,16 +270,24 @@ export class PdfviewComponent implements OnInit {
 
   useSignature(sign, type) {
     if (type == "1") {
+      var xx = '.drag';
+      var yy = '.remove';
+      var aa = 'remove';
       this.exitSignature = sign
     }
 
     if (type == "2") {
+      var xx = '.idrag';
+      var yy = '.iremove';
+      var aa = 'iremove';
       this.exitInitial = sign
     }
-
+    $(yy).remove();
+    $(xx).css({ 'background-color': 'transparent', padding: 0 });
+    $(xx).append(
+      `<img class="${aa}" style="height: 100px;width: auto;" src="${this.imageBaseUrl}${sign}">`
+    );
     this.modalService.dismissAll();
-
-
   }
 
   cloneComment() {
