@@ -31,7 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DigitOnlyDirective } from './helpers/digitOnlyDirective';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -105,7 +105,7 @@ const ROUTES: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [NgxImageCompressService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

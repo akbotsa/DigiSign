@@ -3,6 +3,7 @@ import { ServicesService } from '../services/services.service';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf';
 import { environment } from 'src/environments/environment';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-final-doc',
@@ -80,7 +81,9 @@ export class FinalDocComponent implements OnInit {
   dummy: any = [];
   isDownloadflag: boolean = true;
   public worker: Worker;
-  constructor(private services: ServicesService) {
+  constructor(private services: ServicesService,
+    private imageCompress: NgxImageCompressService
+    ) {
 
 
 
@@ -90,10 +93,19 @@ export class FinalDocComponent implements OnInit {
       this.worker.onmessage = ({ data }) => {
         console.log(`page got message: `, JSON.stringify(data));
         console.log(data.type);
+        var orientation = -1;
         if(data.type=== "initial"){
-          this.receipientData[data.index].signatureImage = data.url;
+          this.imageCompress.compressFile(data.url, orientation, 50, 50).then(
+            result => {
+              this.receipientData[data.index].signatureImage = data.url;
+            });
+          
         }else{
-          this.receipientData[data.index].initialImage = data.url
+          this.imageCompress.compressFile(data.url, orientation, 50, 50).then(
+            result => {
+              this.receipientData[data.index].initialImage = data.url
+            });
+          
         }
         
       };
