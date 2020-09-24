@@ -36,6 +36,6 @@
 
 
 .signature-pad canvas {
-  /* width: 100% !important; */
-  /* height: 300px; */
+  width: 100% !important; 
+   height: 300px;
 }

@@ -146,15 +146,16 @@
                             <div class="row">
                                 <div class="col-md-4 mb-3"  *ngFor="let item of signslist">
                                     <div class="card">
-                                        <div>
+                                        <div >
                                             <img  class="image" [src]="imageBaseUrl + item.Sign" >
-                                        </div>
+                                        
                                         <div class="actions">
-                                            <button class="button-3">default</button>
+                                            <button (click)="defaultSign(item)" [ngClass]="{'button3': item.IsDefault === true , 'defaultColour': item.IsDefault === false}">Default</button>
                                             <button class="button-1"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                             <button class="button-2"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -165,17 +166,18 @@
                         <div class="signature-main">
                             <button class="ml-3 btn btn-md btn-primary" (click)="sign(2)"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Initial</button>
                             <div class="row">
-                                <div class="col-md-4 mb-3" >
+                                <div class="col-md-4 mb-3"  *ngFor="let item of initialList">
                                     <div class="card">
-                                        <div>
-                                            <img  class="image" src="assets/images/signn.png" >
-                                        </div>
+                                        <div >
+                                            <img  class="image" [src]="imageBaseUrl + item.Sign" >
+                                        
                                         <div class="actions">
-                                            <button class="button-3">default</button>
+                                            <button (click)="defaultSign(item)" [ngClass]="{'button3': item.IsDefault === true , 'defaultColour': item.IsDefault === false}">Default</button>
                                             <button class="button-1"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                             <button class="button-2"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

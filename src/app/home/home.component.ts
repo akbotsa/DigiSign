@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   type: any;
   signslist: any;
   public imageBaseUrl = environment.imageBaseUrl
+  initialList: any;
 
   constructor(private modalService: NgbModal, private services: ServicesService,   
     
@@ -41,11 +42,28 @@ export class HomeComponent implements OnInit {
 
   getsigns(){
    const formData= {
-      "UserId" : "5f61cacae1e8890af056308a"
+      "UserId" : this.userId
     }
     this.services.getsigns(formData).subscribe((res)=>{
       console.log("res",res)
-      this.signslist = res.data
+      
+      const array = res.data.filter((res)=>{return res.Type === '1'})
+      console.log("array",array)
+      this.signslist = array
+      const array2 = res.data.filter((res)=>{return res.Type === '2'})
+      this.initialList = array2
+
+    })
+  }
+
+  defaultSign(p){
+    const formdata ={
+      "UserId"  : this.userId,
+      "SignID" : p.SignID
+    }
+    this.services.setDefaultSigns(formdata).subscribe(res=>{
+      console.log("setDefaultSigns",res)
+      this.getsigns()
     })
   }
 
@@ -149,6 +167,7 @@ export class HomeComponent implements OnInit {
 
     this.services.signs(formdata).subscribe((resp) => {
       console.log("signs response",resp);
+      this.getsigns()
     })
   }
   
