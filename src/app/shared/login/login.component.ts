@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
 
 
   login(){
-    console.log("form values--",this.loginForm.value);
 
     let loginObj = {
       UserName: this.loginForm.value.email,
@@ -47,7 +46,6 @@ export class LoginComponent implements OnInit {
         this.toastr.error(`${resp.Message}`,'Failed:')
        // alert(`${resp.Message}`)
       }
-      console.log("Login resp=---",resp.data);
     })
     
   }
