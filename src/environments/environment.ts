@@ -12,7 +12,7 @@ export const environment = {
   // imageBaseUrl : "https://app.getendorse.co/api/v1/documents/document/",
 };
 
-/*
+/*  
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *
