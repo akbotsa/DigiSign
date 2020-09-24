@@ -104,6 +104,10 @@ export class ServicesService {
     return this.http.post(environment.baseUrl + "documents/get_signs", data);
   }
 
+  deleteExistedSign(id):Observable<any> {
+    return this.http.get(environment.baseUrl + `documents/Sign_remove/${id}`);
+  }
+
   // /documents/Get_Default_Signs
   getDefaultSigns(id):Observable<any> {
     return this.http.get(environment.baseUrl + `documents/Get_Default_Signs/${id}`);

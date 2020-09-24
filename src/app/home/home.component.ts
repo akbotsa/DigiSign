@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
 import { ServicesService } from '../services/services.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var jquery: any;
 declare var $: any;
@@ -28,9 +29,7 @@ export class HomeComponent implements OnInit {
   public imageBaseUrl = environment.imageBaseUrl
   initialList: any;
 
-  constructor(private modalService: NgbModal, private services: ServicesService,   
-    
-    ) { }
+  constructor(private modalService: NgbModal, private services: ServicesService, private toastr: ToastrService, ) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("userDetails"));
@@ -114,7 +113,7 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  uploadSignature() {
+  uploadSignature() { 
     this.itemId = localStorage.getItem('itemId');
     console.log('uploadSignature--->', this.fileContent);
     const reader = new FileReader();
@@ -166,8 +165,24 @@ export class HomeComponent implements OnInit {
     formdata.append("Sign",signReference)
 
     this.services.signs(formdata).subscribe((resp) => {
-      console.log("signs response",resp);
       this.getsigns()
+      console.log("signs response",resp);
+      // this.getsigns()
+    })
+  }
+
+
+  handleSignDelete(type,item) {
+    console.log("currentItem-",item);
+    console.log("typeee",type)
+
+    let id = item.SignID;
+    this.services.deleteExistedSign(id).subscribe((resp)=> {
+      console.log("delete response----",resp);
+      if(resp.statusCode == 200) {
+        this.getsigns();
+        this.toastr.success(`${resp.message}`);
+      }
     })
   }
   
