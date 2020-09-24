@@ -33,7 +33,7 @@
               <div class="doc-sidee">
                 <div class="doc-sidebar">
                   <p class="final-name">{{ list?.Name }}</p>
-                  <p class="final-mail">{{ list?.Email }}</p>
+                  <!-- <p class="final-mail">{{ list?.Email }}</p> -->
                 </div>
                 <div class="side-status">
                   <!-- <span *ngIf="list.VerifyFlag; then con1; else con2"></span> -->
@@ -70,6 +70,11 @@
                   </div>
                 </div>
               </div>
+
+              <div class="email">
+                <p>{{ list?.Email }}</p>
+              </div>
+
             </div>
           </div>
         </div>
