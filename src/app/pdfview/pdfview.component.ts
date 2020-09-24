@@ -171,26 +171,27 @@ export class PdfviewComponent implements OnInit {
     reader.onloadend = function () {
       var base64data = reader.result;
       self.itemId = localStorage.getItem('itemId');
-      self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
+      if (self.itemId == 1) {
+        var xx = '.drag';
+        var yy = '.remove';
+        var aa = 'remove';
+        self.signatureImage = base64data;
+      } else {
+        var xx = '.idrag';
+        var yy = '.iremove';
+        var aa = 'iremove';
+        self.initialFile = base64data;
+      }
+      $(yy).remove();
+      $(xx).css({ 'background-color': 'transparent', padding: 0 });
+      $(xx).append(
+        `<img class="${aa}" style="height: 100px;width: auto;" src="${base64data}">`
+      );
+      self.modalService.dismissAll();
+     /*  self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
         console.log(result);
-        if (self.itemId == 1) {
-          var xx = '.drag';
-          var yy = '.remove';
-          var aa = 'remove';
-          self.signatureImage = result;
-        } else {
-          var xx = '.idrag';
-          var yy = '.iremove';
-          var aa = 'iremove';
-          self.initialFile = result;
-        }
-        $(yy).remove();
-        $(xx).css({ 'background-color': 'transparent', padding: 0 });
-        $(xx).append(
-          `<img class="${aa}" style="height: 100px;width: auto;" src="${base64data}">`
-        );
-        self.modalService.dismissAll();
-      });
+        
+      }); */
     };
   }
   saveImage1(data) {
