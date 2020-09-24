@@ -81,6 +81,8 @@ export class FinalDocComponent implements OnInit {
   dummy: any = [];
   isDownloadflag: boolean = true;
   public worker: Worker;
+
+  public imageBaseUrl = environment.imageBaseUrl
   constructor(private services: ServicesService,
     private imageCompress: NgxImageCompressService
     ) {
@@ -152,20 +154,20 @@ export class FinalDocComponent implements OnInit {
           }
 
           if (this.receipientData[i].signatureImage != "") {
-            console.log('xdataUrl-->', i);
+            console.log('xdataUrl-->', this.receipientData[i].signatureImage);
             let self = this;
             var burl = `${environment.imageBaseUrl}${this.receipientData[i].signatureImage}`;
-            /* this.toDataURL(burl, function (dataUrl) {
+            this.toDataURL(burl, function (dataUrl) {
                   let x = dataUrl.split(';')
                   self.receipientData[i].signatureImage = `data:image/png;${x[1]}`;
-            }) */
+            }) 
             // this.worker.postMessage('hello');
             let obj = {
               url: burl,
               index: i,
               type: "signature"
             }
-            this.worker.postMessage(obj);
+            // this.worker.postMessage(obj);
           }
 
           if (this.receipientData[i].initialImage != "") {
@@ -176,11 +178,11 @@ export class FinalDocComponent implements OnInit {
               index: i,
               type: "initial"
             }
-            this.worker.postMessage(obj);
-            /*  this.toDataURL(burl, function (dataUrl) {
+            // this.worker.postMessage(obj);
+              this.toDataURL(burl, function (dataUrl) {
                let x = dataUrl.split(';')
                self.receipientData[i].initialImage = `data:image/png;${x[1]}`;
-             }) */
+             }) 
           }
         }
       }
@@ -189,7 +191,7 @@ export class FinalDocComponent implements OnInit {
         this.isDownloadflag = false;
       }
     })
-    console.log('receipientData-->', this.receipientData);
+    console.log('DataTest-->', this.receipientData);
   }
 
   toDataURL(url, callback) {
@@ -209,7 +211,7 @@ export class FinalDocComponent implements OnInit {
 
   generatePdf() {
     const filename = 'FinalDOc.pdf';
-    html2canvas(document.querySelector('#content'), { scale: 3 }).then(canvas => {
+    html2canvas(document.querySelector('#content'), { scale: 0.5 }).then(canvas => {
       let pdf = new jsPDF('p', 'mm', 'a4');
       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
       pdf.save(filename);

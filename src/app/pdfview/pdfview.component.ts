@@ -175,12 +175,12 @@ export class PdfviewComponent implements OnInit {
         var xx = '.drag';
         var yy = '.remove';
         var aa = 'remove';
-        self.signatureImage = base64data;
+        self.signatureImage = data;
       } else {
         var xx = '.idrag';
         var yy = '.iremove';
         var aa = 'iremove';
-        self.initialFile = base64data;
+        self.initialFile = data;
       }
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
