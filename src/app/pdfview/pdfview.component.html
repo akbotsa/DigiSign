@@ -3,13 +3,22 @@
     <div class="col-md-3 col-md-offset-3">
       <!-- <button class="btn btn-primary" (click)="generatePdf()">Genarate Pdf</button> -->
       <form [formGroup]="rejectFormGroup">
-        <div class="signature-acceptance" *ngIf="isShowflag && docRejected === false && isVerified === false">
+        <div
+          class="signature-acceptance"
+          *ngIf="isShowflag && docRejected === false && isVerified === false"
+        >
           <div class="comment-box">
-            <textarea name="comments" cols="30" rows="1" placeholder="Please comment here..."
-              formControlName="comments"></textarea>
+            <textarea
+              name="comments"
+              cols="30"
+              rows="1"
+              placeholder="Please comment here..."
+              formControlName="comments"
+            ></textarea>
 
-            <button class="btn btn-primary" (click)="cloneComment()"><i class="fa fa-plus"
-                aria-hidden="true"></i></button>
+            <button class="btn btn-primary" (click)="cloneComment()">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
           </div>
           <div class="d-flex">
             <div class="reject-btn">
@@ -30,8 +39,6 @@
         <div *ngIf="isVerified === true" class="rejected-text">
           <h5 class="text-danger">Document has already Signed</h5>
         </div>
-
-
       </form>
     </div>
     <div class="col-md-9 image-view" #content id="content">
@@ -42,9 +49,13 @@
       <div class="pdfViewerSection" id="sortable">
         <div *ngFor="let list of userData; let i = index">
           <div *ngFor="let pos of list.signature; let idx = index">
-            <span *ngIf="list.VerifyFlag; then condition1; else condition2"></span>
+            <span
+              *ngIf="list.VerifyFlag; then condition1; else condition2"
+            ></span>
             <ng-template #condition1>
-              <div class="drag-cls ui-draggable ui-draggable-handle drag" style="
+              <div
+                class="drag-cls ui-draggable ui-draggable-handle drag"
+                style="
                   display: inline;
                   z-index: 1;
                   background: transparent;
@@ -52,14 +63,21 @@
                   border-radius: 5px;
                   color: rgb(255, 255, 255);
                   position: relative;
-                " [style.left.px]="pos.left" [style.top.px]="pos.top">
-                <img style="height: 70px; width: 300px" src="{{ imageBaseUrl + 
-                    list.signatureImage
-                  }}" />
+                "
+                [style.left.px]="pos.left"
+                [style.top.px]="pos.top"
+              >
+                <img
+                  style="height: 70px; width: 300px"
+                  src="{{ imageBaseUrl + list.signatureImage }}"
+                />
               </div>
             </ng-template>
             <ng-template #condition2>
-              <div (click)="draggable_Signature(1)" class="drag-cls ui-draggable ui-draggable-handle drag" style="
+              <div
+                (click)="draggable_Signature(1)"
+                class="drag-cls ui-draggable ui-draggable-handle drag"
+                style="
                   display: inline;
                   z-index: 1;
                   background: rgba(204, 204, 204, 0.73);
@@ -68,9 +86,15 @@
                   color: rgb(255, 255, 255);
                   cursor: move;
                   position: relative;
-                " [style.left.px]="pos.left" [style.top.px]="pos.top">
+                "
+                [style.left.px]="pos.left"
+                [style.top.px]="pos.top"
+              >
                 <!-- <div id="replace_{{i}}_{{idx}}"></div> -->
-                <p class="ui-state-highlight remove" style="display: inline; color: #135699; font-weight: bold">
+                <p
+                  class="ui-state-highlight remove"
+                  style="display: inline; color: #135699; font-weight: bold"
+                >
                   <img style="height: 20px" src="assets/images/sign.png" />{{
                     list.Name
                   }}
@@ -81,7 +105,9 @@
           <div *ngFor="let ini of list.initial; let j = index">
             <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
             <ng-template #con1>
-              <div class="drag-cls ui-draggable ui-draggable-handle idrag" style="
+              <div
+                class="drag-cls ui-draggable ui-draggable-handle idrag"
+                style="
                   display: inline;
                   z-index: 1;
                   background: transparent;
@@ -89,14 +115,21 @@
                   border-radius: 5px;
                   color: rgb(255, 255, 255);
                   position: relative;
-                " [style.left.px]="ini.left" [style.top.px]="ini.top">
-                <img style="height: 70px; width: 300px" src="{{ imageBaseUrl +
-                    list.initialImage
-                  }}" />
+                "
+                [style.left.px]="ini.left"
+                [style.top.px]="ini.top"
+              >
+                <img
+                  style="height: 70px; width: 300px"
+                  src="{{ imageBaseUrl + list.initialImage }}"
+                />
               </div>
             </ng-template>
             <ng-template #con2>
-              <div (click)="draggable_Signature(2)" class="drag-cls ui-draggable ui-draggable-handle idrag" style="
+              <div
+                (click)="draggable_Signature(2)"
+                class="drag-cls ui-draggable ui-draggable-handle idrag"
+                style="
                   display: inline;
                   z-index: 1;
                   background: rgba(204, 204, 204, 0.73);
@@ -105,20 +138,31 @@
                   color: rgb(255, 255, 255);
                   cursor: move;
                   position: relative;
-                " [style.left.px]="ini.left" [style.top.px]="ini.top">
+                "
+                [style.left.px]="ini.left"
+                [style.top.px]="ini.top"
+              >
                 <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
-                <p class="ui-state-highlight iremove" style="display: inline; color: #135699; font-weight: bold">
+                <p
+                  class="ui-state-highlight iremove"
+                  style="display: inline; color: #135699; font-weight: bold"
+                >
                   <img style="height: 20px" src="assets/images/digital.png" />{{
                     list.Name
                   }}
-
                 </p>
               </div>
             </ng-template>
           </div>
         </div>
-        <pdf-viewer [src]="viewSrc" [render-text]="true" [render-text]="true" [show-all]="true" [fit-to-page]="true"
-          style="display: block">
+        <pdf-viewer
+          [src]="viewSrc"
+          [render-text]="true"
+          [render-text]="true"
+          [show-all]="true"
+          [fit-to-page]="true"
+          style="display: block"
+        >
         </pdf-viewer>
       </div>
     </div>
@@ -134,6 +178,20 @@
   </div> -->
   <div class="modal-body">
     <ngb-tabset [destroyOnHide]="false">
+      <ngb-tab title="Draw">
+        <ng-template ngbTabContent>
+          <div class="col-md-12">
+            <div class="tab-sign">
+              <ng-signature-pad
+                doneButtonText="Create a Signature"
+                format="blob"
+                (done)="saveImage($event)"
+              >
+              </ng-signature-pad>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
 
       <ngb-tab title="Use">
         <ng-template ngbTabContent>
@@ -141,28 +199,20 @@
             <div class="text-center">
               <div *ngIf="!showimage">
                 <p>No default Signature Found</p>
-
               </div>
               <div *ngIf="showimage">
-
-                <img [src]="imageBaseUrl + dafaultSignObj?.Sign">
+                <img [src]="imageBaseUrl + dafaultSignObj?.Sign" />
               </div>
             </div>
           </div>
-          <button *ngIf="showimage" type="button" class="btn btn-primary" (click)="useSignature(dafaultSignObj?.Sign , dafaultSignObj?.Type)">
+          <button
+            *ngIf="showimage"
+            type="button"
+            class="btn btn-primary"
+            (click)="useSignature(dafaultSignObj?.Sign, dafaultSignObj?.Type)"
+          >
             Use Signature
           </button>
-        </ng-template>
-      </ngb-tab>
-
-      <ngb-tab title="Draw">
-        <ng-template ngbTabContent>
-          <div class="col-md-12">
-            <div class="tab-sign">
-              <ng-signature-pad doneButtonText="Create a Signature" format="blob" (done)="saveImage($event)">
-              </ng-signature-pad>
-            </div>
-          </div>
         </ng-template>
       </ngb-tab>
 
@@ -184,18 +234,36 @@
               <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
                 <img [src]="imageURL" alt="upimages" width="200px" />
               </div>
-              <button class="btn btn-primary btn-block" type="button" (click)="fileInput.click()">
+              <button
+                class="btn btn-primary btn-block"
+                type="button"
+                (click)="fileInput.click()"
+              >
                 <span>UPLOAD</span>
-                <input #fileInput type="file" (change)="onFileSelected($event)" id="file" style="display: none"
-                  accept="image/*" />
+                <input
+                  #fileInput
+                  type="file"
+                  (change)="onFileSelected($event)"
+                  id="file"
+                  style="display: none"
+                  accept="image/*"
+                />
               </button>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="modal.close('Save click')"
+          >
             Cancle
           </button>
-          <button type="button" class="btn btn-outline-dark" (click)="uploadSignature()"
-            *ngIf="imageURL && imageURL !== ''">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="uploadSignature()"
+            *ngIf="imageURL && imageURL !== ''"
+          >
             Create Signature
           </button>
         </ng-template>

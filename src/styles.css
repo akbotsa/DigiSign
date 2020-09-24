@@ -34,8 +34,10 @@
   margin-bottom: 0;
 }
 
-
 .signature-pad canvas {
-  width: 100% !important; 
-   height: 300px;
+  /* max-width: 100% !important; */
+  height: 300px !important;
+}
+.signature-pad {
+  overflow: hidden !important;
 }

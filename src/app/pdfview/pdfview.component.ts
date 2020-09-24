@@ -1,9 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ServicesService } from '../services/services.service';
+import { NgxImageCompressService } from 'ngx-image-compress';
 import {
   NgbModal,
   ModalDismissReasons,
-  NgbModalRef, NgbPopover
+  NgbModalRef,
+  NgbPopover,
 } from '@ng-bootstrap/ng-bootstrap';
 declare var jquery: any;
 declare var $: any;
@@ -43,22 +45,24 @@ export class PdfviewComponent implements OnInit {
   public docRejected: boolean;
   public isVerified: boolean = false;
 
-  public imageBaseUrl = environment.imageBaseUrl
+  public imageBaseUrl = environment.imageBaseUrl;
 
   comments: any = [];
   defaultSign: any;
   getid: any;
   dafaultSignObj: any;
   showimage: boolean;
-  exitSignature: string = null
-  exitInitial: string = null
+  exitSignature: string = null;
+  exitInitial: string = null;
   constructor(
     private modalService: NgbModal,
     private services: ServicesService,
     private router: Router,
     private toastr: ToastrService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+
+    private imageCompress: NgxImageCompressService
+  ) {}
 
   ngOnInit(): void {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
@@ -67,18 +71,18 @@ export class PdfviewComponent implements OnInit {
     this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
     this.loadRecipientsList();
     this.loadRejectForm();
-    this.getdefaultSigns()
+    this.getdefaultSigns();
   }
 
   getdefaultSigns() {
     this.services.getDefaultSigns(this.userId).subscribe((res) => {
       if (res.statusCode == 200) {
-        this.defaultSign = res.data
+        this.defaultSign = res.data;
       } else {
-        this.defaultSign = []
+        this.defaultSign = [];
       }
-      console.log("getDefaultSigns", this.defaultSign)
-    })
+      console.log('getDefaultSigns', this.defaultSign);
+    });
   }
 
   loadRecipientsList() {
@@ -140,15 +144,17 @@ export class PdfviewComponent implements OnInit {
 
   draggable_Signature(id) {
     console.log(id);
-    this.getid = id
-    const array = this.defaultSign.find(res => { return res.Type == id.toString() })
-    console.log("array", array)
+    this.getid = id;
+    const array = this.defaultSign.find((res) => {
+      return res.Type == id.toString();
+    });
+    console.log('array', array);
     if (array !== undefined) {
-      this.dafaultSignObj = array
-      this.showimage = true
+      this.dafaultSignObj = array;
+      this.showimage = true;
     } else {
-      this.dafaultSignObj = {}
-      this.showimage = false
+      this.dafaultSignObj = {};
+      this.showimage = false;
     }
 
     this.modalService.open(this.mymodal);
@@ -158,6 +164,36 @@ export class PdfviewComponent implements OnInit {
   }
 
   saveImage(data) {
+    console.log(data);
+    let self = this;
+    var reader = new FileReader();
+    reader.readAsDataURL(data);
+    reader.onloadend = function () {
+      var base64data = reader.result;
+      self.itemId = localStorage.getItem('itemId');
+      self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
+        console.log(result);
+        if (self.itemId == 1) {
+          var xx = '.drag';
+          var yy = '.remove';
+          var aa = 'remove';
+          self.signatureImage = result;
+        } else {
+          var xx = '.idrag';
+          var yy = '.iremove';
+          var aa = 'iremove';
+          self.initialFile = result;
+        }
+        $(yy).remove();
+        $(xx).css({ 'background-color': 'transparent', padding: 0 });
+        $(xx).append(
+          `<img class="${aa}" style="height: 100px;width: auto;" src="${base64data}">`
+        );
+        self.modalService.dismissAll();
+      });
+    };
+  }
+  saveImage1(data) {
     let self = this;
     var reader = new FileReader();
     reader.readAsDataURL(data);
@@ -269,18 +305,18 @@ export class PdfviewComponent implements OnInit {
   }
 
   useSignature(sign, type) {
-    if (type == "1") {
+    if (type == '1') {
       var xx = '.drag';
       var yy = '.remove';
       var aa = 'remove';
-      this.exitSignature = sign
+      this.exitSignature = sign;
     }
 
-    if (type == "2") {
+    if (type == '2') {
       var xx = '.idrag';
       var yy = '.iremove';
       var aa = 'iremove';
-      this.exitInitial = sign
+      this.exitInitial = sign;
     }
     $(yy).remove();
     $(xx).css({ 'background-color': 'transparent', padding: 0 });
@@ -297,13 +333,15 @@ export class PdfviewComponent implements OnInit {
       this.toastr.error('Please Enter Comment', 'Failed:');
     } else {
       let cObject = {
-        "comment": comment,
-        "top": 0,
-        "left": 0
-      }
+        comment: comment,
+        top: 0,
+        left: 0,
+      };
       this.comments.push(cObject);
 
-      $('.pdfViewerSection').prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;" id="drag_${this.comments.length}"><p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${comment}</p></div>`);
+      $('.pdfViewerSection').prepend(
+        `<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;" id="drag_${this.comments.length}"><p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${comment}</p></div>`
+      );
       let self = this;
       $('.draggable2').draggable({
         containment: 'parent',
@@ -314,11 +352,10 @@ export class PdfviewComponent implements OnInit {
           /* console.log('positionIndex-->', positionIndex);
           console.log('positionIndex-->', self.comments); */
 
-
           self.comments[positionIndex - 1]['top'] = ui.position.top;
           self.comments[positionIndex - 1]['left'] = ui.position.left;
           console.log('comments-->', JSON.stringify(self.comments));
-        }
+        },
       });
 
       //console.log('comments-->', JSON.stringify(this.comments));
@@ -346,8 +383,7 @@ export class PdfviewComponent implements OnInit {
 
     formData.append('comments', comt);
 
-    console.log('data',
-      formData.getAll('initialImage'))
+    console.log('data', formData.getAll('initialImage'));
 
     /*  if(this.comments.length > 0){
        for (let i = 0; i < this.comments.length; i++) {
@@ -392,6 +428,4 @@ export class PdfviewComponent implements OnInit {
       }
     });
   }
-
-
 }
