@@ -5,17 +5,17 @@
     margin: 10px 0px;
 } */
 
-.pdfViewer.removePageBorders .page {
+/* .pdfViewer.removePageBorders .page {
   width: 100% !important;
-}
+} */
 
 .pdfViewer .canvasWrapper {
   width: 100% !important;
 }
 
-.page .textLayer {
+/* .page .textLayer {
   width: 100% !important;
-}
+} */
 
 @media print and (color) {
   #sortable,
@@ -41,3 +41,20 @@
 .signature-pad {
   overflow: hidden !important;
 }
+
+#sortable {
+  padding: 0px !important;
+}
+
+.pdfViewer .page canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* .textLayer {
+  height: auto !important;
+}
+
+.canvasWrapper {
+  height: auto !important;
+} */

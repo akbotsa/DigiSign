@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid con">
   <div class="row">
     <div class="col-md-3 col-md-offset-3">
       <div>
@@ -90,11 +90,11 @@
       </div>
       <!-- <button class="btn btn-primary" (click)="updateSignature()">Update Signature</button> -->
     </div>
-    <div class="col-md-9 image-view" #content id="content">
+    <div class="col-md-8 image-view" #content id="content">
       <!-- <div class="pdf-none">
                 <p>&nbsp;</p>
             </div> -->
-      <div class="pdfViewerSection" id="sortable">
+      <div class="pdfViewerSection" id="sortable" style="padding: 50px 50px;">
         <div *ngFor="let list of receipientData; let i = index">
           <div *ngFor = "let como of list.comments">
             <div class="drag-cls ui-draggable ui-draggable-handle drag"  style="
@@ -102,6 +102,8 @@
               z-index: 1;
               border-radius: 5px;
               position: relative;
+              width: 100%;
+              height: 100%;
             "
             [style.left.px]="como.left"
             [style.top.px]="como.top"
