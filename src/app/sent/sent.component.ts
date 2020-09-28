@@ -13,6 +13,7 @@ export class SentComponent implements OnInit {
   public documentsList = [];
   userId: any;
   public page: number = 1;
+  seachpipe:any;
 
   constructor(private digiServices: ServicesService, private router: Router) {}
 

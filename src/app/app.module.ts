@@ -34,6 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {NgxImageCompressService} from 'ngx-image-compress';
 import { ForgotPasswordComponent } from './shared/forgot-password/forgot-password.component';
 import { EmailVerificationComponent } from './shared/email-verification/email-verification.component';
+import { PipePipe } from './filter/pipe.pipe';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -94,6 +95,7 @@ const ROUTES: Routes = [
     DigitOnlyDirective,
     ForgotPasswordComponent,
     EmailVerificationComponent,
+    PipePipe,
   ],
   imports: [
     HttpClientModule,

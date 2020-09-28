@@ -21,3 +21,6 @@
     display: flex;
     align-items: center;
 }
+.active{
+    color: blue !important;
+}

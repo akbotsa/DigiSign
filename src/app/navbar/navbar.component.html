@@ -6,11 +6,12 @@
   
     <div class="collapse navbar-collapse ml-5 pl-5" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active ml-4"  *ngIf="showLogin">
-          <a href="/home" routerLink="/home" routerLinkActive="active" class="nav-link" >Home</a>
+        <li class="nav-item  ml-4"  *ngIf="showLogin">
+          <!-- <a  routerLink="/home"  class="nav-link" >Home</a> -->
+          <a [routerLink]="[ '/home' ]" class="nav-link" routerLinkActive="active">Home</a>
         </li>
         <li class="nav-item ml-4"  *ngIf="showLogin">
-          <a href="/document" routerLink="/document" routerLinkActive="active"  class="nav-link" >Manage</a>
+          <a [routerLink]="[ '/document' ]" class="nav-link" routerLinkActive="active">Manage</a>
         </li>
         <!-- <li class="nav-item ml-4">
           <a class="nav-link" href="#">Template</a>
@@ -28,10 +29,8 @@
         </li>
 
         <li class="nav-item dropdown profile" *ngIf="showLogin">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown">My Profile</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" (click)="logout()">Logout</a>
-          </div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+         
         </li>
 
       </ul>

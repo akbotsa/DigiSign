@@ -12,10 +12,10 @@
             ></pagination-controls>
           </div>
           <div>
-            <input type="text" class="form-control" placeholder="Search" />
+            <input type="text" class="form-control"  [(ngModel)]="seachpipe" placeholder="Search" />
           </div>
-          &nbsp;&nbsp;
-          <div><i class="fa fa-filter"></i> FILTERS</div>
+          <!-- &nbsp;&nbsp;
+          <div><i class="fa fa-filter"></i> FILTERS</div> -->
         </div>
       </div>
       <div class="inbox-mails mt-5">
@@ -38,7 +38,7 @@
                 <tr
                   class="border-bottom"
                   *ngFor="
-                    let document of documentsList
+                    let document of documentsList | pipe :seachpipe
                       | paginate: { itemsPerPage: 10, currentPage: page }
                   "
                 >

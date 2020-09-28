@@ -14,6 +14,7 @@ export class InboxComponent implements OnInit {
   public documentsList = [];
   userId: any;
   public page: number = 1;
+  seachpipe:any;
   boldStyleFlag: boolean = true;
 
   constructor(
