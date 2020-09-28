@@ -48,6 +48,12 @@
 }
 
 .link {
-    padding: 10px 0px; 
+    padding: 7px 0px; 
     margin-bottom: 10px;
+}
+
+.btn-block {
+    height: 50px;
+    border-radius: 30px;
+    box-shadow: 0 8px 6px -6px black;
 }

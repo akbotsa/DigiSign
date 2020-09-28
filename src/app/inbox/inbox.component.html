@@ -69,9 +69,12 @@
                       document?.createdAt | date: "h:mm:ss a"
                     }}</span>
                   </td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn form-inline dropdown-toggle d-none" data-toggle="dropdown">
+                  <td style="text-align: center;">
+                    <button class="btn btn-primary" (click)="onClicksign(document)">
+                      Sign
+                    </button>
+                    <!-- <div class="dropdown">
+                      <button class="btn form-inline dropdown-toggle" data-toggle="dropdown">
                         MOVE
                       </button>
                       <div class="dropdown-menu">
@@ -83,10 +86,8 @@
                         <a class="dropdown-item">Delete</a>
                       </div>
 
-                      <button class="btn btn-primary" (click)="onClicksign(document)">
-                        Sign
-                      </button>
-                    </div>
+                      
+                    </div> -->
                   </td>
                 </tr>
               </tbody>

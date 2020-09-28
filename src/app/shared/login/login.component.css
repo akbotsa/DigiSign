@@ -29,3 +29,13 @@
 .forgotpasswordbutton{
     cursor: pointer;
 }
+
+.forgetPassword a {
+    color: #8bd2c9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.forgetPassword a:hover {
+    border-bottom: 3px solid #8db2c9;
+}

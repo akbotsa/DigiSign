@@ -1,10 +1,18 @@
 
 
 .login-card {
-    max-width: 420px;
+    /* max-width: 420px; */
     margin: auto;
     /* text-align: center; */
 }
+
+.signup-form {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 1px 6px 5px #eee;
+}
+
 
 .register {
     padding: 20px 0px;
@@ -12,4 +20,18 @@
 
 .is-invalid {
     border: solid 1px red;
+}
+
+.signinn a {
+    color: #8bd2c9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signinn a:hover {
+    border-bottom: 3px solid #8db2c9;
+}
+
+.signup-btn {
+    padding: 10px 15px;
 }

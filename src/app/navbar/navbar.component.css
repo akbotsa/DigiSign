@@ -22,5 +22,16 @@
     align-items: center;
 }
 .active{
-    color: blue !important;
+    color: #416a65 !important;
+    font-weight: bold;
+    font-weight: 18px;
+    border-bottom: 4px solid #416a65;
+}
+
+.form-inline ul li a{
+    cursor: pointer;
+}
+
+.nav-link {
+    padding-bottom: 2px;
 }
