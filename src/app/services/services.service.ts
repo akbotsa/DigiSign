@@ -120,14 +120,14 @@ export class ServicesService {
 
    // Change Password
    changePassword(data):Observable<any> {
-    return this.http.post(environment.baseUrl2 + `authentication/changePassword`,data);
+    return this.http.post(environment.baseUrl + `authentication/changePassword`,data);
   }
 
 
   // /authentication/Status_Update
   authenticationStatusUpdate(data){
     
-    return this.http.post(environment.baseUrl2 + `/authentication/Status_Update`,data);
+    return this.http.post(environment.baseUrl + `authentication/Status_Update`,data);
   }
 
 

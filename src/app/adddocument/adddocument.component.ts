@@ -32,7 +32,7 @@ export class AdddocumentComponent implements OnInit {
   showDelete: boolean;
   uploadedFiles = [];
   recepArr: FormArray;
-  userId: string = '5f61cacae1e8890af056308a';
+  userId: string;
   docId: string;
   isSignInOrder: boolean = false;
   public documentFieldValidationFlag: boolean = false;
@@ -79,7 +79,7 @@ export class AdddocumentComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private digiService: ServicesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
@@ -215,24 +215,37 @@ export class AdddocumentComponent implements OnInit {
 
   gotoAddField() {
     this.router.navigateByUrl('/addfields');
-  }
+  } 
 
   /*  =============== Drag and Drop ============ */
 
   uploadFile(event) {
-    if (event.length > 0) {
-      this.showNextBtn = true;
+    this.files = []
+    this.uploadedFiles = []
+    if (event.length == 1) {
+      const file = event[0]
+      const fileName = file.name.split('.')
+      console.log('fileName' , fileName)
+           const check = fileName.filter(item =>{
+               return item.toUpperCase() === 'PDF' || item.toUpperCase() === 'DOCX' || item.toUpperCase() === 'DOC'
+           })
+      if (check.length > 0) {
+        this.uploadedFiles.push(file);
+        this.files.push(file.name);
+        this.showNextBtn = true;
+      } else {
+        alert('File should be Pdf file or docx file or doc File')
+      }
+    } else {
+      alert('Select  Pdf File or docx file  or doc file at a time')
     }
-    for (let index = 0; index < event.length; index++) {
-      this.uploadedFiles.push(event[0]);
 
-      console.log('upload file-->', event[0]);
-      const element = event[index];
-      this.files.push(element.name);
-    }
+
   }
   deleteAttachment(index) {
-    this.files.splice(index, 1);
+    this.files = []
+    this.uploadedFiles = []
+    this.showNextBtn = false
   }
 
   /* Sign In order */
