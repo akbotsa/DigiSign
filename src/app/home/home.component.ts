@@ -41,9 +41,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("userDetails"));
-    this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
+    this.userId = JSON.parse(localStorage.getItem('userDetails'))?._id;
     // this.firstName = this.user.FirstName;
     console.log("user----",this.user)
+    if(!this.user){
+      this.router.navigateByUrl('/login')
+    }
     this.getsigns()
   }
   changePassword(){
@@ -58,7 +61,8 @@ export class HomeComponent implements OnInit {
         console.log("res",res)
         alert(res.Message)
         if(res.StatusCode === 200){
-        this.router.navigateByUrl('/login')
+          this.router.navigateByUrl("/login");
+          localStorage.clear();
         }    
       })
     

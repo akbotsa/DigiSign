@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         this.services.loginHideShow.emit(true);
         this.toastr.success(`${resp.Message}`, 'Success:')
         //alert(`${resp.Message}`);
-        this.router.navigateByUrl('document')
+        this.router.navigateByUrl('document/inbox')
       } else {
         this.toastr.error(`${resp.Message}`, 'Failed:')
         // alert(`${resp.Message}`)
