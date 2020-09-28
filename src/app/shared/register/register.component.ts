@@ -15,6 +15,11 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private services: ServicesService, private route: Router ) { }
 
   ngOnInit(): void {
+    
+    const user = JSON.parse(localStorage.getItem("userDetails"));
+    if(user){
+      this.route.navigateByUrl('/home')
+    }
     this.loadRegisterForm();
   }
 
@@ -34,9 +39,9 @@ export class RegisterComponent implements OnInit {
   get r() { return this.registerForm.controls }
 
   register() {
-    console.log("regForm-----",this.registerForm.valid);
+    // console.log("regForm-----",this.registerForm.valid);
     if( this.registerForm.valid ) {
-      console.log("registerForm",this.registerForm);
+      // console.log("registerForm",this.registerForm);
 
       let regObj = {
         FirstName: this.registerForm.value.first_name,

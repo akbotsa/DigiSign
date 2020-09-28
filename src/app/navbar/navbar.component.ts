@@ -20,10 +20,10 @@ export class NavbarComponent implements OnInit {
         this.showLogin = true;
       }
     })
-    console.log("login useerr",this.user);
     if( this.user == null || this.user == undefined) {
       this.showLogin = false;
     } else {
+
       this.showLogin = true;
     }
   }
