@@ -30,8 +30,8 @@ export class RegisterComponent implements OnInit {
       email: ['',Validators.required],
       password: ['',Validators.required],
       phone: ['',Validators.required],
-      job_title: ['',Validators.required],
-      industry: ['',]
+      job_title: [''],
+      // industry: ['',]
     })
     // console.log("registerForm",this.registerForm);
   }

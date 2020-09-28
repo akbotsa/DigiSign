@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
 import { ServicesService } from '../services/services.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 declare var jquery: any;
 declare var $: any;
@@ -28,8 +30,14 @@ export class HomeComponent implements OnInit {
   signslist: any;
   public imageBaseUrl = environment.imageBaseUrl
   initialList: any;
+  changePasswordForm: FormGroup;
 
-  constructor(private modalService: NgbModal, private services: ServicesService, private toastr: ToastrService, ) { }
+  constructor(private modalService: NgbModal, private services: ServicesService, private toastr: ToastrService,private fb:FormBuilder,private router:Router ) {
+    this.changePasswordForm = this.fb.group({
+      oldPassword:["",Validators.required],
+      newPassword:["",Validators.required]
+    })
+   }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("userDetails"));
@@ -37,6 +45,24 @@ export class HomeComponent implements OnInit {
     // this.firstName = this.user.FirstName;
     console.log("user----",this.user)
     this.getsigns()
+  }
+  changePassword(){
+    console.log("password",this.changePasswordForm.value)
+    const formData ={
+        "UserID" : this.userId,
+        "OldPassword" : this.changePasswordForm.value.oldPassword,
+        "NewPassword" : this.changePasswordForm.value.newPassword
+      }
+      console.log("obj",formData)
+      this.services.changePassword(formData).subscribe(res=>{
+        console.log("res",res)
+        alert(res.Message)
+        if(res.StatusCode === 200){
+        this.router.navigateByUrl('/login')
+        }    
+      })
+    
+
   }
 
   getsigns(){

@@ -28,8 +28,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Email*</label>
-                                    <input type="text" formControlName="email" class="form-control" placeholder="Enter email"
-                                    [ngClass]="{ 'is-invalid': r.email.touched && r.email.errors && this.registerForm.invalid}">
+                                    <input type="email" formControlName="email" class="form-control" placeholder="Enter email" 
+                                    [ngClass]="{ 'is-invalid': r.email.touched && r.email.errors }"
+                                    required  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+                                    />
+                                    <!-- <div *ngIf="r.email.touched && r.email.errors" class="text-danger">
+                                        <div *ngIf="r.email.errors.required">Please enter your Email</div>
+                                    </div> -->
+                                    <div *ngIf="r.email.errors" class="text-danger">
+                                        <div *ngIf="r.email.errors.pattern">Please enter your correct EmailAddress</div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -37,27 +46,36 @@
                                     <label for="">Password*</label>
                                     <input type="password" formControlName="password" class="form-control" placeholder="Enter password"
                                     [ngClass]="{ 'is-invalid': r.password.touched && r.password.errors && this.registerForm.invalid}">
+                                    
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Phone*</label> 
-                                    <input type="text" formControlName="phone" class="form-control" placeholder="Enter phone"
-                                    [ngClass]="{ 'is-invalid': r.phone.touched && r.phone.errors && this.registerForm.invalid}">
+                                    <input type="number" formControlName="phone" class="form-control" placeholder="Enter phone"
+                                    [ngClass]="{ 'is-invalid':  r.phone.touched &&  r.phone.errors }"
+                                    required
+                                    minlength=10 maxlength=10 required pattern="^[6-9]\d{9}$"
+                                    />
+                                    <!-- <div *ngIf=" r.phone.touched &&  r.phone.errors" class="text-danger">
+                                        <div *ngIf=" r.phone.errors.required">Please enter your mobileNumber</div>
+                                    </div> -->
+                                    <div *ngIf=" r.phone.errors" class="text-danger">
+                                        <div *ngIf=" r.phone.errors.pattern">Please enter your 10 digit Mobile number</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Job Title*</label>
+                                    <label for="">Job Title</label>
                                     <input type="text" formControlName="job_title" class="form-control" placeholder="Enter job title"
-                                    [ngClass]="{ 'is-invalid': r.job_title.touched && r.job_title.errors && this.registerForm.invalid }">
+                                    >
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12 d-none">
                                 <div class="form-group">
                                     <label for="">Industry*</label>
-                                    <select name="" id="" class="form-control" formControlName="industry"
-                                    [ngClass]="{ 'is-invalid': r.industry.touched && r.industry.errors && this.registerForm.invalid }">
+                                    <select name="" id="" class="form-control" formControlName="industry">
                                         <option value="">Accounting & Tax</option>
                                         <option value="">Business Services / Consulting</option>
                                         <option value="">Construction</option>
@@ -66,9 +84,9 @@
                                         <option value="">Government</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-12">
-                                <button class="btn btn-block btn-primary" (click)="register()">GET STARTED</button>
+                                <button class="btn btn-block btn-primary" [disabled]="!registerForm.valid" (click)="register()">GET STARTED</button>
                             </div>
                         </div>
                     </div>

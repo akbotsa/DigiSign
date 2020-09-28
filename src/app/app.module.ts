@@ -32,6 +32,8 @@ import { DigitOnlyDirective } from './helpers/digitOnlyDirective';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {NgxImageCompressService} from 'ngx-image-compress';
+import { ForgotPasswordComponent } from './shared/forgot-password/forgot-password.component';
+import { EmailVerificationComponent } from './shared/email-verification/email-verification.component';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -66,6 +68,8 @@ const ROUTES: Routes = [
   { path: 'pdfview', component: PdfviewComponent },
   { path: 'documentSign', component: DocumentSignViewComponent },
   { path: 'finalDoc', component: FinalDocComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
+  { path: 'emailverfication', component: EmailVerificationComponent },
 ];
 
 @NgModule({
@@ -88,6 +92,8 @@ const ROUTES: Routes = [
     DocumentSignViewComponent,
     FinalDocComponent,
     DigitOnlyDirective,
+    ForgotPasswordComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     HttpClientModule,

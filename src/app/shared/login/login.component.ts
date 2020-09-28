@@ -12,8 +12,15 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  showForgetPasswordForm: boolean= true;
+  showmessage: boolean = false;
+  forgetPasswordForm : FormGroup
 
-  constructor(private fb: FormBuilder, private router: Router, private services: ServicesService, private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder, private router: Router, private services: ServicesService, private toastr: ToastrService) {
+    this.forgetPasswordForm = this.fb.group({
+      emailId: ["",Validators.required]
+    })
+   }
 
   ngOnInit(): void {
     const user = JSON.parse(localStorage.getItem("userDetails"));
@@ -31,6 +38,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     })
   }
+
 
 
   login() {
@@ -54,5 +62,13 @@ export class LoginComponent implements OnInit {
       }
     })
 
+  }
+  forgotPassword(){
+    this.showForgetPasswordForm = false
+  }
+
+  forgotPasswordSubmit(){
+    // this.showForgetPasswordForm = true
+    this.showmessage = true
   }
 }

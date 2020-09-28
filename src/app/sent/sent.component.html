@@ -28,6 +28,7 @@
             <table class="table">
               <thead>
                 <th></th>
+                <th>Document</th>
                 <th>Subject</th>
                 <th>Message</th>
                 <th>Date & Time</th>
@@ -55,6 +56,9 @@
                       {{ rec.Name }},
                     </span>
                     <!-- <span class="to-status">  Sujatha M</span> -->
+                  </td>
+                  <td>
+                    <span class="to-status">{{ document?.Subject }}</span>
                   </td>
                   <td>
                     <span class="to-status">{{ document?.Message }}</span>

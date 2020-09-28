@@ -28,6 +28,7 @@
             <table class="table">
               <thead>
                 <th></th>
+                <th>Document</th>
                 <th>Subject</th>
                 <th>Message</th>
                 <th>Date & Time</th>
@@ -55,6 +56,9 @@
                     <!-- <span class="to-status">  Sujatha M</span> -->
                   </td>
                   <td>
+                    <span class="to-status">{{ document?.Subject }}</span>
+                  </td>
+                  <td>
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
                   <td>
@@ -67,7 +71,7 @@
                   </td>
                   <td>
                     <div class="dropdown">
-                      <button class="btn form-inline dropdown-toggle" data-toggle="dropdown">
+                      <button class="btn form-inline dropdown-toggle d-none" data-toggle="dropdown">
                         MOVE
                       </button>
                       <div class="dropdown-menu">

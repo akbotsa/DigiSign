@@ -137,6 +137,20 @@
                 >Statitics</span
               ></a
             >
+            <a
+            class="nav-link mb-3 p-3 shadow"
+            id="v-pills-changePassword-tab"
+            data-toggle="pill"
+            href="#v-pills-changePassword"
+            role="tab"
+            aria-controls="v-pills-changePassword"
+            aria-selected="false"
+          >
+            <i class="fa fa-key mr-2"></i>
+            <span class="font-weight-bold small text-uppercase"
+              >Change Password</span
+            ></a
+          >
           </div>
         </div>
 
@@ -271,6 +285,47 @@
                   </div>
                 </div>
 
+                <!-- <button></button> -->
+              </div>
+            </div>
+            <div
+              class="tab-pane fade shadow rounded bg-white p-5"
+              id="v-pills-changePassword"
+              role="tabpanel"
+              aria-labelledby="v-pills-changePassword-tab"
+            >
+              <div class="change-password">
+                <div class="login">
+                  <div class="container">
+                      <div class=" login-card">
+                          <div class="">
+                              <!-- <h1 class="text-center logo"><span><img src="assets/images/logo.png"></span></h1> -->
+                              <div>
+                                  <form [formGroup]="changePasswordForm">
+                                      <!-- <div class="col-md-12"> -->
+                                      <!-- <div class="row"> -->
+                                      <div class="form-group">
+                                          <label for="">Old Password</label>
+                                          <input type="text" formControlName="oldPassword" class="form-control" placeholder="Enter old Password"
+                                          [ngClass]="{ 'is-invalid': changePasswordForm.controls.oldPassword.touched &&  changePasswordForm.controls.oldPassword.errors }">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="">New Password</label>
+                                          <input type="password" formControlName="newPassword" class="form-control" placeholder="enter new Password "
+                                          [ngClass]="{ 'is-invalid': changePasswordForm.controls.newPassword.touched &&  changePasswordForm.controls.newPassword.errors }">
+
+                                      </div>
+                                      <div class="form-group">
+                                          <button class="btn btn-block changePasswordButton" [disabled]="!changePasswordForm.valid"  (click) = "changePassword()">Change Password</button>
+                                      </div>
+                                      <!-- </div> -->
+                                      <!-- </div> -->
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
                 <!-- <button></button> -->
               </div>
             </div>

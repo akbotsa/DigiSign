@@ -3,8 +3,8 @@
 <div class="login">
     <div class="container">
         <div class=" login-card">
-            <div class="">
-                <h1 class="text-center logo"><span><img src="assets/images/logo.png"></span></h1>
+            <div class="" *ngIf="showForgetPasswordForm">
+                <!-- <h1 class="text-center logo"><span><img src="assets/images/logo.png"></span></h1> -->
                 <div>
                     <form [formGroup]="loginForm">
                         <!-- <div class="col-md-12"> -->
@@ -17,17 +17,49 @@
                             <label for="">Password</label>
                             <input type="password" formControlName="password" class="form-control" placeholder="enter password">
                         </div>
+                        
                         <div class="form-group">
                             <button class="btn btn-block btn-primary" (click) = "login()">LOGIN</button>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center forgetPassword">
                             <a routerLink="/register"> No account? Sign up for free</a>
+                            <a (click)="forgotPassword()" class="forgotpasswordbutton text-right">Forgot Password?</a>
                         </div>
                         <!-- </div> -->
                         <!-- </div> -->
                     </form>
                 </div>
             </div>
+
+            <div class="password" *ngIf="!showForgetPasswordForm">
+                <h6>Enter Your Email Address to Set New Password</h6>
+                <form [formGroup]="forgetPasswordForm">
+                    <!-- <div class="col-md-12"> -->
+                    <!-- <div class="row"> -->
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" formControlName="emailId" class="form-control" placeholder="Enter your Email Id"
+                        [ngClass]="{ 'is-invalid': forgetPasswordForm.controls.emailId.touched &&  forgetPasswordForm.controls.emailId.errors }"
+                        required  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+                        />
+                        <!-- <div *ngIf="r.email.touched && r.email.errors" class="text-danger">
+                            <div *ngIf="r.email.errors.required">Please enter your Email</div>
+                        </div> -->
+                        <div *ngIf="forgetPasswordForm.controls.emailId.errors" class="text-danger">
+                            <div *ngIf="forgetPasswordForm.controls.emailId.errors.pattern">Please enter your correct EmailAddress</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary"  [disabled]="!forgetPasswordForm.valid" (click) = "forgotPasswordSubmit()">submit</button>
+                    </div>
+                    </form>
+                    <div *ngIf="showmessage">
+                        <p><span class="text-primary">Thank you </span> , we have sent an email. Please Check and reset new password .</p>
+                    </div>
+                
+            </div>
         </div>
     </div>
 </div>
+
+

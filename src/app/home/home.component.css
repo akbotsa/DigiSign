@@ -171,3 +171,33 @@
   /* width: 100% !important; */
   height: 300px;
 }
+
+
+
+/* change password    */
+
+.login-card {
+  max-width: 420px;
+  margin: auto;
+  /* text-align: center; */
+}
+
+.login {
+  padding: 50px 0px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px 25px 0px;
+}
+
+.logo img {
+  height: 110px;
+  /* width: 250px; */
+}
+.changePasswordButton{
+  background-color: #008000b3;
+  color: #fff;
+}
