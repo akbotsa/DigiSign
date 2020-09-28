@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ServicesService {
+   
+  showHideLogin = new EventEmitter<any>();
   constructor(private http: HttpClient) {}
 
   login(data): Observable<any> {

@@ -63,6 +63,7 @@ export class HomeComponent implements OnInit {
         if(res.StatusCode === 200){
           this.router.navigateByUrl("/login");
           localStorage.clear();
+          this.services.showHideLogin.emit(true)
         }    
       })
     

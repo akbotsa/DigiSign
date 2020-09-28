@@ -14,6 +14,9 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router,private services: ServicesService) { }
 
   ngOnInit(): void {
+    this.services.showHideLogin.subscribe(res=>{
+      this.showLogin = false;
+    })
     this.user = JSON.parse(localStorage.getItem("userDetails"));
     this.services.loginHideShow.subscribe((resp) => {
       if(resp == true) {
