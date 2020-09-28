@@ -19,14 +19,14 @@
                 </a>
             </li>
         </ul> -->
-        <div>
-            <label [routerLink]="['/document/inbox']"><i class="fa fa-inbox mr-2"></i>inbox</label>
+        <div class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a  [routerLink]="['/document/inbox']" ><i class="fa fa-inbox mr-2"></i>inbox</a>
         </div>
-        <div>
-            <label [routerLink]="['/document/sent']"><i class="fa fa-send-o mr-2"></i>Sent</label>
+        <div class="link" [routerLinkActive]="['active']">
+            <a  [routerLink]="['/document/sent']"><i class="fa fa-send-o mr-2"></i>Sent</a>
         </div>
-        <div>
-            <label [routerLink]="['/document/draft']"><i class="fa fa-pencil-square-o mr-2"></i>Drafts</label>
+        <div class="link" [routerLinkActive]="['active']">
+            <a  [routerLink]="['/document/draft']"><i class="fa fa-pencil-square-o mr-2"></i>Drafts</a>
         </div>
         <!-- <div>
             <label><i class="fa fa-trash mr-2"></i>Deleted</label>
