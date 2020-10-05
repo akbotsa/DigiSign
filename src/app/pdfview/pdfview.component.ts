@@ -10,7 +10,7 @@ import {
 declare var jquery: any;
 declare var $: any;
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
@@ -60,12 +60,24 @@ export class PdfviewComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private fb: FormBuilder,
-
+    private aRoute: ActivatedRoute,
     private imageCompress: NgxImageCompressService
-  ) {}
+  ) {
+
+
+    const queryParams = this.aRoute.queryParams.subscribe(data => {
+      if (data) {
+        this.userId = data.UserID
+        this.docID = data.DocId
+        this.viewSrc = `${environment.imageBaseUrl}${data.DocFile}`;
+      }
+
+    })
+
+  }
 
   ngOnInit(): void {
-    this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
+    this.userId = JSON.parse(localStorage.getItem('userDetails'))?._id;
     this.docID = localStorage.getItem('docId');
     this.docfile = localStorage.getItem('docfile');
     this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
@@ -86,6 +98,7 @@ export class PdfviewComponent implements OnInit {
   }
 
   loadRecipientsList() {
+
     let reqObj = {
       UserId: this.userId,
       DocId: this.docID,
@@ -188,10 +201,10 @@ export class PdfviewComponent implements OnInit {
         `<img class="${aa}" style="height: 100px;width: auto;" src="${base64data}">`
       );
       self.modalService.dismissAll();
-     /*  self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
-        console.log(result);
-        
-      }); */
+      /*  self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
+         console.log(result);
+         
+       }); */
     };
   }
   saveImage1(data) {
