@@ -216,10 +216,10 @@ export class FinalDocComponent implements OnInit {
     const filename = 'DOC_'+randNum+'.pdf';
     html2canvas(document.querySelector('#content')).then(canvas => {
 
-      var imgData = canvas.toDataURL('image/png');
+      var imgData = canvas.toDataURL('image/png',0.3);
       console.log('cavas--->',canvas);
       
-      let pdf = new jsPDF('p', 'mm', 'a4');
+      let pdf = new jsPDF('p', 'mm', 'a4',true);
       var pageHeight= pdf.internal.pageSize.height;
       var pageWidth= pdf.internal.pageSize.getWidth();
       var imgHeight = canvas.height * 208/ canvas.width;
