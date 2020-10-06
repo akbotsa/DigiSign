@@ -40,6 +40,7 @@ export class PdfviewComponent implements OnInit {
   initialFile: any;
   dummy = [];
   isShowflag: boolean = true;
+  public otherReceipts= []
   public rejectFormGroup: FormGroup;
   @ViewChild('mymodal', { static: false }) mymodal: TemplateRef<any>;
   public docRejected: boolean;
@@ -63,7 +64,13 @@ export class PdfviewComponent implements OnInit {
     private aRoute: ActivatedRoute,
     private imageCompress: NgxImageCompressService
   ) {
-
+    this.aRoute.queryParams.subscribe(data => {
+      if (data) {
+        this.userId = data.UserID
+        this.docID = data.DocId
+        this.viewSrc = `${environment.imageBaseUrl}${data.DocFile}`;
+      }
+    })
 
   }
 
@@ -74,14 +81,7 @@ export class PdfviewComponent implements OnInit {
     this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
     
 
-    const queryParams = this.aRoute.queryParams.subscribe(data => {
-      if (data) {
-        this.userId = data.UserID
-        this.docID = data.DocId
-        this.viewSrc = `${environment.imageBaseUrl}${data.DocFile}`;
-      }
-
-    })
+   
     this.loadRecipientsList();
     this.loadRejectForm();
     this.getdefaultSigns();
@@ -94,7 +94,7 @@ export class PdfviewComponent implements OnInit {
       } else {
         this.defaultSign = [];
       }
-      console.log('getDefaultSigns', this.defaultSign);
+      // console.log('getDefaultSigns', this.defaultSign);
     });
   }
 
@@ -118,6 +118,7 @@ export class PdfviewComponent implements OnInit {
       if (resp.statusCode == 200) {
         console.log('coordinats-->', resp);
         this.userData = resp.data[0].Recipients;
+        this.otherReceipts = resp.otherReceipts;
         this.docRejected = resp.data[0].Recipients[0].isReject;
         this.useRecId = resp.data[0].Recipients[0].ReceiptId;
         this.userDocId = resp.data[0].DocId;
