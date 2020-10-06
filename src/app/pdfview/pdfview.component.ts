@@ -200,7 +200,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 100px;width: auto;" src="${base64data}">`
+        `<img class="${aa}" style="height: 100px;width: auto; position:relative;top:-20px" src="${base64data}">`
       );
       self.modalService.dismissAll();
       /*  self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
