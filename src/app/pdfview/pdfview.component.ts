@@ -65,6 +65,15 @@ export class PdfviewComponent implements OnInit {
   ) {
 
 
+  }
+
+  ngOnInit(): void {
+    this.userId = JSON.parse(localStorage.getItem('userDetails'))?._id;
+    this.docID = localStorage.getItem('docId');
+    this.docfile = localStorage.getItem('docfile');
+    this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
+    
+
     const queryParams = this.aRoute.queryParams.subscribe(data => {
       if (data) {
         this.userId = data.UserID
@@ -73,14 +82,6 @@ export class PdfviewComponent implements OnInit {
       }
 
     })
-
-  }
-
-  ngOnInit(): void {
-    this.userId = JSON.parse(localStorage.getItem('userDetails'))?._id;
-    this.docID = localStorage.getItem('docId');
-    this.docfile = localStorage.getItem('docfile');
-    this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
     this.loadRecipientsList();
     this.loadRejectForm();
     this.getdefaultSigns();
