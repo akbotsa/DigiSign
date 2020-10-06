@@ -52,6 +52,7 @@
                     <div class="form-group">
                         <button class="btn btn-block btn-primary"  [disabled]="!forgetPasswordForm.valid" (click) = "forgotPasswordSubmit()">submit</button>
                     </div>
+                    <a class="login-back" *ngIf="!showmessage" (click)="back()">Log In?</a>
                     </form>
                     <div *ngIf="showmessage">
                         <p><span class="text-primary">Thank you </span> , we have sent an email. Please Check and reset new password .</p>

@@ -65,10 +65,26 @@ export class LoginComponent implements OnInit {
   }
   forgotPassword(){
     this.showForgetPasswordForm = false
+   
+  }
+  back(){
+    this.showForgetPasswordForm = true
+    
   }
 
   forgotPasswordSubmit(){
     // this.showForgetPasswordForm = true
-    this.showmessage = true
+    
+    const data={
+      "Email" : this.forgetPasswordForm.value.emailId
+    }
+    this.services.forgetPassword(data).subscribe(res=>{
+        console.log("res",res)
+        if(res.StatusCode === 200){
+          this.showmessage = true
+        }else{
+          alert(res.Message)
+        }
+    })
   }
 }

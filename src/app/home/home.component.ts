@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   public imageBaseUrl = environment.imageBaseUrl
   initialList: any;
   changePasswordForm: FormGroup;
+  inboxData: any;
 
   constructor(private modalService: NgbModal, private services: ServicesService, private toastr: ToastrService,private fb:FormBuilder,private router:Router ) {
     this.changePasswordForm = this.fb.group({
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl('/login')
     }
     this.getsigns()
+    this.getCountsData()
   }
   changePassword(){
     console.log("password",this.changePasswordForm.value)
@@ -215,6 +217,18 @@ export class HomeComponent implements OnInit {
         this.toastr.success(`${resp.message}`);
       }
     })
+  }
+
+  // get counts
+  getCountsData(){
+    const obj = {
+      "UserID" : this.userId
+    }
+    this.services.getCounts(obj).subscribe(responce=>{
+      console.log("res",responce)
+      this.inboxData  = responce
+    })
+
   }
   
 }

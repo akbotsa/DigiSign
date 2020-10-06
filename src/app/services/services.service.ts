@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,42 @@ export class ServicesService {
   register(data): Observable<any> {
     return this.http.post(
       environment.baseUrl + 'authentication/register',
+      data
+    );
+  }
+  // http://15.207.202.132:7000/api/v1/authentication/forgetPassword
+  // http://15.207.202.132:7000/api/v1/authentication/updatePassword
+  updatePassword(data): Observable<any> {
+    return this.http.post(
+      environment.baseUrl + 'authentication/updatePassword',
+      data
+    );
+  }
+
+  MatchPassword(newPassword: string, repeatpassword: string) {
+    return (formGroup: FormGroup) => {
+      const passwordControl = formGroup.controls[newPassword];
+      const confirmPasswordControl = formGroup.controls[repeatpassword];
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (confirmPasswordControl.errors && !confirmPasswordControl.errors.passwordMismatch) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+    }
+  }
+
+  forgetPassword(data): Observable<any> {
+    return this.http.post(
+      environment.baseUrl + 'authentication/forgetPassword',
       data
     );
   }
@@ -131,6 +168,10 @@ export class ServicesService {
     
     return this.http.post(environment.baseUrl + `authentication/Status_Update`,data);
   }
-
-
+  
+  // http://15.207.202.132:7000/api/v1/documents/counts
+  getCounts(data){
+    
+    return this.http.post(environment.baseUrl + `documents/counts`,data);
+  } 
 }

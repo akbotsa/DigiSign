@@ -348,7 +348,7 @@
                           >
                             <div class="card-body">
                               <p><strong>Completed:</strong></p>
-                              <p class="mb-0">3</p>
+                              <p class="mb-0">{{inboxData?.data?.inbox.CompletedCounts}}</p>
                             </div>
                           </div>
                         </div>
@@ -358,7 +358,7 @@
                           >
                             <div class="card-body">
                               <p><strong>UnRead:</strong></p>
-                              <p class="mb-0">3</p>
+                              <p class="mb-0">{{inboxData?.data?.inbox.UnReadCounts}}</p>
                             </div>
                           </div>
                         </div>
@@ -368,10 +368,56 @@
                           >
                             <div class="card-body">
                               <p><strong>Rejected:</strong></p>
-                              <p class="mb-0">3</p>
+                              <p class="mb-0">{{inboxData?.data?.inbox.RejectCounts}}</p>
                             </div>
                           </div>
                         </div>
+                        <div class="col-md-4">
+                          <div
+                            class="card border-left-primary shadow ordersListGap"
+                          >
+                            <div class="card-body">
+                              <p><strong>Pending:</strong></p>
+                              <p class="mb-0">{{inboxData?.data?.inbox.PendingCounts}}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <h2>Sent</h2>
+                      <div class="row">
+                        
+                        <div class="col-md-4">
+                          <div
+                            class="card border-left-primary shadow ordersListGap"
+                          >
+                            <div class="card-body">
+                              <p><strong>Completed:</strong></p>
+                              <p class="mb-0">{{inboxData?.data?.sent.CompletedCounts}}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div
+                            class="card border-left-primary shadow ordersListGap"
+                          >
+                            <div class="card-body">
+                              <p><strong>Rejected:</strong></p>
+                              <p class="mb-0">{{inboxData?.data?.sent.RejectCounts}}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div
+                            class="card border-left-primary shadow ordersListGap"
+                          >
+                            <div class="card-body">
+                              <p><strong>Pending:</strong></p>
+                              <p class="mb-0">{{inboxData?.data?.sent.PendingCounts}}</p>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>

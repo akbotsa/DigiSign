@@ -39,3 +39,9 @@
 .forgetPassword a:hover {
     border-bottom: 3px solid #8db2c9;
 }
+.login-back{
+    display: block;
+    text-align: right;
+    color: blue !important;
+    cursor: pointer;
+}
