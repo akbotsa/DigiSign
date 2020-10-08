@@ -35,6 +35,8 @@ import {NgxImageCompressService} from 'ngx-image-compress';
 import { ForgotPasswordComponent } from './shared/forgot-password/forgot-password.component';
 import { EmailVerificationComponent } from './shared/email-verification/email-verification.component';
 import { PipePipe } from './filter/pipe.pipe';
+import { AwaitedComponent } from './awaited/awaited.component';
+import { CompletedComponent } from './completed/completed.component';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -59,6 +61,14 @@ const ROUTES: Routes = [
       {
         path: 'draft',
         component: DraftsComponent,
+      },
+      {
+        path: 'awaited',
+        component: AwaitedComponent,
+      },
+      {
+        path: 'completed',
+        component: CompletedComponent,
       },
     ],
   },
@@ -96,6 +106,8 @@ const ROUTES: Routes = [
     ForgotPasswordComponent,
     EmailVerificationComponent,
     PipePipe,
+    AwaitedComponent,
+    CompletedComponent,
   ],
   imports: [
     HttpClientModule,

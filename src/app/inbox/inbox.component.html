@@ -28,9 +28,10 @@
             <table class="table">
               <thead>
                 <th></th>
-                <th>Document</th>
+                <th>Sender</th>
                 <th>Subject</th>
                 <th>Message</th>
+                <th>Status</th>
                 <th>Date & Time</th>
                 <th>Action</th>
               </thead>
@@ -60,6 +61,15 @@
                   </td>
                   <td>
                     <span class="to-status">{{ document?.Message }}</span>
+                  </td>
+                  <td class="tooltip-status">
+                    <p class="tooltip" href="#">Help
+                      <span class="custom help">
+                        <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>
+                        <p>anil@gmail.com&nbsp;-&nbsp;PENDING</p>
+                        <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>
+                      </span>
+                    </p> 
                   </td>
                   <td>
                     <p class="mb-0 to-status">
