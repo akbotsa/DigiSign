@@ -181,7 +181,7 @@
             </ng-template>
             <ng-template #con2>
               <div
-                (click)="draggable_comment()"
+                (click)="draggable_comment(j)"
                 class="drag-cls ui-draggable ui-draggable-handle idrag"
                 style="
                   display: inline;
@@ -371,9 +371,9 @@
   <div class="modal-body">
     <div class="comment-modal">
       <h3 class="add-comment">Add a comment </h3>
-      <textarea rows="8" class="enter message"></textarea>
+      <textarea rows="8" class="enter message" #commentval></textarea>
       <div class="submit-btn">
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" (click)=clickOnComment(commentval.value)>Submit</button>
       </div>
     </div>
   </div>

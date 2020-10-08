@@ -179,7 +179,8 @@ export class PdfviewComponent implements OnInit {
     localStorage.setItem('itemId', id);
   }
 
-  draggable_comment(){
+  draggable_comment(id){
+    localStorage.setItem('comId', id);
     this.modalService.open(this.mymodal1);
     
   }
@@ -382,6 +383,15 @@ export class PdfviewComponent implements OnInit {
 
       //console.log('comments-->', JSON.stringify(this.comments));
     }
+  }
+
+  clickOnComment(eve){
+    var x = localStorage.getItem('comId');
+
+    console.log('comId--->', x);
+    console.log('commment--->', eve);
+
+    
   }
 
   updateSignature() {
