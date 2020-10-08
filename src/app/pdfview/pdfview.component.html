@@ -172,7 +172,7 @@
                 [style.left.px]="comm.left"
                 [style.top.px]="comm.top"
               >
-                {{comm.comment}}
+                {{ comm.comment }}
                 <!-- <img
                   style="height: 70px; width: 300px"
                   src="{{ imageBaseUrl + list.initialImage }}"
@@ -209,48 +209,44 @@
             </ng-template>
           </div>
         </div>
-        <div  *ngFor="let receipt of otherReceipts">
-          <div *ngFor = "let data of receipt.signature">
+        <div *ngFor="let receipt of otherReceipts">
+          <div *ngFor="let data of receipt.signature">
             <div
-            class="drag-cls ui-draggable ui-draggable-handle idrag"
-            style="
-              display: inline;
-              z-index: 1;
-              border-radius: 5px;
-              color: rgb(255, 255, 255);
-              position: relative;
-            "
-            [style.left.px]="data.left"
-            [style.top.px]="data.top"
-          >
-  
-            <img
-            style="height: 70px; width: 300px"
-            [src]="imageBaseUrl + receipt.signatureImage"
-          />
-  
+              class="drag-cls ui-draggable ui-draggable-handle idrag"
+              style="
+                display: inline;
+                z-index: 1;
+                border-radius: 5px;
+                color: rgb(255, 255, 255);
+                position: relative;
+              "
+              [style.left.px]="data.left"
+              [style.top.px]="data.top"
+            >
+              <img
+                style="height: 70px; width: 300px"
+                [src]="imageBaseUrl + receipt.signatureImage"
+              />
+            </div>
           </div>
-          </div>
-          <div *ngFor = "let data of receipt.initial">
+          <div *ngFor="let data of receipt.initial">
             <div
-            class="drag-cls ui-draggable ui-draggable-handle idrag"
-            style="
-              display: inline;
-              z-index: 1;
-              border-radius: 5px;
-              color: rgb(255, 255, 255);
-              position: relative;
-            "
-            [style.left.px]="data.left"
-            [style.top.px]="data.top"
-          >
-  
-            <img
-            style="height: 70px; width: 300px"
-            [src]="imageBaseUrl + receipt.initialImage"
-          />
-  
-          </div>
+              class="drag-cls ui-draggable ui-draggable-handle idrag"
+              style="
+                display: inline;
+                z-index: 1;
+                border-radius: 5px;
+                color: rgb(255, 255, 255);
+                position: relative;
+              "
+              [style.left.px]="data.left"
+              [style.top.px]="data.top"
+            >
+              <img
+                style="height: 70px; width: 300px"
+                [src]="imageBaseUrl + receipt.initialImage"
+              />
+            </div>
           </div>
         </div>
 
@@ -371,7 +367,7 @@
   </div>
 </ng-template>
 
-<ng-template #mymodal2 let-modal>
+<ng-template #mymodal1 let-modal>
   <div class="modal-body">
     <h2>Ttstinggg</h2>
   </div>
