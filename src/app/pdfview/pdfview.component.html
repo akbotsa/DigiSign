@@ -154,6 +154,60 @@
               </div>
             </ng-template>
           </div>
+
+          <div *ngFor="let comm of list.commentsCoordinates; let j = index">
+            <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
+            <ng-template #con1>
+              <div
+                class="drag-cls ui-draggable ui-draggable-handle idrag"
+                style="
+                  display: inline;
+                  z-index: 1;
+                  background: transparent;
+                  padding: 0px;
+                  border-radius: 5px;
+                  color: rgb(255, 255, 255);
+                  position: relative;
+                "
+                [style.left.px]="comm.left"
+                [style.top.px]="comm.top"
+              >
+                {{comm.comment}}
+                <!-- <img
+                  style="height: 70px; width: 300px"
+                  src="{{ imageBaseUrl + list.initialImage }}"
+                /> -->
+              </div>
+            </ng-template>
+            <ng-template #con2>
+              <div
+                (click)="draggable_comment()"
+                class="drag-cls ui-draggable ui-draggable-handle idrag"
+                style="
+                  display: inline;
+                  z-index: 1;
+                  background: rgba(204, 204, 204, 0.73);
+                  padding: 10px 30px;
+                  border-radius: 5px;
+                  color: rgb(255, 255, 255);
+                  cursor: move;
+                  position: relative;
+                "
+                [style.left.px]="comm.left"
+                [style.top.px]="comm.top"
+              >
+                <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
+                <p
+                  class="ui-state-highlight iremove"
+                  style="display: inline; color: #135699; font-weight: bold"
+                >
+                  <img style="height: 20px" src="assets/images/digital.png" />{{
+                    list.Name
+                  }}
+                </p>
+              </div>
+            </ng-template>
+          </div>
         </div>
         <div  *ngFor="let receipt of otherReceipts">
           <div *ngFor = "let data of receipt.signature">
@@ -314,6 +368,12 @@
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
+  </div>
+</ng-template>
+
+<ng-template #mymodal2 let-modal>
+  <div class="modal-body">
+    <h2>Ttstinggg</h2>
   </div>
 </ng-template>
 <!-- <div class="modal-footer">

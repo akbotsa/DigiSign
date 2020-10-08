@@ -43,6 +43,7 @@ export class PdfviewComponent implements OnInit {
   public otherReceipts= []
   public rejectFormGroup: FormGroup;
   @ViewChild('mymodal', { static: false }) mymodal: TemplateRef<any>;
+  @ViewChild('mymodal1', { static: false }) mymodal1: TemplateRef<any>;
   public docRejected: boolean;
   public isVerified: boolean = false;
 
@@ -176,6 +177,11 @@ export class PdfviewComponent implements OnInit {
     //this.modelref.close();
     console.log('method working');
     localStorage.setItem('itemId', id);
+  }
+
+  draggable_comment(){
+    this.modalService.open(this.mymodal1);
+    
   }
 
   saveImage(data) {
