@@ -179,8 +179,8 @@ export class PdfviewComponent implements OnInit {
     localStorage.setItem('itemId', id);
   }
 
-  draggable_comment(id){
-    localStorage.setItem('comId', id);
+  draggable_comment(){
+    //localStorage.setItem('comId', id);
     this.modalService.open(this.mymodal1);
     
   }
@@ -349,7 +349,7 @@ export class PdfviewComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  cloneComment() {
+  /* cloneComment() {
     var comment = this.rejectFormGroup.value.comments;
     console.log('comment--->', comment);
     if (comment === null) {
@@ -371,10 +371,6 @@ export class PdfviewComponent implements OnInit {
         stop: function (event, ui) {
           console.log('draggable element id ', $(this).attr('id'));
           let [name, positionIndex] = $(this).attr('id').split('_');
-          //console.log('name-->', name);
-          /* console.log('positionIndex-->', positionIndex);
-          console.log('positionIndex-->', self.comments); */
-
           self.comments[positionIndex - 1]['top'] = ui.position.top;
           self.comments[positionIndex - 1]['left'] = ui.position.left;
           console.log('comments-->', JSON.stringify(self.comments));
@@ -383,21 +379,29 @@ export class PdfviewComponent implements OnInit {
 
       //console.log('comments-->', JSON.stringify(this.comments));
     }
-  }
+  } */
 
   clickOnComment(eve){
-    var x = localStorage.getItem('comId');
 
-    console.log('comId--->', x);
-    console.log('commment--->', eve);
+    var xx = '.icomm';
+    var yy = '.icommrmv';
+    var aa = 'icommrmv';
+
+    $(yy).remove();
+    $(xx).css({ 'background-color': 'transparent', padding: 0 });
+    $(xx).append(
+      `<p class="ui-state-highlight icommrmv" style="display: inline; color: #135699; font-weight: bold">${eve}</p>`
+    );
+    this.comments = eve;
+    //console.log('commment--->', eve);
 
     
   }
 
   updateSignature() {
-    var comt = JSON.stringify(this.comments);
+    //var comt = JSON.stringify(this.comments);
 
-    console.log('comments-->', comt);
+    console.log('comments-->', this.comments);
     /* console.log('lnght-->',this.comments.length);
     if(this.comments.length > 0){
       for (let i = 0; i < this.comments.length; i++) {
@@ -413,7 +417,7 @@ export class PdfviewComponent implements OnInit {
     formData.append('exitSignature', this.exitSignature);
     formData.append('exitInitial', this.exitInitial);
 
-    formData.append('comments', comt);
+    formData.append('comments', this.comments);
 
     console.log('data', formData.getAll('initialImage'));
 
@@ -425,15 +429,15 @@ export class PdfviewComponent implements OnInit {
 
     //console.log('formData--->', formData);
 
-    this.services.sendRecipientFiles(formData).subscribe((resp) => {
-      if (resp.statusCode == 200) {
-        this.toastr.success(`${resp.Message}`, 'Success:');
-        this.router.navigateByUrl('/document');
-      } else {
-        this.toastr.error(`${resp.Message}`, 'Failed:');
-      }
-      //console.log('coordinats-->', resp);
-    });
+      this.services.sendRecipientFiles(formData).subscribe((resp) => {
+        if (resp.statusCode == 200) {
+          this.toastr.success(`${resp.Message}`, 'Success:');
+          this.router.navigateByUrl('/document');
+        } else {
+          this.toastr.error(`${resp.Message}`, 'Failed:');
+        }
+        //console.log('coordinats-->', resp);
+      });
   }
 
   /* Signature Rejection  */
@@ -441,7 +445,7 @@ export class PdfviewComponent implements OnInit {
     let rejectReqObj = {
       DocId: this.userDocId,
       RecipientID: this.useRecId,
-      comments: this.rejectFormGroup.value.comments,
+      comments: this.comments,
     };
 
     this.services.getReject(rejectReqObj).subscribe((resp) => {

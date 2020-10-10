@@ -150,10 +150,10 @@ export class FinalDocComponent implements OnInit {
             this.dummy.push(this.receipientData[i].VerifyFlag);
           }
 
-          if (this.receipientData[i].comments.length > 0) {
+          /* if (this.receipientData[i].comments.length > 0) {
             var items = JSON.parse(this.receipientData[i].comments);
             this.receipientData[i]['comments'] = items;
-          }
+          } */
 
           if (this.receipientData[i].signatureImage != "") {
             console.log('xdataUrl-->', this.receipientData[i].signatureImage);

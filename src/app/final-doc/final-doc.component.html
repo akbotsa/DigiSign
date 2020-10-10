@@ -96,21 +96,6 @@
             </div> -->
       <div class="pdfViewerSection" id="sortable" style="padding: 50px 50px;">
         <div *ngFor="let list of receipientData; let i = index">
-          <div *ngFor = "let como of list.comments">
-            <div class="drag-cls ui-draggable ui-draggable-handle drag"  style="
-              display: inline;
-              z-index: 1;
-              border-radius: 5px;
-              position: relative;
-              width: 100%;
-              height: 100%;
-            "
-            [style.left.px]="como.left"
-            [style.top.px]="como.top"
-          >{{como.comment}}
-            </div>
-          </div>
-
           <div *ngFor="let pos of list.signature; let idx = index">
             <div
               class="drag-cls ui-draggable ui-draggable-handle drag"
@@ -173,6 +158,37 @@
                   style="display: inline; color: #135699; font-weight: bold"
                 >
                   <img style="height: 20px" src="assets/images/digital.png" />{{
+                    list.Name
+                  }}
+                </p>
+              </ng-template>
+            </div>
+          </div>
+          <div *ngFor="let com of list.commentsCoordinates; let j = index">
+            <div
+              class="drag-cls ui-draggable ui-draggable-handle idrag"
+              style="
+                display: inline;
+                z-index: 1;
+                border-radius: 5px;
+                color: rgb(255, 255, 255);
+                position: relative;
+              "
+              [style.left.px]="com.left"
+              [style.top.px]="com.top"
+            >
+              <div
+                *ngIf="list.VerifyFlag; then condition1; else condition2"
+              ></div>
+              <ng-template #condition1>
+                <p style="color: black;">{{ list.comments }}</p>
+              </ng-template>
+              <ng-template #condition2>
+                <p
+                  class="ui-state-highlight iremove"
+                  style="display: inline; color: #135699; font-weight: bold"
+                >
+                  <img style="height: 20px" src="assets/images/comm.png" />{{
                     list.Name
                   }}
                 </p>

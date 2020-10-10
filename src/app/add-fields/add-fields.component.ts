@@ -174,38 +174,31 @@ export class AddFieldsComponent implements OnInit {
       let temp = [
         {
           top: 0,
-          left: 0,
-          comment: ''
+          left: 0
         },
       ];
       this.recpList[index]['commentsCoordinates'] = temp;
-    } else {
-      // console.log("recp list  have signature key");
-      this.recpList[index]['commentsCoordinates'].push({
-        top: 0,
-        left: 0,
-        comment: ''
+
+      $('.pdfViewerSection').prepend(
+        `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/comm.png">${user.Name}</p></div>`
+      );
+  
+      let self = this;
+      $('.draggable4').draggable({
+        containment: 'parent',
+        stop: function (event, ui) {
+          let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
+          self.recpList[parentIndex]['commentsCoordinates'][positionIndex - 1]['top'] =
+            ui.position.top;
+          self.recpList[parentIndex]['commentsCoordinates'][positionIndex - 1]['left'] =
+            ui.position.left;
+          //console.log("recpList", self.recpList);
+          localStorage.setItem('userData', JSON.stringify(self.recpList));
+        },
       });
-    }
+      localStorage.setItem('userData', JSON.stringify(self.recpList));
 
-    $('.pdfViewerSection').prepend(
-      `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/digital.png">${user.Name}</p></div>`
-    );
-
-    let self = this;
-    $('.draggable4').draggable({
-      containment: 'parent',
-      stop: function (event, ui) {
-        let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
-        self.recpList[parentIndex]['commentsCoordinates'][positionIndex - 1]['top'] =
-          ui.position.top;
-        self.recpList[parentIndex]['commentsCoordinates'][positionIndex - 1]['left'] =
-          ui.position.left;
-        //console.log("recpList", self.recpList);
-        localStorage.setItem('userData', JSON.stringify(self.recpList));
-      },
-    });
-    localStorage.setItem('userData', JSON.stringify(self.recpList));
+    }     
   }
 
   loadRecipientsList() {
@@ -290,7 +283,7 @@ export class AddFieldsComponent implements OnInit {
 
     var recepctData = JSON.stringify(localStorage.getItem('userData'));
 
-    //console.log('final Data--->', this.recpList);
+    console.log('final Data--->', this.recpList);
 
     let object = {
       UserId: this.userId,

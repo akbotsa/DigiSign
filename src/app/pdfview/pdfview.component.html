@@ -8,17 +8,17 @@
           *ngIf="isShowflag && docRejected === false && isVerified === false"
         >
           <div class="comment-box">
-            <textarea
+            <!-- <textarea
               name="comments"
               cols="30"
               rows="1"
               placeholder="Please comment here..."
               formControlName="comments"
-            ></textarea>
+            ></textarea> -->
 
-            <button class="btn btn-primary" (click)="cloneComment()">
+            <!-- <button class="btn btn-primary" (click)="cloneComment()">
               <i class="fa fa-plus" aria-hidden="true"></i>
-            </button>
+            </button> -->
           </div>
           <div class="d-flex">
             <div class="reject-btn">
@@ -154,7 +154,7 @@
               </div>
             </ng-template>
           </div>
-
+          
           <div *ngFor="let comm of list.commentsCoordinates; let j = index">
             <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
             <ng-template #con1>
@@ -166,13 +166,13 @@
                   background: transparent;
                   padding: 0px;
                   border-radius: 5px;
-                  color: rgb(255, 255, 255);
+                  color:black;
                   position: relative;
                 "
                 [style.left.px]="comm.left"
                 [style.top.px]="comm.top"
               >
-                {{ comm.comment }}
+                {{ list.comments }}
                 <!-- <img
                   style="height: 70px; width: 300px"
                   src="{{ imageBaseUrl + list.initialImage }}"
@@ -181,8 +181,8 @@
             </ng-template>
             <ng-template #con2>
               <div
-                (click)="draggable_comment(j)"
-                class="drag-cls ui-draggable ui-draggable-handle idrag"
+                (click)="draggable_comment()"
+                class="drag-cls ui-draggable ui-draggable-handle icomm"
                 style="
                   display: inline;
                   z-index: 1;
@@ -198,10 +198,10 @@
               >
                 <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
                 <p
-                  class="ui-state-highlight iremove"
+                  class="ui-state-highlight icommrmv"
                   style="display: inline; color: #135699; font-weight: bold"
                 >
-                  <img style="height: 20px" src="assets/images/digital.png" />{{
+                  <img style="height: 20px" src="assets/images/comm.png" />{{
                     list.Name
                   }}
                 </p>
