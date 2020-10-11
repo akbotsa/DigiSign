@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ServicesService } from '../services/services.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class SentComponent implements OnInit {
   public page: number = 1;
   seachpipe: any;
 
-  constructor(private digiServices: ServicesService, private router: Router) { }
+  constructor(private digiServices: ServicesService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
@@ -85,5 +86,30 @@ export class SentComponent implements OnInit {
         status: "Pending"
       }
     }
+  }
+
+  deleteDoc(currentDoc) {
+    let documents = [];
+    documents = [
+      {
+        receiptId: "",
+        docId: currentDoc.documents[0].DocId
+      }
+    ]
+
+    let req = {
+      deleteType: 2,
+      userId: this.userId,
+      docs: documents
+    }
+    this.digiServices.deleteDocument(req).subscribe((resp) => {
+      console.log("delete doc resp------", resp);
+      if( resp.statusCode == 200 ) {
+        this.getDocumentsManage();
+        this.toastr.success(`${resp.message}`);
+      } else {
+        this.toastr.error(`${resp.message}`)
+      }
+    })
   }
 }

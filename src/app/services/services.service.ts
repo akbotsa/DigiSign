@@ -174,4 +174,8 @@ export class ServicesService {
     
     return this.http.post(environment.baseUrl + `documents/counts`,data);
   } 
+
+  deleteDocument(data):Observable<any> {
+    return this.http.post(environment.baseUrl + "documents/delete",data);
+  }
 }
