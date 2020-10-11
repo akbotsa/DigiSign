@@ -80,7 +80,7 @@ export class InboxComponent implements OnInit {
         status: "Signed"
       }
     }
-    if (document.Recipients.VerifyFlag === false ) {
+    if (document.Recipients.VerifyFlag === false) {
       return {
         status: "Sign"
       }
@@ -101,7 +101,7 @@ export class InboxComponent implements OnInit {
         status: "Signed"
       }
     }
-    if (recipient.VerifyFlag === false ) {
+    if (recipient.VerifyFlag === false) {
       return {
         status: "Pending"
       }
@@ -109,7 +109,7 @@ export class InboxComponent implements OnInit {
 
   }
 
-  DocumentStatus(document){
+  DocStatus(document) {
 
     if (document.isRejected === true) {
       return {
@@ -129,5 +129,28 @@ export class InboxComponent implements OnInit {
         status: "Pending"
       }
     }
+  }
+
+  deleteDoc(currentDoc) {
+    let documents = [];
+    documents = [
+      {
+        receiptId: currentDoc.Recipients.ReceiptId,
+        docId: currentDoc.documents[0].DocId
+      }
+    ]
+
+    let req = {
+      deleteType: 1,
+      userId: this.userId,
+      docs: documents
+    }
+    this.digiServices.deleteDocument(req).subscribe((resp) => {
+      console.log("delete doc resp------", resp);
+      if( resp.statusCode == 200 ) {
+        this.getDocumentsManage();
+        this.toastr.success(`${resp.message}`);
+      }
+    })
   }
 }

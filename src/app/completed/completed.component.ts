@@ -42,7 +42,20 @@ export class CompletedComponent implements OnInit {
       });
   }
 
-  gotoPdfView(doc) {
+  gotoPdfView(document) {
+    // let obj = {
+    //   Type: "1",
+    //   UserId: this.userId,
+    //   DocId: document.documents[0].DocId
+    // }
+    // console.log("objjjjjjjjjjjjj", obj)
+    // this.digiServices.viewFlagUpdate(obj).subscribe((resp) => {
+    //   console.log("respppppp", resp);
+    // })
+    let docId = document.documents[0].DocId;
+    let docfile = document.documents[0].Doc;
+    localStorage.setItem('docId', docId);
+    localStorage.setItem('docfile', docfile);
     this.router.navigateByUrl('/pdfview');
   }
 }
