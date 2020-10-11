@@ -209,7 +209,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 100px;width: auto; position:relative;top:-20px" src="${base64data}">`
+        `<img class="${aa}" style="height: 80px;width: auto; position:relative;top:-10px" src="${base64data}">`
       );
       self.modalService.dismissAll();
       /*  self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
@@ -239,7 +239,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 100px;width: auto;" src="${base64data}">`
+        `<img class="${aa}" style="height: 80px;width: auto;" src="${base64data}">`
       );
       self.modalService.dismissAll();
     };
@@ -319,7 +319,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 100px;width: auto;" src="${this.mainImage}">`
+        `<img class="${aa}" style="height: 80px;width: auto;" src="${this.mainImage}">`
       );
 
       console.log(this.uploadedFiles);
@@ -346,7 +346,7 @@ export class PdfviewComponent implements OnInit {
     $(yy).remove();
     $(xx).css({ 'background-color': 'transparent', padding: 0 });
     $(xx).append(
-      `<img class="${aa}" style="height: 100px;width: auto;" src="${this.imageBaseUrl}${sign}">`
+      `<img class="${aa}" style="height: 80px;width: auto;" src="${this.imageBaseUrl}${sign}">`
     );
     this.modalService.dismissAll();
   }
@@ -365,7 +365,7 @@ export class PdfviewComponent implements OnInit {
       this.comments.push(cObject);
 
       $('.pdfViewerSection').prepend(
-        `<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 30px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;" id="drag_${this.comments.length}"><p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${comment}</p></div>`
+        `<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;" id="drag_${this.comments.length}"><p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${comment}</p></div>`
       );
       let self = this;
       $('.draggable2').draggable({
