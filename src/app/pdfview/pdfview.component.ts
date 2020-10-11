@@ -80,6 +80,9 @@ export class PdfviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    const data = new Date()
+    console.log(new Date())
     this.userId = JSON.parse(localStorage.getItem('userDetails'))?._id;
     this.docID = localStorage.getItem('docId');
     this.docfile = localStorage.getItem('docfile');
@@ -471,6 +474,7 @@ export class PdfviewComponent implements OnInit {
     
   }
 
+
   updateSignature() {
     //var comt = JSON.stringify(this.comments);
 
@@ -492,7 +496,7 @@ export class PdfviewComponent implements OnInit {
     formData.append('exitInitial', this.exitInitial);
     
     formData.append('comments', this.comments);
-    formData.append('createAt', `${Date.now}`);
+    formData.append('createAt', `${new Date()}`);
 
     console.log('data', formData.getAll('initialImage'));
 
