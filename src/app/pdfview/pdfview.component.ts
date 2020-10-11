@@ -42,7 +42,7 @@ export class PdfviewComponent implements OnInit {
   initialFile: any;
   dummy = [];
   isShowflag: boolean = true;
-  public otherReceipts= []
+  public otherReceipts = []
   public rejectFormGroup: FormGroup;
   @ViewChild('mymodal', { static: false }) mymodal: TemplateRef<any>;
   @ViewChild('mymodal1', { static: false }) mymodal1: TemplateRef<any>;
@@ -87,9 +87,9 @@ export class PdfviewComponent implements OnInit {
     this.docID = localStorage.getItem('docId');
     this.docfile = localStorage.getItem('docfile');
     this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
-    
 
-   
+
+
     this.loadRecipientsList();
     this.loadRejectForm();
     this.getdefaultSigns();
@@ -140,9 +140,9 @@ export class PdfviewComponent implements OnInit {
               let self = this;
               var burl = `${environment.imageBaseUrl}${this.otherReceipts[k].signatureImage}`;
               this.toDataURL(burl, function (dataUrl) {
-                    let x = dataUrl.split(';')
-                    self.otherReceipts[k].signatureImage = `data:image/png;${x[1]}`;
-              }) 
+                let x = dataUrl.split(';')
+                self.otherReceipts[k].signatureImage = `data:image/png;${x[1]}`;
+              })
               // this.worker.postMessage('hello');
               let obj = {
                 url: burl,
@@ -151,7 +151,7 @@ export class PdfviewComponent implements OnInit {
               }
               // this.worker.postMessage(obj);
             }
-    
+
             if (this.otherReceipts[k].initialImage != "") {
               let self = this;
               var burl = `${environment.imageBaseUrl}${this.otherReceipts[k].initialImage}`;
@@ -161,10 +161,10 @@ export class PdfviewComponent implements OnInit {
                 type: "initial"
               }
               // this.worker.postMessage(obj);
-                this.toDataURL(burl, function (dataUrl) {
-                 let x = dataUrl.split(';')
-                 self.otherReceipts[k].initialImage = `data:image/png;${x[1]}`;
-               }) 
+              this.toDataURL(burl, function (dataUrl) {
+                let x = dataUrl.split(';')
+                self.otherReceipts[k].initialImage = `data:image/png;${x[1]}`;
+              })
             }
           }
         }
@@ -185,9 +185,9 @@ export class PdfviewComponent implements OnInit {
             let self = this;
             var burl = `${environment.imageBaseUrl}${this.userData[i].signatureImage}`;
             this.toDataURL(burl, function (dataUrl) {
-                  let x = dataUrl.split(';')
-                  self.userData[i].signatureImage = `data:image/png;${x[1]}`;
-            }) 
+              let x = dataUrl.split(';')
+              self.userData[i].signatureImage = `data:image/png;${x[1]}`;
+            })
             // this.worker.postMessage('hello');
             let obj = {
               url: burl,
@@ -206,10 +206,10 @@ export class PdfviewComponent implements OnInit {
               type: "initial"
             }
             // this.worker.postMessage(obj);
-              this.toDataURL(burl, function (dataUrl) {
-               let x = dataUrl.split(';')
-               self.userData[i].initialImage = `data:image/png;${x[1]}`;
-             }) 
+            this.toDataURL(burl, function (dataUrl) {
+              let x = dataUrl.split(';')
+              self.userData[i].initialImage = `data:image/png;${x[1]}`;
+            })
           }
 
           if (this.userData[i].VerifyFlag === true) {
@@ -254,10 +254,10 @@ export class PdfviewComponent implements OnInit {
     localStorage.setItem('itemId', id);
   }
 
-  draggable_comment(){
+  draggable_comment() {
     //localStorage.setItem('comId', id);
     this.modalService.open(this.mymodal1);
-    
+
   }
 
   saveImage(data) {
@@ -456,7 +456,7 @@ export class PdfviewComponent implements OnInit {
     }
   } */
 
-  clickOnComment(eve){
+  clickOnComment(eve) {
 
     var xx = '.icomm';
     var yy = '.icommrmv';
@@ -471,7 +471,7 @@ export class PdfviewComponent implements OnInit {
     this.modalService.dismissAll();
     //console.log('commment--->', eve);
 
-    
+
   }
 
 
@@ -485,8 +485,15 @@ export class PdfviewComponent implements OnInit {
         console.log('test-->',this.comments[i]);
       }
     } */
+    const currentDate = new Date()
+    let year = currentDate.getFullYear()
+    let month = (currentDate.getMonth() + 1).toString()
+    let day = currentDate.getDate().toString()
 
-    // const data = new Date.now();
+    if (day.length < 2) day = `0${day}`; else day = `${day}`;
+    if (month.toString().length < 2) month = `0${month}`; else month = `${month}`;
+    let currentDateFormat = year + "-" + month + "-" + day;
+    
     const formData = new FormData();
     formData.append('DocId', this.userDocId);
     formData.append('RecipientID', this.useRecId);
@@ -494,9 +501,9 @@ export class PdfviewComponent implements OnInit {
     formData.append('signatureImage', this.signatureImage);
     formData.append('exitSignature', this.exitSignature);
     formData.append('exitInitial', this.exitInitial);
-    
+
     formData.append('comments', this.comments);
-    formData.append('createAt', `${new Date()}`);
+    formData.append('createAt', currentDateFormat);
 
     console.log('data', formData.getAll('initialImage'));
 
@@ -508,15 +515,15 @@ export class PdfviewComponent implements OnInit {
 
     //console.log('formData--->', formData);
 
-      this.services.sendRecipientFiles(formData).subscribe((resp) => {
-        if (resp.statusCode == 200) {
-          this.toastr.success(`${resp.Message}`, 'Success:');
-          this.router.navigateByUrl('/document');
-        } else {
-          this.toastr.error(`${resp.Message}`, 'Failed:');
-        }
-        //console.log('coordinats-->', resp);
-      });
+    this.services.sendRecipientFiles(formData).subscribe((resp) => {
+      if (resp.statusCode == 200) {
+        this.toastr.success(`${resp.Message}`, 'Success:');
+        this.router.navigateByUrl('/document');
+      } else {
+        this.toastr.error(`${resp.Message}`, 'Failed:');
+      }
+      //console.log('coordinats-->', resp);
+    });
   }
 
   /* Signature Rejection  */
@@ -548,28 +555,28 @@ export class PdfviewComponent implements OnInit {
 
   generatePdf() {
     var randNum = Math.floor(1000 + Math.random() * 9000);
-    const filename = 'DOC_'+randNum+'.pdf';
+    const filename = 'DOC_' + randNum + '.pdf';
     html2canvas(document.querySelector('#content')).then(canvas => {
 
-      var imgData = canvas.toDataURL('image/png',0.3);
-      console.log('cavas--->',canvas);
-      
-      let pdf = new jsPDF('p', 'mm', 'a4',true);
-      var pageHeight= pdf.internal.pageSize.height;
-      var pageWidth= pdf.internal.pageSize.getWidth();
-      var imgHeight = canvas.height * 208/ canvas.width;
+      var imgData = canvas.toDataURL('image/png', 0.3);
+      console.log('cavas--->', canvas);
+
+      let pdf = new jsPDF('p', 'mm', 'a4', true);
+      var pageHeight = pdf.internal.pageSize.height;
+      var pageWidth = pdf.internal.pageSize.getWidth();
+      var imgHeight = canvas.height * 208 / canvas.width;
 
       var pagecount = Math.ceil(imgHeight / pageHeight);
       console.log(pagecount);
       pdf.addImage(imgData, 'PNG', 0, 0, 208, imgHeight);
       if (pagecount > 0) {
-        var xx = pagecount -1;
-        for (var i = 1; i <= xx; i++) { 
+        var xx = pagecount - 1;
+        for (var i = 1; i <= xx; i++) {
           pdf.addPage();
           console.log(i);
-          pdf.addImage(imgData, 'PNG', 2, -(i * pageHeight), pageWidth-4, 0);
+          pdf.addImage(imgData, 'PNG', 2, -(i * pageHeight), pageWidth - 4, 0);
         }
-    }
+      }
       pdf.save(filename);
     });
   }
@@ -602,7 +609,7 @@ export class PdfviewComponent implements OnInit {
       this.userId = resp.data.UserId;
       // console.log(this.receipientData);
 
-      
+
       if (this.receipientData.length > 0) {
         for (let i = 0; i < this.receipientData.length; i++) {
           //console.log('verify-->', this.receipientData[i].VerifyFlag);
@@ -620,9 +627,9 @@ export class PdfviewComponent implements OnInit {
             let self = this;
             var burl = `${environment.imageBaseUrl}${this.receipientData[i].signatureImage}`;
             this.toDataURL(burl, function (dataUrl) {
-                  let x = dataUrl.split(';')
-                  self.receipientData[i].signatureImage = `data:image/png;${x[1]}`;
-            }) 
+              let x = dataUrl.split(';')
+              self.receipientData[i].signatureImage = `data:image/png;${x[1]}`;
+            })
             // this.worker.postMessage('hello');
             let obj = {
               url: burl,
@@ -641,10 +648,10 @@ export class PdfviewComponent implements OnInit {
               type: "initial"
             }
             // this.worker.postMessage(obj);
-              this.toDataURL(burl, function (dataUrl) {
-               let x = dataUrl.split(';')
-               self.receipientData[i].initialImage = `data:image/png;${x[1]}`;
-             }) 
+            this.toDataURL(burl, function (dataUrl) {
+              let x = dataUrl.split(';')
+              self.receipientData[i].initialImage = `data:image/png;${x[1]}`;
+            })
           }
         }
       }
