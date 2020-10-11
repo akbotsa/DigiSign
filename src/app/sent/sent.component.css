@@ -89,4 +89,27 @@
   padding: 15px;
 }
 
+.delete {
+  margin-left: 16px;
+  background: #df5151;
+  border: 1px solid #df5151;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
 
+.delete:hover {
+  background: none;
+}
+
+.delete:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.delete:hover span i {
+  color: #df5151;
+}
+
+.delete i {
+  color: #fff;
+}
