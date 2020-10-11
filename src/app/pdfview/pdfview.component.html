@@ -20,7 +20,7 @@
               <i class="fa fa-plus" aria-hidden="true"></i>
             </button> -->
           </div>
-          <div class="d-flex">
+          <div class="d-flex" *ngIf="isVerified === false">
             <div class="reject-btn">
               <button class="btn btn-danger" (click)="onRejectInvitation()">
                 Reject
@@ -38,6 +38,9 @@
         </div>
         <div *ngIf="isVerified === true" class="rejected-text">
           <h5 class="text-danger">Document has already Signed</h5>
+          <button class="btn btn-primary" (click)=generatePdf()>
+            Download
+          </button>
         </div>
       </form>
     </div>
@@ -250,7 +253,7 @@
           </div>
         </div>
 
-        <pdf-viewer
+        <pdf-viewer id="content"
           [src]="viewSrc"
           [render-text]="true"
           [render-text]="true"
