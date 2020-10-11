@@ -65,11 +65,12 @@
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
                   <td class="tooltip-status">
-                    <p class="tooltip" href="#">Help
+                    <p class="tooltip">{{DocStatus(document).status}}
                       <span class="custom help">
-                        <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>
+                        <p *ngFor = "let recipient of document?.Recipients">{{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}}</p>
+                        <!-- <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>
                         <p>anil@gmail.com&nbsp;-&nbsp;PENDING</p>
-                        <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>
+                        <p>anil@gmail.com&nbsp;-&nbsp;DONE</p> -->
                       </span>
                     </p> 
                   </td>

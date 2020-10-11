@@ -13,9 +13,9 @@ export class SentComponent implements OnInit {
   public documentsList = [];
   userId: any;
   public page: number = 1;
-  seachpipe:any;
+  seachpipe: any;
 
-  constructor(private digiServices: ServicesService, private router: Router) {}
+  constructor(private digiServices: ServicesService, private router: Router) { }
 
   ngOnInit(): void {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
@@ -43,5 +43,47 @@ export class SentComponent implements OnInit {
     localStorage.setItem('docId', docId);
     localStorage.setItem('docfile', docfile);
     this.router.navigateByUrl('/finalDoc');
+  }
+
+  recipientStatus(recipient) {
+
+    if (recipient.isReject === true) {
+      return {
+        status: "Rejected"
+      }
+    }
+
+    if (recipient.VerifyFlag === true) {
+      return {
+        status: "Signed"
+      }
+    }
+    if (recipient.VerifyFlag === false) {
+      return {
+        status: "Pending"
+      }
+    }
+
+  }
+
+  DocStatus(document) {
+
+    if (document.isRejected === true) {
+      return {
+        status: "Rejected"
+      }
+    }
+
+    if (document.isCompleted === true) {
+      return {
+        status: "Completed"
+      }
+    }
+
+    if (document.isCompleted === false) {
+      return {
+        status: "Pending"
+      }
+    }
   }
 }
