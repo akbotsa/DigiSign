@@ -65,7 +65,7 @@
                   <td class="tooltip-status">
                     <span style="color: #79cbc1;padding-right: 5px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span><p class="tooltip">{{DocStatus(document).status}}
                       <span class="custom help">
-                        <p *ngFor = "let recipient of document?.RecipientsDetails">{{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}}</p>
+                        <p *ngFor = "let recipient of document?.RecipientsDetails">{{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}} - {{recipient?.createAt}}</p>
                         <!-- <p>anil@gmail.com&nbsp;-&nbsp;PENDING</p>
                         <p>anil@gmail.com&nbsp;-&nbsp;DONE</p> -->
                       </span>

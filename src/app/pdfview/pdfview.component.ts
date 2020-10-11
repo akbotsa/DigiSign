@@ -492,7 +492,7 @@ export class PdfviewComponent implements OnInit {
     formData.append('exitInitial', this.exitInitial);
     
     formData.append('comments', this.comments);
-    formData.append('createAt', '');
+    formData.append('createAt', `${Date.now}`);
 
     console.log('data', formData.getAll('initialImage'));
 

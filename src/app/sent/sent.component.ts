@@ -56,7 +56,7 @@ export class SentComponent implements OnInit {
 
     if (recipient.VerifyFlag === true) {
       return {
-        status: "Signed"
+        status: "Sign"
       }
     }
     if (recipient.VerifyFlag === false) {

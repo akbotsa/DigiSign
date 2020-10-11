@@ -55,9 +55,9 @@ export class InboxComponent implements OnInit {
       UserId: this.userId,
       DocId: document.documents[0].DocId
     }
-    console.log("objjjjjjjjjjjjj", obj)
+    // console.log("objjjjjjjjjjjjj", obj)
     this.digiServices.viewFlagUpdate(obj).subscribe((resp) => {
-      console.log("respppppp", resp);
+      // console.log("respppppp", resp);
     })
     let docId = document.documents[0].DocId;
     let docfile = document.documents[0].Doc;
@@ -77,7 +77,7 @@ export class InboxComponent implements OnInit {
 
     if (document.Recipients.VerifyFlag === true) {
       return {
-        status: "Signed"
+        status: "View"
       }
     }
     if (document.Recipients.VerifyFlag === false) {
@@ -98,7 +98,7 @@ export class InboxComponent implements OnInit {
 
     if (recipient.VerifyFlag === true) {
       return {
-        status: "Signed"
+        status: "Sign"
       }
     }
     if (recipient.VerifyFlag === false) {
