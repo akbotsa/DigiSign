@@ -70,10 +70,12 @@
     font-size: 13px;
 }
 
-.signature button {
+.signature button {    
     background: #87ceeb;
     border: 1px solid #87ceeb;
-    padding: 8px 20px;
+    padding: 6px;
+    font-size: 13px;
+
     /* margin-bottom: 15px; */
     /* margin:0px 5px 10px 5px; */
 }
@@ -90,10 +92,12 @@
 
 
 
-.signature1 button {
+.signature1 button {    
     background: #87ceeb;
     border: 1px solid #87ceeb;
-    padding: 8px 20px;
+    padding: 5px;
+    font-size: 13px;
+
     /* margin-bottom: 10px; */
     /* margin:0px 5px 10px 0px; */
 }
