@@ -88,6 +88,7 @@ export class PdfviewComponent implements OnInit {
     this.loadRecipientsList();
     this.loadRejectForm();
     this.getdefaultSigns();
+    
   }
 
   getdefaultSigns() {
@@ -395,6 +396,7 @@ export class PdfviewComponent implements OnInit {
       `<p class="ui-state-highlight icommrmv" style="display: inline; color: #135699; font-weight: bold">${eve}</p>`
     );
     this.comments = eve;
+    this.modalService.dismissAll();
     //console.log('commment--->', eve);
 
     
@@ -495,5 +497,20 @@ export class PdfviewComponent implements OnInit {
     }
       pdf.save(filename);
     });
+  }
+
+  toDataURL(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        //console.log('test--->', reader);
+        callback(reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
   }
 }
