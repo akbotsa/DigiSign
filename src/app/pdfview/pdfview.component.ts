@@ -490,10 +490,13 @@ export class PdfviewComponent implements OnInit {
     let month = (currentDate.getMonth() + 1).toString()
     let day = currentDate.getDate().toString()
 
+    let mm = currentDate.getMinutes()
+    let sec = currentDate.getSeconds()
+
     if (day.length < 2) day = `0${day}`; else day = `${day}`;
     if (month.toString().length < 2) month = `0${month}`; else month = `${month}`;
-    let currentDateFormat = year + "-" + month + "-" + day;
-    
+    let currentDateFormat = year + "-" + month + "-" + day + ":" + mm + "-" + sec;
+
     const formData = new FormData();
     formData.append('DocId', this.userDocId);
     formData.append('RecipientID', this.useRecId);
