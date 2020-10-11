@@ -109,7 +109,7 @@ export class InboxComponent implements OnInit {
 
   }
 
-  DocStatus(document){
+  DocumentStatus(document){
 
     if (document.isRejected === true) {
       return {

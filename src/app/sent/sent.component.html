@@ -65,7 +65,7 @@
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
                   <td class="tooltip-status">
-                    <p class="tooltip">{{DocStatus(document).status}}
+                    <p class="tooltip">{{DocumentStatus(document).status}}
                       <span class="custom help">
                         <p *ngFor = "let recipient of document?.Recipients">{{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}}</p>
                         <!-- <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>
