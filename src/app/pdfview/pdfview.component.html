@@ -72,7 +72,7 @@
               >
                 <img
                   style="height: 70px; width: 300px"
-                  src="{{ imageBaseUrl + list.signatureImage }}"
+                  src="{{  list.signatureImage }}"
                 />
               </div>
             </ng-template>
@@ -124,7 +124,7 @@
               >
                 <img
                   style="height: 70px; width: 300px"
-                  src="{{ imageBaseUrl + list.initialImage }}"
+                  src="{{ list.initialImage }}"
                 />
               </div>
             </ng-template>
@@ -228,7 +228,7 @@
             >
               <img
                 style="height: 70px; width: 300px"
-                [src]="imageBaseUrl + receipt.signatureImage"
+                [src]="receipt.signatureImage"
               />
             </div>
           </div>
@@ -247,7 +247,7 @@
             >
               <img
                 style="height: 70px; width: 300px"
-                [src]="imageBaseUrl + receipt.initialImage"
+                [src]="receipt.initialImage"
               />
             </div>
           </div>

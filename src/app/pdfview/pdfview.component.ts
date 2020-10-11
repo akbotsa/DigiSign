@@ -58,6 +58,8 @@ export class PdfviewComponent implements OnInit {
   showimage: boolean;
   exitSignature: string = null;
   exitInitial: string = null;
+  receipientData: any;
+  docId: any;
   constructor(
     private modalService: NgbModal,
     private services: ServicesService,
@@ -88,7 +90,7 @@ export class PdfviewComponent implements OnInit {
     this.loadRecipientsList();
     this.loadRejectForm();
     this.getdefaultSigns();
-    
+    this.getDocDetails();
   }
 
   getdefaultSigns() {
@@ -128,6 +130,41 @@ export class PdfviewComponent implements OnInit {
         this.userDocId = resp.data[0].DocId;
         this.isVerified = resp.data[0].Recipients[0].VerifyFlag;
         console.log(this.userData);
+        if (this.otherReceipts.length > 0) {
+          for (let k = 0; k < this.otherReceipts.length; k++) {
+            if (this.otherReceipts[k].signatureImage != "") {
+              console.log('xdataUrl-->', this.otherReceipts[k].signatureImage);
+              let self = this;
+              var burl = `${environment.imageBaseUrl}${this.otherReceipts[k].signatureImage}`;
+              this.toDataURL(burl, function (dataUrl) {
+                    let x = dataUrl.split(';')
+                    self.otherReceipts[k].signatureImage = `data:image/png;${x[1]}`;
+              }) 
+              // this.worker.postMessage('hello');
+              let obj = {
+                url: burl,
+                index: k,
+                type: "signature"
+              }
+              // this.worker.postMessage(obj);
+            }
+    
+            if (this.otherReceipts[k].initialImage != "") {
+              let self = this;
+              var burl = `${environment.imageBaseUrl}${this.otherReceipts[k].initialImage}`;
+              let obj = {
+                url: burl,
+                index: k,
+                type: "initial"
+              }
+              // this.worker.postMessage(obj);
+                this.toDataURL(burl, function (dataUrl) {
+                 let x = dataUrl.split(';')
+                 self.otherReceipts[k].initialImage = `data:image/png;${x[1]}`;
+               }) 
+            }
+          }
+        }
       } else if (resp.statusCode == 403) {
         this.isShowflag = true;
         this.toastr.error(
@@ -140,6 +177,38 @@ export class PdfviewComponent implements OnInit {
       if (this.userData.length > 0) {
         for (let i = 0; i < this.userData.length; i++) {
           console.log('verify-->', this.userData[i].VerifyFlag);
+          if (this.userData[i].signatureImage != "") {
+            console.log('xdataUrl-->', this.userData[i].signatureImage);
+            let self = this;
+            var burl = `${environment.imageBaseUrl}${this.userData[i].signatureImage}`;
+            this.toDataURL(burl, function (dataUrl) {
+                  let x = dataUrl.split(';')
+                  self.userData[i].signatureImage = `data:image/png;${x[1]}`;
+            }) 
+            // this.worker.postMessage('hello');
+            let obj = {
+              url: burl,
+              index: i,
+              type: "signature"
+            }
+            // this.worker.postMessage(obj);
+          }
+
+          if (this.userData[i].initialImage != "") {
+            let self = this;
+            var burl = `${environment.imageBaseUrl}${this.userData[i].initialImage}`;
+            let obj = {
+              url: burl,
+              index: i,
+              type: "initial"
+            }
+            // this.worker.postMessage(obj);
+              this.toDataURL(burl, function (dataUrl) {
+               let x = dataUrl.split(';')
+               self.userData[i].initialImage = `data:image/png;${x[1]}`;
+             }) 
+          }
+
           if (this.userData[i].VerifyFlag === true) {
             this.dummy.push(this.userData[i].VerifyFlag);
           }
@@ -512,5 +581,72 @@ export class PdfviewComponent implements OnInit {
     xhr.open('GET', url);
     xhr.responseType = 'blob';
     xhr.send();
+  }
+
+
+  getDocDetails() {
+    let finObject = {
+      "DocId": this.docId
+    }
+    this.services.getDocumentDetails(finObject).subscribe((resp) => {
+      console.log('documentDetails-->', resp);
+      this.receipientData = resp.data.Recipients;
+
+      //this.useRecId = resp.data[0].Recipients[0].ReceiptId;
+      this.userId = resp.data.UserId;
+      // console.log(this.receipientData);
+
+      
+      if (this.receipientData.length > 0) {
+        for (let i = 0; i < this.receipientData.length; i++) {
+          //console.log('verify-->', this.receipientData[i].VerifyFlag);
+          if (this.receipientData[i].VerifyFlag === false) {
+            this.dummy.push(this.receipientData[i].VerifyFlag);
+          }
+
+          /* if (this.receipientData[i].comments.length > 0) {
+            var items = JSON.parse(this.receipientData[i].comments);
+            this.receipientData[i]['comments'] = items;
+          } */
+
+          if (this.receipientData[i].signatureImage != "") {
+            console.log('xdataUrl-->', this.receipientData[i].signatureImage);
+            let self = this;
+            var burl = `${environment.imageBaseUrl}${this.receipientData[i].signatureImage}`;
+            this.toDataURL(burl, function (dataUrl) {
+                  let x = dataUrl.split(';')
+                  self.receipientData[i].signatureImage = `data:image/png;${x[1]}`;
+            }) 
+            // this.worker.postMessage('hello');
+            let obj = {
+              url: burl,
+              index: i,
+              type: "signature"
+            }
+            // this.worker.postMessage(obj);
+          }
+
+          if (this.receipientData[i].initialImage != "") {
+            let self = this;
+            var burl = `${environment.imageBaseUrl}${this.receipientData[i].initialImage}`;
+            let obj = {
+              url: burl,
+              index: i,
+              type: "initial"
+            }
+            // this.worker.postMessage(obj);
+              this.toDataURL(burl, function (dataUrl) {
+               let x = dataUrl.split(';')
+               self.receipientData[i].initialImage = `data:image/png;${x[1]}`;
+             }) 
+          }
+        }
+      }
+
+      // if (this.dummy.length > 0) {
+      //   this.isDownloadflag = false;
+      // }
+    })
+    console.log('receipientData-->', this.receipientData);
   }
 }
