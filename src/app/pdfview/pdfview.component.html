@@ -162,7 +162,7 @@
             <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
             <ng-template #con1>
               <div
-                class="drag-cls ui-draggable ui-draggable-handle idrag"
+                class="drag-cls ui-draggable ui-draggable-handle icomm"
                 style="
                   display: inline;
                   z-index: 1;
@@ -215,7 +215,7 @@
         <div *ngFor="let receipt of otherReceipts">
           <div *ngFor="let data of receipt.signature">
             <div
-              class="drag-cls ui-draggable ui-draggable-handle idrag"
+              class="drag-cls ui-draggable ui-draggable-handle"
               style="
                 display: inline;
                 z-index: 1;
@@ -234,7 +234,7 @@
           </div>
           <div *ngFor="let data of receipt.initial">
             <div
-              class="drag-cls ui-draggable ui-draggable-handle idrag"
+              class="drag-cls ui-draggable ui-draggable-handle"
               style="
                 display: inline;
                 z-index: 1;
@@ -249,6 +249,27 @@
                 style="height: 70px; width: 300px"
                 [src]="imageBaseUrl + receipt.initialImage"
               />
+            </div>
+          </div>
+
+          <div *ngFor="let comm1 of receipt.commentsCoordinates">
+            <div
+              class="drag-cls ui-draggable ui-draggable-handle"
+              style="
+                display: inline;
+                z-index: 1;
+                border-radius: 5px;
+                color: #000;
+                position: relative;
+              "
+              [style.left.px]="comm1.left"
+              [style.top.px]="comm1.top"
+            >
+              <!-- <img
+                style="height: 70px; width: 300px"
+                [src]="imageBaseUrl + receipt.initialImage"
+              /> -->
+              {{receipt.comments}}
             </div>
           </div>
         </div>
