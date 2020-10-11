@@ -51,165 +51,167 @@
 
       <div class="pdfViewerSection" id="sortable">
         <div *ngFor="let list of userData; let i = index">
-          <div *ngFor="let pos of list.signature; let idx = index">
-            <span
-              *ngIf="list.VerifyFlag; then condition1; else condition2"
-            ></span>
-            <ng-template #condition1>
-              <div
-                class="drag-cls ui-draggable ui-draggable-handle drag"
-                style="
-                  display: inline;
-                  z-index: 1;
-                  background: transparent;
-                  padding: 0px;
-                  border-radius: 5px;
-                  color: rgb(255, 255, 255);
-                  position: relative;
-                "
-                [style.left.px]="pos.left"
-                [style.top.px]="pos.top"
-              >
-                <img
-                  style="height: 70px; width: 300px"
-                  src="{{  list.signatureImage }}"
-                />
-              </div>
-            </ng-template>
-            <ng-template #condition2>
-              <div
-                (click)="draggable_Signature(1)"
-                class="drag-cls ui-draggable ui-draggable-handle drag"
-                style="
-                  display: inline;
-                  z-index: 1;
-                  background: rgba(204, 204, 204, 0.73);
-                  padding: 10px 10px;
-                  border-radius: 5px;
-                  color: rgb(255, 255, 255);
-                  cursor: move;
-                  position: relative;
-                "
-                [style.left.px]="pos.left"
-                [style.top.px]="pos.top"
-              >
-                <!-- <div id="replace_{{i}}_{{idx}}"></div> -->
-                <p
-                  class="ui-state-highlight remove"
-                  style="display: inline; color: #135699; font-weight: bold"
+          <div *ngIf=!list.isReject>
+            <div *ngFor="let pos of list.signature; let idx = index">
+              <span
+                *ngIf="list.VerifyFlag; then condition1; else condition2"
+              ></span>
+              <ng-template #condition1>
+                <div
+                  class="drag-cls ui-draggable ui-draggable-handle drag"
+                  style="
+                    display: inline;
+                    z-index: 1;
+                    background: transparent;
+                    padding: 0px;
+                    border-radius: 5px;
+                    color: rgb(255, 255, 255);
+                    position: relative;
+                  "
+                  [style.left.px]="pos.left"
+                  [style.top.px]="pos.top"
                 >
-                  <img style="height: 20px" src="assets/images/sign.png" />{{
-                    list.Name
-                  }}
-                </p>
-              </div>
-            </ng-template>
-          </div>
-          <div *ngFor="let ini of list.initial; let j = index">
-            <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
-            <ng-template #con1>
-              <div
-                class="drag-cls ui-draggable ui-draggable-handle idrag"
-                style="
-                  display: inline;
-                  z-index: 1;
-                  background: transparent;
-                  padding: 0px;
-                  border-radius: 5px;
-                  color: rgb(255, 255, 255);
-                  position: relative;
-                "
-                [style.left.px]="ini.left"
-                [style.top.px]="ini.top"
-              >
-                <img
-                  style="height: 70px; width: 300px"
-                  src="{{ list.initialImage }}"
-                />
-              </div>
-            </ng-template>
-            <ng-template #con2>
-              <div
-                (click)="draggable_Signature(2)"
-                class="drag-cls ui-draggable ui-draggable-handle idrag"
-                style="
-                  display: inline;
-                  z-index: 1;
-                  background: rgba(204, 204, 204, 0.73);
-                  padding: 10px 10px;
-                  border-radius: 5px;
-                  color: rgb(255, 255, 255);
-                  cursor: move;
-                  position: relative;
-                "
-                [style.left.px]="ini.left"
-                [style.top.px]="ini.top"
-              >
-                <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
-                <p
-                  class="ui-state-highlight iremove"
-                  style="display: inline; color: #135699; font-weight: bold"
+                  <img
+                    style="height: 70px; width: 300px"
+                    src="{{  list.signatureImage }}"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #condition2>
+                <div
+                  (click)="draggable_Signature(1)"
+                  class="drag-cls ui-draggable ui-draggable-handle drag"
+                  style="
+                    display: inline;
+                    z-index: 1;
+                    background: rgba(204, 204, 204, 0.73);
+                    padding: 10px 10px;
+                    border-radius: 5px;
+                    color: rgb(255, 255, 255);
+                    cursor: move;
+                    position: relative;
+                  "
+                  [style.left.px]="pos.left"
+                  [style.top.px]="pos.top"
                 >
-                  <img style="height: 20px" src="assets/images/digital.png" />{{
-                    list.Name
-                  }}
-                </p>
-              </div>
-            </ng-template>
-          </div>
-          
-          <div *ngFor="let comm of list.commentsCoordinates; let j = index">
-            <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
-            <ng-template #con1>
-              <div
-                class="drag-cls ui-draggable ui-draggable-handle icomm"
-                style="
-                  display: inline;
-                  z-index: 1;
-                  background: transparent;
-                  padding: 0px;
-                  border-radius: 5px;
-                  color:black;
-                  position: relative;
-                "
-                [style.left.px]="comm.left"
-                [style.top.px]="comm.top"
-              >
-                {{ list.comments }}
-                <!-- <img
-                  style="height: 70px; width: 300px"
-                  src="{{ imageBaseUrl + list.initialImage }}"
-                /> -->
-              </div>
-            </ng-template>
-            <ng-template #con2>
-              <div
-                (click)="draggable_comment()"
-                class="drag-cls ui-draggable ui-draggable-handle icomm"
-                style="
-                  display: inline;
-                  z-index: 1;
-                  background: rgba(204, 204, 204, 0.73);
-                  padding: 10px 10px;
-                  border-radius: 5px;
-                  color: rgb(255, 255, 255);
-                  cursor: move;
-                  position: relative;
-                "
-                [style.left.px]="comm.left"
-                [style.top.px]="comm.top"
-              >
-                <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
-                <p
-                  class="ui-state-highlight icommrmv"
-                  style="display: inline; color: #135699; font-weight: bold"
+                  <!-- <div id="replace_{{i}}_{{idx}}"></div> -->
+                  <p
+                    class="ui-state-highlight remove"
+                    style="display: inline; color: #135699; font-weight: bold"
+                  >
+                    <img style="height: 20px" src="assets/images/sign.png" />{{
+                      list.Name
+                    }}
+                  </p>
+                </div>
+              </ng-template>
+            </div>
+            <div *ngFor="let ini of list.initial; let j = index">
+              <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
+              <ng-template #con1>
+                <div
+                  class="drag-cls ui-draggable ui-draggable-handle idrag"
+                  style="
+                    display: inline;
+                    z-index: 1;
+                    background: transparent;
+                    padding: 0px;
+                    border-radius: 5px;
+                    color: rgb(255, 255, 255);
+                    position: relative;
+                  "
+                  [style.left.px]="ini.left"
+                  [style.top.px]="ini.top"
                 >
-                  <img style="height: 20px" src="assets/images/comm.png" />{{
-                    list.Name
-                  }}
-                </p>
-              </div>
-            </ng-template>
+                  <img
+                    style="height: 70px; width: 300px"
+                    src="{{ list.initialImage }}"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #con2>
+                <div
+                  (click)="draggable_Signature(2)"
+                  class="drag-cls ui-draggable ui-draggable-handle idrag"
+                  style="
+                    display: inline;
+                    z-index: 1;
+                    background: rgba(204, 204, 204, 0.73);
+                    padding: 10px 10px;
+                    border-radius: 5px;
+                    color: rgb(255, 255, 255);
+                    cursor: move;
+                    position: relative;
+                  "
+                  [style.left.px]="ini.left"
+                  [style.top.px]="ini.top"
+                >
+                  <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
+                  <p
+                    class="ui-state-highlight iremove"
+                    style="display: inline; color: #135699; font-weight: bold"
+                  >
+                    <img style="height: 20px" src="assets/images/digital.png" />{{
+                      list.Name
+                    }}
+                  </p>
+                </div>
+              </ng-template>
+            </div>
+            
+            <div *ngFor="let comm of list.commentsCoordinates; let j = index">
+              <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
+              <ng-template #con1>
+                <div
+                  class="drag-cls ui-draggable ui-draggable-handle icomm"
+                  style="
+                    display: inline;
+                    z-index: 1;
+                    background: transparent;
+                    padding: 0px;
+                    border-radius: 5px;
+                    color:black;
+                    position: relative;
+                  "
+                  [style.left.px]="comm.left"
+                  [style.top.px]="comm.top"
+                >
+                  {{ list.comments }}
+                  <!-- <img
+                    style="height: 70px; width: 300px"
+                    src="{{ imageBaseUrl + list.initialImage }}"
+                  /> -->
+                </div>
+              </ng-template>
+              <ng-template #con2>
+                <div
+                  (click)="draggable_comment()"
+                  class="drag-cls ui-draggable ui-draggable-handle icomm"
+                  style="
+                    display: inline;
+                    z-index: 1;
+                    background: rgba(204, 204, 204, 0.73);
+                    padding: 10px 10px;
+                    border-radius: 5px;
+                    color: rgb(255, 255, 255);
+                    cursor: move;
+                    position: relative;
+                  "
+                  [style.left.px]="comm.left"
+                  [style.top.px]="comm.top"
+                >
+                  <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
+                  <p
+                    class="ui-state-highlight icommrmv"
+                    style="display: inline; color: #135699; font-weight: bold"
+                  >
+                    <img style="height: 20px" src="assets/images/comm.png" />{{
+                      list.Name
+                    }}
+                  </p>
+                </div>
+              </ng-template>
+            </div>
           </div>
         </div>
         <div *ngFor="let receipt of otherReceipts">
