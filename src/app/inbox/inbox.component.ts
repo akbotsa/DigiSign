@@ -14,14 +14,14 @@ export class InboxComponent implements OnInit {
   public documentsList = [];
   userId: any;
   public page: number = 1;
-  seachpipe:any;
+  seachpipe: any;
   boldStyleFlag: boolean = true;
 
   constructor(
     private digiServices: ServicesService,
     private readonly router: Router,
-    private toastr: ToastrService 
-  ) {}
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.boldStyleFlag = true;
@@ -55,14 +55,79 @@ export class InboxComponent implements OnInit {
       UserId: this.userId,
       DocId: document.documents[0].DocId
     }
-    console.log("objjjjjjjjjjjjj",obj)
-    this.digiServices.viewFlagUpdate(obj).subscribe((resp)=> {
-      console.log("respppppp",resp);
+    console.log("objjjjjjjjjjjjj", obj)
+    this.digiServices.viewFlagUpdate(obj).subscribe((resp) => {
+      console.log("respppppp", resp);
     })
     let docId = document.documents[0].DocId;
     let docfile = document.documents[0].Doc;
     localStorage.setItem('docId', docId);
     localStorage.setItem('docfile', docfile);
     this.router.navigateByUrl('/pdfview');
+  }
+
+
+  docStatus(document) {
+
+    if (document.Recipients.isReject === true) {
+      return {
+        status: "Rejected"
+      }
+    }
+
+    if (document.Recipients.VerifyFlag === true) {
+      return {
+        status: "Signed"
+      }
+    }
+    if (document.Recipients.VerifyFlag === false ) {
+      return {
+        status: "Sign"
+      }
+    }
+
+  }
+
+  recipientStatus(recipient) {
+
+    if (recipient.isReject === true) {
+      return {
+        status: "Rejected"
+      }
+    }
+
+    if (recipient.VerifyFlag === true) {
+      return {
+        status: "Signed"
+      }
+    }
+    if (recipient.VerifyFlag === false ) {
+      return {
+        status: "Pending"
+      }
+    }
+
+  }
+
+  DocStatus(document){
+
+    if (document.isRejected === true) {
+      return {
+        status: "Rejected"
+      }
+    }
+
+
+    if (document.isCompleted === true) {
+      return {
+        status: "Completed"
+      }
+    }
+
+    if (document.isCompleted === false) {
+      return {
+        status: "Pending"
+      }
+    }
   }
 }
