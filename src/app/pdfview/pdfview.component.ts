@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ServicesService } from '../services/services.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -132,7 +134,7 @@ export class PdfviewComponent implements OnInit {
           'Failed:'
         );
       } else {
-        this.toastr.error('Oops! Somthing went worng.', 'Failed:');
+        this.toastr.error('Oops! Something went wrong.', 'Failed:');
       }
       if (this.userData.length > 0) {
         for (let i = 0; i < this.userData.length; i++) {
@@ -462,6 +464,36 @@ export class PdfviewComponent implements OnInit {
       } else {
         this.toastr.error(`${resp.Message}`, 'Failed:');
       }
+    });
+  }
+
+  /* ========== generate PDF ============== */
+
+  generatePdf() {
+    var randNum = Math.floor(1000 + Math.random() * 9000);
+    const filename = 'DOC_'+randNum+'.pdf';
+    html2canvas(document.querySelector('#content')).then(canvas => {
+
+      var imgData = canvas.toDataURL('image/png',0.3);
+      console.log('cavas--->',canvas);
+      
+      let pdf = new jsPDF('p', 'mm', 'a4',true);
+      var pageHeight= pdf.internal.pageSize.height;
+      var pageWidth= pdf.internal.pageSize.getWidth();
+      var imgHeight = canvas.height * 208/ canvas.width;
+
+      var pagecount = Math.ceil(imgHeight / pageHeight);
+      console.log(pagecount);
+      pdf.addImage(imgData, 'PNG', 0, 0, 208, imgHeight);
+      if (pagecount > 0) {
+        var xx = pagecount -1;
+        for (var i = 1; i <= xx; i++) { 
+          pdf.addPage();
+          console.log(i);
+          pdf.addImage(imgData, 'PNG', 2, -(i * pageHeight), pageWidth-4, 0);
+        }
+    }
+      pdf.save(filename);
     });
   }
 }
