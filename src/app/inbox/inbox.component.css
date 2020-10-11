@@ -50,12 +50,13 @@
 
 .tooltip {
 /* border-bottom: 1px dotted #000000; */
-color: #000000;
+color: #000;
 outline: none;
 cursor: help;
 text-decoration: none;
 position: relative;
 opacity: 1;
+font-weight: bold;
 }
 .tooltip span {
 margin-left: -999em;
@@ -74,7 +75,7 @@ left: 0px;
 top: 2em;
 z-index: 99;
 margin-left: 0;
-width: 300px;
+width: 350px;
 color: #fff;
 background-color: #4d4949;
 border-radius: 0px !important;
@@ -105,6 +106,10 @@ border: 1px solid #bcb9b9ed;
 }
 .tooltip p {
     text-decoration: none;
+}
+
+.tooltip-status {
+    display: flex;
 }
 
 .custom {

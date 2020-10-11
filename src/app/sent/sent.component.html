@@ -48,11 +48,11 @@
                     <i class="fa fa-check"></i>
                   </td>
                   <td>
-                    <p class="mb-0">
+                    <!-- <p class="mb-0">
                       Please Endorse:
                       <strong>{{ document?.documents[0]?.Doc }}</strong
                       >
-                    </p>
+                    </p> -->
                     To:<span *ngFor="let rec of document.Recipients">
                       {{ rec.Name }},
                     </span>
@@ -65,7 +65,7 @@
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
                   <td class="tooltip-status">
-                    <p class="tooltip">{{DocumentStatus(document).status}}
+                    <span style="color: #79cbc1;padding-right: 5px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span><p class="tooltip">{{DocumentStatus(document).status}}
                       <span class="custom help">
                         <p *ngFor = "let recipient of document?.Recipients">{{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}}</p>
                         <!-- <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>

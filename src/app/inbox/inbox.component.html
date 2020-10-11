@@ -46,10 +46,10 @@
                   </td>
                   <td>
                     <div [ngClass]="{'boldClass': document?.Recipients?.viewFlag == false}">
-                      <p class="mb-0">
+                      <!-- <p class="mb-0">
                         Please Endorse:
                         {{ document?.documents[0]?.Doc }}
-                      </p>
+                      </p> -->
                       <span>
                         From: {{ document?.Sender[0].FirstName }}
                         {{ document?.Sender[0].LastName }}</span>
@@ -63,7 +63,7 @@
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
                   <td class="tooltip-status">
-                    <p class="tooltip">{{DocStatus(document).status}}
+                    <span style="color: #79cbc1;padding-right: 5px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span><p class="tooltip">{{DocStatus(document).status}}
                       <span class="custom help">
                         <p *ngFor = "let recipient of document?.RecipientsDetails">{{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}}</p>
                         <!-- <p>anil@gmail.com&nbsp;-&nbsp;PENDING</p>

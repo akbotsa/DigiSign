@@ -278,6 +278,9 @@ export class AddFieldsComponent implements OnInit {
         this.recpList[i]['signatureImage'] = '';
         this.recpList[i]['initialImage'] = '';
         this.recpList[i]['isReject'] = false;
+        this.recpList[i]['isDelete'] = false;
+        this.recpList[i]['createAt'] = '';
+        
       }
     }
 

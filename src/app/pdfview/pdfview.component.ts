@@ -482,6 +482,7 @@ export class PdfviewComponent implements OnInit {
       }
     } */
 
+    // const data = new Date.now();
     const formData = new FormData();
     formData.append('DocId', this.userDocId);
     formData.append('RecipientID', this.useRecId);
@@ -489,8 +490,9 @@ export class PdfviewComponent implements OnInit {
     formData.append('signatureImage', this.signatureImage);
     formData.append('exitSignature', this.exitSignature);
     formData.append('exitInitial', this.exitInitial);
-
+    
     formData.append('comments', this.comments);
+    formData.append('createAt', '');
 
     console.log('data', formData.getAll('initialImage'));
 
