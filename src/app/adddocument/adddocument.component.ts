@@ -215,30 +215,37 @@ export class AdddocumentComponent implements OnInit {
 
   gotoAddField() {
     this.router.navigateByUrl('/addfields');
-  } 
+  }
 
   /*  =============== Drag and Drop ============ */
 
   uploadFile(event) {
     this.files = []
     this.uploadedFiles = []
-    if (event.length == 1) {
-      const file = event[0]
+    // if (event.length == 1) {
+
+    for (let i = 0; i < event.length; i++) {
+      const file = event[i]
       const fileName = file.name.split('.')
-      console.log('fileName' , fileName)
-           const check = fileName.filter(item =>{
-               return item.toUpperCase() === 'PDF' || item.toUpperCase() === 'DOCX' || item.toUpperCase() === 'DOC'
-           })
+      console.log('fileName', fileName)
+      const check = fileName.filter(item => {
+        return item.toUpperCase() === 'PDF' || item.toUpperCase() === 'DOCX' || item.toUpperCase() === 'DOC'
+      })
       if (check.length > 0) {
         this.uploadedFiles.push(file);
         this.files.push(file.name);
         this.showNextBtn = true;
       } else {
-        alert('File should be Pdf file or docx file or doc File')
+        alert('Files should be Pdf file or docx file or doc File')
+        break
       }
-    } else {
-      alert('Select  Pdf File or docx file  or doc file at a time')
     }
+
+   
+  
+    // } else {
+    //   alert('Select  Pdf File or docx file  or doc file at a time')
+    // }
 
 
   }
