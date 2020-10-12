@@ -30,7 +30,7 @@ export class AdddocumentComponent implements OnInit {
   showNextBtn: boolean;
   formLength: number = 1;
   showDelete: boolean;
-  uploadedFiles = [];
+  uploadedFiles : any = [];
   recepArr: FormArray;
   userId: string;
   docId: string;
@@ -171,9 +171,14 @@ export class AdddocumentComponent implements OnInit {
   }
 
   showNextAllRecp() {
+    console.log('files' , this.uploadedFiles)
     const formData = new FormData();
     formData.append('UserId', this.userId);
-    formData.append('doc', this.uploadedFiles[0]);
+    this.uploadedFiles.forEach(file =>{
+      formData.append('Doc' , file);
+    })
+   
+    console.log( formData.get('Doc'))
     this.digiService.getUploadDocument(formData).subscribe((resp) => {
       if (resp.statusCode === 200) {
         localStorage.setItem('docId', resp.data.doc.DocId);
