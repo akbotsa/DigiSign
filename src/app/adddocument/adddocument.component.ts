@@ -225,10 +225,6 @@ export class AdddocumentComponent implements OnInit {
   /*  =============== Drag and Drop ============ */
 
   uploadFile(event) {
-    this.files = []
-    this.uploadedFiles = []
-    // if (event.length == 1) {
-
     for (let i = 0; i < event.length; i++) {
       const file = event[i]
       const fileName = file.name.split('.')
@@ -246,18 +242,17 @@ export class AdddocumentComponent implements OnInit {
       }
     }
 
-   
-  
-    // } else {
-    //   alert('Select  Pdf File or docx file  or doc file at a time')
-    // }
-
-
   }
   deleteAttachment(index) {
-    this.files = []
-    this.uploadedFiles = []
-    this.showNextBtn = false
+   
+     this.files.splice(index , 1)
+     this.uploadedFiles.splice(index , 1)
+    if(this.files.length == 0 && this.uploadedFiles.length == 0){
+      this.showNextBtn = false
+    }
+    console.log('files' , this.files)
+    console.log('uploadedFiles' , this.uploadedFiles)
+
   }
 
   /* Sign In order */
