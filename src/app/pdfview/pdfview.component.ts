@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-pdfview',
   templateUrl: './pdfview.component.html',
@@ -495,7 +495,7 @@ export class PdfviewComponent implements OnInit {
 
     if (day.length < 2) day = `0${day}`; else day = `${day}`;
     if (month.toString().length < 2) month = `0${month}`; else month = `${month}`;
-    let currentDateFormat = year + "-" + month + "-" + day 
+    let currentDateFormat = year + "-" + month + "-" + day
 
     const formData = new FormData();
     formData.append('DocId', this.userDocId);
@@ -584,6 +584,17 @@ export class PdfviewComponent implements OnInit {
     });
   }
 
+  downloadPdf() {
+    this.services.pdfDownload(this.docID).subscribe(resp => {
+       
+      if (resp.statusCode == 200) {
+        saveAs.saveAs(`${this.imageBaseUrl}${resp.data}`, `Doc${resp.data}`)
+      }
+
+    })
+
+  }
+
   toDataURL(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -606,14 +617,14 @@ export class PdfviewComponent implements OnInit {
     }
     this.services.getDocumentDetails(finObject).subscribe((resp) => {
       console.log('documentDetails-->', resp);
-      this.receipientData = resp.data.Recipients;
+      this.receipientData = resp.data?.Recipients;
 
       //this.useRecId = resp.data[0].Recipients[0].ReceiptId;
-      this.userId = resp.data.UserId;
+      this.userId = resp.data?.UserId;
       // console.log(this.receipientData);
 
 
-      if (this.receipientData.length > 0) {
+      if (this.receipientData?.length > 0) {
         for (let i = 0; i < this.receipientData.length; i++) {
           //console.log('verify-->', this.receipientData[i].VerifyFlag);
           if (this.receipientData[i].VerifyFlag === false) {

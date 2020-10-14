@@ -7,6 +7,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import html2pdf from "html2pdf.js";
 declare var jquery: any;
 declare var $: any;
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-final-doc',
@@ -84,6 +85,7 @@ export class FinalDocComponent implements OnInit {
   dummy: any = [];
   isDownloadflag: boolean = true;
   public worker: Worker;
+  public imageBaseUrl = environment.imageBaseUrl;
   constructor(private services: ServicesService,
     private imageCompress: NgxImageCompressService
     ) {
@@ -237,6 +239,17 @@ export class FinalDocComponent implements OnInit {
     }
       pdf.save(filename);
     });
+  }
+
+  downloadPdf() {
+    this.services.pdfDownload(this.docId).subscribe(resp => {
+       
+      if (resp.statusCode == 200) {
+        saveAs.saveAs(`${this.imageBaseUrl}${resp.data}`, `Doc${resp.data}`)
+      }
+
+    })
+
   }
 
 }

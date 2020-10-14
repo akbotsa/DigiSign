@@ -178,4 +178,9 @@ export class ServicesService {
   deleteDocument(data):Observable<any> {
     return this.http.post(environment.baseUrl + "documents/delete",data);
   }
+
+  pdfDownload(DocId : string):Observable<any> {
+    const params = new HttpParams().set("DocId" , DocId)
+    return this.http.get(environment.baseUrl + "documents/pdfDownload" , {params :params} , );
+  }
 }
