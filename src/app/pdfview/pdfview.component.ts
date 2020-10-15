@@ -476,26 +476,15 @@ export class PdfviewComponent implements OnInit {
 
 
   updateSignature() {
-    //var comt = JSON.stringify(this.comments);
+    
+    var currentdate = new Date();
+    var datetime = currentdate.getDate() + "/"
+      + (currentdate.getMonth() + 1) + "/"
+      + currentdate.getFullYear() + " @ "
+      + currentdate.getHours() + ":"
+      + currentdate.getMinutes() 
+    // + currentdate.getSeconds();
 
-    console.log('comments-->', this.comments);
-    /* console.log('lnght-->',this.comments.length);
-    if(this.comments.length > 0){
-      for (let i = 0; i < this.comments.length; i++) {
-        console.log('test-->',this.comments[i]);
-      }
-    } */
-    const currentDate = new Date()
-    let year = currentDate.getFullYear()
-    let month = (currentDate.getMonth() + 1).toString()
-    let day = currentDate.getDate().toString()
-
-    let mm = currentDate.getMinutes()
-    let sec = currentDate.getSeconds()
-
-    if (day.length < 2) day = `0${day}`; else day = `${day}`;
-    if (month.toString().length < 2) month = `0${month}`; else month = `${month}`;
-    let currentDateFormat = year + "-" + month + "-" + day
 
     const formData = new FormData();
     formData.append('DocId', this.userDocId);
@@ -506,7 +495,7 @@ export class PdfviewComponent implements OnInit {
     formData.append('exitInitial', this.exitInitial);
 
     formData.append('comments', this.comments);
-    formData.append('createAt', currentDateFormat);
+    formData.append('createAt', datetime);
 
     console.log('data', formData.getAll('initialImage'));
 
@@ -531,10 +520,20 @@ export class PdfviewComponent implements OnInit {
 
   /* Signature Rejection  */
   public onRejectInvitation() {
+
+    var currentdate = new Date();
+    var datetime = currentdate.getDate() + "/"
+      + (currentdate.getMonth() + 1) + "/"
+      + currentdate.getFullYear() + " @ "
+      + currentdate.getHours() + ":"
+      + currentdate.getMinutes() 
+    // + currentdate.getSeconds();
+
     let rejectReqObj = {
       DocId: this.userDocId,
       RecipientID: this.useRecId,
       comments: this.comments,
+      createAt: datetime
     };
 
     this.services.getReject(rejectReqObj).subscribe((resp) => {
@@ -546,10 +545,10 @@ export class PdfviewComponent implements OnInit {
         this.isShowflag = false;
         this.toastr.error(
           'Waiting for prior authorized signatures.',
-          'Failed:'
+
         );
       } else {
-        this.toastr.error(`${resp.Message}`, 'Failed:');
+        this.toastr.error(`${resp.Message}`);
       }
     });
   }
@@ -586,7 +585,7 @@ export class PdfviewComponent implements OnInit {
 
   downloadPdf() {
     this.services.pdfDownload(this.docID).subscribe(resp => {
-       
+
       if (resp.statusCode == 200) {
         saveAs.saveAs(`${this.imageBaseUrl}${resp.data}`, `Doc${resp.data}`)
       }
