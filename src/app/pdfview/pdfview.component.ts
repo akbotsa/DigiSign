@@ -488,7 +488,7 @@ export class PdfviewComponent implements OnInit {
     var datetime = currentdate.getDate() + "/"
       + (currentdate.getMonth() + 1) + "/"
       + currentdate.getFullYear() + " "
-      + currentdate.getHours() + ":"
+      + hours + ":"
       + currentdate.getMinutes() + " "
       + ampm
 
@@ -536,8 +536,8 @@ export class PdfviewComponent implements OnInit {
 
     var datetime = currentdate.getDate() + "/"
       + (currentdate.getMonth() + 1) + "/"
-      + currentdate.getFullYear() + " @ "
-      + currentdate.getHours() + ":"
+      + currentdate.getFullYear() + " "
+      + hours + ":"
       + currentdate.getMinutes() + " "
       // + currentdate.getSeconds();
       + ampm
