@@ -91,3 +91,9 @@
     width: 100% !important;
     height: 100% !important;
 }
+
+.pdf-sign1 {
+    height: auto;
+    width: 25%;
+    position: relative;
+}

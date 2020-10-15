@@ -72,7 +72,7 @@
                   [style.top.px]="pos.top"
                 >
                   <img
-                    style="height: 70px; width: 300px"
+                    class="pdf-sign1"
                     src="{{  list.signatureImage }}"
                   />
                 </div>
@@ -119,12 +119,14 @@
                     border-radius: 5px;
                     color: rgb(255, 255, 255);
                     position: relative;
+                    width: 100px;
+                    height: auto;
                   "
                   [style.left.px]="ini.left"
                   [style.top.px]="ini.top"
                 >
                   <img
-                    style="height: 70px; width: 300px"
+                   class="pdf-sign2"
                     src="{{ list.initialImage }}"
                   />
                 </div>
@@ -205,7 +207,7 @@
                     class="ui-state-highlight icommrmv"
                     style="display: inline; color: #135699; font-weight: bold"
                   >
-                    <img style="height: 20px" src="assets/images/comm.png" />{{
+                  <i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>{{
                       list.Name
                     }}
                   </p>
@@ -229,7 +231,7 @@
               [style.top.px]="data.top"
             >
               <img
-                style="height: 70px; width: 300px"
+                class="pdf-sign1"
                 [src]="receipt.signatureImage"
               />
             </div>
@@ -248,7 +250,7 @@
               [style.top.px]="data.top"
             >
               <img
-                style="height: 70px; width: 300px"
+                class="pdf-sign2"
                 [src]="receipt.initialImage"
               />
             </div>
@@ -303,7 +305,7 @@
         <ng-template ngbTabContent>
           <div class="col-md-12">
             <div class="tab-sign">
-              <ng-signature-pad
+              <ng-signature-pad class="sign-test"
                 doneButtonText="Create a Signature"
                 format="blob"
                 (done)="saveImage($event)"

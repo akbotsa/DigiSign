@@ -83,3 +83,40 @@
   }
 
 }
+
+.signature-pad {
+  overflow: visible !important;
+  width: auto;
+  position: relative;
+}
+.signature-pad canvas {
+  height: auto !important;
+  width: auto !important;
+}
+
+.sign-test .signature-pad{
+  overflow: visible !important;
+  width: 350px !important;
+  position: relative !important;
+}
+
+/* .sign-test .signature-pad{
+  overflow: visible !important;
+  width: auto !important;
+  position: relative !important;
+} */
+
+.pdf-sign {
+  height: auto; 
+  width: 27%; 
+  position:relative;
+}
+
+#sidebar-wrapper {
+  height: 100%;
+}
+
+#sidebar-wrapper .link {
+  border-bottom: 1px solid #ccc;
+}
+

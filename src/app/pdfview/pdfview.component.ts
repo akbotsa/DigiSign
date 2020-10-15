@@ -282,7 +282,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 80px;width: auto; position:relative;top:-10px" src="${base64data}">`
+        `<img class="${aa} pdf-sign" src="${base64data}">`
       );
       self.modalService.dismissAll();
       /*  self.imageCompress.compressFile(data, -1, 50, 50).then((result) => {
@@ -312,7 +312,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 80px;width: auto;" src="${base64data}">`
+        `<img class="${aa} pdf-sign" src="${base64data}">`
       );
       self.modalService.dismissAll();
     };
@@ -392,7 +392,7 @@ export class PdfviewComponent implements OnInit {
       $(yy).remove();
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
-        `<img class="${aa}" style="height: 80px;width: auto;" src="${this.mainImage}">`
+        `<img class="${aa} pdf-sign" src="${this.mainImage}">`
       );
 
       console.log(this.uploadedFiles);
@@ -419,7 +419,7 @@ export class PdfviewComponent implements OnInit {
     $(yy).remove();
     $(xx).css({ 'background-color': 'transparent', padding: 0 });
     $(xx).append(
-      `<img class="${aa}" style="height: 80px;width: auto;" src="${this.imageBaseUrl}${sign}">`
+      `<img class="${aa} pdf-sign" src="${this.imageBaseUrl}${sign}">`
     );
     this.modalService.dismissAll();
   }

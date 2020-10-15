@@ -20,19 +20,19 @@
             </li>
         </ul> -->
         <div class="link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <a [routerLink]="['/document/inbox']" ><i class="fa fa-inbox mr-2"></i>inbox</a>
+            <a [routerLink]="['/document/inbox']" ><i class="fa fa-inbox mr-2"></i>|&nbsp;inbox</a>
         </div>
         <div class="link" [routerLinkActive]="['active']">
-            <a  [routerLink]="['/document/sent']"><i class="fa fa-send-o mr-2"></i>Sent</a>
+            <a  [routerLink]="['/document/sent']"><i class="fa fa-send-o mr-2"></i>|&nbsp;Sent</a>
         </div>
         <!-- <div class="link" [routerLinkActive]="['active']">
             <a  [routerLink]="['/document/draft']"><i class="fa fa-pencil-square-o mr-2"></i>Drafts</a>
         </div> -->
         <div class="link" [routerLinkActive]="['active']">
-            <a  [routerLink]="['/document/awaited']"><i class="fa fa-send-o mr-2"></i>Awaiting</a>
+            <a  [routerLink]="['/document/awaited']"><i class="fa fa-clock-o mr-2"></i>|&nbsp;Awaiting</a>
         </div>
         <div class="link" [routerLinkActive]="['active']">
-            <a  [routerLink]="['/document/completed']"><i class="fa fa-check mr-2"></i>Completed</a>
+            <a  [routerLink]="['/document/completed']"><i class="fa fa-check mr-2"></i>|&nbsp;Completed</a>
         </div>
         <!-- <div>
             <label><i class="fa fa-trash mr-2"></i>Deleted</label>

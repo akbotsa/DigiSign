@@ -134,6 +134,12 @@
     position: absolute !important;
 }
 
+.sign-comment i {
+    color: #000;
+}
+
+
+
 /* #sortable {
      margin: 0px 70px;
 } */
