@@ -476,15 +476,21 @@ export class PdfviewComponent implements OnInit {
 
 
   updateSignature() {
-    
+
     var currentdate = new Date();
+
+    let hours = currentdate.getHours()
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12
+    // let slotHour = `${hours} ${ampm}`;
+
     var datetime = currentdate.getDate() + "/"
       + (currentdate.getMonth() + 1) + "/"
-      + currentdate.getFullYear() + " @ "
+      + currentdate.getFullYear() + " "
       + currentdate.getHours() + ":"
-      + currentdate.getMinutes() 
-    // + currentdate.getSeconds();
-
+      + currentdate.getMinutes() + " "
+      + ampm
 
     const formData = new FormData();
     formData.append('DocId', this.userDocId);
@@ -522,12 +528,19 @@ export class PdfviewComponent implements OnInit {
   public onRejectInvitation() {
 
     var currentdate = new Date();
+
+    let hours = currentdate.getHours()
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12
+
     var datetime = currentdate.getDate() + "/"
       + (currentdate.getMonth() + 1) + "/"
       + currentdate.getFullYear() + " @ "
       + currentdate.getHours() + ":"
-      + currentdate.getMinutes() 
-    // + currentdate.getSeconds();
+      + currentdate.getMinutes() + " "
+      // + currentdate.getSeconds();
+      + ampm
 
     let rejectReqObj = {
       DocId: this.userDocId,
