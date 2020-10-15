@@ -424,12 +424,10 @@
             <div class="col-md-12">
               <div class="tab-sign">
                 <!-- (done)="saveImage($event)" -->
-                <ng-signature-pad
+                <ng-signature-pad class="sign-test"
                   doneButtonText="Create a Signature"
                   format="blob"
                   (done)="saveImage($event)"
-                  [height]="200"
-                  [width]="1000"
                 ></ng-signature-pad>
               </div>
             </div>

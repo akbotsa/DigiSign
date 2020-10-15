@@ -180,7 +180,7 @@ export class AddFieldsComponent implements OnInit {
       this.recpList[index]['commentsCoordinates'] = temp;
 
       $('.pdfViewerSection').prepend(
-        `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/comm.png">${user.Name}</p></div>`
+        `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
       );
   
       let self = this;
