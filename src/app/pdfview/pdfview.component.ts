@@ -515,10 +515,10 @@ export class PdfviewComponent implements OnInit {
 
     this.services.sendRecipientFiles(formData).subscribe((resp) => {
       if (resp.statusCode == 200) {
-        this.toastr.success(`${resp.Message}`, 'Success:');
+        this.toastr.success('Signed SuccessFully', 'Success:');
         this.router.navigateByUrl('/document');
       } else {
-        this.toastr.error(`${resp.Message}`, 'Failed:');
+        this.toastr.error('Signed Failed , Please sign again', 'Failed:');
       }
       //console.log('coordinats-->', resp);
     });
@@ -553,11 +553,12 @@ export class PdfviewComponent implements OnInit {
       if (resp.statusCode === 200) {
         this.router.navigateByUrl('/document/inbox');
         this.isShowflag = false;
-        this.toastr.success(`${resp.Message}`, 'Success:');
+        this.toastr.success('Rejected SuccessFully', 'Success:');
       } else if (resp.statusCode == 403) {
         this.isShowflag = false;
         this.toastr.error(
           'Waiting for prior authorized signatures.',
+          'Failed:'
 
         );
       } else {
