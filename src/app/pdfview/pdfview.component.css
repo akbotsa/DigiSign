@@ -87,3 +87,28 @@
 /* .modal-dialog {
   margin-top: 50px;
 } */
+
+@media (min-width: 200px) {
+  .res-row {
+    flex-wrap: nowrap !important;
+    overflow: scroll !important;
+  }
+
+  .res-formm {
+    width: 350px !important;
+  }
+
+  #id {
+    width: 1012px !important;
+  }
+
+  #sortable {
+    width: 982px !important;
+  }
+
+  #page {
+  width: 793px !important;
+    height: 1122px !important;
+  }
+
+}

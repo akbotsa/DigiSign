@@ -1,8 +1,8 @@
 <div class="container-fluid con">
-  <div class="row">
+  <div class="row res-row">
     <div class="col-md-3 col-md-offset-3">
       <!-- <button class="btn btn-primary" (click)="generatePdf()">Genarate Pdf</button> -->
-      <form [formGroup]="rejectFormGroup">
+      <form [formGroup]="rejectFormGroup" class="res-formm">
         <div
           class="signature-acceptance"
           *ngIf="isShowflag && docRejected === false && isVerified === false"
