@@ -137,6 +137,12 @@
 
 .pdf-sign2 {
   height: auto;
-  width: 90%;
+  width: 25%;
+  position: relative;
+}
+
+.pdf-sign3 {
+  height: auto;
+  width: 25%;
   position: relative;
 }
