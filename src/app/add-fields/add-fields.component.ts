@@ -33,12 +33,16 @@ export class AddFieldsComponent implements OnInit {
   currentIndex: any;
   sendBtnHide: boolean = false;
 
+  documents: any = []
+
+  public imageBaseUrl = environment.imageBaseUrl
+
   constructor(
     private modalService: NgbModal,
     private toastr: ToastrService,
     private services: ServicesService,
     private router: Router
-  ) {}
+  ) { }
   private modelref: NgbModalRef;
   ngOnInit(): void {
     localStorage.removeItem('userData');
@@ -168,7 +172,7 @@ export class AddFieldsComponent implements OnInit {
   }
 
 
-  cloneComment(user, index){
+  cloneComment(user, index) {
     this.sendBtnHide = true;
     if (!this.recpList[index].hasOwnProperty('commentsCoordinates')) {
       let temp = [
@@ -182,7 +186,7 @@ export class AddFieldsComponent implements OnInit {
       $('.pdfViewerSection').prepend(
         `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
       );
-  
+
       let self = this;
       $('.draggable4').draggable({
         containment: 'parent',
@@ -198,7 +202,7 @@ export class AddFieldsComponent implements OnInit {
       });
       localStorage.setItem('userData', JSON.stringify(self.recpList));
 
-    }     
+    }
   }
 
   loadRecipientsList() {
@@ -209,12 +213,20 @@ export class AddFieldsComponent implements OnInit {
 
     this.services.recipientsList(reqObj).subscribe((resp) => {
       //console.log("recpList resp-----", resp);
-      this.recpList = resp.data.ReceiptsDetails[0].Receipts;
+      this.recpList = resp.data.ReceiptsDetails[0]?.Receipts;
       //console.log("recpList- ", this.recpList)
-      let docum = resp.data.DocDetails[0].Doc;
+      let docum = resp.data.DocDetails[0]?.Doc;
       //console.log("doccccccccc", docum);
-      this.viewSrc = `${environment.imageBaseUrl}${docum}`;
+      // this.viewSrc = `${environment.imageBaseUrl}${docum}`;
+      this.viewSrc = resp.data.DocDetails[0]?.Documents[0]?.Doc;
+
+      this.documents = resp.data.DocDetails[0]?.Documents
+
     });
+  }
+
+  DocView(doc) {
+    this.viewSrc = doc.Doc
   }
 
   onPdfUpload(event) {
@@ -280,7 +292,7 @@ export class AddFieldsComponent implements OnInit {
         this.recpList[i]['isReject'] = false;
         this.recpList[i]['isDelete'] = false;
         this.recpList[i]['createAt'] = '';
-        
+
       }
     }
 
@@ -294,14 +306,14 @@ export class AddFieldsComponent implements OnInit {
       Recipients: this.recpList,
     };
     //console.log(object);
-    this.services.insertDragObject(object).subscribe((resp) => {
-      console.log('Final Coordiantes', resp);
-      if (resp.statusCode == 200) {
-        this.router.navigateByUrl('document/sent');
-        //alert('Coordinate send successfully.');
-      } else {
-        this.toastr.error('Somthing went wrong.', 'Failed:');
-      }
-    }); 
+    // this.services.insertDragObject(object).subscribe((resp) => {
+    //   console.log('Final Coordiantes', resp);
+    //   if (resp.statusCode == 200) {
+    //     this.router.navigateByUrl('document/sent');
+    //     //alert('Coordinate send successfully.');
+    //   } else {
+    //     this.toastr.error('Somthing went wrong.', 'Failed:');
+    //   }
+    // });
   }
 }
