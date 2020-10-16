@@ -83,10 +83,20 @@ export class PdfviewComponent implements OnInit {
 
     const data = new Date()
     console.log(new Date())
-    this.userId = JSON.parse(localStorage.getItem('userDetails'))?._id;
-    this.docID = localStorage.getItem('docId');
-    this.docfile = localStorage.getItem('docfile');
-    this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
+    let user = JSON.parse(localStorage.getItem('userDetails'))?._id;
+    if (user) {
+      this.userId = user
+    }
+    let docId = localStorage.getItem('docId');
+    if (docId) {
+      this.docID = docId
+    }
+    let localDocfile = localStorage.getItem('docfile')
+    if (localDocfile) {
+      this.docfile = localDocfile
+      this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
+
+    }
 
 
 
@@ -177,7 +187,7 @@ export class PdfviewComponent implements OnInit {
       } else {
         this.toastr.error('Oops! Something went wrong.', 'Failed:');
       }
-      if (this.userData.length > 0) {
+      if (this.userData?.length > 0) {
         for (let i = 0; i < this.userData.length; i++) {
           console.log('verify-->', this.userData[i].VerifyFlag);
           if (this.userData[i].signatureImage != "") {
@@ -514,12 +524,24 @@ export class PdfviewComponent implements OnInit {
     //console.log('formData--->', formData);
 
     this.services.sendRecipientFiles(formData).subscribe((resp) => {
+
+
       if (resp.statusCode == 200) {
         this.toastr.success('Signed SuccessFully', 'Success:');
-        this.router.navigateByUrl('/document');
+
+        let user = JSON.parse(localStorage.getItem('userDetails'))?._id;
+        if (user) {
+          this.router.navigateByUrl('/document');
+        } else {
+          this.router.navigateByUrl('')
+        }
+
+
       } else {
         this.toastr.error('Signed Failed , Please sign again', 'Failed:');
       }
+
+
       //console.log('coordinats-->', resp);
     });
   }
@@ -550,10 +572,18 @@ export class PdfviewComponent implements OnInit {
     };
 
     this.services.getReject(rejectReqObj).subscribe((resp) => {
+
+
       if (resp.statusCode === 200) {
-        this.router.navigateByUrl('/document/inbox');
-        this.isShowflag = false;
         this.toastr.success('Rejected SuccessFully', 'Success:');
+        let user = JSON.parse(localStorage.getItem('userDetails'))?._id;
+        if (user) {
+          this.router.navigateByUrl('/document/inbox');
+          this.isShowflag = false;
+
+        } else {
+          this.router.navigateByUrl('')
+        }
       } else if (resp.statusCode == 403) {
         this.isShowflag = false;
         this.toastr.error(
@@ -564,6 +594,9 @@ export class PdfviewComponent implements OnInit {
       } else {
         this.toastr.error(`${resp.Message}`);
       }
+
+
+
     });
   }
 
