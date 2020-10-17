@@ -73,7 +73,7 @@
                         </div> -->
 
                         <div style="text-align: center;" class="signature1" *ngFor = "let doc of documents ; let i = index">
-                            <button  class="btn btn-succss" style="padding: 13px 30px;margin: 20px 0px 10px 0px;" (click) = "DocView(doc)">DOC {{i + 1}}</button>  
+                            <button  class="btn btn-succss" style="padding: 13px 30px;margin: 20px 0px 10px 0px;" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>  
                         </div>  
 
                         <hr>
@@ -95,14 +95,14 @@
 
                                 <div class="sign-format">
                                     <div class="signature">
-                                        <button (click)="cloneSignature(list, i)" class="btn btn-primary"><img src="assets/images/penn.png">&nbsp;Signature</button>
+                                        <button (click)="cloneSignature(list, i, indexdoc, indexdocId)" class="btn btn-primary"><img src="assets/images/penn.png">&nbsp;Signature</button>
                                     </div>
     
                                     <div class="signature1">
-                                        <button (click)="cloneIntial(list, i)" class="btn btn-primary"><img src="assets/images/digital.png">&nbsp;Initial</button>
+                                        <button (click)="cloneIntial(list, i, indexdoc, indexdocId)" class="btn btn-primary"><img src="assets/images/digital.png">&nbsp;Initial</button>
                                     </div>
                                     <div class="signature sign-comment">
-                                        <button (click)="cloneComment(list, i)" class="btn btn-primary"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;Comment</button>
+                                        <button (click)="cloneComment(list, i, indexdoc, indexdocId)" class="btn btn-primary"><i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;Comment</button>
                                     </div>
                                 </div>
 
@@ -136,19 +136,16 @@
 
                 <!-- <img [src]="signatureImage" *ngIf="signatureImage" /> -->
 
-               
+               <div *ngFor="let docu of documents ; let i = index" >
+                   {{doc | json}}
+                    <div class="pdfViewerSection_{{i}}" id="sortable" style="display: none;">
+                        <pdf-viewer [src]="imageBaseUrl + docu.Doc" 
+                        [render-text]='true'
+                        [show-all]="true"
+                        [fit-to-page]="true"> style="display: block;"> </pdf-viewer>
 
-                <div class="pdfViewerSection" id="sortable">
-                    <!-- <div class="hhhh"></div>
-                    <div class="draggable drag-cls" style="display: inline;">
-                        <p  class="ui-state-highlight">Testing</p>
-                    </div> -->
-                    <pdf-viewer [src]="imageBaseUrl + viewSrc" 
-                    [render-text]='true'
-                    [show-all]="true"
-                    [fit-to-page]="true"> style="display: block;"> </pdf-viewer>
-
-                </div>
+                    </div>
+            </div>
             </div>
             <!-- <div class="col-md-1">
                 <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Singature</button>

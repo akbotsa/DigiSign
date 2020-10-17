@@ -32,6 +32,8 @@ export class AddFieldsComponent implements OnInit {
   recpList: any;
   currentIndex: any;
   sendBtnHide: boolean = false;
+  indexdoc: any;
+  indexdocId: any;
 
   documents: any = []
 
@@ -89,90 +91,103 @@ export class AddFieldsComponent implements OnInit {
     });
   }
 
-  cloneSignature(user, index) {
-    console.log('hello');
-
-    this.sendBtnHide = true;
-    if (!this.recpList[index].hasOwnProperty('signature')) {
-      let temp = [
-        {
+  cloneSignature(user, index, docindex, indexdocId) {
+    console.log('hello', docindex);
+    if(docindex == undefined){
+        this.toastr.error('Please Select any one Document', 'error');
+    }else{
+      this.sendBtnHide = true;
+      if (!this.recpList[index].hasOwnProperty('signature')) {
+        let temp = [
+          {
+            top: 0,
+            left: 0,
+            id : indexdocId
+          },
+        ];
+        this.recpList[index]['signature'] = temp;
+      } else {
+        // console.log("recp list  have signature key");
+        this.recpList[index]['signature'].push({
           top: 0,
           left: 0,
+          id: indexdocId
+        });
+      }
+      //console.log("rec list length", this.recpList[index]['positions'].length);
+  
+      $('.pdfViewerSection_'+docindex)
+        .prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;"
+      id="drag_${index}_${this.recpList[index]['signature'].length}">
+      <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${user.Name}</p></div>`);
+      let self = this;
+      $('.draggable2').draggable({
+        containment: 'parent',
+        stop: function (event, ui) {
+          console.log('draggable element id ', $(this).attr('id'));
+          let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
+          self.recpList[parentIndex]['signature'][positionIndex - 1]['top'] =
+            ui.position.top;
+          self.recpList[parentIndex]['signature'][positionIndex - 1]['left'] =
+            ui.position.left;
+          console.log("recpList", self.recpList);
+          localStorage.setItem('userData', JSON.stringify(self.recpList));
         },
-      ];
-      this.recpList[index]['signature'] = temp;
-    } else {
-      // console.log("recp list  have signature key");
-      this.recpList[index]['signature'].push({
-        top: 0,
-        left: 0,
       });
+      //console.log("First");
+      console.log("recpList", self.recpList);
+      localStorage.setItem('userData', JSON.stringify(self.recpList));
     }
-    //console.log("rec list length", this.recpList[index]['positions'].length);
-
-    $('.pdfViewerSection')
-      .prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;"
-    id="drag_${index}_${this.recpList[index]['signature'].length}">
-    <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${user.Name}</p></div>`);
-    let self = this;
-    $('.draggable2').draggable({
-      containment: 'parent',
-      stop: function (event, ui) {
-        console.log('draggable element id ', $(this).attr('id'));
-        let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
-        self.recpList[parentIndex]['signature'][positionIndex - 1]['top'] =
-          ui.position.top;
-        self.recpList[parentIndex]['signature'][positionIndex - 1]['left'] =
-          ui.position.left;
-        //console.log("recpList", self.recpList);
-        localStorage.setItem('userData', JSON.stringify(self.recpList));
-      },
-    });
-    //console.log("First");
-    //console.log("recpList", self.recpList);
-    localStorage.setItem('userData', JSON.stringify(self.recpList));
   }
 
-  cloneIntial(user, index) {
+  cloneIntial(user, index, docindex, indexdocId,) {
+    if(docindex == undefined){
+      this.toastr.error('Please Select any one Document', 'error');
+  }else{
     this.sendBtnHide = true;
-    if (!this.recpList[index].hasOwnProperty('initial')) {
-      let temp = [
-        {
+      if (!this.recpList[index].hasOwnProperty('initial')) {
+        let temp = [
+          {
+            top: 0,
+            left: 0,
+            id: indexdocId
+          },
+        ];
+        this.recpList[index]['initial'] = temp;
+      } else {
+        // console.log("recp list  have signature key");
+        this.recpList[index]['initial'].push({
           top: 0,
           left: 0,
+          id: indexdocId
+        });
+      }
+
+      $('.pdfViewerSection_'+docindex).prepend(
+        `<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/digital.png">${user.Name}</p></div>`
+      );
+
+      let self = this;
+      $('.draggable3').draggable({
+        containment: 'parent',
+        stop: function (event, ui) {
+          let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
+          self.recpList[parentIndex]['initial'][positionIndex - 1]['top'] =
+            ui.position.top;
+          self.recpList[parentIndex]['initial'][positionIndex - 1]['left'] =
+            ui.position.left;
+          //console.log("recpList", self.recpList);
+          localStorage.setItem('userData', JSON.stringify(self.recpList));
         },
-      ];
-      this.recpList[index]['initial'] = temp;
-    } else {
-      // console.log("recp list  have signature key");
-      this.recpList[index]['initial'].push({
-        top: 0,
-        left: 0,
       });
-    }
-
-    $('.pdfViewerSection').prepend(
-      `<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/digital.png">${user.Name}</p></div>`
-    );
-
-    let self = this;
-    $('.draggable3').draggable({
-      containment: 'parent',
-      stop: function (event, ui) {
-        let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
-        self.recpList[parentIndex]['initial'][positionIndex - 1]['top'] =
-          ui.position.top;
-        self.recpList[parentIndex]['initial'][positionIndex - 1]['left'] =
-          ui.position.left;
-        //console.log("recpList", self.recpList);
-        localStorage.setItem('userData', JSON.stringify(self.recpList));
-      },
-    });
-    localStorage.setItem('userData', JSON.stringify(self.recpList));
+      localStorage.setItem('userData', JSON.stringify(self.recpList));
+  }
+    
   }
 
 
-  cloneComment(user, index) {
+  cloneComment(user, index, docindex, indexdocId) {
+    
     this.sendBtnHide = true;
     if (!this.recpList[index].hasOwnProperty('commentsCoordinates')) {
       let temp = [
@@ -183,7 +198,7 @@ export class AddFieldsComponent implements OnInit {
       ];
       this.recpList[index]['commentsCoordinates'] = temp;
 
-      $('.pdfViewerSection').prepend(
+      $('.pdfViewerSection_', docindex).prepend(
         `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
       );
 
@@ -225,8 +240,18 @@ export class AddFieldsComponent implements OnInit {
     });
   }
 
-  DocView(doc) {
-    this.viewSrc = doc.Doc
+  DocView(doc, index) {
+    console.log('doc', doc);
+    this.indexdoc = index;
+    this.indexdocId = doc.id;
+    if(this.documents.length > 0){
+      for (let h = 0; h < this.documents.length; h++) {
+          this.documents
+          $('.pdfViewerSection_'+ h).css('display', 'none');
+      }
+    }
+    $('.pdfViewerSection_'+ index).css('display', 'block');
+    //this.viewSrc = doc.Doc
   }
 
   onPdfUpload(event) {
