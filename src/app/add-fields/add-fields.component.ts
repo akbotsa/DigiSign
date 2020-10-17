@@ -97,38 +97,74 @@ export class AddFieldsComponent implements OnInit {
         this.toastr.error('Please Select any one Document', 'error');
     }else{
       this.sendBtnHide = true;
-      if (!this.recpList[index].hasOwnProperty('signature')) {
-        let temp = [
-          {
-            top: 0,
-            left: 0,
-            id : indexdocId
-          },
-        ];
-        this.recpList[index]['signature'] = temp;
-      } else {
-        // console.log("recp list  have signature key");
-        this.recpList[index]['signature'].push({
-          top: 0,
-          left: 0,
-          id: indexdocId
-        });
+      if (!this.recpList[index].hasOwnProperty('document')) {
+        let temp2 = [{}];
+        this.recpList[index]['document'] = temp2;
+        if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
+            let temp = [
+              {
+                top: 0,
+                left: 0
+              },
+            ];
+            this.recpList[index].document[docindex]['signature'] = temp;
+          } else {
+            // console.log("recp list  have signature key");
+            this.recpList[index]['signature'].push({
+              top: 0,
+              left: 0
+            });
+          }
+      }else{
+        if(!this.recpList[index].document[docindex]){
+          this.recpList[index]['document'].push({});
+          if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
+              let temp = [
+                {
+                  top: 0,
+                  left: 0,
+                },
+              ];
+              this.recpList[index].document[docindex]['signature'] = temp;
+            } else {
+              // console.log("recp list  have signature key");
+              this.recpList[index]['signature'].push({
+                top: 0,
+                left: 0
+              });
+            }
+        }else{
+          if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
+            let temp = [
+              {
+                top: 0,
+                left: 0,
+              },
+            ];
+            this.recpList[index].document[docindex]['signature'] = temp;
+          } else {
+            // console.log("recp list  have signature key");
+            this.recpList[index]['signature'].push({
+              top: 0,
+              left: 0
+            });
+          }
+        }
       }
       //console.log("rec list length", this.recpList[index]['positions'].length);
-  
       $('.pdfViewerSection_'+docindex)
         .prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;"
-      id="drag_${index}_${this.recpList[index]['signature'].length}">
+      id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['signature'].length}">
       <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${user.Name}</p></div>`);
       let self = this;
       $('.draggable2').draggable({
         containment: 'parent',
         stop: function (event, ui) {
           console.log('draggable element id ', $(this).attr('id'));
-          let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
-          self.recpList[parentIndex]['signature'][positionIndex - 1]['top'] =
+          let [name, parentIndex, dIndex, positionIndex] = $(this).attr('id').split('_');
+          self.recpList[parentIndex].document[dIndex]['signature'][positionIndex - 1]['top'] =
             ui.position.top;
-          self.recpList[parentIndex]['signature'][positionIndex - 1]['left'] =
+          self.recpList[parentIndex].document[dIndex]['signature'][positionIndex - 1]['left'] =
             ui.position.left;
           console.log("recpList", self.recpList);
           localStorage.setItem('userData', JSON.stringify(self.recpList));
@@ -145,38 +181,74 @@ export class AddFieldsComponent implements OnInit {
       this.toastr.error('Please Select any one Document', 'error');
   }else{
     this.sendBtnHide = true;
-      if (!this.recpList[index].hasOwnProperty('initial')) {
+    if (!this.recpList[index].hasOwnProperty('document')) {
+      let temp2 = [{}];
+      this.recpList[index]['document'] = temp2;
+      if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
         let temp = [
           {
             top: 0,
-            left: 0,
-            id: indexdocId
+            left: 0
           },
         ];
-        this.recpList[index]['initial'] = temp;
+        this.recpList[index].document[docindex]['initial'] = temp;
       } else {
         // console.log("recp list  have signature key");
-        this.recpList[index]['initial'].push({
+        this.recpList[index].document[docindex]['initial'].push({
           top: 0,
-          left: 0,
-          id: indexdocId
+          left: 0
         });
       }
-
+    }else{
+      if(!this.recpList[index].document[docindex]){
+        this.recpList[index]['document'].push({});
+        if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
+          let temp = [
+            {
+              top: 0,
+              left: 0
+            },
+          ];
+          this.recpList[index].document[docindex]['initial'] = temp;
+        } else {
+          // console.log("recp list  have signature key");
+          this.recpList[index].document[docindex]['initial'].push({
+            top: 0,
+            left: 0
+          });
+        }
+      }else{
+        if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
+          let temp = [
+            {
+              top: 0,
+              left: 0
+            },
+          ];
+          this.recpList[index].document[docindex]['initial'] = temp;
+        } else {
+          // console.log("recp list  have signature key");
+          this.recpList[index].document[docindex]['initial'].push({
+            top: 0,
+            left: 0
+          });
+        }
+      }
+    }
       $('.pdfViewerSection_'+docindex).prepend(
-        `<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/digital.png">${user.Name}</p></div>`
+        `<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/digital.png">${user.Name}</p></div>`
       );
 
       let self = this;
       $('.draggable3').draggable({
         containment: 'parent',
         stop: function (event, ui) {
-          let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
-          self.recpList[parentIndex]['initial'][positionIndex - 1]['top'] =
+          let [name, parentIndex, dIndex, positionIndex] = $(this).attr('id').split('_');
+          self.recpList[parentIndex].document[dIndex]['initial'][positionIndex - 1]['top'] =
             ui.position.top;
-          self.recpList[parentIndex]['initial'][positionIndex - 1]['left'] =
+          self.recpList[parentIndex].document[dIndex]['initial'][positionIndex - 1]['left'] =
             ui.position.left;
-          //console.log("recpList", self.recpList);
+          console.log("recpList", self.recpList);
           localStorage.setItem('userData', JSON.stringify(self.recpList));
         },
       });
@@ -187,36 +259,100 @@ export class AddFieldsComponent implements OnInit {
 
 
   cloneComment(user, index, docindex, indexdocId) {
+    if(docindex == undefined){
+      this.toastr.error('Please Select any one Document', 'error');
+    }else{
+      this.sendBtnHide = true;
+      if (!this.recpList[index].hasOwnProperty('document')) {
+        let temp2 = [{}];
+        this.recpList[index]['document'] = temp2;
+        if (!this.recpList[index].document[docindex].hasOwnProperty('commentsCoordinates')) {
+          let temp = [
+            {
+              top: 0,
+              left: 0
+            },
+          ];
+          this.recpList[index].document[docindex]['commentsCoordinates'] = temp;
     
-    this.sendBtnHide = true;
-    if (!this.recpList[index].hasOwnProperty('commentsCoordinates')) {
-      let temp = [
-        {
-          top: 0,
-          left: 0
-        },
-      ];
-      this.recpList[index]['commentsCoordinates'] = temp;
-
-      $('.pdfViewerSection_', docindex).prepend(
-        `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${this.recpList[index]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
-      );
-
-      let self = this;
-      $('.draggable4').draggable({
-        containment: 'parent',
-        stop: function (event, ui) {
-          let [name, parentIndex, positionIndex] = $(this).attr('id').split('_');
-          self.recpList[parentIndex]['commentsCoordinates'][positionIndex - 1]['top'] =
-            ui.position.top;
-          self.recpList[parentIndex]['commentsCoordinates'][positionIndex - 1]['left'] =
-            ui.position.left;
-          //console.log("recpList", self.recpList);
+          $('.pdfViewerSection_'+docindex).prepend(
+            `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
+          );
+    
+          let self = this;
+          $('.draggable4').draggable({
+            containment: 'parent',
+            stop: function (event, ui) {
+              let [name, parentIndex, dIndex, positionIndex] = $(this).attr('id').split('_');
+              self.recpList[parentIndex].document[dIndex]['commentsCoordinates'][positionIndex - 1]['top'] =
+                ui.position.top;
+              self.recpList[parentIndex].document[dIndex]['commentsCoordinates'][positionIndex - 1]['left'] =
+                ui.position.left;
+              //console.log("recpList", self.recpList);
+              localStorage.setItem('userData', JSON.stringify(self.recpList));
+            },
+          });
           localStorage.setItem('userData', JSON.stringify(self.recpList));
-        },
-      });
-      localStorage.setItem('userData', JSON.stringify(self.recpList));
-
+    
+        }
+      }else{
+        if(!this.recpList[index].document[docindex]){
+          this.recpList[index]['document'].push({});
+          if (!this.recpList[index].document[docindex].hasOwnProperty('commentsCoordinates')) {
+            let temp = [
+              {
+                top: 0,
+                left: 0
+              },
+            ];
+            this.recpList[index].document[docindex]['commentsCoordinates'] = temp;
+            $('.pdfViewerSection_'+docindex).prepend(
+              `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
+            );
+      
+            let self = this;
+            $('.draggable4').draggable({
+              containment: 'parent',
+              stop: function (event, ui) {
+                let [name, parentIndex, dIndex, positionIndex] = $(this).attr('id').split('_');
+                self.recpList[parentIndex].document[dIndex]['commentsCoordinates'][positionIndex - 1]['top'] =
+                  ui.position.top;
+                self.recpList[parentIndex].document[dIndex]['commentsCoordinates'][positionIndex - 1]['left'] =
+                  ui.position.left;
+                //console.log("recpList", self.recpList);
+                localStorage.setItem('userData', JSON.stringify(self.recpList));
+              },
+            });
+          } 
+        }else{
+          if (!this.recpList[index].document[docindex].hasOwnProperty('commentsCoordinates')) {
+            let temp = [
+              {
+                top: 0,
+                left: 0
+              },
+            ];
+            this.recpList[index].document[docindex]['commentsCoordinates'] = temp;
+            $('.pdfViewerSection_'+docindex).prepend(
+              `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
+            );
+      
+            let self = this;
+            $('.draggable4').draggable({
+              containment: 'parent',
+              stop: function (event, ui) {
+                let [name, parentIndex, dIndex, positionIndex] = $(this).attr('id').split('_');
+                self.recpList[parentIndex].document[dIndex]['commentsCoordinates'][positionIndex - 1]['top'] =
+                  ui.position.top;
+                self.recpList[parentIndex].document[dIndex]['commentsCoordinates'][positionIndex - 1]['left'] =
+                  ui.position.left;
+                //console.log("recpList", self.recpList);
+                localStorage.setItem('userData', JSON.stringify(self.recpList));
+              },
+            });
+          } 
+        }
+      }
     }
   }
 
@@ -331,7 +467,7 @@ export class AddFieldsComponent implements OnInit {
       Recipients: this.recpList,
     };
     //console.log(object);
-    this.services.insertDragObject(object).subscribe((resp) => {
+     this.services.insertDragObject(object).subscribe((resp) => {
       console.log('Final Coordiantes', resp);
       if (resp.statusCode == 200) {
         this.router.navigateByUrl('document/sent');
@@ -339,6 +475,6 @@ export class AddFieldsComponent implements OnInit {
       } else {
         this.toastr.error('Something went wrong.', 'Failed:');
       }
-    });
+    }); 
   }
 }

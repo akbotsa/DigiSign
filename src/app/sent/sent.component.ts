@@ -43,6 +43,10 @@ export class SentComponent implements OnInit {
     let docfile = document.documents[0].Doc;
     localStorage.setItem('docId', docId);
     localStorage.setItem('docfile', docfile);
+
+    let documents = document.documents[0].Documents;
+    localStorage.setItem('documents', JSON.stringify(documents));
+    
     this.router.navigateByUrl('/finalDoc');
   }
 

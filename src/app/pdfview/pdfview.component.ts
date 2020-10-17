@@ -106,7 +106,9 @@ export class PdfviewComponent implements OnInit {
       this.documents = localDocuments
       this.viewSrc = `${environment.imageBaseUrl}${this.documents[0].Doc}`;
       this.indexdocId = this.documents[0].id
-
+      if(this.documents.length > 0){
+        $('.pdfViewerSection_0').css('display', 'block');
+      }
     }
 
 
@@ -285,15 +287,13 @@ export class PdfviewComponent implements OnInit {
     console.log('doc', doc);
     this.indexdoc = index;
     this.indexdocId = doc.id;
-    this.viewSrc =`${environment.imageBaseUrl}${doc.Doc}`
-    if(this.documents.length > 0){
+     if(this.documents.length > 0){
       for (let h = 0; h < this.documents.length; h++) {
           this.documents
           $('.pdfViewerSection_'+ h).css('display', 'none');
       }
     }
-    $('.pdfViewerSection_'+ index).css('display', 'block');
-    // this.viewSrc = doc.Doc
+    $('.pdfViewerSection_'+ index).css('display', 'block'); 
   }
   saveImage(data) {
     console.log(data);

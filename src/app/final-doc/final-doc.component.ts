@@ -82,6 +82,11 @@ export class FinalDocComponent implements OnInit {
   userId;
   docfile: any;
   viewSrc: any;
+  documents: any;
+  
+  indexdoc: any;
+  indexdocId: any;
+
   dummy: any = [];
   isDownloadflag: boolean = true;
   public worker: Worker;
@@ -130,6 +135,11 @@ export class FinalDocComponent implements OnInit {
     //this.docId=this.userdata.docId;
     //this.userId=this.userdata.userId;
     this.getDocDetails();
+    const localDocuments = JSON.parse(localStorage.getItem('documents'))
+    console.log('localDocuments' , localDocuments)
+    if (localDocuments) {
+      this.documents = localDocuments
+    }
   }
 
   getDocDetails() {
@@ -250,6 +260,19 @@ export class FinalDocComponent implements OnInit {
 
     })
 
+  }
+
+  DocView(doc, index) {
+    console.log('doc', doc);
+    this.indexdoc = index;
+    this.indexdocId = doc.id;
+     if(this.documents.length > 0){
+      for (let h = 0; h < this.documents.length; h++) {
+          this.documents
+          $('.pdfViewerSection_'+ h).css('display', 'none');
+      }
+    }
+    $('.pdfViewerSection_'+ index).css('display', 'block'); 
   }
 
 }
