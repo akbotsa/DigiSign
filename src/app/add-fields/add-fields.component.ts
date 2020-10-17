@@ -331,14 +331,14 @@ export class AddFieldsComponent implements OnInit {
       Recipients: this.recpList,
     };
     //console.log(object);
-    // this.services.insertDragObject(object).subscribe((resp) => {
-    //   console.log('Final Coordiantes', resp);
-    //   if (resp.statusCode == 200) {
-    //     this.router.navigateByUrl('document/sent');
-    //     //alert('Coordinate send successfully.');
-    //   } else {
-    //     this.toastr.error('Somthing went wrong.', 'Failed:');
-    //   }
-    // });
+    this.services.insertDragObject(object).subscribe((resp) => {
+      console.log('Final Coordiantes', resp);
+      if (resp.statusCode == 200) {
+        this.router.navigateByUrl('document/sent');
+        //alert('Coordinate send successfully.');
+      } else {
+        this.toastr.error('Something went wrong.', 'Failed:');
+      }
+    });
   }
 }

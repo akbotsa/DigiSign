@@ -7,7 +7,11 @@
           class="signature-acceptance"
           *ngIf="isShowflag && docRejected === false && isVerified === false"
         >
-          <div class="comment-box">
+          <div class="comment-box" *ngFor = "let doc of documents ; let i = index">
+
+            <button class="btn btn-primary" (click)="DocView(doc , i)">
+             Doc {{i + 1}}
+            </button>
             <!-- <textarea
               name="comments"
               cols="30"
@@ -48,8 +52,8 @@
       <!-- <div class="pdf-none">
                 <p>&nbsp;</p>
             </div> -->
-
-      <div class="pdfViewerSection" id="sortable">
+       <div *ngFor = "let douc of documents">
+      <div class="pdfViewerSection" id="sortable" tyle="display: none;">
         <div *ngFor="let list of userData; let i = index">
           <div *ngIf=!list.isReject>
             <div *ngFor="let pos of list.signature; let idx = index">
@@ -93,7 +97,7 @@
                   "
                   [style.left.px]="pos.left"
                   [style.top.px]="pos.top"
-                >
+                 *ngIf = "indexdocId === pos.id">
                   <!-- <div id="replace_{{i}}_{{idx}}"></div> -->
                   <p
                     class="ui-state-highlight remove"
@@ -277,7 +281,7 @@
         </div>
 
         <pdf-viewer 
-          [src]="viewSrc"
+          [src]="imageBaseUrl + douc.Doc"
           [render-text]="true"
           [render-text]="true"
           [show-all]="true"
@@ -286,6 +290,8 @@
         >
         </pdf-viewer>
       </div>
+    </div>
+      
     </div>
   </div>
 </div>

@@ -59,10 +59,15 @@ export class InboxComponent implements OnInit {
     this.digiServices.viewFlagUpdate(obj).subscribe((resp) => {
       // console.log("respppppp", resp);
     })
+    
     let docId = document.documents[0].DocId;
     let docfile = document.documents[0].Doc;
+    let documents = document.documents[0].Documents;
+
     localStorage.setItem('docId', docId);
     localStorage.setItem('docfile', docfile);
+    localStorage.setItem('documents', JSON.stringify(documents));
+
     this.router.navigateByUrl('/pdfview');
   }
 

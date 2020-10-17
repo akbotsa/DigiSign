@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { saveAs } from 'file-saver';
+import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-pdfview',
   templateUrl: './pdfview.component.html',
@@ -60,6 +61,9 @@ export class PdfviewComponent implements OnInit {
   exitInitial: string = null;
   receipientData: any;
   docId: any;
+  documents : any
+  indexdoc : any
+  indexdocId : any
   constructor(
     private modalService: NgbModal,
     private services: ServicesService,
@@ -83,18 +87,25 @@ export class PdfviewComponent implements OnInit {
 
     const data = new Date()
     console.log(new Date())
-    let user = JSON.parse(localStorage.getItem('userDetails'))?._id;
+    const user = JSON.parse(localStorage.getItem('userDetails'))?._id;
     if (user) {
       this.userId = user
     }
-    let docId = localStorage.getItem('docId');
+    const docId = localStorage.getItem('docId');
     if (docId) {
       this.docID = docId
     }
-    let localDocfile = localStorage.getItem('docfile')
-    if (localDocfile) {
-      this.docfile = localDocfile
-      this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
+    // let localDocfile = localStorage.getItem('docfile')
+    // if (localDocfile) {
+    //   this.docfile = localDocfile
+    //   this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
+    // }
+    const localDocuments = JSON.parse(localStorage.getItem('documents'))
+    console.log('localDocuments' , localDocuments)
+    if (localDocuments) {
+      this.documents = localDocuments
+      this.viewSrc = `${environment.imageBaseUrl}${this.documents[0].Doc}`;
+      this.indexdocId = this.documents[0].id
 
     }
 
@@ -270,6 +281,20 @@ export class PdfviewComponent implements OnInit {
 
   }
 
+  DocView(doc, index) {
+    console.log('doc', doc);
+    this.indexdoc = index;
+    this.indexdocId = doc.id;
+    this.viewSrc =`${environment.imageBaseUrl}${doc.Doc}`
+    if(this.documents.length > 0){
+      for (let h = 0; h < this.documents.length; h++) {
+          this.documents
+          $('.pdfViewerSection_'+ h).css('display', 'none');
+      }
+    }
+    $('.pdfViewerSection_'+ index).css('display', 'block');
+    // this.viewSrc = doc.Doc
+  }
   saveImage(data) {
     console.log(data);
     let self = this;

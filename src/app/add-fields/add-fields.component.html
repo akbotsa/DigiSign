@@ -137,7 +137,7 @@
                 <!-- <img [src]="signatureImage" *ngIf="signatureImage" /> -->
 
                <div *ngFor="let docu of documents ; let i = index" >
-                   {{doc | json}}
+                   <!-- {{doc | json}} -->
                     <div class="pdfViewerSection_{{i}}" id="sortable" style="display: none;">
                         <pdf-viewer [src]="imageBaseUrl + docu.Doc" 
                         [render-text]='true'
