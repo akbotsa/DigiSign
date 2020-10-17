@@ -100,6 +100,9 @@ export class AddFieldsComponent implements OnInit {
       if (!this.recpList[index].hasOwnProperty('document')) {
         let temp2 = [{}];
         this.recpList[index]['document'] = temp2;
+        if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+          this.recpList[index].document[docindex]['id'] = indexdocId;
+        }
         if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
             let temp = [
               {
@@ -118,6 +121,9 @@ export class AddFieldsComponent implements OnInit {
       }else{
         if(!this.recpList[index].document[docindex]){
           this.recpList[index]['document'].push({});
+          if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+            this.recpList[index].document[docindex]['id'] = indexdocId;
+          }
           if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
               let temp = [
                 {
@@ -184,6 +190,9 @@ export class AddFieldsComponent implements OnInit {
     if (!this.recpList[index].hasOwnProperty('document')) {
       let temp2 = [{}];
       this.recpList[index]['document'] = temp2;
+      if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+        this.recpList[index].document[docindex]['id'] = indexdocId;
+      }
       if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
         let temp = [
           {
@@ -202,6 +211,9 @@ export class AddFieldsComponent implements OnInit {
     }else{
       if(!this.recpList[index].document[docindex]){
         this.recpList[index]['document'].push({});
+        if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+          this.recpList[index].document[docindex]['id'] = indexdocId;
+        }
         if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
           let temp = [
             {
@@ -266,6 +278,9 @@ export class AddFieldsComponent implements OnInit {
       if (!this.recpList[index].hasOwnProperty('document')) {
         let temp2 = [{}];
         this.recpList[index]['document'] = temp2;
+        if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+          this.recpList[index].document[docindex]['id'] = indexdocId;
+        }
         if (!this.recpList[index].document[docindex].hasOwnProperty('commentsCoordinates')) {
           let temp = [
             {
@@ -298,6 +313,9 @@ export class AddFieldsComponent implements OnInit {
       }else{
         if(!this.recpList[index].document[docindex]){
           this.recpList[index]['document'].push({});
+          if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+            this.recpList[index].document[docindex]['id'] = indexdocId;
+          }
           if (!this.recpList[index].document[docindex].hasOwnProperty('commentsCoordinates')) {
             let temp = [
               {
