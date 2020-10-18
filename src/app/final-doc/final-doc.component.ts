@@ -30,6 +30,9 @@ export class FinalDocComponent implements OnInit , AfterViewInit {
 
   dummy: any = [];
   isDownloadflag: boolean = true;
+  selectedDocuments: any = []
+  pdfDouments: any
+  downloadFlag :  boolean =  true
   public worker: Worker;
   public imageBaseUrl = environment.imageBaseUrl;
   constructor(private services: ServicesService,
@@ -201,20 +204,77 @@ export class FinalDocComponent implements OnInit , AfterViewInit {
     });
   }
 
+  Documents() {
+    this.services.pdfDownload(this.docId).subscribe(resp => {
+
+      if (resp.statusCode == 200) {
+
+        this.pdfDouments = resp.data
+      }
+
+    })
+
+  }
+
   downloadPdf() {
     this.services.pdfDownload(this.docId).subscribe(resp => {
 
       if (resp.statusCode == 200) {
 
-        resp.data.forEach(item  =>{
-          saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
-        })
+        if (this.downloadFlag === true) {
+          resp.data.forEach(item => {
+            saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
+          })
 
-      }else{
+        }
+
+        if (this.downloadFlag === false) {
+          this.selectedDocuments.forEach(item => {
+            saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
+          })
+
+        }
+
+
+      } else {
         alert('something went wrong')
       }
 
     })
+
+  }
+
+  DownloadDocs(type, id, event) {
+
+
+    if (type == 1) {
+      this.downloadFlag = true
+    } else {
+      this.downloadFlag = false
+
+      if (event.target.checked === false) {
+
+        for (let j = 0; j < this.selectedDocuments.length; j++) {
+
+          const selectDocs = this.selectedDocuments[j]
+
+            if(selectDocs.id  === id){
+              this.selectedDocuments.splice(j , 1)
+              j--
+            }
+
+        }
+
+      }else{
+        const data = this.pdfDouments.filter(item => item.id === id)
+
+        this.selectedDocuments.push(data[0])
+      }
+      console.log(' this.selectedDocuments' ,  this.selectedDocuments)
+
+     
+
+    }
 
   }
 

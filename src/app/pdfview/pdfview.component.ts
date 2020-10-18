@@ -23,7 +23,7 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './pdfview.component.html',
   styleUrls: ['./pdfview.component.css'],
 })
-export class PdfviewComponent implements OnInit , AfterViewInit {
+export class PdfviewComponent implements OnInit, AfterViewInit {
   viewSrc: string;
   userId: any;
   docID: string;
@@ -43,6 +43,7 @@ export class PdfviewComponent implements OnInit , AfterViewInit {
   initialFile: any;
   dummy = [];
   isShowflag: boolean = true;
+  downloadFlag: boolean = true
   public otherReceipts = []
   public rejectFormGroup: FormGroup;
   @ViewChild('mymodal', { static: false }) mymodal: TemplateRef<any>;
@@ -61,9 +62,11 @@ export class PdfviewComponent implements OnInit , AfterViewInit {
   exitInitial: string = null;
   receipientData: any;
   docId: any;
-  documents : any
-  indexdoc : any
-  indexdocId : any
+  documents: any
+  indexdoc: any 
+  indexdocId: any
+  selectedDocuments: any = []
+  pdfDouments: any
   constructor(
     private modalService: NgbModal,
     private services: ServicesService,
@@ -101,12 +104,12 @@ export class PdfviewComponent implements OnInit , AfterViewInit {
     //   this.viewSrc = `${environment.imageBaseUrl}${this.docfile}`;
     // }
     const localDocuments = JSON.parse(localStorage.getItem('documents'))
-    console.log('localDocuments' , localDocuments)
+    console.log('localDocuments', localDocuments)
     if (localDocuments) {
       this.documents = localDocuments
       this.viewSrc = `${environment.imageBaseUrl}${this.documents[0].Doc}`;
       this.indexdocId = this.documents[0].id
-      if(this.documents.length > 0){
+      if (this.documents.length > 0) {
         $('.pdfViewerSection_0').css('display', 'block');
       }
     }
@@ -117,9 +120,9 @@ export class PdfviewComponent implements OnInit , AfterViewInit {
     this.getDocDetails();
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
 
-    if(this.documents.length > 0){
+    if (this.documents.length > 0) {
       $('.pdfViewerSection_0').css('display', 'block');
     }
 
@@ -298,13 +301,13 @@ export class PdfviewComponent implements OnInit , AfterViewInit {
     console.log('doc', doc);
     this.indexdoc = index;
     this.indexdocId = doc.id;
-     if(this.documents.length > 0){
+    if (this.documents.length > 0) {
       for (let h = 0; h < this.documents.length; h++) {
-          this.documents
-          $('.pdfViewerSection_'+ h).css('display', 'none');
+        this.documents
+        $('.pdfViewerSection_' + h).css('display', 'none');
       }
     }
-    $('.pdfViewerSection_'+ index).css('display', 'block'); 
+    $('.pdfViewerSection_' + index).css('display', 'block');
   }
   saveImage(data) {
     console.log(data);
@@ -666,22 +669,81 @@ export class PdfviewComponent implements OnInit , AfterViewInit {
     });
   }
 
+  Documents() {
+    this.services.pdfDownload(this.docID).subscribe(resp => {
+
+      if (resp.statusCode == 200) {
+
+        this.pdfDouments = resp.data
+      }
+
+    })
+
+  }
+
   downloadPdf() {
     this.services.pdfDownload(this.docID).subscribe(resp => {
 
       if (resp.statusCode == 200) {
 
-        resp.data.forEach(item  =>{
-          saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
-        })
+        if (this.downloadFlag === true) {
+          resp.data.forEach(item => {
+            saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
+          })
 
-      }else{
+        }
+
+        if (this.downloadFlag === false) {
+          this.selectedDocuments.forEach(item => {
+            saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
+          })
+
+        }
+
+
+      } else {
         alert('something went wrong')
       }
 
     })
 
   }
+
+
+  DownloadDocs(type, id, event) {
+
+
+    if (type == 1) {
+      this.downloadFlag = true
+    } else {
+      this.downloadFlag = false
+
+      if (event.target.checked === false) {
+
+        for (let j = 0; j < this.selectedDocuments.length; j++) {
+
+          const selectDocs = this.selectedDocuments[j]
+
+            if(selectDocs.id  === id){
+              this.selectedDocuments.splice(j , 1)
+              j--
+            }
+
+        }
+
+      }else{
+        const data = this.pdfDouments.filter(item => item.id === id)
+
+        this.selectedDocuments.push(data[0])
+      }
+      console.log(' this.selectedDocuments' ,  this.selectedDocuments)
+
+     
+
+    }
+
+  }
+
 
   toDataURL(url, callback) {
     var xhr = new XMLHttpRequest();
