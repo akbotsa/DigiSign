@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {
   NgbModal,
@@ -9,7 +9,7 @@ import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
 declare var jquery: any;
 declare var $: any;
-import { ToastrService } from 'ngx-toastr';
+import { ToastrComponentlessModule, ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './add-fields.component.html',
   styleUrls: ['./add-fields.component.css'],
 })
-export class AddFieldsComponent implements OnInit {
+export class AddFieldsComponent implements OnInit, AfterViewInit {
   viewSrc: string;
   closeResult: string;
   signatureImage;
@@ -57,6 +57,18 @@ export class AddFieldsComponent implements OnInit {
     // console.log("dociiddddd",this.docID);
     this.getdrag();
     this.loadRecipientsList();
+   
+    console.log('docsNgOno', this.documents)
+
+  }
+
+  ngAfterViewInit() {
+    console.log('docs', this.documents)
+    if (this.documents.length > 0) {
+      $('.pdfViewerSection_0').css('display', 'block');
+    }
+
+
   }
 
   getdrag() {
@@ -93,9 +105,9 @@ export class AddFieldsComponent implements OnInit {
 
   cloneSignature(user, index, docindex, indexdocId) {
     console.log('hello', docindex);
-    if(docindex == undefined){
-        this.toastr.error('Please Select any one Document', 'error');
-    }else{
+    if (docindex == undefined) {
+      this.toastr.error('Please Select any one Document', 'error');
+    } else {
       this.sendBtnHide = true;
       if (!this.recpList[index].hasOwnProperty('document')) {
         let temp2 = [{}];
@@ -104,10 +116,31 @@ export class AddFieldsComponent implements OnInit {
           this.recpList[index].document[docindex]['id'] = indexdocId;
         }
         if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
+          let temp = [
+            {
+              top: 0,
+              left: 0
+            },
+          ];
+          this.recpList[index].document[docindex]['signature'] = temp;
+        } else {
+          // console.log("recp list  have signature key");
+          this.recpList[index]['signature'].push({
+            top: 0,
+            left: 0
+          });
+        }
+      } else {
+        if (!this.recpList[index].document[docindex]) {
+          this.recpList[index]['document'].push({});
+          if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+            this.recpList[index].document[docindex]['id'] = indexdocId;
+          }
+          if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
             let temp = [
               {
                 top: 0,
-                left: 0
+                left: 0,
               },
             ];
             this.recpList[index].document[docindex]['signature'] = temp;
@@ -118,28 +151,7 @@ export class AddFieldsComponent implements OnInit {
               left: 0
             });
           }
-      }else{
-        if(!this.recpList[index].document[docindex]){
-          this.recpList[index]['document'].push({});
-          if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
-            this.recpList[index].document[docindex]['id'] = indexdocId;
-          }
-          if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
-              let temp = [
-                {
-                  top: 0,
-                  left: 0,
-                },
-              ];
-              this.recpList[index].document[docindex]['signature'] = temp;
-            } else {
-              // console.log("recp list  have signature key");
-              this.recpList[index]['signature'].push({
-                top: 0,
-                left: 0
-              });
-            }
-        }else{
+        } else {
           if (!this.recpList[index].document[docindex].hasOwnProperty('signature')) {
             let temp = [
               {
@@ -158,7 +170,7 @@ export class AddFieldsComponent implements OnInit {
         }
       }
       //console.log("rec list length", this.recpList[index]['positions'].length);
-      $('.pdfViewerSection_'+docindex)
+      $('.pdfViewerSection_' + docindex)
         .prepend(`<div class="draggable2 drag-cls " style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move; left:0px; top:0px;"
       id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['signature'].length}">
       <p  class="ui-state-highlight" style="display: inline; color: #135699; font-weight: bold" ><img style="height: 20px;" src="assets/images/sign.png">${user.Name}</p></div>`);
@@ -183,34 +195,13 @@ export class AddFieldsComponent implements OnInit {
   }
 
   cloneIntial(user, index, docindex, indexdocId,) {
-    if(docindex == undefined){
+    if (docindex == undefined) {
       this.toastr.error('Please Select any one Document', 'error');
-  }else{
-    this.sendBtnHide = true;
-    if (!this.recpList[index].hasOwnProperty('document')) {
-      let temp2 = [{}];
-      this.recpList[index]['document'] = temp2;
-      if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
-        this.recpList[index].document[docindex]['id'] = indexdocId;
-      }
-      if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
-        let temp = [
-          {
-            top: 0,
-            left: 0
-          },
-        ];
-        this.recpList[index].document[docindex]['initial'] = temp;
-      } else {
-        // console.log("recp list  have signature key");
-        this.recpList[index].document[docindex]['initial'].push({
-          top: 0,
-          left: 0
-        });
-      }
-    }else{
-      if(!this.recpList[index].document[docindex]){
-        this.recpList[index]['document'].push({});
+    } else {
+      this.sendBtnHide = true;
+      if (!this.recpList[index].hasOwnProperty('document')) {
+        let temp2 = [{}];
+        this.recpList[index]['document'] = temp2;
         if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
           this.recpList[index].document[docindex]['id'] = indexdocId;
         }
@@ -229,25 +220,46 @@ export class AddFieldsComponent implements OnInit {
             left: 0
           });
         }
-      }else{
-        if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
-          let temp = [
-            {
+      } else {
+        if (!this.recpList[index].document[docindex]) {
+          this.recpList[index]['document'].push({});
+          if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
+            this.recpList[index].document[docindex]['id'] = indexdocId;
+          }
+          if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
+            let temp = [
+              {
+                top: 0,
+                left: 0
+              },
+            ];
+            this.recpList[index].document[docindex]['initial'] = temp;
+          } else {
+            // console.log("recp list  have signature key");
+            this.recpList[index].document[docindex]['initial'].push({
               top: 0,
               left: 0
-            },
-          ];
-          this.recpList[index].document[docindex]['initial'] = temp;
+            });
+          }
         } else {
-          // console.log("recp list  have signature key");
-          this.recpList[index].document[docindex]['initial'].push({
-            top: 0,
-            left: 0
-          });
+          if (!this.recpList[index].document[docindex].hasOwnProperty('initial')) {
+            let temp = [
+              {
+                top: 0,
+                left: 0
+              },
+            ];
+            this.recpList[index].document[docindex]['initial'] = temp;
+          } else {
+            // console.log("recp list  have signature key");
+            this.recpList[index].document[docindex]['initial'].push({
+              top: 0,
+              left: 0
+            });
+          }
         }
       }
-    }
-      $('.pdfViewerSection_'+docindex).prepend(
+      $('.pdfViewerSection_' + docindex).prepend(
         `<div class="draggable3 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['initial'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><img style="height: 20px;" src="assets/images/digital.png">${user.Name}</p></div>`
       );
 
@@ -265,15 +277,15 @@ export class AddFieldsComponent implements OnInit {
         },
       });
       localStorage.setItem('userData', JSON.stringify(self.recpList));
-  }
-    
+    }
+
   }
 
 
   cloneComment(user, index, docindex, indexdocId) {
-    if(docindex == undefined){
+    if (docindex == undefined) {
       this.toastr.error('Please Select any one Document', 'error');
-    }else{
+    } else {
       this.sendBtnHide = true;
       if (!this.recpList[index].hasOwnProperty('document')) {
         let temp2 = [{}];
@@ -289,11 +301,11 @@ export class AddFieldsComponent implements OnInit {
             },
           ];
           this.recpList[index].document[docindex]['commentsCoordinates'] = temp;
-    
-          $('.pdfViewerSection_'+docindex).prepend(
+
+          $('.pdfViewerSection_' + docindex).prepend(
             `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
           );
-    
+
           let self = this;
           $('.draggable4').draggable({
             containment: 'parent',
@@ -308,10 +320,10 @@ export class AddFieldsComponent implements OnInit {
             },
           });
           localStorage.setItem('userData', JSON.stringify(self.recpList));
-    
+
         }
-      }else{
-        if(!this.recpList[index].document[docindex]){
+      } else {
+        if (!this.recpList[index].document[docindex]) {
           this.recpList[index]['document'].push({});
           if (!this.recpList[index].document[docindex].hasOwnProperty('id')) {
             this.recpList[index].document[docindex]['id'] = indexdocId;
@@ -324,10 +336,10 @@ export class AddFieldsComponent implements OnInit {
               },
             ];
             this.recpList[index].document[docindex]['commentsCoordinates'] = temp;
-            $('.pdfViewerSection_'+docindex).prepend(
+            $('.pdfViewerSection_' + docindex).prepend(
               `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
             );
-      
+
             let self = this;
             $('.draggable4').draggable({
               containment: 'parent',
@@ -341,8 +353,8 @@ export class AddFieldsComponent implements OnInit {
                 localStorage.setItem('userData', JSON.stringify(self.recpList));
               },
             });
-          } 
-        }else{
+          }
+        } else {
           if (!this.recpList[index].document[docindex].hasOwnProperty('commentsCoordinates')) {
             let temp = [
               {
@@ -351,10 +363,10 @@ export class AddFieldsComponent implements OnInit {
               },
             ];
             this.recpList[index].document[docindex]['commentsCoordinates'] = temp;
-            $('.pdfViewerSection_'+docindex).prepend(
+            $('.pdfViewerSection_' + docindex).prepend(
               `<div class="draggable4 drag-cls" style="display: inline; z-index:1; background: #ccccccba; padding: 10px 10px; border-radius: 5px; color: #fff; cursor: move" id="drag_${index}_${docindex}_${this.recpList[index].document[docindex]['commentsCoordinates'].length}"> <p  class="ui-state-highlight" style="display: inline; color: #135699;  font-weight: bold"><i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>&nbsp;${user.Name}</p></div>`
             );
-      
+
             let self = this;
             $('.draggable4').draggable({
               containment: 'parent',
@@ -368,43 +380,46 @@ export class AddFieldsComponent implements OnInit {
                 localStorage.setItem('userData', JSON.stringify(self.recpList));
               },
             });
-          } 
+          }
         }
       }
     }
   }
 
-  loadRecipientsList() {
+  async loadRecipientsList() {
     let reqObj = {
       UserId: this.userId,
       DocId: this.docID,
     };
 
-    this.services.recipientsList(reqObj).subscribe((resp) => {
+     this.services.recipientsList(reqObj).subscribe(async (resp) => {
       //console.log("recpList resp-----", resp);
-      this.recpList = resp.data.ReceiptsDetails[0]?.Receipts;
+      this.recpList = await resp.data.ReceiptsDetails[0]?.Receipts;
       //console.log("recpList- ", this.recpList)
       let docum = resp.data.DocDetails[0]?.Doc;
       //console.log("doccccccccc", docum);
       // this.viewSrc = `${environment.imageBaseUrl}${docum}`;
-      this.viewSrc = resp.data.DocDetails[0]?.Documents[0]?.Doc;
+      this.viewSrc = await resp.data.DocDetails[0]?.Documents[0]?.Doc;
 
-      this.documents = resp.data.DocDetails[0]?.Documents
+      this.documents = await resp.data.DocDetails[0]?.Documents
+
+      console.log('documents', this.documents)
+
 
     });
   }
 
   DocView(doc, index) {
-    console.log('doc', doc);
+
     this.indexdoc = index;
     this.indexdocId = doc.id;
-    if(this.documents.length > 0){
+    if (this.documents.length > 0) {
       for (let h = 0; h < this.documents.length; h++) {
-          this.documents
-          $('.pdfViewerSection_'+ h).css('display', 'none');
+        this.documents
+        $('.pdfViewerSection_' + h).css('display', 'none');
       }
     }
-    $('.pdfViewerSection_'+ index).css('display', 'block');
+    $('.pdfViewerSection_' + index).css('display', 'block');
     //this.viewSrc = doc.Doc
   }
 
@@ -485,7 +500,7 @@ export class AddFieldsComponent implements OnInit {
       Recipients: this.recpList,
     };
     //console.log(object);
-     this.services.insertDragObject(object).subscribe((resp) => {
+    this.services.insertDragObject(object).subscribe((resp) => {
       console.log('Final Coordiantes', resp);
       if (resp.statusCode == 200) {
         this.router.navigateByUrl('document/sent');
@@ -493,6 +508,6 @@ export class AddFieldsComponent implements OnInit {
       } else {
         this.toastr.error('Something went wrong.', 'Failed:');
       }
-    }); 
+    });
   }
 }

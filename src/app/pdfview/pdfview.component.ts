@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ServicesService } from '../services/services.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import html2canvas from 'html2canvas'
@@ -23,7 +23,7 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './pdfview.component.html',
   styleUrls: ['./pdfview.component.css'],
 })
-export class PdfviewComponent implements OnInit {
+export class PdfviewComponent implements OnInit , AfterViewInit {
   viewSrc: string;
   userId: any;
   docID: string;
@@ -111,13 +111,24 @@ export class PdfviewComponent implements OnInit {
       }
     }
 
-
-
     this.loadRecipientsList();
     this.loadRejectForm();
     this.getdefaultSigns();
     this.getDocDetails();
   }
+
+  ngAfterViewInit(){
+
+    if(this.documents.length > 0){
+      $('.pdfViewerSection_0').css('display', 'block');
+    }
+
+
+  }
+
+
+
+
 
   getdefaultSigns() {
     this.services.getDefaultSigns(this.userId).subscribe((res) => {

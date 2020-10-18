@@ -233,7 +233,7 @@
             </div>
           </div>
           <div *ngFor="let receipt of otherReceipts">
-            <div *ngFor="let data of receipt.signature">
+            <div *ngFor="let data of receipt.document[m]?.signature">
               <div
                 class="drag-cls ui-draggable ui-draggable-handle"
                 style="
@@ -252,7 +252,7 @@
                 />
               </div>
             </div>
-            <div *ngFor="let data of receipt.initial">
+            <div *ngFor="let data of receipt.document[m]?.initial">
               <div
                 class="drag-cls ui-draggable ui-draggable-handle"
                 style="
@@ -272,7 +272,7 @@
               </div>
             </div>
 
-            <div *ngFor="let comm1 of receipt?.commentsCoordinates">
+            <div *ngFor="let comm1 of receipt.document[m]?.commentsCoordinates">
               <div
                 class="drag-cls ui-draggable ui-draggable-handle"
                 style="

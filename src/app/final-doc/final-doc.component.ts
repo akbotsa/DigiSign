@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ServicesService } from '../services/services.service';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf';
@@ -14,68 +14,9 @@ import { saveAs } from 'file-saver';
   templateUrl: './final-doc.component.html',
   styleUrls: ['./final-doc.component.css']
 })
-export class FinalDocComponent implements OnInit {
-  userdata: any =
-    {
-      "UserId": "5f63a0a5d4865523ab706587",
-      "DocId": "08f04af6-6437-46aa-aa47-45c938211adf",
-      "Recipients": [
-        {
-          "ReceiptId": 1,
-          "Name": "test User",
-          "Email": "sanjeevreddy644@gmail.com",
-          "VerifyFlag": true,
-          "signatureImage": "test.png",
-          "initialImage": "test.png",
-          "signature": [
-            {
-              "top": 246,
-              "left": 24.875
-            },
-            {
-              "top": 360,
-              "left": 40
-            }
-          ],
-          "initial": [
-            {
-              "top": 200,
-              "left": 300
-            },
-            {
-              "top": 0,
-              "left": 0
-            }
-          ]
-        },
-        {
-          "ReceiptId": 2,
-          "Name": "kirankumar",
-          "Email": "chinthadakirankumar@gmail.com",
-          "VerifyFlag": false,
-          "signatureImage": "test.png",
-          "initialImage": "",
-          "signature": [
-            {
-              "top": 408,
-              "left": 165
-            }
-          ]
-        }
-      ],
-      "documents": [
-        {
-          "_id": "5f65841b0ead043940b05e5b",
-          "Status": "1",
-          "UserId": "5f645bc4d4865523ab7065db",
-          "Doc": "DOC-d4e4.pdf",
-          "DocId": "ab339b2f-7542-47ad-91aa-18015cfd7a16",
-          "createdAt": "2020-09-19T04:07:55.385Z",
-          "updatedAt": "2020-09-19T04:07:55.385Z",
-          "__v": 0
-        }
-      ]
-    }
+export class FinalDocComponent implements OnInit , AfterViewInit {
+
+  userdata : any
 
   receipientData: any;
   docId: any;
@@ -140,6 +81,15 @@ export class FinalDocComponent implements OnInit {
     if (localDocuments) {
       this.documents = localDocuments
     }
+  }
+
+  ngAfterViewInit(){
+
+    if(this.documents.length > 0){
+      $('.pdfViewerSection_0').css('display', 'block');
+    }
+
+
   }
 
   getDocDetails() {
@@ -253,9 +203,15 @@ export class FinalDocComponent implements OnInit {
 
   downloadPdf() {
     this.services.pdfDownload(this.docId).subscribe(resp => {
-       
+
       if (resp.statusCode == 200) {
-        saveAs.saveAs(`${this.imageBaseUrl}${resp.data}`, `Doc${resp.data}`)
+
+        resp.data.forEach(item  =>{
+          saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
+        })
+
+      }else{
+        alert('something went wrong')
       }
 
     })
