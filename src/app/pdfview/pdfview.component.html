@@ -55,7 +55,7 @@
           <div *ngFor="let list of userData; let i = index">
             
             <div *ngIf=!list.isReject>
-              <div *ngFor="let pos of list.document[m].signature; let idx = index">
+              <div *ngFor="let pos of list.document[m]?.signature; let idx = index">
                 <span
                   *ngIf="list.VerifyFlag; then condition1; else condition2"
                 ></span>
@@ -108,7 +108,7 @@
                   </div>
                 </ng-template>
               </div>
-              <div *ngFor="let ini of list.document[m].initial; let j = index">
+              <div *ngFor="let ini of list.document[m]?.initial; let j = index">
                 <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
                 <ng-template #con1>
                   <div
@@ -161,7 +161,7 @@
                 </ng-template>
               </div>
               
-              <div *ngFor="let comm of list.document[m].commentsCoordinates; let j = index">
+              <div *ngFor="let comm of list.document[m]?.commentsCoordinates; let j = index">
                 <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
                 <ng-template #con1>
                   <div
@@ -256,7 +256,7 @@
               </div>
             </div>
 
-            <div *ngFor="let comm1 of receipt.commentsCoordinates">
+            <div *ngFor="let comm1 of receipt?.commentsCoordinates">
               <div
                 class="drag-cls ui-draggable ui-draggable-handle"
                 style="
@@ -273,7 +273,7 @@
                   style="height: 70px; width: 300px"
                   [src]="imageBaseUrl + receipt.initialImage"
                 /> -->
-                {{receipt.comments}}
+                {{receipt?.comments}}
               </div>
             </div>
           </div>

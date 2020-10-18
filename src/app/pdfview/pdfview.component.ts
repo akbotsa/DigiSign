@@ -659,7 +659,13 @@ export class PdfviewComponent implements OnInit {
     this.services.pdfDownload(this.docID).subscribe(resp => {
 
       if (resp.statusCode == 200) {
-        saveAs.saveAs(`${this.imageBaseUrl}${resp.data}`, `Doc${resp.data}`)
+
+        resp.data.forEach(item  =>{
+          saveAs.saveAs(`${this.imageBaseUrl}${item.Doc}`, `Doc${item.Doc}`)
+        })
+
+      }else{
+        alert('something went wrong')
       }
 
     })
