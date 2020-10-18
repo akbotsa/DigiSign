@@ -112,8 +112,8 @@
         <!-- Button trigger modal -->
         <div class="doc-sign-btn">
           <div style="text-align: center;">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Launch demo modal
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "Documents()">
+              Download
             </button>
           </div>
   
@@ -142,7 +142,7 @@
                     
                     <div class="modal-checkbox">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2" (click) = "DownloadDocs('1' , '2' , '3')">
                         <label class="custom-control-label" for="customCheck2">Download all</label>
                       </div>
                     </div>
@@ -150,7 +150,13 @@
                     <div class="modals-checks">
                       <div class="col-md-12 p-0">
                         <div class="row">
-                          <div class="col-md-4">
+                          <div class="col-md-4" *ngFor = "let docs of documents ; let h = index">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="{{h}}" (click) = "DownloadDocs('2' , docs.id , $event)">
+                              <label class="custom-control-label" for="{{h}}">{{docs.Doc}}</label>
+                            </div>
+                          </div>
+                          <!-- <div class="col-md-4">
                             <div class="custom-control custom-checkbox">
                               <input type="checkbox" class="custom-control-input" id="customCheck3">
                               <label class="custom-control-label" for="customCheck2">doc2</label>
@@ -168,14 +174,14 @@
                             <div class="custom-control custom-checkbox">
                               <input type="checkbox" class="custom-control-input" id="customCheck5">
                               <label class="custom-control-label" for="customCheck2">doc3</label>
-                            </div>
-                          </div>
+                            </div> -->
+                          <!-- </div> -->
                         </div>
                       </div>
                     </div>
   
                     <div class="col-md-12" style="text-align: center;">
-                      <button class="submit">
+                      <button class="submit" (click) ="downloadPdf()">
                         Download
                       </button>
                     </div>
