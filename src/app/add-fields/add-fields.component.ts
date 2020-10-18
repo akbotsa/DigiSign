@@ -417,9 +417,11 @@ export class AddFieldsComponent implements OnInit, AfterViewInit {
       for (let h = 0; h < this.documents.length; h++) {
         this.documents
         $('.pdfViewerSection_' + h).css('display', 'none');
+        $('.final_'+ h).removeClass('active');
       }
     }
     $('.pdfViewerSection_' + index).css('display', 'block');
+    $('.final_'+ index).addClass('active');
     //this.viewSrc = doc.Doc
   }
 

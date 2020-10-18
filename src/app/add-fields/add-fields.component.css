@@ -159,6 +159,12 @@
     color: #87ceeb;
 }
 
+.pdf-buttonn:active {
+    color: #fff !important;
+    background-color: #0062cc !important;
+    border-color: #005cbf !important;
+  }
+
 
 /* #sortable {
      margin: 0px 70px;
