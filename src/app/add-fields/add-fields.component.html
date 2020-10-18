@@ -72,9 +72,20 @@
                             </div>
                         </div> -->
 
-                        <div style="text-align: center;" class="signature1" *ngFor = "let doc of documents ; let i = index">
-                            <button  class="btn btn-succss" style="padding: 13px 30px;margin: 20px 0px 10px 0px;" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>  
-                        </div>  
+                        <h3 class="select-doc">Please select Document :</h3>
+                        <div class="doc-sign-btn">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4" *ngFor = "let doc of documents ; let i = index">
+                                        <button  class="btn btn-succss" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>   
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <!-- <div style="text-align: center;" class="signature1" *ngFor = "let doc of documents ; let i = index">
+                            <button  class="btn btn-succss" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>  
+                        </div>   -->
 
                         <hr>
                         <div>

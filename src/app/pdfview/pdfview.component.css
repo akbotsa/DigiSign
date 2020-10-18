@@ -146,3 +146,28 @@
   width: 25%;
   position: relative;
 }
+
+.select-doc {
+  font-size: 23px;
+  font-weight: 400;
+  color: #000;
+}
+
+.doc-sign-btn {
+  margin: 0px 0px 20px 0px;
+}
+
+.doc-sign-btn button{
+  background: #87ceeb;
+  border: 1px solid #87ceeb;
+  padding: 5px;
+  font-size: 13px;
+  padding: 16px 25px;
+  margin: 20px 0px 10px 0px;
+}
+
+.doc-sign-btn button:hover {
+  background: #fff;
+  cursor: pointer;
+  color: #87ceeb;
+}
