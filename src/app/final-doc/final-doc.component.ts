@@ -17,7 +17,7 @@ import { saveAs } from 'file-saver';
 export class FinalDocComponent implements OnInit , AfterViewInit {
 
   userdata : any
-
+  // selectorr:any;
   receipientData: any;
   docId: any;
   userId;
@@ -27,6 +27,12 @@ export class FinalDocComponent implements OnInit , AfterViewInit {
   
   indexdoc: any;
   indexdocId: any;
+
+  // selectorr = '.final-btns button';
+  // $(selectorr).on('click', function(){
+  //     $(selectorr).removeClass('active');
+  //     $(this).addClass('active');
+  // });
 
   dummy: any = [];
   isDownloadflag: boolean = true;
@@ -290,5 +296,7 @@ export class FinalDocComponent implements OnInit , AfterViewInit {
     }
     $('.pdfViewerSection_'+ index).css('display', 'block'); 
   }
+
+ 
 
 }
