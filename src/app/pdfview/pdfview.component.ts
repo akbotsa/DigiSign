@@ -118,6 +118,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     this.loadRejectForm();
     this.getdefaultSigns();
     this.getDocDetails();
+    this.Documents()
   }
 
   ngAfterViewInit() {

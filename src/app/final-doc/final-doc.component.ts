@@ -90,6 +90,8 @@ export class FinalDocComponent implements OnInit , AfterViewInit {
     if (localDocuments) {
       this.documents = localDocuments
     }
+    this.Documents()
+
   }
 
   ngAfterViewInit(){
