@@ -7,11 +7,27 @@
           class="signature-acceptance"
           *ngIf="isShowflag && docRejected === false && isVerified === false"
         >
-          <div class="comment-box" *ngFor = "let doc of documents ; let i = index">
+
+
+        <h3 class="select-doc">Please select Document :</h3>
+        <div class="doc-sign-btn">
+          <div class="col-md-12">
+              <div class="row">
+                  <div class="col-md-4" *ngFor = "let doc of documents ; let i = index">
+                    <button class="btn btn-primary" (click)="DocView(doc , i)">
+                      Doc {{i + 1}}
+                     </button> 
+                  </div>
+              </div>
+          </div> 
+        </div>
+
+
+          <!-- <div class="comment-box" *ngFor = "let doc of documents ; let i = index">
             <button class="btn btn-primary" (click)="DocView(doc , i)">
              Doc {{i + 1}}
             </button>
-          </div>
+          </div> -->
           <div class="d-flex" *ngIf="isVerified === false">
             <div class="reject-btn">
               <button class="btn btn-danger" (click)="onRejectInvitation()">
