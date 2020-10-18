@@ -53,11 +53,10 @@
                   </div>
                   <h5 class="text-danger">Document has already Signed</h5>
                 <div>
+
                   <!-- <button class="btn btn-primary" (click)=downloadPdf()>
                     Download
                   </button> -->
-
-
 
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -132,17 +131,22 @@
                       </div>
                     </div>
                   </div>
+                </div>               
+              </div>
+          </div> 
+        </div>
 
-
-
-
-
-
-
-
-
-
-
+        <div class="doc-sign-btn">
+          <div class="col-md-12">
+              <div class="row" *ngIf="docRejected === true">
+                <h3 class="select-doc">Please select Document :</h3>
+                  <div class="col-md-4" *ngFor = "let doc of documents ; let i = index">
+                    <button class="btn btn-primary" (click)="DocView(doc , i)">
+                      Doc {{i + 1}}
+                     </button>   
+                  </div>
+                  <h5 class="text-danger">Document Rejected by You</h5>
+                <div>
                 </div>               
               </div>
           </div> 
