@@ -49,7 +49,7 @@
               <div class="row" *ngIf="isVerified === true" >
                 <h3 class="select-doc">Please select Document :</h3>
                   <div class="col-md-4" *ngFor = "let doc of documents ; let i = index">
-                    <button class="" (click)="DocView(doc , i)"> Doc {{i + 1}} </button>   
+                    <button class="btn btn-primary doc-btn-main1 final_{{i}}" (click)="DocView(doc , i)"> Doc {{i + 1}} </button>   
                   </div>
                   <h5 class="text-danger">Document has already Signed</h5>
                 <div>

@@ -124,6 +124,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
 
     if (this.documents.length > 0) {
       $('.pdfViewerSection_0').css('display', 'block');
+      $('.final_0').addClass('active');
     }
 
 
@@ -305,9 +306,11 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
       for (let h = 0; h < this.documents.length; h++) {
         this.documents
         $('.pdfViewerSection_' + h).css('display', 'none');
+        $('.final_'+ h).removeClass('active');
       }
     }
     $('.pdfViewerSection_' + index).css('display', 'block');
+    $('.final_'+ index).addClass('active');
   }
   saveImage(data) {
     console.log(data);
@@ -826,4 +829,21 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     })
     console.log('receipientData-->', this.receipientData);
   }
+
+  // DocView(doc, index) {
+  //   console.log('doc', doc);
+  //   this.indexdoc = index;
+  //   this.indexdocId = doc.id;
+  //    if(this.documents.length > 0){
+  //     for (let h = 0; h < this.documents.length; h++) {
+  //         this.documents
+  //         $('.pdfViewerSection_'+ h).css('display', 'none');
+  //         $('.final_'+ h).removeClass('active');
+  //     }
+  //   }
+  //   $('.pdfViewerSection_'+ index).css('display', 'block'); 
+
+  //   $('.final_'+ index).addClass('active');
+
+  // }
 }
