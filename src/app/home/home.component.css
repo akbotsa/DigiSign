@@ -62,7 +62,7 @@
 }
 
 .border-left-primary {
-  border-left: solid 4px #008000b3;
+  border-left: solid 4px #84cfc5;
 }
 
 .reject-btn {
@@ -124,8 +124,8 @@
 .actions .buttons-1 {
   color: #fff;
   margin: 0px 8px !important;
-  background: #008000b3 !important;
-  border: 1px solid #008000b3 !important;
+  background: #84cfc5 !important;
+  border: 1px solid #84cfc5 !important;
   padding: 5px 10px;
 }
 
@@ -140,13 +140,13 @@
 .actions .button-3 {
   color: #fff !important;
   margin: 0px 8px !important;
-  background: #008000b3;
-  border: 1px solid #008000b3;
+  background: #84cfc5;
+  border: 1px solid #84cfc5;
   padding: 10px 15px !important;
 }
 
 .nav-pills .nav-link.active {
-  background: #008000b3;
+  background: #84cfc5;
   color: #fff;
 }
 
@@ -160,7 +160,7 @@
 }
 
 .new-button {
-  background: #008000b3;
+  background: #84cfc5;
   color: #fff;
 }
 .defaultColour {
