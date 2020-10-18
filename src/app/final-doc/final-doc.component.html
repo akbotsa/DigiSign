@@ -3,11 +3,27 @@
     <div class="col-md-3 col-md-offset-3">
       <div class="res-formm">
         
-        <div class="comment-box" *ngFor = "let doc of documents ; let i = index">
+        <div class="doc-sign-btn">
+          <div class="col-md-12">
+              <div class="row">
+                <h3 class="select-doc">Please select Document :</h3>
+                  <div class="col-md-4 final-btns" *ngFor = "let doc of documents ; let i = index">
+                    <button class="btn btn-primary doc-btn-main1" (click)="DocView(doc , i)">
+                      Doc {{i + 1}}
+                     </button>   
+                  </div>
+                <div>
+                </div>               
+              </div>
+          </div> 
+        </div>
+
+
+        <!-- <div class="comment-box" *ngFor = "let doc of documents ; let i = index">
           <button class="btn btn-primary" (click)="DocView(doc , i)">
            Doc {{i + 1}}
           </button>
-        </div>
+        </div> -->
         <div
           *ngFor="let list of receipientData; let i = index"
           class="mail-section border-left-primary"
@@ -85,14 +101,91 @@
           </div>
         </div>
       </div>
-      <div class="text-center"><!--  -->
-        <button
+      <div><!--  -->
+        <!-- <button
           class="btn btn-primary"
           *ngIf="isDownloadflag"
           (click)=downloadPdf()
         >
           Download Pdf
-        </button>
+        </button> -->
+        <!-- Button trigger modal -->
+        <div class="doc-sign-btn">
+          <div style="text-align: center;">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Launch demo modal
+            </button>
+          </div>
+  
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-new-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Download Documents</h5>
+                  <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="col-md-12">
+  
+                    <!-- <div class="modal-select">
+                      <div class="select-dropdown">
+                        <select>
+                          <option value="Option 1">First Option</option>
+                          <option value="Option 2">2nd Option</option>
+                          <option value="Option 3">Option Number 3</option>
+                        </select>
+                      </div>
+                    </div> -->
+                    
+                    <div class="modal-checkbox">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label" for="customCheck2">Download all</label>
+                      </div>
+                    </div>
+  
+                    <div class="modals-checks">
+                      <div class="col-md-12 p-0">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="customCheck3">
+                              <label class="custom-control-label" for="customCheck2">doc2</label>
+                            </div>
+                          </div>
+  
+                          <div class="col-md-4">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="customCheck4">
+                              <label class="custom-control-label" for="customCheck2">doc1</label>
+                            </div>
+                          </div>
+  
+                          <div class="col-md-4">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="customCheck5">
+                              <label class="custom-control-label" for="customCheck2">doc3</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-md-12" style="text-align: center;">
+                      <button class="submit">
+                        Download
+                      </button>
+                    </div>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- <button class="btn btn-primary" (click)="updateSignature()">Update Signature</button> -->
     </div>
