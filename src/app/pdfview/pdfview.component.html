@@ -102,7 +102,7 @@
                                   <div class="col-md-4" *ngFor = "let docs of documents ; let h = index">
                                     <div class="custom-control custom-checkbox">
                                       <input type="checkbox" class="custom-control-input" id="{{h}}" (click) = "DownloadDocs('2' , docs.id , $event)">
-                                      <label class="custom-control-label" for="{{h}}">{{docs.Doc}}</label>
+                                      <label class="custom-control-label" for="{{h}}">Doc {{h + 1}}</label>
                                     </div>
                                   </div>
 
