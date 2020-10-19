@@ -125,7 +125,7 @@ export class AddFieldsComponent implements OnInit {
           this.recpList[index].document[docindex]['signature'] = temp;
         } else {
           // console.log("recp list  have signature key");
-          this.recpList[index]['signature'].push({
+          this.recpList[index].document[docindex]['signature'].push({
             top: 0,
             left: 0
           });
@@ -146,7 +146,7 @@ export class AddFieldsComponent implements OnInit {
             this.recpList[index].document[docindex]['signature'] = temp;
           } else {
             // console.log("recp list  have signature key");
-            this.recpList[index]['signature'].push({
+            this.recpList[index].document[docindex]['signature'].push({
               top: 0,
               left: 0
             });
@@ -162,7 +162,7 @@ export class AddFieldsComponent implements OnInit {
             this.recpList[index].document[docindex]['signature'] = temp;
           } else {
             // console.log("recp list  have signature key");
-            this.recpList[index]['signature'].push({
+            this.recpList[index].document[docindex]['signature'].push({
               top: 0,
               left: 0
             });
