@@ -77,7 +77,17 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-4" *ngFor = "let doc of documents ; let i = index">
-                                        <button  class="btn btn-succss btn btn-primary doc-btn-main1 final_{{i}}" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>   
+                                        <!-- <button  class="btn btn-succss btn btn-primary doc-btn-main1 final_{{i}}" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>  -->
+
+
+                                        <span *ngIf="(i == 0); then condition1; else condition2"></span>
+                                        <ng-template #condition1>
+                                            <button  class="btn btn-succss btn btn-primary doc-btn-main1 active final_{{i}}" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>  
+                                        </ng-template>
+                                        <ng-template #condition2>
+                                            <button  class="btn btn-succss btn btn-primary doc-btn-main1 final_{{i}}" (click) = "DocView(doc, i)">DOC {{i + 1}}</button>  
+                                        </ng-template>
+                                         
                                     </div>
                                 </div>
                             </div> 
@@ -149,13 +159,26 @@
 
                <div *ngFor="let docu of documents ; let i = index" >
                    <!-- {{doc | json}} -->
-                    <div class="pdfViewerSection_{{i}}" id="sortable" style="display: none;">
-                        <pdf-viewer [src]="imageBaseUrl + docu.Doc" 
-                        [render-text]='true'
-                        [show-all]="true"
-                        [fit-to-page]="true"> style="display: block;"> </pdf-viewer>
-
-                    </div>
+                   <span *ngIf="(i == 0); then condition1; else condition2"></span>
+                    <ng-template #condition1>
+                        <div class="pdfViewerSection_{{i}}" id="sortable" style="display: block;">
+                            <pdf-viewer [src]="imageBaseUrl + docu.Doc" 
+                            [render-text]='true'
+                            [show-all]="true"
+                            [fit-to-page]="true"> style="display: block;"> </pdf-viewer>
+    
+                        </div>
+                    </ng-template>
+                    <ng-template #condition2>
+                        <div class="pdfViewerSection_{{i}}" id="sortable" style="display: none;">
+                            <pdf-viewer [src]="imageBaseUrl + docu.Doc" 
+                            [render-text]='true'
+                            [show-all]="true"
+                            [fit-to-page]="true"> style="display: block;"> </pdf-viewer>
+    
+                        </div>
+                    </ng-template>
+                    
             </div>
             </div>
             <!-- <div class="col-md-1">

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {
   NgbModal,
@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './add-fields.component.html',
   styleUrls: ['./add-fields.component.css'],
 })
-export class AddFieldsComponent implements OnInit, AfterViewInit {
+export class AddFieldsComponent implements OnInit {
   viewSrc: string;
   closeResult: string;
   signatureImage;
@@ -55,21 +55,21 @@ export class AddFieldsComponent implements OnInit, AfterViewInit {
     this.userId = JSON.parse(localStorage.getItem('userDetails'))._id;
     this.docID = localStorage.getItem('docId');
     // console.log("dociiddddd",this.docID);
-    this.getdrag();
     this.loadRecipientsList();
-   
-    console.log('docsNgOno', this.documents)
+    this.getdrag();
+    console.log('ngOnInit', this.documents)
+  }
 
+  /* ngAfterContentInit(){
+    console.log('ngAfterContentInit', this.documents)
   }
 
   ngAfterViewInit() {
-    console.log('docs', this.documents)
+    console.log('ngAfterViewInit', this.documents)
     if (this.documents.length > 0) {
       $('.pdfViewerSection_0').css('display', 'block');
     }
-
-
-  }
+  } */
 
   getdrag() {
     var sigcount = 1;
@@ -402,7 +402,10 @@ export class AddFieldsComponent implements OnInit, AfterViewInit {
       this.viewSrc = await resp.data.DocDetails[0]?.Documents[0]?.Doc;
 
       this.documents = await resp.data.DocDetails[0]?.Documents
-
+      if(this.documents.length > 0){
+        this.indexdoc = 0;
+        this.indexdocId = this.documents[0].id;
+      }
       console.log('documents', this.documents)
 
 
