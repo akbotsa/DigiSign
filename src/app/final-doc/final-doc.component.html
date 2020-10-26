@@ -291,7 +291,7 @@
                 *ngIf="list?.VerifyFlag; then condition1; else condition2"
               ></div>
               <ng-template #condition1>
-                <p style="color: black;">{{ list?.comments }}</p>
+                <p style="color: black;">{{ list?.comments[m] }}</p>
               </ng-template>
               <ng-template #condition2>
                 <p

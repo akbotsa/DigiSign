@@ -111,6 +111,10 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
       this.viewSrc = `${environment.imageBaseUrl}${this.documents[0].Doc}`;
       this.indexdocId = this.documents[0].id
       if (this.documents.length > 0) {
+        for (let k = 0; k < this.documents.length; k++) {
+          this.comments.push({});
+        }
+
         $('.pdfViewerSection_0').css('display', 'block');
       }
     }
@@ -557,7 +561,6 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     var cdoc = localStorage.getItem('cdoc_id');
     var cind = localStorage.getItem('cindex');
 
-
     var xx = '.icomm_' + cdoc + '_' + cind;
     var yy = '.icommrmv_' + cdoc + '_' + cind;
     var aa = 'icommrmv_' + cdoc + '_' + cind;
@@ -567,7 +570,13 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     $(xx).append(
       `<p class="ui-state-highlight icommrmv" style="display: inline; color: #135699; font-weight: bold">${eve}</p>`
     );
-    this.comments = eve;
+
+    
+
+    this.comments[cdoc] = eve;
+
+    console.log('commment--->', this.comments);
+
     this.modalService.dismissAll();
     //console.log('commment--->', eve);
 
@@ -592,18 +601,30 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
       + currentdate.getMinutes() + " "
       + ampm
 
-    const formData = new FormData();
+
+    let formObj = {
+        'DocId' : this.userDocId,
+        'RecipientID' : this.useRecId,
+        'initialImage' : this.initialFile,
+        'signatureImage' : this.signatureImage,
+        'exitSignature' : this.exitSignature,
+        'exitInitial' : this.exitInitial,
+        'comments' : this.comments,
+        'createAt' : datetime
+    }
+    
+
+    /* const formData = new FormData();
     formData.append('DocId', this.userDocId);
     formData.append('RecipientID', this.useRecId);
     formData.append('initialImage', this.initialFile);
     formData.append('signatureImage', this.signatureImage);
     formData.append('exitSignature', this.exitSignature);
     formData.append('exitInitial', this.exitInitial);
-
     formData.append('comments', this.comments);
     formData.append('createAt', datetime);
 
-    console.log('data', formData.getAll('initialImage'));
+    console.log('data', formData.getAll('initialImage')); */
 
     /*  if(this.comments.length > 0){
        for (let i = 0; i < this.comments.length; i++) {
@@ -611,11 +632,9 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
        }
      } */
 
-    //console.log('formData--->', formData);
+    console.log('formData--->', formObj);
 
-    this.services.sendRecipientFiles(formData).subscribe((resp) => {
-
-
+     this.services.sendRecipientFiles(formObj).subscribe((resp) => {
       if (resp.statusCode == 200) {
         this.toastr.success('Signed SuccessFully', 'Success:');
 
@@ -625,15 +644,10 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
         } else {
           this.router.navigateByUrl('')
         }
-
-
       } else {
         this.toastr.error('Signed Failed , Please sign again', 'Failed:');
       }
-
-
-      //console.log('coordinats-->', resp);
-    });
+    }); 
   }
 
   /* Signature Rejection  */

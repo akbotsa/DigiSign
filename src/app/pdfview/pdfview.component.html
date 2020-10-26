@@ -298,7 +298,7 @@
                     [style.left.px]="comm.left"
                     [style.top.px]="comm.top"
                   >
-                    {{ list.comments }}
+                    {{ list?.comments[m] }}
                     <!-- <img
                       style="height: 70px; width: 300px"
                       src="{{ imageBaseUrl + list.initialImage }}"
