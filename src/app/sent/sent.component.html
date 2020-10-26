@@ -4,15 +4,15 @@
   <div class="container-fluid">
     <div class="">
       <div class="top-section">
-        <div><h2>Sent</h2></div>
+        <div>
+          <h2>Sent</h2>
+        </div>
         <div class="top-right-filters">
           <div class="pagination-container">
-            <pagination-controls
-              (pageChange)="page = $event"
-            ></pagination-controls>
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
           </div>
           <div>
-            <input type="text" class="form-control"  [(ngModel)]="seachpipe" placeholder="Search" />
+            <input type="text" class="form-control" [(ngModel)]="seachpipe" placeholder="Search" />
           </div>
           <!-- &nbsp;&nbsp;
           <div><i class="fa fa-filter"></i> FILTERS</div> -->
@@ -38,13 +38,10 @@
 
               </thead>
               <tbody>
-                <tr
-                  class="border-bottom"
-                  *ngFor="
+                <tr class="border-bottom" *ngFor="
                     let document of documentsList | pipe :seachpipe
                       | paginate: { itemsPerPage: 10, currentPage: page }
-                  "
-                >
+                  ">
                   <td>
                     <input type="checkbox" />&nbsp;&nbsp;
                     <i class="fa fa-check"></i>
@@ -67,14 +64,18 @@
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
                   <td class="tooltip-status">
-                    <span style="color: #79cbc1;padding-right: 5px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span><p class="tooltip">{{DocumentStatus(document).status}}
+                    <span style="color: #79cbc1;padding-right: 5px;"><i class="fa fa-info-circle"
+                        aria-hidden="true"></i></span>
+                    <p class="tooltip">{{DocumentStatus(document).status}}
                       <span class="custom help">
-                        <p *ngFor = "let recipient of document?.Recipients">{{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}} - {{recipient?.createAt}}</p>
+                        <p *ngFor="let recipient of document?.Recipients">
+                          {{recipient?.Email}}&nbsp;-&nbsp;{{recipientStatus(recipient).status}} -
+                          {{recipient?.createAt}}</p>
                         <!-- <p>anil@gmail.com&nbsp;-&nbsp;DONE</p>
                         <p>anil@gmail.com&nbsp;-&nbsp;PENDING</p>
                         <p>anil@gmail.com&nbsp;-&nbsp;DONE</p> -->
                       </span>
-                    </p> 
+                    </p>
                   </td>
                   <td>
                     <p class="mb-0 to-status">
@@ -85,38 +86,24 @@
                     }}</span>
                   </td>
                   <td>
-                    <!-- <div class="dropdown">
-                                            <button class="btn form-inline dropdown-toggle"
-                                                data-toggle="dropdown">MOVE</button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item">Forward</a>
-                                                <a class="dropdown-item">Create a copy</a>
-                                                <a class="dropdown-item">Save as Template</a>
-                                                <a class="dropdown-item">History</a>
-                                                <a class="dropdown-item">Export as CSV</a>
-                                                <a class="dropdown-item">Delete</a>
-                                            </div>
-                                        </div> -->
-                    <button
-                      class="btn btn-primary"
-                      (click)="onClicksign(document)"
-                    >
-                      View
-                    </button>
+                    <div class="d-flex">
+                      <button class="btn btn-primary" (click)="onClicksign(document)">
+                        View
+                      </button>
 
-                    <button class="delete" (click)="deleteDoc(document)"><span><i class="fa fa-trash" aria-hidden="true"></i></span></button>
+                      <button class="delete" (click)="deleteDoc(document)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </button>
+                    </div>
                   </td>
 
                   <td class="to-status">
-                    <button
-                    class="btn btn-primary"
-                    (click)="ResendDoc(document)"
-                    *ngIf = "document?.pendingCount > 0 && document?.isRejected != true"
-                  >
-                    ReSend
-                  </button>
+                    <button class="btn btn-primary" (click)="ResendDoc(document)"
+                      *ngIf="document?.pendingCount > 0 && document?.isRejected != true">
+                      ReSend
+                    </button>
                   </td>
-                </tr> 
+                </tr>
               </tbody>
             </table>
           </div>
