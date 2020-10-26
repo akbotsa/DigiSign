@@ -183,4 +183,9 @@ export class ServicesService {
     const params = new HttpParams().set("DocId" , DocId)
     return this.http.get(environment.baseUrl + "documents/pdfDownload" , {params :params} , );
   }
+
+  reSend(DocId : string):Observable<any> {
+    const params = new HttpParams().set("DocId" , DocId)
+    return this.http.get(environment.baseUrl + "documents/resend" , {params :params} , );
+  }
 }

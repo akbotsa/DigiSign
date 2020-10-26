@@ -116,4 +116,18 @@ export class SentComponent implements OnInit {
       }
     })
   }
+
+  ResendDoc(Document){
+
+    this.digiServices.reSend(Document.documents[0].DocId).subscribe(res =>{
+      console.log('res' , res)
+      if(res.statusCode === 200){
+        this.toastr.success('Document Sent SuccessFully' , 'Success');
+      }else{
+        this.toastr.error(`${res.message}` , 'Failed')
+      }
+    })
+
+
+  }
 }

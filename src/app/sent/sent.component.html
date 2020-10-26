@@ -34,6 +34,8 @@
                 <th>Status</th>
                 <th>Date & Time</th>
                 <th>Action</th>
+                <th></th>
+
               </thead>
               <tbody>
                 <tr
@@ -103,9 +105,18 @@
                     </button>
 
                     <button class="delete" (click)="deleteDoc(document)"><span><i class="fa fa-trash" aria-hidden="true"></i></span></button>
-
                   </td>
-                </tr>
+
+                  <td class="to-status">
+                    <button
+                    class="btn btn-primary"
+                    (click)="ResendDoc(document)"
+                    *ngIf = "document?.pendingCount > 0 && document?.isRejected != true"
+                  >
+                    ReSend
+                  </button>
+                  </td>
+                </tr> 
               </tbody>
             </table>
           </div>
