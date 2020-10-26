@@ -202,8 +202,8 @@
                 </ng-template>
                 <ng-template #condition2>
                   <div
-                    (click)="draggable_Signature(1)"
-                    class="drag-cls ui-draggable ui-draggable-handle drag"
+                    (click)="getDefaultSignature(1, m, idx)"
+                    class="drag-cls ui-draggable ui-draggable-handle drag_{{m}}_{{idx}}"
                     style="
                       display: inline;
                       z-index: 1;
@@ -218,7 +218,7 @@
                     [style.top.px]="pos.top" >
                     <!-- <div id="replace_{{i}}_{{idx}}"></div> -->
                     <p
-                      class="ui-state-highlight remove"
+                      class="ui-state-highlight remove_{{m}}_{{idx}}"
                       style="display: inline; color: #135699; font-weight: bold"
                     >
                       <img style="height: 20px" src="assets/images/sign.png" />{{
@@ -253,8 +253,8 @@
                 </ng-template>
                 <ng-template #con2>
                   <div
-                    (click)="draggable_Signature(2)"
-                    class="drag-cls ui-draggable ui-draggable-handle idrag"
+                    (click)="getDefaultSignature(2, m, j)"
+                    class="drag-cls ui-draggable ui-draggable-handle idrag_{{m}}_{{j}}"
                     style="
                       display: inline;
                       z-index: 1;
@@ -270,7 +270,7 @@
                   >
                     <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
                     <p
-                      class="ui-state-highlight iremove"
+                      class="ui-state-highlight iremove_{{m}}_{{j}}"
                       style="display: inline; color: #135699; font-weight: bold"
                     >
                       <img style="height: 20px" src="assets/images/digital.png" />{{
@@ -281,7 +281,7 @@
                 </ng-template>
               </div>
               
-              <div *ngFor="let comm of list.document[m]?.commentsCoordinates; let j = index">
+              <div *ngFor="let comm of list.document[m]?.commentsCoordinates; let k = index">
                 <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
                 <ng-template #con1>
                   <div
@@ -307,8 +307,8 @@
                 </ng-template>
                 <ng-template #con2>
                   <div
-                    (click)="draggable_comment()"
-                    class="drag-cls ui-draggable ui-draggable-handle icomm"
+                    (click)="draggable_comment(m, k)"
+                    class="drag-cls ui-draggable ui-draggable-handle icomm_{{m}}_{{k}}"
                     style="
                       display: inline;
                       z-index: 1;
@@ -324,7 +324,7 @@
                   >
                     <!-- <div id="ireplace_{{i}}_{{j}}"></div> -->
                     <p
-                      class="ui-state-highlight icommrmv"
+                      class="ui-state-highlight icommrmv_{{m}}_{{k}}"
                       style="display: inline; color: #135699; font-weight: bold"
                     >
                     <i style="color: #000;" class="fa fa-commenting" aria-hidden="true"></i>{{

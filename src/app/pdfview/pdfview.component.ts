@@ -293,8 +293,40 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     localStorage.setItem('itemId', id);
   }
 
-  draggable_comment() {
-    //localStorage.setItem('comId', id);
+  getDefaultSignature(type, docId, index){
+    console.log('type-->',type );
+    console.log('docId-->',docId );
+    console.log('index-->',index );
+    console.log('Sign-->', );
+
+    const array = this.defaultSign.find((res) => {
+      return res.Type == type.toString();
+    });
+    console.log('Sign', array?.Sign);
+
+     if (type == 1) {
+      var xx = '.drag_'+docId+'_'+index ;
+      var yy = '.remove_'+docId+'_'+index;
+      var aa = 'remove_'+docId+'_'+index;
+      this.exitSignature = array?.Sign;
+    } else {
+      var xx = '.idrag_'+docId+'_'+index;
+      var yy = '.iremove_'+docId+'_'+index;
+      var aa = 'iremove_'+docId+'_'+index;
+      this.exitInitial = array?.Sign;
+    }
+    var signImg = this.imageBaseUrl + array?.Sign;
+    $(yy).remove();
+    $(xx).css({ 'background-color': 'transparent', padding: 0 });
+    $(xx).append(
+      `<img class="${aa} pdf-sign" src="${signImg}">`
+    ); 
+    
+  }
+
+  draggable_comment(docId, index) {
+    localStorage.setItem('cdoc_id', docId);
+    localStorage.setItem('cindex', index);
     this.modalService.open(this.mymodal1);
 
   }
@@ -510,10 +542,13 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
   } */
 
   clickOnComment(eve) {
+    var cdoc = localStorage.getItem('cdoc_id');
+    var cind = localStorage.getItem('cindex');
 
-    var xx = '.icomm';
-    var yy = '.icommrmv';
-    var aa = 'icommrmv';
+
+    var xx = '.icomm_'+cdoc+'_'+cind;
+    var yy = '.icommrmv_'+cdoc+'_'+cind;
+    var aa = 'icommrmv_'+cdoc+'_'+cind;
 
     $(yy).remove();
     $(xx).css({ 'background-color': 'transparent', padding: 0 });
@@ -566,7 +601,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
 
     //console.log('formData--->', formData);
 
-    this.services.sendRecipientFiles(formData).subscribe((resp) => {
+     this.services.sendRecipientFiles(formData).subscribe((resp) => {
 
 
       if (resp.statusCode == 200) {
@@ -586,7 +621,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
 
 
       //console.log('coordinats-->', resp);
-    });
+    }); 
   }
 
   /* Signature Rejection  */
