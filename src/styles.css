@@ -121,3 +121,25 @@
 }
 
 
+.swal2-styled.swal2-confirm {
+	background-color: #c81c1c !important;
+	font-size: 12px !important;
+}
+
+.swal2-styled.swal2-cancel {
+	font-size: 12px !important;
+}
+
+.swal2-icon.swal2-warning {
+	margin: 0px !important;
+	font-size: 11px;
+}
+
+.swal2-title {
+	font-size: 20px !important;
+}
+
+.swal2-icon.swal2-success {
+	margin: 0px !important;
+}
+

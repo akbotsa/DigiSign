@@ -9,6 +9,7 @@ import {
   NgbModalRef,
   NgbPopover,
 } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 declare var jquery: any;
 declare var $: any;
 
@@ -63,7 +64,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
   receipientData: any;
   docId: any;
   documents: any
-  indexdoc: any 
+  indexdoc: any
   indexdocId: any
   selectedDocuments: any = []
   pdfDouments: any
@@ -293,7 +294,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     localStorage.setItem('itemId', id);
   }
 
-  getDefaultSignature(type, docId, index){
+  getDefaultSignature(type, docId, index) {
     /* console.log('type-->',type );
     console.log('docId-->',docId );
     console.log('index-->',index );
@@ -303,19 +304,26 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
       return res.Type == type.toString();
     });
 
-    console.log('Sign-->',array );
-    if(array == undefined){
-      this.toastr.error('Please set default signature', 'Failed:');
-    }else{
+    if (array == undefined) {
+      let txt = 'signature or initial'
       if (type == 1) {
-        var xx = '.drag_'+docId+'_'+index ;
-        var yy = '.remove_'+docId+'_'+index;
-        var aa = 'remove_'+docId+'_'+index;
+        txt = 'signature'
+
+      }
+      if (type == 2) {
+        txt = 'initial'
+      }
+      this.toastr.error(`Please set default ${txt}`, 'Failed:');
+    } else {
+      if (type == 1) {
+        var xx = '.drag_' + docId + '_' + index;
+        var yy = '.remove_' + docId + '_' + index;
+        var aa = 'remove_' + docId + '_' + index;
         this.exitSignature = array?.Sign;
       } else {
-        var xx = '.idrag_'+docId+'_'+index;
-        var yy = '.iremove_'+docId+'_'+index;
-        var aa = 'iremove_'+docId+'_'+index;
+        var xx = '.idrag_' + docId + '_' + index;
+        var yy = '.iremove_' + docId + '_' + index;
+        var aa = 'iremove_' + docId + '_' + index;
         this.exitInitial = array?.Sign;
       }
       var signImg = this.imageBaseUrl + array?.Sign;
@@ -323,7 +331,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
       $(xx).css({ 'background-color': 'transparent', padding: 0 });
       $(xx).append(
         `<img class="${aa} pdf-sign" src="${signImg}">`
-      ); 
+      );
     }
     //console.log('Sign', array?.Sign);
   }
@@ -343,11 +351,11 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
       for (let h = 0; h < this.documents.length; h++) {
         this.documents
         $('.pdfViewerSection_' + h).css('display', 'none');
-        $('.final_'+ h).removeClass('active');
+        $('.final_' + h).removeClass('active');
       }
     }
     $('.pdfViewerSection_' + index).css('display', 'block');
-    $('.final_'+ index).addClass('active');
+    $('.final_' + index).addClass('active');
   }
   saveImage(data) {
     console.log(data);
@@ -550,9 +558,9 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     var cind = localStorage.getItem('cindex');
 
 
-    var xx = '.icomm_'+cdoc+'_'+cind;
-    var yy = '.icommrmv_'+cdoc+'_'+cind;
-    var aa = 'icommrmv_'+cdoc+'_'+cind;
+    var xx = '.icomm_' + cdoc + '_' + cind;
+    var yy = '.icommrmv_' + cdoc + '_' + cind;
+    var aa = 'icommrmv_' + cdoc + '_' + cind;
 
     $(yy).remove();
     $(xx).css({ 'background-color': 'transparent', padding: 0 });
@@ -605,7 +613,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
 
     //console.log('formData--->', formData);
 
-     this.services.sendRecipientFiles(formData).subscribe((resp) => {
+    this.services.sendRecipientFiles(formData).subscribe((resp) => {
 
 
       if (resp.statusCode == 200) {
@@ -625,61 +633,80 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
 
 
       //console.log('coordinats-->', resp);
-    }); 
+    });
   }
 
   /* Signature Rejection  */
   public onRejectInvitation() {
 
-    var currentdate = new Date();
-
-    let hours = currentdate.getHours()
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12
-
-    var datetime = currentdate.getDate() + "/"
-      + (currentdate.getMonth() + 1) + "/"
-      + currentdate.getFullYear() + " "
-      + hours + ":"
-      + currentdate.getMinutes() + " "
-      // + currentdate.getSeconds();
-      + ampm
-
-    let rejectReqObj = {
-      DocId: this.userDocId,
-      RecipientID: this.useRecId,
-      comments: this.comments,
-      createAt: datetime
-    };
-
-    this.services.getReject(rejectReqObj).subscribe((resp) => {
 
 
-      if (resp.statusCode === 200) {
-        this.toastr.success('Rejected SuccessFully', 'Success:');
-        let user = JSON.parse(localStorage.getItem('userDetails'))?._id;
-        if (user) {
-          this.router.navigateByUrl('/document/inbox');
-          this.isShowflag = false;
-
+    Swal.fire({
+      title: 'Please Enter Your  Reject Reason',
+      input: 'text',
+      inputValue: "",
+      showCancelButton: true,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      confirmButtonText: 'Confirm Reject',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Please Enter Your  Reject Reason'
         } else {
-          this.router.navigateByUrl('')
+          const currentdate = new Date();
+
+          let hours = currentdate.getHours()
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          hours = hours % 12;
+          hours = hours ? hours : 12
+
+          const datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + " "
+            + hours + ":"
+            + currentdate.getMinutes() + " "
+            // + currentdate.getSeconds();
+            + ampm
+
+          const rejectReqObj = {
+            DocId: this.userDocId,
+            RecipientID: this.useRecId,
+            comments: value,
+            createAt: datetime
+          };
+
+
+          this.services.getReject(rejectReqObj).subscribe((resp) => {
+            if (resp.statusCode === 200) {
+              this.toastr.success('Rejected SuccessFully', 'Success:');
+              let user = JSON.parse(localStorage.getItem('userDetails'))?._id;
+              if (user) {
+                this.router.navigateByUrl('/document/inbox');
+                this.isShowflag = false;
+
+              } else {
+                this.router.navigateByUrl('')
+              }
+            } else if (resp.statusCode == 403) {
+              this.isShowflag = false;
+              this.toastr.error(
+                'Waiting for prior authorized signatures.',
+                'Failed:'
+              );
+            } else {
+              this.toastr.error(`${resp.Message}`);
+            }
+          });
+
         }
-      } else if (resp.statusCode == 403) {
-        this.isShowflag = false;
-        this.toastr.error(
-          'Waiting for prior authorized signatures.',
-          'Failed:'
-
-        );
-      } else {
-        this.toastr.error(`${resp.Message}`);
       }
+    })
 
 
 
-    });
+
+
+
   }
 
   /* ========== generate PDF ============== */
@@ -767,21 +794,21 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
 
           const selectDocs = this.selectedDocuments[j]
 
-            if(selectDocs.id  === id){
-              this.selectedDocuments.splice(j , 1)
-              j--
-            }
+          if (selectDocs.id === id) {
+            this.selectedDocuments.splice(j, 1)
+            j--
+          }
 
         }
 
-      }else{
+      } else {
         const data = this.pdfDouments.filter(item => item.id === id)
 
         this.selectedDocuments.push(data[0])
       }
-      console.log(' this.selectedDocuments' ,  this.selectedDocuments)
+      console.log(' this.selectedDocuments', this.selectedDocuments)
 
-     
+
 
     }
 

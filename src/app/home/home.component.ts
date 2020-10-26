@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, DoCheck, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
@@ -15,7 +15,7 @@ declare var $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit , DoCheck {
   user: any;
   firstName: any;
   @ViewChild('mymodal', { static: false }) mymodal: TemplateRef<any>;
@@ -113,6 +113,7 @@ export class HomeComponent implements OnInit {
       this.imageURL = reader.result as string;
     };
     reader.readAsDataURL(file);
+    this.getsigns()
   }
 
   saveImage(data) {
@@ -144,6 +145,7 @@ export class HomeComponent implements OnInit {
       // );
       self.modalService.dismissAll();
     };
+    this.getsigns()
   }
 
   uploadSignature() { 
@@ -183,6 +185,7 @@ export class HomeComponent implements OnInit {
       console.log(this.uploadedFiles);
 
       this.modalService.dismissAll();
+      this.getsigns()
     };
     reader.readAsDataURL(this.fileContent);
   }
@@ -229,6 +232,10 @@ export class HomeComponent implements OnInit {
       this.inboxData  = responce
     })
 
+  }
+
+  ngDoCheck(){
+    // this.getsigns()
   }
   
 }
