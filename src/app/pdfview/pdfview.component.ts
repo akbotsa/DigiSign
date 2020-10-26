@@ -294,34 +294,38 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
   }
 
   getDefaultSignature(type, docId, index){
-    console.log('type-->',type );
+    /* console.log('type-->',type );
     console.log('docId-->',docId );
     console.log('index-->',index );
-    console.log('Sign-->', );
+    console.log('Sign-->', ); */
 
     const array = this.defaultSign.find((res) => {
       return res.Type == type.toString();
     });
-    console.log('Sign', array?.Sign);
 
-     if (type == 1) {
-      var xx = '.drag_'+docId+'_'+index ;
-      var yy = '.remove_'+docId+'_'+index;
-      var aa = 'remove_'+docId+'_'+index;
-      this.exitSignature = array?.Sign;
-    } else {
-      var xx = '.idrag_'+docId+'_'+index;
-      var yy = '.iremove_'+docId+'_'+index;
-      var aa = 'iremove_'+docId+'_'+index;
-      this.exitInitial = array?.Sign;
+    console.log('Sign-->',array );
+    if(array == undefined){
+      this.toastr.error('Please set default signature', 'Failed:');
+    }else{
+      if (type == 1) {
+        var xx = '.drag_'+docId+'_'+index ;
+        var yy = '.remove_'+docId+'_'+index;
+        var aa = 'remove_'+docId+'_'+index;
+        this.exitSignature = array?.Sign;
+      } else {
+        var xx = '.idrag_'+docId+'_'+index;
+        var yy = '.iremove_'+docId+'_'+index;
+        var aa = 'iremove_'+docId+'_'+index;
+        this.exitInitial = array?.Sign;
+      }
+      var signImg = this.imageBaseUrl + array?.Sign;
+      $(yy).remove();
+      $(xx).css({ 'background-color': 'transparent', padding: 0 });
+      $(xx).append(
+        `<img class="${aa} pdf-sign" src="${signImg}">`
+      ); 
     }
-    var signImg = this.imageBaseUrl + array?.Sign;
-    $(yy).remove();
-    $(xx).css({ 'background-color': 'transparent', padding: 0 });
-    $(xx).append(
-      `<img class="${aa} pdf-sign" src="${signImg}">`
-    ); 
-    
+    //console.log('Sign', array?.Sign);
   }
 
   draggable_comment(docId, index) {
