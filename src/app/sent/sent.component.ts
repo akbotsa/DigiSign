@@ -73,6 +73,12 @@ export class SentComponent implements OnInit {
 
   DocumentStatus(document) {
 
+    if (document.isVoid === true) {
+      return {
+        status: "Void"
+      }
+    }
+
     if (document.isRejected === true) {
       return {
         status: "Rejected"

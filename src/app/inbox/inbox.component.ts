@@ -59,7 +59,7 @@ export class InboxComponent implements OnInit {
     this.digiServices.viewFlagUpdate(obj).subscribe((resp) => {
       // console.log("respppppp", resp);
     })
-    
+
     let docId = document.documents[0].DocId;
     let docfile = document.documents[0].Doc;
     let documents = document.documents[0].Documents;
@@ -72,7 +72,16 @@ export class InboxComponent implements OnInit {
   }
 
 
-  docStatus(document) {
+  documentStatus(document) {
+
+
+    if (document.isVoid === true) {
+      return {
+        status: "View"
+      }
+
+    }
+
 
     if (document.Recipients.isReject === true) {
       return {
@@ -95,6 +104,7 @@ export class InboxComponent implements OnInit {
 
   recipientStatus(recipient) {
 
+
     if (recipient.isReject === true) {
       return {
         status: "Rejected"
@@ -115,6 +125,12 @@ export class InboxComponent implements OnInit {
   }
 
   DocStatus(document) {
+
+    if (document.isVoid === true) {
+      return {
+        status: "Void"
+      }
+    }
 
     if (document.isRejected === true) {
       return {
@@ -152,7 +168,7 @@ export class InboxComponent implements OnInit {
     }
     this.digiServices.deleteDocument(req).subscribe((resp) => {
       console.log("delete doc resp------", resp);
-      if( resp.statusCode == 200 ) {
+      if (resp.statusCode == 200) {
         this.getDocumentsManage();
         this.toastr.success(`${resp.message}`);
       }

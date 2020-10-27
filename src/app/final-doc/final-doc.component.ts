@@ -40,6 +40,7 @@ export class FinalDocComponent implements OnInit , AfterViewInit {
   pdfDouments: any
   downloadFlag :  boolean =  true
   public worker: Worker;
+  isVoid : boolean = false
   public imageBaseUrl = environment.imageBaseUrl;
   constructor(private services: ServicesService,
     private imageCompress: NgxImageCompressService
@@ -111,6 +112,7 @@ export class FinalDocComponent implements OnInit , AfterViewInit {
     this.services.getDocumentDetails(finObject).subscribe((resp) => {
       console.log('documentDetails-->', resp);
       this.receipientData = resp.data.Recipients;
+      this.isVoid = resp.data.isVoid
 
       //this.useRecId = resp.data[0].Recipients[0].ReceiptId;
       this.userId = resp.data.UserId;

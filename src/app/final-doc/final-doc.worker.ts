@@ -1,7 +1,6 @@
 /// <reference lib="webworker" />
 
 addEventListener('message', ({ data }) => {
-console.log("data comming in web worker",data);
   convertImgToBase64(data);
 });
 

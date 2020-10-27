@@ -112,10 +112,10 @@
         <!-- Button trigger modal -->
         <div class="doc-sign-btn">
           <div style="text-align: center;">
-            <button type="button" class="btn btn-primary" (click) = "downloadPdf()" *ngIf = "pdfDouments?.length == 1">
+            <button type="button" class="btn btn-primary" (click) = "downloadPdf()" *ngIf = "pdfDouments?.length == 1 && isVoid != true">
               Download
             </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "Documents()" *ngIf = "pdfDouments?.length > 1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "Documents()" *ngIf = "pdfDouments?.length > 1 && isVoid != true">
               Download
             </button>
            

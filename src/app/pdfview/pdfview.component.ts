@@ -45,6 +45,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
   dummy = [];
   isShowflag: boolean = true;
   downloadFlag: boolean = true
+  isVoid : boolean = false
   public otherReceipts = []
   public rejectFormGroup: FormGroup;
   @ViewChild('mymodal', { static: false }) mymodal: TemplateRef<any>;
@@ -170,6 +171,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     this.services.getpdfcoordinates(reqObj).subscribe((resp) => {
       if (resp.statusCode == 200) {
         console.log('coordinats-->', resp);
+        this.isVoid = resp.data[0].isVoid
         this.userData = resp.data[0].Recipients;
         this.otherReceipts = resp.otherReceipts;
         this.docRejected = resp.data[0].Recipients[0].isReject;
