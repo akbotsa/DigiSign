@@ -130,4 +130,17 @@ export class SentComponent implements OnInit {
 
 
   }
+
+  VoidDoc(Document){
+
+       const obj = {
+         UserId : this.userId,
+         DocId : Document.documents[0].DocId
+       }
+
+       this.digiServices.voidDocument(obj).subscribe(resp =>{
+         console.log('resp' , resp)
+       })
+
+  }
 }

@@ -35,6 +35,7 @@
                 <th>Date & Time</th>
                 <th>Action</th>
                 <th></th>
+                <th></th>
 
               </thead>
               <tbody>
@@ -97,11 +98,19 @@
                     </div>
                   </td>
 
-                  <td class="to-status">
-                    <button class="btn btn-primary" (click)="ResendDoc(document)"
-                      *ngIf="document?.pendingCount > 0 && document?.isRejected != true">
-                      ReSend
-                    </button>
+                  <td>
+                    <div class="d-flex">
+                      <button class="btn btn-primary" (click)="ResendDoc(document)"
+                        *ngIf="document?.pendingCount > 0 && document?.isRejected != true">
+                        ReSend
+                      </button>
+
+                      <button  class="delete" (click)="VoidDoc(document)"
+                        *ngIf="document?.isRejected != true">
+                        Void
+                      </button>
+
+                    </div>
                   </td>
                 </tr>
               </tbody>

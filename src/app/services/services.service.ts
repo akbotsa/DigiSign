@@ -9,9 +9,9 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class ServicesService {
-   
+
   showHideLogin = new EventEmitter<any>();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(data): Observable<any> {
     console.log(environment.baseUrl);
@@ -120,11 +120,11 @@ export class ServicesService {
     return this.http.post(environment.baseUrl + 'documents/final_doc', data);
   }
 
-  viewFlagUpdate(data):Observable<any> {
+  viewFlagUpdate(data): Observable<any> {
     return this.http.post(environment.baseUrl + 'documents/updateView', data);
   }
 
-  signs(data):Observable<any> {
+  signs(data): Observable<any> {
     return this.http.post(environment.baseUrl + "documents/Signs", data);
   }
 
@@ -139,53 +139,59 @@ export class ServicesService {
   }
 
 
-  getsigns(data):Observable<any> {
+  getsigns(data): Observable<any> {
     return this.http.post(environment.baseUrl + "documents/get_signs", data);
   }
 
-  deleteExistedSign(id):Observable<any> {
+  deleteExistedSign(id): Observable<any> {
     return this.http.get(environment.baseUrl + `documents/Sign_remove/${id}`);
   }
 
   // /documents/Get_Default_Signs
-  getDefaultSigns(id):Observable<any> {
+  getDefaultSigns(id): Observable<any> {
     return this.http.get(environment.baseUrl + `documents/Get_Default_Signs/${id}`);
   }
 
   // /documents/sign_default
-  setDefaultSigns(data):Observable<any> {
-    return this.http.put(environment.baseUrl + `documents/sign_default`,data);
+  setDefaultSigns(data): Observable<any> {
+    return this.http.put(environment.baseUrl + `documents/sign_default`, data);
   }
 
-   // Change Password
-   changePassword(data):Observable<any> {
-    return this.http.post(environment.baseUrl + `authentication/changePassword`,data);
+  // Change Password
+  changePassword(data): Observable<any> {
+    return this.http.post(environment.baseUrl + `authentication/changePassword`, data);
   }
 
 
   // /authentication/Status_Update
-  authenticationStatusUpdate(data){
-    
-    return this.http.post(environment.baseUrl + `authentication/Status_Update`,data);
+  authenticationStatusUpdate(data) {
+
+    return this.http.post(environment.baseUrl + `authentication/Status_Update`, data);
   }
-  
+
   // http://15.207.202.132:7000/api/v1/documents/counts
-  getCounts(data){
-    
-    return this.http.post(environment.baseUrl + `documents/counts`,data);
-  } 
+  getCounts(data) {
 
-  deleteDocument(data):Observable<any> {
-    return this.http.post(environment.baseUrl + "documents/delete",data);
+    return this.http.post(environment.baseUrl + `documents/counts`, data);
   }
 
-  pdfDownload(DocId : string):Observable<any> {
-    const params = new HttpParams().set("DocId" , DocId)
-    return this.http.get(environment.baseUrl + "documents/pdfDownload" , {params :params} , );
+  deleteDocument(data): Observable<any> {
+    return this.http.post(environment.baseUrl + "documents/delete", data);
   }
 
-  reSend(DocId : string):Observable<any> {
-    const params = new HttpParams().set("DocId" , DocId)
-    return this.http.get(environment.baseUrl + "documents/resend" , {params :params} , );
+  pdfDownload(DocId: string): Observable<any> {
+    const params = new HttpParams().set("DocId", DocId)
+    return this.http.get(environment.baseUrl + "documents/pdfDownload", { params: params },);
   }
+
+  reSend(DocId: string): Observable<any> {
+    const params = new HttpParams().set("DocId", DocId)
+    return this.http.get(environment.baseUrl + "documents/resend", { params: params },);
+  }
+
+  voidDocument(data: any): Observable<any> {
+    const params = new HttpParams().set("DocId", data.DocId).set("UserId", data.UserId)
+    return this.http.get(environment.baseUrl + "documents/void", { params: params });
+  }
+
 }
