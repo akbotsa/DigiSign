@@ -145,7 +145,11 @@ export class SentComponent implements OnInit {
        }
 
        this.digiServices.voidDocument(obj).subscribe(resp =>{
-         console.log('resp' , resp)
+        if(res.statusCode === 200){
+          this.toastr.success('Void SuccessFully' , 'Success');
+        }else{
+          this.toastr.error(`${res.message}` , 'Failed')
+        }
        })
 
   }
