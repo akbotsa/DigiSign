@@ -144,8 +144,8 @@ export class SentComponent implements OnInit {
          DocId : Document.documents[0].DocId
        }
 
-       this.digiServices.voidDocument(obj).subscribe(resp =>{
-        if(res.statusCode === 200){
+       this.digiServices.voidDocument(obj).subscribe((resp : AnimationPlayState) =>{
+        if(resp.statusCode === 200){
           this.toastr.success('Void SuccessFully' , 'Success');
         }else{
           this.toastr.error(`${res.message}` , 'Failed')
