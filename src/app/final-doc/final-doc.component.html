@@ -2,20 +2,20 @@
   <div class="row  res-row">
     <div class="col-md-3 col-md-offset-3">
       <div class="res-formm">
-        
+
         <div class="doc-sign-btn">
           <div class="col-md-12">
-              <div class="row">
-                <h3 class="select-doc">Please select Document :</h3>
-                  <div class="col-md-4 final-btns" *ngFor = "let doc of documents ; let i = index">
-                    <button class="btn btn-primary doc-btn-main1 final_{{i}}" (click)="DocView(doc , i)">
-                      Doc {{i + 1}}
-                     </button>   
-                  </div>
-                <div>
-                </div>               
+            <div class="row">
+              <h3 class="select-doc">Please select Document :</h3>
+              <div class="col-md-4 final-btns" *ngFor="let doc of documents ; let i = index">
+                <button class="btn btn-primary doc-btn-main1 final_{{i}}" (click)="DocView(doc , i)">
+                  Doc {{i + 1}}
+                </button>
               </div>
-          </div> 
+              <div>
+              </div>
+            </div>
+          </div>
         </div>
 
 
@@ -24,10 +24,7 @@
            Doc {{i + 1}}
           </button>
         </div> -->
-        <div
-          *ngFor="let list of receipientData; let i = index"
-          class="mail-section border-left-primary"
-        >
+        <div *ngFor="let list of receipientData; let i = index" class="mail-section border-left-primary">
           <div class="">
             <!-- <h6 class="recipi">Recipients</h6> -->
             <!-- <div class="row">
@@ -51,7 +48,7 @@
                                 </div>
                             </div>
                         </div> -->
-            <div class="card doc-side-card">
+            <div class="card doc-side-card" *ngIf ="isVoid != true">
               <div class="doc-sidee">
                 <div class="doc-sidebar">
                   <p class="final-name">{{ list?.Name }}</p>
@@ -60,33 +57,25 @@
                 <div class="side-status">
                   <!-- <span *ngIf="list.VerifyFlag; then con1; else con2"></span> -->
                   <div *ngIf="list.VerifyFlag === true">
-                    <p
-                      style="
+                    <p style="
                         color: #000000e6;
                         background: rgb(0 128 0 / 30%);
                         padding: 15px 22px;
-                      "
-                    >
+                      ">
                       Completed
                     </p>
                   </div>
-                  <div
-                    *ngIf="list.VerifyFlag === false && list.isReject === false"
-                  >
-                    <p
-                      style="color: #000000e6; background: rgb(255 165 0 / 50%)"
-                    >
+                  <div *ngIf="list.VerifyFlag === false && list.isReject === false">
+                    <p style="color: #000000e6; background: rgb(255 165 0 / 50%)">
                       Pending
                     </p>
                   </div>
                   <div *ngIf="list.isReject === true">
-                    <p
-                      style="
+                    <p style="
                         color: #000000e6;
                         background: rgb(255 0 0 / 30%);
                         padding: 15px 22px;
-                      "
-                    >
+                      ">
                       Rejected
                     </p>
                   </div>
@@ -101,7 +90,8 @@
           </div>
         </div>
       </div>
-      <div><!--  -->
+      <div>
+        <!--  -->
         <!-- <button
           class="btn btn-primary"
           *ngIf="isDownloadflag"
@@ -112,17 +102,20 @@
         <!-- Button trigger modal -->
         <div class="doc-sign-btn">
           <div style="text-align: center;">
-            <button type="button" class="btn btn-primary" (click) = "downloadPdf()" *ngIf = "pdfDouments?.length == 1 && isVoid != true">
+            <button type="button" class="btn btn-primary" (click)="downloadPdf()"
+              *ngIf="pdfDouments?.length == 1 && isVoid != true">
               Download
             </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click) = "Documents()" *ngIf = "pdfDouments?.length > 1 && isVoid != true">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+              (click)="Documents()" *ngIf="pdfDouments?.length > 1 && isVoid != true">
               Download
             </button>
-           
+
           </div>
-  
+
           <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-new-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -133,7 +126,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="col-md-12">
-  
+
                     <!-- <div class="modal-select">
                       <div class="select-dropdown">
                         <select>
@@ -143,20 +136,22 @@
                         </select>
                       </div>
                     </div> -->
-                    
+
                     <div class="modal-checkbox">
                       <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2" (click) = "DownloadDocs('1' , '2' , '3')">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2"
+                          (click)="DownloadDocs('1' , '2' , '3')">
                         <label class="custom-control-label" for="customCheck2">Download all</label>
                       </div>
                     </div>
-  
+
                     <div class="modals-checks">
                       <div class="col-md-12 p-0">
                         <div class="row">
-                          <div class="col-md-4" *ngFor = "let docs of documents ; let h = index">
+                          <div class="col-md-4" *ngFor="let docs of documents ; let h = index">
                             <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="{{h}}" (click) = "DownloadDocs('2' , docs.id , $event)">
+                              <input type="checkbox" class="custom-control-input" id="{{h}}"
+                                (click)="DownloadDocs('2' , docs.id , $event)">
                               <label class="custom-control-label" for="{{h}}">Doc {{h + 1}}</label>
                             </div>
                           </div>
@@ -183,13 +178,13 @@
                         </div>
                       </div>
                     </div>
-  
+
                     <div class="col-md-12" style="text-align: center;">
-                      <button class="submit" (click) ="downloadPdf()">
+                      <button class="submit" (click)="downloadPdf()">
                         Download
                       </button>
                     </div>
-  
+
                   </div>
                 </div>
               </div>
@@ -203,120 +198,88 @@
       <!-- <div class="pdf-none">
                 <p>&nbsp;</p>
             </div> -->
-            <div *ngFor = "let douc of documents;  let m = index">     
-      <div class="pdfViewerSection_{{m}}" id="sortable" style="padding: 50px 50px; display: none;">
-        <div *ngFor="let list of receipientData; let i = index">
-          <div *ngFor="let pos of list.document[m]?.signature; let idx = index">
-            <div
-              class="drag-cls ui-draggable ui-draggable-handle drag"
-              style="
+      <div *ngFor="let douc of documents;  let m = index">
+        <div class="pdfViewerSection_{{m}}" id="sortable" style="padding: 50px 50px; display: none;">
+
+          <div *ngIf="isVoid != true">
+            <div *ngFor="let list of receipientData; let i = index">
+              <div *ngFor="let pos of list.document[m]?.signature; let idx = index">
+                <div class="drag-cls ui-draggable ui-draggable-handle drag" style="
                 display: inline;
                 z-index: 1;
                 border-radius: 5px;
                 color: rgb(255, 255, 255);
                 position: relative;
-              "
-              [style.left.px]="pos.left"
-              [style.top.px]="pos.top"
-            >
-              <span
-                *ngIf="list?.VerifyFlag; then condition1; else condition2"
-              ></span>
-              <ng-template #condition1>
-                <img
-                class="pdf-sign1"
-                  [src]="list?.signatureImage"
-                />
-              </ng-template>
-              <ng-template #condition2>
-                <p
-                  class="ui-state-highlight remove"
-                  style="display: inline; color: #135699; font-weight: bold"
-                >
-                  <img style="height: 20px" src="assets/images/sign.png" />{{
+              " [style.left.px]="pos.left" [style.top.px]="pos.top">
+                  <span *ngIf="list?.VerifyFlag; then condition1; else condition2"></span>
+                  <ng-template #condition1>
+                    <img class="pdf-sign1" [src]="list?.signatureImage" />
+                  </ng-template>
+                  <ng-template #condition2>
+                    <p class="ui-state-highlight remove" style="display: inline; color: #135699; font-weight: bold">
+                      <img style="height: 20px" src="assets/images/sign.png" />{{
                     list?.Name
                   }}
-                </p>
-              </ng-template>
-            </div>
-          </div>
-          <div *ngFor="let ini of list.document[m]?.initial; let j = index">
-            <div
-              class="drag-cls ui-draggable ui-draggable-handle idrag"
-              style="
+                    </p>
+                  </ng-template>
+                </div>
+              </div>
+              <div *ngFor="let ini of list.document[m]?.initial; let j = index">
+                <div class="drag-cls ui-draggable ui-draggable-handle idrag" style="
                 display: inline;
                 z-index: 1;
                 border-radius: 5px;
                 color: rgb(255, 255, 255);
                 position: relative;
-              "
-              [style.left.px]="ini.left"
-              [style.top.px]="ini.top"
-            >
-              <div
-                *ngIf="list?.VerifyFlag; then condition1; else condition2"
-              ></div>
-              <ng-template #condition1>
-                <img
-                class="pdf-sign1"
-                  [src]="list?.initialImage"
-                />
-              </ng-template>
-              <ng-template #condition2>
-                <p
-                  class="ui-state-highlight iremove"
-                  style="display: inline; color: #135699; font-weight: bold"
-                >
-                  <img style="height: 20px" src="assets/images/digital.png" />{{
+              " [style.left.px]="ini.left" [style.top.px]="ini.top">
+                  <div *ngIf="list?.VerifyFlag; then condition1; else condition2"></div>
+                  <ng-template #condition1>
+                    <img class="pdf-sign1" [src]="list?.initialImage" />
+                  </ng-template>
+                  <ng-template #condition2>
+                    <p class="ui-state-highlight iremove" style="display: inline; color: #135699; font-weight: bold">
+                      <img style="height: 20px" src="assets/images/digital.png" />{{
                     list.Name
                   }}
-                </p>
-              </ng-template>
-            </div>
-          </div>
-          <div *ngFor="let com of list?.document[m]?.commentsCoordinates; let j = index">
-            <div
-              class="drag-cls ui-draggable ui-draggable-handle idrag"
-              style="
+                    </p>
+                  </ng-template>
+                </div>
+              </div>
+              <div *ngFor="let com of list?.document[m]?.commentsCoordinates; let j = index">
+                <div class="drag-cls ui-draggable ui-draggable-handle idrag" style="
                 display: inline;
                 z-index: 1;
                 border-radius: 5px;
                 color: rgb(255, 255, 255);
                 position: relative;
-              "
-              [style.left.px]="com.left"
-              [style.top.px]="com.top"
-            >
-              <div
-                *ngIf="list?.VerifyFlag; then condition1; else condition2"
-              ></div>
-              <ng-template #condition1>
-                <p style="color: black;">{{ list?.comments[m] }}</p>
-              </ng-template>
-              <ng-template #condition2>
-                <p
-                  class="ui-state-highlight iremove"
-                  style="display: inline; color: #135699; font-weight: bold"
-                >
-                  <img style="height: 20px" src="assets/images/comm.png" />{{
+              " [style.left.px]="com.left" [style.top.px]="com.top">
+                  <div *ngIf="list?.VerifyFlag; then condition1; else condition2"></div>
+                  <ng-template #condition1>
+                    <p style="color: black;">{{ list?.comments[m] }}</p>
+                  </ng-template>
+                  <ng-template #condition2>
+                    <p class="ui-state-highlight iremove" style="display: inline; color: #135699; font-weight: bold">
+                      <img style="height: 20px" src="assets/images/comm.png" />{{
                     list?.Name
                   }}
-                </p>
-              </ng-template>
+                    </p>
+                  </ng-template>
+                </div>
+              </div>
             </div>
           </div>
+
+          <div *ngIf="isVoid == true">
+            <img class="pdf-sign1" src="../../assets/images/voidIcon.png">
+          </div>
+
+          <pdf-viewer [src]=" imageBaseUrl + douc?.Doc" [render-text]="true" [render-text]="true" [show-all]="true"
+            [fit-to-page]="true" style="display: block">
+          </pdf-viewer>
         </div>
-        <pdf-viewer
-          [src]=" imageBaseUrl + douc?.Doc"
-          [render-text]="true"
-          [render-text]="true"
-          [show-all]="true"
-          [fit-to-page]="true"
-          style="display: block"
-        >
-        </pdf-viewer>
       </div>
-      </div>
+
+
     </div>
   </div>
 </div>
