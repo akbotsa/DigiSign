@@ -338,8 +338,8 @@
               </div>
             </div>
           </div>
-          <div *ngIf = "isVoid == true">
-            <img class="pdf-sign1" src="../../assets/images/voidIcon.png">
+          <div class="void-icon" *ngIf = "isVoid == true">
+            <img class="pdf-sign15" src="../../assets/images/voidIcon.png">
           </div>
           <pdf-viewer [src]="imageBaseUrl + douc.Doc" [render-text]="true" [render-text]="true" [show-all]="true"
             [fit-to-page]="true" style="display: block">

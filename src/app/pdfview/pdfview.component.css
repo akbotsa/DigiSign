@@ -257,3 +257,23 @@
   border-color: #005cbf !important;
 }
 
+#sortable {
+  position: relative;
+}
+
+.void-icon {
+  text-align: center;
+  position: absolute;
+  top: 3%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.pdf-sign15 {
+  height: auto;
+  width: 40%;
+  position: relative;
+}
