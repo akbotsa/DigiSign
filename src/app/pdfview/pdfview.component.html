@@ -196,7 +196,7 @@
                   </ng-template>
                   <ng-template #condition2>
                     <div (click)="getDefaultSignature(1, m, idx)"
-                      class="drag-cls ui-draggable ui-draggable-handle drag_{{m}}_{{idx}}" style="
+                      class="drag-cls ui-draggable ui-draggable-handle drag_{{m}}_{{idx}}" id="signature_{{idx}}"  style="
                       display: inline;
                       z-index: 1;
                       background: rgba(204, 204, 204, 0.73);
@@ -205,7 +205,7 @@
                       color: rgb(255, 255, 255);
                       cursor: move;
                       position: relative;
-                    " [style.left.px]="pos.left" [style.top.px]="pos.top">
+                    " [style.left.px]="pos.left" [style.top.px]="pos.top"  >
                       <!-- <div id="replace_{{i}}_{{idx}}"></div> -->
                       <p class="ui-state-highlight remove_{{m}}_{{idx}}"
                         style="display: inline; color: #135699; font-weight: bold">
@@ -215,11 +215,12 @@
                       </p>
                     </div>
                   </ng-template>
+                  
                 </div>
                 <div *ngFor="let ini of list.document[m]?.initial; let j = index">
                   <span *ngIf="list.VerifyFlag; then con1; else con2"></span>
                   <ng-template #con1>
-                    <div class="drag-cls ui-draggable ui-draggable-handle idrag" style="
+                    <div class="drag-cls ui-draggable ui-draggable-handle idrag"  id="initial_{{j}}" style="
                       display: inline;
                       z-index: 1;
                       background: transparent;
@@ -346,7 +347,6 @@
           </pdf-viewer>
         </div>
       </div>
-
     </div>
   </div>
 </div>

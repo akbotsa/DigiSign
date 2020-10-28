@@ -305,6 +305,7 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
     console.log('docId-->',docId );
     console.log('index-->',index );
     console.log('Sign-->', ); */
+    var tg = index+1;
 
     const array = this.defaultSign.find((res) => {
       return res.Type == type.toString();
@@ -326,11 +327,13 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
         var yy = '.remove_' + docId + '_' + index;
         var aa = 'remove_' + docId + '_' + index;
         this.exitSignature = array?.Sign;
+        var dd = 'signature_'+tg;
       } else {
         var xx = '.idrag_' + docId + '_' + index;
         var yy = '.iremove_' + docId + '_' + index;
         var aa = 'iremove_' + docId + '_' + index;
         this.exitInitial = array?.Sign;
+        var dd = 'initial_'+tg;
       }
       var signImg = this.imageBaseUrl + array?.Sign;
       $(yy).remove();
@@ -338,6 +341,11 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
       $(xx).append(
         `<img class="${aa} pdf-sign" src="${signImg}">`
       );
+
+      var scroll_to = document.getElementById(dd);
+      console.log(scroll_to);
+      scroll_to.scrollIntoView();
+
     }
     //console.log('Sign', array?.Sign);
   }
@@ -654,9 +662,6 @@ export class PdfviewComponent implements OnInit, AfterViewInit {
 
   /* Signature Rejection  */
   public onRejectInvitation() {
-
-
-
     Swal.fire({
       title: 'Please Enter Your  Reject Reason',
       input: 'text',
