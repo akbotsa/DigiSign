@@ -77,7 +77,7 @@ z-index: 99;
 margin-left: 0;
 width: 350px;
 color: #fff;
-background-color: #4d4949;
+background-color: #79cbc1;
 border-radius: 0px !important;
 font-size: 16px;
 }
@@ -145,3 +145,32 @@ padding: 15px;
     color: #fff;
     font-size: 18px;
 }
+
+.tooltip1 {
+    position: relative;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.custom-para {
+    display: none;    
+}
+
+.custom-para p {
+    margin: 0px;
+}
+
+.tooltip1:hover .custom-para {
+    display: block;
+    position: absolute;
+    background: #79cbc1;
+    color: #fff;
+    z-index: 99999999;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    width: 265px;
+    padding: 15px;
+}
+
