@@ -33,9 +33,7 @@
                 <th>Message</th>
                 <th>Status</th>
                 <th>Date & Time</th>
-                <th>Action</th>
-                <th></th>
-                <th></th>
+                <th class="text-center">Action</th>
 
               </thead>
               <tbody>
@@ -64,7 +62,7 @@
                   <td>
                     <span class="to-status">{{ document?.Message }}</span>
                   </td>
-                  <td class="tooltip-status">
+                  <td class="tooltip-status" style="border-top: none;">
                     <span style="color: #79cbc1;padding-right: 5px;"><i class="fa fa-info-circle"
                         aria-hidden="true"></i></span>
                     <p class="tooltip">{{DocumentStatus(document).status}}
@@ -86,29 +84,26 @@
                       document?.createdAt | date: "h:mm:ss a"
                     }}</span>
                   </td>
-                  <td>
+                  <td class="actions-button">
                     <div class="d-flex">
-                      <button class="btn btn-primary" (click)="onClicksign(document)">
-                        View
+                      <button class="btn btn-success" (click)="onClicksign(document)">
+                        <i class="fa fa-eye"></i>
                       </button>
 
-                      <button class="delete" (click)="deleteDoc(document)">
+                      <button class=" delete btn btn-danger" (click)="deleteDoc(document)">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </button>
                     </div>
-                  </td>
 
-                  <td>
                     <div class="d-flex" *ngIf = "document.isVoid != true">
                       <button class="btn btn-primary" (click)="ResendDoc(document)"
                         *ngIf="document?.pendingCount > 0 && document?.isRejected != true">
-                        ReSend
+                        <i class="fa fa-send-o"></i>
                       </button>
-                      <button  class="delete" (click)="VoidDoc(document)"
+                      <button  class="delete btn btn-secondary" (click)="VoidDoc(document)"
                         >
-                        Void
+                        <i class="fa fa-ban"></i>
                       </button>
-
                     </div>
                   </td>
                 </tr>

@@ -96,8 +96,8 @@
 
 .delete {
   margin-left: 16px;
-  background: #df5151;
-  border: 1px solid #df5151;
+  /* background: #df5151;
+  border: 1px solid #df5151; */
   padding: 5px 10px;
   border-radius: 5px;
 }
@@ -117,4 +117,9 @@
 
 .delete i {
   color: #fff;
+}
+
+.actions-button {
+  display: flex;
+  justify-content: space-around;
 }

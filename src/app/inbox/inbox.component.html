@@ -80,8 +80,31 @@
                     }}</span>
                   </td>
                   <td style="display:flex; justify-content: space-around;">
-                    <button class="btn btn-primary" (click)="onClicksign(document)">
-                      {{documentStatus(document).status}}
+                    <button class="btn p-0" (click)="onClicksign(document)">
+                      <!-- {{documentStatus(document).status}} -->
+                      <div *ngIf="document.Recipients.VerifyFlag == true || document.isVoid == true">
+                        <i class="fa fa-eye" style="padding: 10px;
+                        background: green;
+                        color: #fff;
+                        border: 1px solid green;
+                        border-radius: 5px;
+                        font-size: 18px;"></i>
+                      </div>
+
+                      <div *ngIf="document.Recipients.VerifyFlag == false && document.isVoid == false && document.Recipients.isReject == false">
+                        <i class="fa fa-pencil" aria-hidden="true" style="padding: 10px;
+                        background: #79cbc1;
+                        color: #fff;
+                        border: 1px solid #79cbc1;
+                        border-radius: 5px;
+                        font-size: 18px;"></i>
+                      </div>
+
+                      <div *ngIf=" document.Recipients.isReject == true && document.isVoid == false">
+                        <i class="fa fa-ban"></i>
+                      </div>
+                      
+                      
                     </button>
                     
                     <button class="delete" (click)="deleteDoc(document)"><span><i class="fa fa-trash" aria-hidden="true"></i></span></button>
