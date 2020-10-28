@@ -82,7 +82,7 @@
                   <td style="display:flex; justify-content: space-around;">
                     <button class="btn p-0" (click)="onClicksign(document)">
                       <!-- {{documentStatus(document).status}} -->
-                      <div *ngIf="document.Recipients.VerifyFlag == true || document.isVoid == true">
+                      <div *ngIf="document.Recipients.VerifyFlag == true || document.isVoid == true || document.Recipients.isReject == true">
                         <i class="fa fa-eye" style="padding: 10px;
                         background: green;
                         color: #fff;
@@ -99,10 +99,10 @@
                         border-radius: 5px;
                         font-size: 18px;"></i>
                       </div>
-
+<!-- 
                       <div *ngIf=" document.Recipients.isReject == true && document.isVoid == false">
                         <i class="fa fa-ban"></i>
-                      </div>
+                      </div> -->
                       
                       
                     </button>
